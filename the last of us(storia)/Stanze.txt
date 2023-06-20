@@ -1,0 +1,65 @@
+1)Casa di Joel
+
+	STANZA 1) = Soggiorno, 
+	OGGETTI   = pistola, coltello, bottiglia di vetro, cibo
+	
+	STANZA 2) = Ripostiglio
+	OGGETTI   = munizioni pistola, batterie
+
+	STANZA 3) = Bagno
+	OGGETTI   = Alcool, garza, forbici
+
+
+
+2)Passaggio segreto sotto la ZQ
+
+	STANZA 1) = Corridio del passaggio segreto, 
+	OGGETTI   = nascondigli(rocce casse), guardie
+	
+	STANZA 2) = Uscita
+	OGGETTI   = pulsante per aprire il cancello
+
+	STANZA 3) = Stanza del quadro elettrico
+	OGGETTI   = leva per attivare elettricità
+
+
+
+3)Metropolitana allagata
+
+	STANZA 1) = Ingresso metropolitana, 
+	OGGETTI   = ....
+
+	STANZA 2) = Stanza delle batterie
+	OGGETTI   = pile(addosso alla guardia morta)
+
+	STANZA 3) = Stanza della zattera
+	OGGETTI   = zattera
+
+
+
+4)San Maries Hospital (parte 1)
+	
+	STANZA 1) = Ingresso dell'ospedale 
+	OGGETTI   = tesserino elettronico per l'infermeria(addosso a Marlene)
+
+	STANZA 2) = Magazzino
+	OGGETTI   = forbici
+
+	STANZA 3) = infermeria
+	OGGETTI   = alcool e garze	
+
+
+
+4)San Maries Hospital (parte 2)	
+	STANZA 1) = piano della sala operatoria
+	OGGETTI   = ...
+
+	STANZA 2) = stanza del condotto
+	OGGETTI   = grata
+
+	STANZA 3) = stanza del cacciavite
+	OGGETTI   = cacciavite	
+
+
+
+ 	
