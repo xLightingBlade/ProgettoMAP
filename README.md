@@ -21,4 +21,4 @@ Si è detto anche di usare swing per mostrare il contenuto di qualche documento 
 2) Nella metropolitana allagata bisogna trovare la zattera di legno per far attraversare Ellie
 3) Nel passaggio segreto bisogna arrivare al cancello senza farsi vedere dalle guardie
 4) Per aprire il cancello bisogna ripristinare la corrente e inserire un codice sul tastierino
-5) Una volta ripristinata la corrente bisogna risolvere un'enigma numerico per avere il codice del tastierino.
+5) Una volta ripristinata la corrente bisogna risolvere un'enigma numerico per avere il codice del tastierino (il testo dell'enigma si può mostrare come finestra swing)
