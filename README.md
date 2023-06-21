@@ -14,3 +14,10 @@
 
 6)Lamba expressions: pensarci
 
+
+'Enigmi' del gioco:
+1) Nell'ospedale quando Joel accoltella Marlene rimane ferito e deve trovare un tesserino per poter aprire l'infermeria.
+2) Nella metropolitana allagata bisogna trovare la zattera di legno per far attraversare Ellie
+3) Nel passaggio segreto bisogna arrivare al cancello senza farsi vedere dalle guardie
+4) Per aprire il cancello bisogna ripristinare la corrente e inserire un codice sul tastierino
+5) Una volta ripristinata la corrente bisogna risolvere un'enigma numerico per avere il codice del tastierino.
