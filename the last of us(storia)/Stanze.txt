@@ -53,7 +53,7 @@
 	STANZA 2) = Magazzino
 	OGGETTI   = forbici, armadietto chiuso a chiave(con dentro il tesserino)
 
-	STANZA 3) = medicina agenerale
+	STANZA 3) = reparto di medicina generale
 	OGGETTI   = alcool e garze
 
 	NOTA: "per curarsi Joel deve avere garze, alcool e forbici così
@@ -63,14 +63,17 @@
 
 
 4)San Maries Hospital (parte 2)	
-	STANZA 1) =  piano della sala operatoria
-	OGGETTI   = ...
+	STANZA 1) = piano della sala operatoria
+	OGGETTI   = documento sul cordyceps (da fare con swing)
 
 	STANZA 2) = stanza del condotto
 	OGGETTI   = grata
 
 	STANZA 3) = stanza del cacciavite
-	OGGETTI   = cacciavite	
+	OGGETTI   = cacciavite
+
+	STANZA 4) = sala operatoria
+	OGGETTI    = nessun oggetto	
 
 
 
