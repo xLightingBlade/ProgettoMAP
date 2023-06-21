@@ -1,36 +1,43 @@
 1)Casa di Joel
 
 	STANZA 1) = Soggiorno, 
-	OGGETTI   = pistola, coltello, bottiglia di vetro, cibo
+	OGGETTI   = pistola, coltello, bottiglia di vetro,
+		    cibo, foto di Joel e Sarah (da fare con swing)
 	
 	STANZA 2) = Ripostiglio
-	OGGETTI   = munizioni pistola, batterie
+	OGGETTI   = munizioni pistola, pile
 
 	STANZA 3) = Bagno
-	OGGETTI   = Alcool, garza, forbici
+	OGGETTI   = Alcool, garze, forbici
 
 
 
 2)Passaggio segreto sotto la ZQ
 
 	STANZA 1) = Corridio del passaggio segreto, 
-	OGGETTI   = nascondigli(rocce casse), guardie
+	OGGETTI   = nascondigli(rocce o casse), guardie
 	
 	STANZA 2) = Uscita
-	OGGETTI   = pulsante per aprire il cancello
+	OGGETTI   = tastierino per aprire il cancello
 
 	STANZA 3) = Stanza del quadro elettrico
-	OGGETTI   = leva per attivare elettricità
+	OGGETTI   = leva per attivare elettricità,
+	   	    foglio con enigma (da fare con swing)
+	
+	Enigma: "Joel, la combinazione è nascosta. 3 cifre devi trovare.
+		 La somma delle 3 cifre è 12, il primo è la metà del secondo
+		 e la differenza tra il primo e l'ultimo è 4.(soluz: 4,8,0)
 
 
 
 3)Metropolitana allagata
 
 	STANZA 1) = Ingresso metropolitana, 
-	OGGETTI   = ....
+	OGGETTI   = torcia(addosso alla gurdia morta)
 
 	STANZA 2) = Stanza delle batterie
-	OGGETTI   = pile(addosso alla guardia morta)
+	OGGETTI   = pile(addosso alla guardia morta), documento da leggere (da fare con swing)
+	
 
 	STANZA 3) = Stanza della zattera
 	OGGETTI   = zattera
@@ -40,18 +47,23 @@
 4)San Maries Hospital (parte 1)
 	
 	STANZA 1) = Ingresso dell'ospedale 
-	OGGETTI   = tesserino elettronico per l'infermeria(addosso a Marlene)
+	OGGETTI   = tesserino elettronico per l'infermeria(nell'armadietto), 
+		    corpo di Marlene(con addosso la chiave per l'armadietto)
 
 	STANZA 2) = Magazzino
-	OGGETTI   = forbici
+	OGGETTI   = forbici, armadietto chiuso a chiave(con dentro il tesserino)
 
-	STANZA 3) = infermeria
-	OGGETTI   = alcool e garze	
+	STANZA 3) = medicina agenerale
+	OGGETTI   = alcool e garze
+
+	NOTA: "per curarsi Joel deve avere garze, alcool e forbici così
+	       da poter fare un kit medico. Usiamo comando cura e togliamo 
+	       dall'inventario alcool, garze e forbici."	
 
 
 
 4)San Maries Hospital (parte 2)	
-	STANZA 1) = piano della sala operatoria
+	STANZA 1) =  piano della sala operatoria
 	OGGETTI   = ...
 
 	STANZA 2) = stanza del condotto

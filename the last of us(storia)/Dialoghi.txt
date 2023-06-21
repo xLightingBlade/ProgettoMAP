@@ -1,4 +1,5 @@
 1)La casa di Joel
+
 (Prima di uscire dalla casa)
 Ellie:   Ho sentito una sparatoria, cosa è successo?
 Joel:    Le luci..
@@ -29,15 +30,15 @@ Joel:    Bene, usciamo da qui. Questo posto puzza.
 (Appena usciti dal passaggio)
 Soldato1: Fermi dove siete. Non fate cazzate o siete morti!
 Soldato1: In ginocchio! John scansionali, potrebbero essere infetti. Io avviso la base.
-Joel: Ellie sta tranquilla.
+Joel:     Ellie sta tranquilla.
 Soldato2: Le mani sulla testa. Dammi il braccio ragazzina.
 Rumori ambiente: "Beep! Beep! Beep!".
 Soldato2: Cazzo, la ragazzina è infetta!!
 Rumori ambiente: "Verso degli infetti".
 Soldato2: Oh no ci sono infetti!!
 Rumori ambiente: "Colpi di pistola di Joel".
-Ellie: Li hai uccisi Joel.
-Joel: Ellie corri!!
+Ellie:    Li hai uccisi Joel.
+Joel:     Ellie corri!!
 Rummori ambiente : "Allarme che suona".
 
 
@@ -59,32 +60,100 @@ Ellie: Marlene pensa che la cura alla pandemia sia racchiusa dentro di me e vuol
 Joel:  Merda! Tanto vale proseguire, tanto non possiamo più tornare indietro.
 Joel:  Per andare dalle luci dobbiamo passare attraverso la metropolitana e poi uscire in città. Forza.
 
+
 (All'ingresso della metropolitana)
 Joel:  Diamine, qui non si vede nulla. Meglio fare luce.
 
+
 (appena mette le batterie)
 Joel:  Le batterie mi saranno utili.
+
 
 (appena capiscono che la metro è allagata)
 Ellie: Ehm, io non so nuotare.
 Joel:  Troveremo una soluzione, guardo in giro.
 
+
 (appena entra nella stanza della zattera)
 Joel:  Cazzo, infetti!!
 
+
 (appena trova la zattera)
 Joel:  Questa è perfetta per trasportarci sopra Ellie.
+
 
 (Ellie e Joel escono dalla metropolitana)
 Joel:  Salta sulla zattera Ellie.
 Ellie: Fai attenzione.
 
+
+OPZIONALE
+{
 (Appena usciti dalla metropolitana)
-Joel: Siamo in città. Lo stabilimento delle luci non è molto lontano.
-Ellie
+Joel:  Siamo in città. Lo stabilimento delle luci non è molto lontano.
+Ellie: Speriamo bene.
+Ellie: La tua famiglia che fine ha fatto?
+Joel:  Sono stato sposato, molto tempo fa..
+Ellie: Avevi figli?
+Joel:  Ok..
+Ellie: Troppo?
+Joel:  Troppo, si. Proseguiamo.
+}
 
 
-	
-	
-	
+(appena incontrano Tommy)
+Joel:     Hei, ma quello è.. Tommy
+Tommy:    Joel, che diavolo ci fai da queste parti e, chi è questa ragazzina?
+Joel:     ti spiegheràò tutto più tardi, ascolta.
+Joel:     Sto cercando uno stabilimento delle luci a sud della città,
+          devo portare la ragazzina da loro. Sapresti aiutarmi?
+Tommy:    Non ne è rimasto molto, quel posto era pieno di infetti e l'esercito l'ha bombardato.
+Tommy:    Il San Maries Hospital, prova a cercare la. Sapevo che luci avessero una base li.
+Joel:     E' la nostra unica chance. Tommy mi dispiace lasciarti ma devo proseguire.
+Joel:     A lavoro fatto verrò a Jackson, a presto fratellino.. Ellie, su forza!
+
+
+(All'arrivo dell'ospedale)
+Joel:    Ellie guarda il cartello, ospedale!
+Soldato: Mani in alto! Chi siete e cosa cercate!
+Joel:    stiamo cercando le luci, ci hanno detto che sono al San Maries Hospital.
+	 "il soldato colpisce joel ed Ellie in testa e tutti e due svengono"
+
+
+(appena Joel si sveglia)
+Marlene: Benvenuto tra le luci, scusa per prima non sapevano foste voi.
+Joel:    Ellie?
+Marlene: E' in sala operatoria.
+Joel:    Che vuoi dire, quale intervento?
+Marlene: I dottori hanno detto che il fungo che ha dentro è come mutato e devono asportarlo per creare una cura.
+Joel:    Ma cresce su tutto il dervello! Trova qualcun altro!
+Marlene: Non c'è nessun altro.
+Joel:    brutta stronza!!
+Marlene: Stai fermo!!
+         "Joel e Marlene hanno una collutazione, ma Joel accoltella Marlene e la mette a terra."
+Joel:    Meglio prendere lo zaino, ma prima devo curarmi. 
+Joel:    Ci sarà qualcosa qui da qualche parte spero.
+
+
+(appena trov alcool e garze)
+Joel:   questi saranno utili per un kit medico, ma manca qualcosa ancora.
+
+(appena trova le forbici)
+Joel:   perfetto! Meglio curarsi ora. La sala operatoria deve essere oltre l'infermeria.
+
+
+(l'infermeria è chiusa)
+Joel:   Serve un tesserino elettronico.
+
+
+(Tesserino preso.L'infermeria è aperta ora)
+Joel: Arrivo Ellie, tieni duro.
+Rumori ambiente: Bepp!! Beep!! Beep!!
+Joel: Cazzo, l'allarme.
+
+
+(Appena arrivato al piano della sala operatoria)
+Joel: Questo deve essere il piano della sala operatoria. Cazzo, soldati.
+Joel: Ce ne sono troppi, devo oltrepassarli.
+
 	
