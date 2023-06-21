@@ -6,7 +6,7 @@
 
 2)Uso dei file: pensarci
 
-3)Uso dei thread: pensarci
+3)Uso dei thread: Nella sezione del passsaggio segreto, una volta che ti nascondi dalla guardia, si può usare un thread che faccia sparire la guardia dopo tot secondi.
 
 4)Uso dei socket: pensarci
 
