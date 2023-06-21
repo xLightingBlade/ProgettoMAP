@@ -11,6 +11,7 @@
 4)Uso dei socket: pensarci
 
 5)Uso di SWING: menù principale, finestra per inserire i comandi, finestre per i dialoghi, vediamo un po' cosa fare poi.
+Si è detto anche di usare swing per mostrare il contenuto di qualche documento che verrà trovato.
 
 6)Lamba expressions: pensarci
 
