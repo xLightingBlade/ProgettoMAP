@@ -68,25 +68,25 @@ public class Avventura extends StrutturaGioco {
         //Rooms
         Stanza hall = new Stanza(0, "Corridoio", "Sei appena tornato a casa e non sai cosa fare.\nTi ricordi che non hai ancora aperto quel fantastico regalo di tua zia Lina.\n"
                 + " Sarà il caso di cercarlo e di giocarci!");
-        hall.setLook("Sei nel corridoio, a nord vedi il bagno, a sud il soggiorno e ad ovest la tua cameretta, forse il gioco sarà lì?");
+        hall.setOsservazione("Sei nel corridoio, a nord vedi il bagno, a sud il soggiorno e ad ovest la tua cameretta, forse il gioco sarà lì?");
         Stanza livingRoom = new Stanza(1, "Soggiorno", "Ti trovi nel soggiorno.\nCi sono quei mobili marrone scuro che hai sempre odiato e delle orribili sedie.");
-        livingRoom.setLook("Non c'è nulla di interessante qui.");
+        livingRoom.setOsservazione("Non c'è nulla di interessante qui.");
         Stanza kitchen = new Stanza(2, "Cucina", "Ti trovi nella solita cucina.\nMobili bianchi, maniglie azzurre, quello strano lampadario che adoravi tanto quando eri piccolo.\n"
                 + "C'è un tavolo con un bel portafrutta e una finestra.");
-        kitchen.setLook("La solita cucina, ma noti una chiave vicino al portafrutta.");
+        kitchen.setOsservazione("La solita cucina, ma noti una chiave vicino al portafrutta.");
         Stanza bathroom = new Stanza(3, "Bagno", "Sei nel bagno.\nQuanto tempo passato qui dentro...meglio non pensarci...");
-        bathroom.setLook("Vedo delle batterie sul mobile alla destra del lavandino.");
+        bathroom.setOsservazione("Vedo delle batterie sul mobile alla destra del lavandino.");
         Stanza yourRoom = new Stanza(4, "La tua cameratta", "Finalmente la tua cameretta!\nQuesto luogo ti è così famigliare...ma non ricordi dove hai messo il nuovo regalo di zia Lina.");
-        yourRoom.setLook("C'è un armadio bianco, di solito ci conservi i tuoi giochi.");
+        yourRoom.setOsservazione("C'è un armadio bianco, di solito ci conservi i tuoi giochi.");
         //map
-        kitchen.setEast(livingRoom);
-        livingRoom.setNorth(hall);
-        livingRoom.setWest(kitchen);
-        hall.setSouth(livingRoom);
-        hall.setWest(yourRoom);
-        hall.setNorth(bathroom);
-        bathroom.setSouth(hall);
-        yourRoom.setEast(hall);
+        kitchen.setEst(livingRoom);
+        livingRoom.setNord(hall);
+        livingRoom.setOvest(kitchen);
+        hall.setSud(livingRoom);
+        hall.setOvest(yourRoom);
+        hall.setNord(bathroom);
+        bathroom.setSud(hall);
+        yourRoom.setEst(hall);
         getStanze().add(kitchen);
         getStanze().add(livingRoom);
         getStanze().add(hall);
@@ -95,25 +95,25 @@ public class Avventura extends StrutturaGioco {
         //obejcts
         Oggetto battery = new Oggetto(1, "batteria", "Un pacco di batterie, chissà se sono cariche.");
         battery.setAlias(new String[]{"batterie", "pile", "pila"});
-        bathroom.getObjects().add(battery);
+        bathroom.getOggetti().add(battery);
         ContenitoreOggetti wardrobe = new ContenitoreOggetti(2, "armadio", "Un semplice armadio.");
         wardrobe.setAlias(new String[]{"guardaroba", "vestiario"});
-        wardrobe.setOpenable(true);
-        wardrobe.setPickupable(false);
-        wardrobe.setOpen(false);
-        yourRoom.getObjects().add(wardrobe);
+        wardrobe.setApribile(true);
+        wardrobe.setPrendibile(false);
+        wardrobe.setAperto(false);
+        yourRoom.getOggetti().add(wardrobe);
         Oggetto toy = new Oggetto(3, "giocattolo", "Il gioco che ti ha regalato zia Lina.");
         toy.setAlias(new String[]{"gioco", "robot"});
-        toy.setPushable(true);
-        toy.setPush(false);
+        toy.setSpingibile(true);
+        toy.setSpinto(false);
         wardrobe.add(toy);
         Oggetto kkey = new Oggetto(4, "chiave", "Usa semplice chiave come tante altre.");
         toy.setAlias(new String[]{"key"});
-        toy.setPushable(false);
-        toy.setPush(false);
-        kitchen.getObjects().add(kkey);
+        toy.setSpingibile(false);
+        toy.setSpinto(false);
+        kitchen.getOggetti().add(kkey);
         //set starting room
-        setCurrentRoom(hall);
+        setStanzaCorrente(hall);
         */
     }
 
