@@ -33,14 +33,13 @@ public class Avventura extends StrutturaGioco {
 
     @Override
     public void init() throws Exception {
-        //Commands
-        /*
+        //Comandi
         Comando nord = new Comando(TipoComando.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         getComandi().add(nord);
-        Comando iventory = new Comando(TipoComando.INVENTARIO, "inventario");
-        iventory.setAlias(new String[]{"inv"});
-        getComandi().add(iventory);
+        Comando inventario = new Comando(TipoComando.INVENTARIO, "inventario");
+        inventario.setAlias(new String[]{"inv"});
+        getComandi().add(inventario);
         Comando sud = new Comando(TipoComando.SUD, "sud");
         sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
         getComandi().add(sud);
@@ -50,71 +49,76 @@ public class Avventura extends StrutturaGioco {
         Comando ovest = new Comando(TipoComando.OVEST, "ovest");
         ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
         getComandi().add(ovest);
-        Comando end = new Comando(TipoComando.FINE, "end");
-        end.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
-        getComandi().add(end);
-        Comando look = new Comando(TipoComando.GUARDA, "osserva");
-        look.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
-        getComandi().add(look);
-        Comando pickup = new Comando(TipoComando.PRENDI, "raccogli");
-        pickup.setAlias(new String[]{"prendi"});
-        getComandi().add(pickup);
-        Comando open = new Comando(TipoComando.APRI, "apri");
-        open.setAlias(new String[]{});
-        getComandi().add(open);
-        Comando push = new Comando(TipoComando.SPINGI, "premi");
-        push.setAlias(new String[]{"spingi", "attiva"});
-        getComandi().add(push);
-        //Rooms
-        Stanza hall = new Stanza(0, "Corridoio", "Sei appena tornato a casa e non sai cosa fare.\nTi ricordi che non hai ancora aperto quel fantastico regalo di tua zia Lina.\n"
-                + " Sarà il caso di cercarlo e di giocarci!");
-        hall.setOsservazione("Sei nel corridoio, a nord vedi il bagno, a sud il soggiorno e ad ovest la tua cameretta, forse il gioco sarà lì?");
-        Stanza livingRoom = new Stanza(1, "Soggiorno", "Ti trovi nel soggiorno.\nCi sono quei mobili marrone scuro che hai sempre odiato e delle orribili sedie.");
-        livingRoom.setOsservazione("Non c'è nulla di interessante qui.");
-        Stanza kitchen = new Stanza(2, "Cucina", "Ti trovi nella solita cucina.\nMobili bianchi, maniglie azzurre, quello strano lampadario che adoravi tanto quando eri piccolo.\n"
-                + "C'è un tavolo con un bel portafrutta e una finestra.");
-        kitchen.setOsservazione("La solita cucina, ma noti una chiave vicino al portafrutta.");
-        Stanza bathroom = new Stanza(3, "Bagno", "Sei nel bagno.\nQuanto tempo passato qui dentro...meglio non pensarci...");
-        bathroom.setOsservazione("Vedo delle batterie sul mobile alla destra del lavandino.");
-        Stanza yourRoom = new Stanza(4, "La tua cameratta", "Finalmente la tua cameretta!\nQuesto luogo ti è così famigliare...ma non ricordi dove hai messo il nuovo regalo di zia Lina.");
-        yourRoom.setOsservazione("C'è un armadio bianco, di solito ci conservi i tuoi giochi.");
-        //map
-        kitchen.setEst(livingRoom);
-        livingRoom.setNord(hall);
-        livingRoom.setOvest(kitchen);
-        hall.setSud(livingRoom);
-        hall.setOvest(yourRoom);
-        hall.setNord(bathroom);
-        bathroom.setSud(hall);
-        yourRoom.setEst(hall);
-        getStanze().add(kitchen);
-        getStanze().add(livingRoom);
-        getStanze().add(hall);
-        getStanze().add(bathroom);
-        getStanze().add(yourRoom);
-        //obejcts
-        Oggetto battery = new Oggetto(1, "batteria", "Un pacco di batterie, chissà se sono cariche.");
-        battery.setAlias(new String[]{"batterie", "pile", "pila"});
-        bathroom.getOggetti().add(battery);
-        ContenitoreOggetti wardrobe = new ContenitoreOggetti(2, "armadio", "Un semplice armadio.");
-        wardrobe.setAlias(new String[]{"guardaroba", "vestiario"});
-        wardrobe.setApribile(true);
-        wardrobe.setPrendibile(false);
-        wardrobe.setAperto(false);
-        yourRoom.getOggetti().add(wardrobe);
-        Oggetto toy = new Oggetto(3, "giocattolo", "Il gioco che ti ha regalato zia Lina.");
-        toy.setAlias(new String[]{"gioco", "robot"});
-        toy.setSpingibile(true);
-        toy.setSpinto(false);
-        wardrobe.add(toy);
-        Oggetto kkey = new Oggetto(4, "chiave", "Usa semplice chiave come tante altre.");
-        toy.setAlias(new String[]{"key"});
-        toy.setSpingibile(false);
-        toy.setSpinto(false);
-        kitchen.getOggetti().add(kkey);
-        //set starting room
-        setStanzaCorrente(hall);
-        */
+        Comando fine = new Comando(TipoComando.FINE, "end");
+        fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
+        getComandi().add(fine);
+        Comando osserva = new Comando(TipoComando.GUARDA, "osserva");
+        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
+        getComandi().add(osserva);
+        Comando prendi = new Comando(TipoComando.PRENDI, "raccogli");
+        prendi.setAlias(new String[]{"prendi"});
+        getComandi().add(prendi);
+        Comando apri = new Comando(TipoComando.APRI, "apri");
+        apri.setAlias(new String[]{});
+        getComandi().add(apri);
+        Comando spingi = new Comando(TipoComando.SPINGI, "premi");
+        spingi.setAlias(new String[]{"spingi", "attiva"});
+        getComandi().add(spingi);
+        
+        //Stanze
+        Stanza soggiornoCasa = new Stanza(0, "Soggiorno", "Il soggiorno della casa di Joel. Uno dei pochi posti ancora 'sicuri'");
+        soggiornoCasa.setOsservazione("Nel tavolo del soggiorno puoi vedere, come buttati a caso lì sopra, una pistola, un coltello, "
+                + "una bottiglia di vetro e delle scatolette di cibo \n"
+                + "Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la porta principale." );
+        Stanza bagnoCasa = new Stanza(1, "Bagno", "Il bagno. Non in gran condizioni, ma potrebbe esserci qualcosa di utile");
+        bagnoCasa.setOsservazione("\nSotto lo specchio sporco c'è un mobiletto."
+                + "\n Andando ad ovest torneresti nel soggiorno.");
+        Stanza ripostiglioCasa = new Stanza(2, "Ripostiglio", "Un ripostiglio impolverato.");
+        ripostiglioCasa.setOsservazione("\nCi sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola"
+                + "e una confezione di batterie. \n Andando a nord torneresti in soggiorno");
+        
+        //Mappa
+        soggiornoCasa.setEst(bagnoCasa);
+        soggiornoCasa.setSud(ripostiglioCasa);
+        bagnoCasa.setOvest(soggiornoCasa);
+        ripostiglioCasa.setNord(soggiornoCasa);
+        getStanze().add(soggiornoCasa);
+        getStanze().add(bagnoCasa);
+        getStanze().add(ripostiglioCasa);
+        
+        //Oggetti
+        Oggetto pistola = new Oggetto(0, "pistola", "Una pistola 9mm");
+        pistola.setAlias(new String[] {"arma"});
+        soggiornoCasa.getOggetti().add(pistola);
+        Oggetto coltello = new Oggetto(1, "coltello", "Un coltello da caccia");
+        coltello.setAlias(new String[]{"lama"});
+        soggiornoCasa.getOggetti().add(coltello);
+        Oggetto bottigliaVuota = new Oggetto(2, "bottiglia", "Una bottiglia di vetro vuota");
+        soggiornoCasa.getOggetti().add(bottigliaVuota);
+        Oggetto scatolettaCibo = new Oggetto(3, "cibo", "Una scatoletta di cibo, ancora buono(forse)");
+        scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
+        soggiornoCasa.getOggetti().add(scatolettaCibo);
+        ContenitoreOggetti mobileBagno = new ContenitoreOggetti(4, "mobile", "Un mobiletto da bagno. Chissà cosa c'è dentro..");
+        mobileBagno.setAlias(new String[]{"mobiletto"});
+        mobileBagno.setApribile(true);
+        mobileBagno.setPrendibile(false);
+        mobileBagno.setAperto(false);
+        bagnoCasa.getOggetti().add(mobileBagno);
+        Oggetto garza = new Oggetto(5, "garza", "Una garza sterile(piu o meno)");
+        Oggetto alcol = new Oggetto(6, "alcol", "Una bottiglia di alcol etilico");  
+        Oggetto forbici = new Oggetto(7, "forbici", "Un paio di forbici dalla punta decisamente non arrotondata");  
+        mobileBagno.add(garza);
+        mobileBagno.add(alcol);
+        mobileBagno.add(forbici);
+        Oggetto munizioni = new Oggetto(8, "munizioni", "Un pacco di munizioni 9mm per la pistola. Io le prenderei..");
+        munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto"});
+        ripostiglioCasa.getOggetti().add(munizioni);
+        Oggetto batterie = new Oggetto(9, "batterie", "Un pacco di batterie, forse per una torcia");
+        batterie.setAlias(new String[]{"batteria"});
+        ripostiglioCasa.getOggetti().add(batterie);
+        
+        //Stanza attuale
+        setStanzaCorrente(soggiornoCasa);
     }
 
     @Override
@@ -237,14 +241,8 @@ public class Avventura extends StrutturaGioco {
                 //ricerca oggetti pushabili
                 if (p.getOggetto() != null && p.getOggetto().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggetto().getNome());
-                    if (p.getOggetto().getId() == 3) {
-                        end(out);
-                    }
                 } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggettoInventario().getNome());
-                    if (p.getOggettoInventario().getId() == 3) {
-                        end(out);
-                    }
                 } else {
                     out.println("Non ci sono oggetti che puoi premere qui.");
                 }
@@ -257,10 +255,5 @@ public class Avventura extends StrutturaGioco {
                 out.println(getStanzaCorrente().getDescrizione());
             }
         }
-    }
-
-    private void end(PrintStream out) {
-        out.println("Premi il pulsante del giocattolo e in seguito ad una forte esplosione la tua casa prende fuoco...\ntu e tuoi famigliari cercate invano di salvarvi e venite avvolti dalle fiamme...\nè stata una morte CALOROSA...addio!");
-        System.exit(0);
     }
 }
