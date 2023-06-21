@@ -28,6 +28,8 @@ public class Oggetto {
     private boolean prendibile = true;
 
     private boolean spingibile = false;
+    
+    private boolean leggibile = false;
 
     private boolean aperto = false;
 
@@ -94,7 +96,15 @@ public class Oggetto {
     public void setSpingibile(boolean spingibile) {
         this.spingibile = spingibile;
     }
-
+    
+    public boolean isLeggibile() {
+        return leggibile;
+    }
+    
+    public void setLeggibile(boolean leggibile) {
+        this.leggibile = leggibile;
+    }
+    
     public boolean isAperto() {
         return aperto;
     }
