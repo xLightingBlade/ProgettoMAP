@@ -64,6 +64,9 @@ public class Avventura extends StrutturaGioco {
         Comando spingi = new Comando(TipoComando.SPINGI, "premi");
         spingi.setAlias(new String[]{"spingi", "attiva"});
         getComandi().add(spingi);
+        Comando leggi = new Comando(TipoComando.LEGGI, "leggi");
+        leggi.setAlias(new String[]{"sfoglia"});
+        getComandi().add(leggi);
         
         //Stanze
         Stanza soggiornoCasa = new Stanza(0, "Soggiorno", "Il soggiorno della casa di Joel. Uno dei pochi posti ancora 'sicuri'");
@@ -178,11 +181,13 @@ public class Avventura extends StrutturaGioco {
         coltello.setAlias(new String[]{"lama"});
         soggiornoCasa.getOggetti().add(coltello);
         Oggetto bottigliaVuota = new Oggetto(2, "bottiglia", "Una bottiglia di vetro vuota");
+        bottigliaVuota.setAlias(new String[]{});
         soggiornoCasa.getOggetti().add(bottigliaVuota);
         Oggetto scatolettaCibo = new Oggetto(3, "cibo", "Una scatoletta di cibo, ancora buono(forse)");
         scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
         soggiornoCasa.getOggetti().add(scatolettaCibo);
         Oggetto foto = new Oggetto(4, "foto", "Una foto di te con tua figlia. Un ricordo di ciò che non c'è più");
+        foto.setAlias(new String[]{"immagine"});
         soggiornoCasa.getOggetti().add(foto);
         ContenitoreOggetti mobileBagno = new ContenitoreOggetti(5, "mobile", "Un mobiletto da bagno. Chissà cosa c'è dentro..");
         mobileBagno.setAlias(new String[]{"mobiletto"});
@@ -191,8 +196,11 @@ public class Avventura extends StrutturaGioco {
         mobileBagno.setAperto(false);
         bagnoCasa.getOggetti().add(mobileBagno);
         Oggetto garza = new Oggetto(6, "garza", "Una garza sterile(piu o meno)");
-        Oggetto alcol = new Oggetto(7, "alcol", "Una bottiglia di alcol etilico");  
-        Oggetto forbici = new Oggetto(8, "forbici", "Un paio di forbici dalla punta decisamente non arrotondata");  
+        garza.setAlias(new String[]{"garze"});        
+        Oggetto alcol = new Oggetto(7, "alcol", "Una bottiglia di alcol etilico");
+        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
+        Oggetto forbici = new Oggetto(8, "forbici", "Un paio di forbici dalla punta decisamente non arrotondata");
+        forbici.setAlias(new String[]{"forbice"});
         mobileBagno.add(garza);
         mobileBagno.add(alcol);
         mobileBagno.add(forbici);
@@ -207,39 +215,51 @@ public class Avventura extends StrutturaGioco {
         roccia.setPrendibile(false);
         corridoioPassaggio.getOggetti().add(roccia);
         Oggetto tastierino = new Oggetto(12, "tastierino", "Il tastierino numerico per aprire il cancello");
+        tastierino.setAlias(new String[]{});        
         tastierino.setPrendibile(false);
         cancello.getOggetti().add(tastierino);
         Oggetto foglioQuadro = new Oggetto(13, "fogliettoQuadroElettrico", "Un foglio con sopra un enigma riguardante un codice");
         foglioQuadro.setLeggibile(true);
+        foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
         stanzaQuadroElettrico.getOggetti().add(foglioQuadro);
         Oggetto levaCorrente = new Oggetto(14, "leva", "Una leva, forse per riattivare il quadro elettrico");
+        levaCorrente.setAlias(new String[]{});
         levaCorrente.setPrendibile(false);
         stanzaQuadroElettrico.getOggetti().add(levaCorrente);
         Oggetto torcia = new Oggetto(15, "torcia", "Una torcia, tornerà utile prima o poi");
+        torcia.setAlias(new String[]{});
         ingressoMetro.getOggetti().add(torcia);
         Oggetto documentoMetro = new Oggetto(16, "documentoMetro", "Un documento");
+        documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
         documentoMetro.setLeggibile(true);
         binariMetro.getOggetti().add(documentoMetro);
         Oggetto zattera = new Oggetto(17, "zattera", "Assi di legno a mo' di zattera. Abbastanza da reggere una ragazzina");
+        zattera.setAlias(new String[]{"legno"});
         stanzaZattera.getOggetti().add(zattera);
         Oggetto chiaveArmadietto = new Oggetto(18, "chiaveArmadietto", "Una chiave, non sai bene cosa apre");
+        chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
         dentroOspedale.getOggetti().add(chiaveArmadietto);
         ContenitoreOggetti armadietto = new ContenitoreOggetti(19, "armadietto", "Un armadietto chiuso a chiave");
+        armadietto.setAlias(new String[]{});
         armadietto.setApribile(false);
         armadietto.setPrendibile(false);
         armadietto.setAperto(false);
         armadietto.add(forbici);
         Oggetto tesserino = new Oggetto(20, "tesserino", "Un tesserino con scritto 'Infermeria'");
+        tesserino.setAlias(new String[]{"tessera"});
         armadietto.add(tesserino);
         magazzino.getOggetti().add(armadietto);
         infermeria.getOggetti().add(alcol);
         infermeria.getOggetti().add(garza);
         Oggetto cacciavite = new Oggetto(21, "cacciavite", "Un cacciavite");
+        cacciavite.setAlias(new String[]{});
         stanzaCacciavite.getOggetti().add(cacciavite);
         Oggetto documentoMedico = new Oggetto(22, "documentoMedico", "Un documento medico");
+        documentoMedico.setAlias(new String[]{"referto", "documento medico"});
         documentoMedico.setLeggibile(true);
         pianoSalaOperatoria.getOggetti().add(documentoMedico);
         Oggetto grata = new Oggetto(23, "grata", "Una grata, chiusa con delle viti");
+        grata.setAlias(new String[]{});
         grata.setPrendibile(false);
         grata.setSpingibile(false);
         grata.setApribile(false);
@@ -375,7 +395,15 @@ public class Avventura extends StrutturaGioco {
                 } else {
                     out.println("Non ci sono oggetti che puoi premere qui.");
                 }
-            }
+            } else if (p.getComando().getTipo() == TipoComando.LEGGI) {
+                if (p.getOggetto() != null && p.getOggetto().isLeggibile()) {
+                    out.print(p.getOggetto().getContenuto());
+                } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isLeggibile()) {
+                    out.print(p.getOggetto().getContenuto());
+                } else {
+                    out.println("Non ci sono oggetti che puoi leggere qui.");
+                }
+            }    
             if (nienteStanza) {
                 out.println("Da quella parte non si può andare c'è un muro!\nNon hai ancora acquisito i poteri per oltrepassare i muri...");
             } else if (movimento) {

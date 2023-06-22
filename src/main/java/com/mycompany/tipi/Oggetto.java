@@ -22,6 +22,8 @@ public class Oggetto {
     private String descrizione;
     
     private Set<String> alias;
+    
+    private String contenuto;
 
     private boolean apribile = false;
 
@@ -64,7 +66,15 @@ public class Oggetto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    public String getContenuto() {
+        return contenuto;
+    }
+    
+    public void setContenuto(String contenuto) {
+        this.contenuto = contenuto;
+    }
+    
     public String getDescrizione() {
         return descrizione;
     }
