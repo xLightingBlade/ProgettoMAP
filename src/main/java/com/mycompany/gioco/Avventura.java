@@ -196,11 +196,11 @@ public class Avventura extends StrutturaGioco {
         mobileBagno.setAperto(false);
         bagnoCasa.getOggetti().add(mobileBagno);
         Oggetto garza = new Oggetto(6, "garza", "Una garza sterile(piu o meno)");
-        garza.setAlias(new String[]{});        
+        garza.setAlias(new String[]{"garze"});        
         Oggetto alcol = new Oggetto(7, "alcol", "Una bottiglia di alcol etilico");
-        alcol.setAlias(new String[]{});
+        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
         Oggetto forbici = new Oggetto(8, "forbici", "Un paio di forbici dalla punta decisamente non arrotondata");
-        forbici.setAlias(new String[]{});
+        forbici.setAlias(new String[]{"forbice"});
         mobileBagno.add(garza);
         mobileBagno.add(alcol);
         mobileBagno.add(forbici);
