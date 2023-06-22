@@ -7,7 +7,8 @@ package com.mycompany.tipi;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
+ * Questa classe enumerativa descrivi quali tipi di comando sono definiti nel gioco.
  */
 public enum TipoComando {
     FINE, INVENTARIO, NORD, SUD, EST, OVEST, APRI, CHIUDI, SPINGI, TIRA, CAMMINA, PRENDI, PARLA, DAI, USA, GUARDA, ACCENDI, SPEGNI, LEGGI

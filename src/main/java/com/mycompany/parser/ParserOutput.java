@@ -10,7 +10,7 @@ import com.mycompany.tipi.Comando;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
  */
 public class ParserOutput {
 
@@ -20,6 +20,7 @@ public class ParserOutput {
     
     private Oggetto oggettoInventario;
 
+    //Costruttori
     public ParserOutput(Comando comando, Oggetto oggetto) {
         this.comando = comando;
         this.oggetto = oggetto;
@@ -30,7 +31,8 @@ public class ParserOutput {
         this.oggetto = oggetto;
         this.oggettoInventario = oggettoInv;
     }
-
+    //
+    
     public Comando getComando() {
         return comando;
     }

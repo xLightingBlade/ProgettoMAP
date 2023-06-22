@@ -12,16 +12,20 @@ import java.util.Set;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
+ * Questa classe modella la struttura che un comando (che sarà fornito dall'utente) deve avere.
  */
 public class Comando {
 
-    private final TipoComando tipo;
+    private final TipoComando tipo;//definisce il tipo di azione che il comando eseguirà
 
     private final String nome;
 
-    private Set<String> alias;
-
+    private Set<String> alias;//un insieme di alis, cioè di nomi simili del comando.
+    //Non è detto che l'utente fornirà in input esattamente il nome del comando che vuole usare,
+    //ma magari potrebbe fornire un nome simile(presente tra gli alias) e il gioco continuerà a funzionare correttmente.
+    
+    //Costruttori
     public Comando(TipoComando tipo, String nome) {
         this.tipo = tipo;
         this.nome = nome;
@@ -32,7 +36,9 @@ public class Comando {
         this.nome = nome;
         this.alias = alias;
     }
-
+    //
+    
+    
     public String getNome() {
         return nome;
     }

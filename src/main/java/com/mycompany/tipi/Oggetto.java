@@ -11,7 +11,8 @@ import java.util.Set;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
+ * Questa classe modella la struttura che un oggetto del gioco (utilizzato dall'utente) deve avere
  */
 public class Oggetto {
 
@@ -21,7 +22,9 @@ public class Oggetto {
 
     private String descrizione;
     
-    private Set<String> alias;
+    private Set<String> alias;//un insieme di alis, cioè di nomi simili dell'oggetto.
+    //Non è detto che l'utente fornirà in input esattamente il nome dell'oggetto che vuole usare,
+    //ma magari potrebbe fornire un nome simile(presente tra gli alias) e il gioco continuerà a funzionare correttmente.
     
     private String contenuto;
 
@@ -37,6 +40,8 @@ public class Oggetto {
 
     private boolean spinto = false;
 
+    
+    //Costruttori
     public Oggetto(int id) {
         this.id = id;
     }
@@ -58,6 +63,16 @@ public class Oggetto {
         this.descrizione = descrizione;
         this.alias = alias;
     }
+    
+    public Oggetto(int id, String nome, String descrizione, Set<String> alias, String contenuto) {
+        this.id = id;
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.alias = alias;
+        this.contenuto = contenuto;
+    }
+    //
+    
 
     public String getNome() {
         return nome;
@@ -83,6 +98,7 @@ public class Oggetto {
         this.descrizione = descrizione;
     }
 
+    //Usato per capire se un oggetto si può aprire
     public boolean isApribile() {
         return apribile;
     }
@@ -90,7 +106,8 @@ public class Oggetto {
     public void setApribile(boolean apribile) {
         this.apribile = apribile;
     }
-
+    
+    //Usato per capire se un oggetto si può prendere
     public boolean isPrendibile() {
         return prendibile;
     }
@@ -98,15 +115,17 @@ public class Oggetto {
     public void setPrendibile(boolean prendibile) {
         this.prendibile = prendibile;
     }
-
+    
+    //Usato per capire se un oggetto si può spingere
     public boolean isSpingibile() {
         return spingibile;
     }
-
+    
     public void setSpingibile(boolean spingibile) {
         this.spingibile = spingibile;
     }
     
+    //Usato per capire se un oggetto si può leggere
     public boolean isLeggibile() {
         return leggibile;
     }
@@ -115,6 +134,7 @@ public class Oggetto {
         this.leggibile = leggibile;
     }
     
+    //Usato per capire se un oggetto è aperto
     public boolean isAperto() {
         return aperto;
     }
@@ -122,7 +142,8 @@ public class Oggetto {
     public void setAperto(boolean aperto) {
         this.aperto = aperto;
     }
-
+    
+    //Usato per capire se un oggetto è stato spinto
     public boolean isSpinto() {
         return spinto;
     }
