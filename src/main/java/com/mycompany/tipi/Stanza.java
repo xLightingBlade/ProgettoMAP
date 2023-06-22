@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
+ * Questa classe modella la struttura che ogni stanza deve avere.
  */
 public class Stanza {
 
@@ -18,12 +19,13 @@ public class Stanza {
 
     private String nome;
 
-    private String descrizione;
+    private String descrizione;//una breve descrizione della stanza
 
     private String osservazione;
 
-    private boolean visibile = true;
+    private boolean visibile = true;//definisce se la stanza sarà visibile nella mappa o no.
 
+    //definiamo cosa c'è a nord, sud, est e ovest della stanza
     private Stanza sud = null;
 
     private Stanza nord = null;
@@ -31,9 +33,11 @@ public class Stanza {
     private Stanza est = null;
 
     private Stanza ovest = null;
-    
-    private final List<Oggetto> oggetti=new ArrayList<>();
+    //
+     
+    private final List<Oggetto> oggetti=new ArrayList<>();//la lista degli oggetti che si trovano nella stanza
 
+    //costruttori
     public Stanza(int id) {
         this.id = id;
     }
@@ -43,7 +47,9 @@ public class Stanza {
         this.nome = nome;
         this.descrizione = descrizione;
     }
-
+    //
+    
+    
     public String getNome() {
         return nome;
     }
@@ -59,7 +65,8 @@ public class Stanza {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-
+    
+    //utilizzato per capire se una stanza deve essere visibile nella mappa o no
     public boolean isVisibile() {
         return visibile;
     }

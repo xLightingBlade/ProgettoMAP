@@ -15,17 +15,19 @@ import java.util.List;
 
 /**
  *
- * @author pierpaolo
+ * @author gabri
+ * Questa classe astratta modella la struttura fondamentale 
+ * che una qualunque avventura testuale deve avere.
  */
 public abstract class StrutturaGioco {
 
-    private final List<Stanza> stanze = new ArrayList<>();
+    private final List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
 
-    private final List<Comando> comandi = new ArrayList<>();
+    private final List<Comando> comandi = new ArrayList<>();//la lista dei comandi del gioco
 
-    private final List<Oggetto> inventario = new ArrayList<>();
+    private final List<Oggetto> inventario = new ArrayList<>();//la lista degli oggetti del gioco
 
-    private Stanza stanzaCorrente;
+    private Stanza stanzaCorrente;//so sempre in che stanza mi trovo in qualunque momento
 
     public List<Stanza> getStanze() {
         return stanze;
@@ -47,8 +49,10 @@ public abstract class StrutturaGioco {
         return inventario;
     }
 
-    public abstract void init() throws Exception;
+    public abstract void init() throws Exception;//Questo metodo (implementato da una classe che erediterà da questa)
+    //inizializzerà tutti i dati del gioco, come stanze, oggetti ecc...
 
-    public abstract void prossimaMossa(ParserOutput p, PrintStream out);
+     
+    public abstract void prossimaMossa(ParserOutput p, PrintStream out);//In questo metodo è racchiusa la storia dell'avventura testuale
 
 }
