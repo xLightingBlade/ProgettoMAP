@@ -239,6 +239,7 @@ public class Avventura extends StrutturaGioco
         Oggetto foglioQuadro = new Oggetto(13, "fogliettoQuadroElettrico", "Un foglio con sopra un enigma riguardante un codice");
         foglioQuadro.setLeggibile(true);
         foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
+        foglioQuadro.setContenuto("CONTENUTO FOGLIO ENIGMA");
         stanzaQuadroElettrico.getOggetti().add(foglioQuadro);
         Oggetto levaCorrente = new Oggetto(14, "leva", "Una leva, forse per riattivare il quadro elettrico");
         levaCorrente.setAlias(new String[]{});
@@ -250,6 +251,7 @@ public class Avventura extends StrutturaGioco
         Oggetto documentoMetro = new Oggetto(16, "documentoMetro", "Un documento");
         documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
         documentoMetro.setLeggibile(true);
+        documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
         binariMetro.getOggetti().add(documentoMetro);
         Oggetto zattera = new Oggetto(17, "zattera", "Assi di legno a mo' di zattera. Abbastanza da reggere una ragazzina");
         zattera.setAlias(new String[]{"legno"});
@@ -275,6 +277,7 @@ public class Avventura extends StrutturaGioco
         Oggetto documentoMedico = new Oggetto(22, "documentoMedico", "Un documento medico");
         documentoMedico.setAlias(new String[]{"referto", "documento medico"});
         documentoMedico.setLeggibile(true);
+        documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
         pianoSalaOperatoria.getOggetti().add(documentoMedico);
         Oggetto grata = new Oggetto(23, "grata", "Una grata, chiusa con delle viti");
         grata.setAlias(new String[]{});
