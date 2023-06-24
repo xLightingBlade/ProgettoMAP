@@ -55,7 +55,7 @@ public class Avventura extends StrutturaGioco
         fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
         getComandi().add(fine);
         Comando osserva = new Comando(TipoComando.GUARDA, "osserva");
-        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
+        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
         getComandi().add(osserva);
         Comando prendi = new Comando(TipoComando.PRENDI, "raccogli");
         prendi.setAlias(new String[]{"prendi"});
@@ -72,7 +72,7 @@ public class Avventura extends StrutturaGioco
         
         //Stanze
         Stanza soggiornoCasa = new Stanza(0, "Soggiorno", "Il soggiorno della casa di Joel. Uno dei pochi posti ancora 'sicuri'");
-        soggiornoCasa.setOsservazione("Nel tavolo del soggiorno puoi vedere, come buttati a caso lì sopra, una pistola, un coltello, "
+        soggiornoCasa.setOsservazione("Nel tavolo del soggiorno puoi vedere, una pistola, un coltello, "
                 + "una bottiglia di vetro e delle scatolette di cibo \n"
                 + "Inoltre, non puoi fare a meno di notare una foto appoggiata su un mobile vicino\n"
                 + "Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la porta principale." );
@@ -82,16 +82,16 @@ public class Avventura extends StrutturaGioco
                 + "\n Andando ad ovest torneresti nel soggiorno.");
         
         Stanza ripostiglioCasa = new Stanza(2, "Ripostiglio", "Un ripostiglio impolverato.");
-        ripostiglioCasa.setOsservazione("\nCi sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola"
+        ripostiglioCasa.setOsservazione("\nCi sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola "
                 + "e una confezione di batterie. \n Andando a nord torneresti in soggiorno");
         
         Stanza corridoioPassaggio = new Stanza(3, "Corridoio", "Un corridodio del passaggio segreto");
-        corridoioPassaggio.setOsservazione("Noti che nel corridoio c'è una guarda che pattuglia la zona."
-                + "Attorno a te c'è convenientemente un grande masso dove nascondersi."
+        corridoioPassaggio.setOsservazione("Noti che nel corridoio c'è una guarda che pattuglia la zona. "
+                + "Attorno a te c'è un grande masso dove nascondersi."
                 + "\nNoti dritto davanti a te, alla fine del corridoio, un cancello");
         
         Stanza cancello = new Stanza(4, "Cancello", "La stanza del cancello, l'uscita dalla ZQ");
-        cancello.setOsservazione("Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice."
+        cancello.setOsservazione("Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è privo di corrente"
                 + "\nGuardando ad est vedi una porta aperta verso una stanza."
                 + "\nGuardandoti dietro vedi il corridoio");
         
@@ -99,7 +99,7 @@ public class Avventura extends StrutturaGioco
         stanzaQuadroElettrico.setOsservazione("Osservi che forse qua potresti far tornare la corrente al cancello."
                 + "\nMa non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro, quasi nascosto, c'è un"
                 + "foglietto con una scritta."
-                + "\nAndando ad ovest ritorni nel corridoio");
+                + "\nAndando ad ovest ritorni al cancello");
         
         Stanza ingressoMetro = new Stanza(6, "IngressoMetro", "L'ingresso della metropolitana");
         ingressoMetro.setOsservazione("Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso.."
@@ -305,11 +305,13 @@ public class Avventura extends StrutturaGioco
             boolean nienteStanza = false;
             boolean movimento = false;
             
-            if (p.getComando().getTipo() == TipoComando.NORD) 
+            //se vado a nord
+            if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
             {
+                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
                 if (getStanzaCorrente().getNord() != null)
                 {
-                 setStanzaCorrente(getStanzaCorrente().getNord());
+                    setStanzaCorrente(getStanzaCorrente().getNord());
                     movimento = true;
                 }
                 else
@@ -317,8 +319,9 @@ public class Avventura extends StrutturaGioco
                     nienteStanza = true;
                 }
             }
-            else if (p.getComando().getTipo() == TipoComando.SUD) 
+            else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
             {
+                //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
                 if (getStanzaCorrente().getSud() != null) 
                 {
                     setStanzaCorrente(getStanzaCorrente().getSud());
@@ -329,8 +332,9 @@ public class Avventura extends StrutturaGioco
                     nienteStanza = true;
                 }
             } 
-            else if (p.getComando().getTipo() == TipoComando.EST) 
+            else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
             {
+                //setta la nuova stanzaCorrente a quella a est della stanza corrente attuale
                 if (getStanzaCorrente().getEst() != null) 
                 {
                     setStanzaCorrente(getStanzaCorrente().getEst());
@@ -341,8 +345,9 @@ public class Avventura extends StrutturaGioco
                     nienteStanza = true;
                 }
             } 
-            else if (p.getComando().getTipo() == TipoComando.OVEST) 
+            else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
             {
+                //setta la nuova stanzaCorrente a quella ad ovest della stanza corrente attuale
                 if (getStanzaCorrente().getOvest() != null) {setStanzaCorrente(getStanzaCorrente().getOvest());
                     movimento = true;
                 } 
@@ -350,8 +355,9 @@ public class Avventura extends StrutturaGioco
                 {
                     nienteStanza = true;
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.INVENTARIO) 
+            }
+            //Motra inventario
+            else if (p.getComando().getTipo() == TipoComando.INVENTARIO)
             {
                 out.println("Nel tuo inventario ci sono:");
                 
@@ -368,7 +374,7 @@ public class Avventura extends StrutturaGioco
                 } 
                 else 
                 {
-                    out.println("Non c'è niente di interessante qui.");
+                    out.println("Non c'è niente di interessante da osserva qui.");
                 }
             } 
             else if (p.getComando().getTipo() == TipoComando.PRENDI) 
@@ -388,7 +394,7 @@ public class Avventura extends StrutturaGioco
                 } 
                 else 
                 {
-                    out.println("Non c'è niente da raccogliere qui.");
+                    out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
                 }
             } 
             else if (p.getComando().getTipo() == TipoComando.APRI) 
@@ -502,7 +508,7 @@ public class Avventura extends StrutturaGioco
                 } 
                 else if (p.getOggettoInventario() != null && p.getOggettoInventario().isLeggibile()) 
                 {
-                    out.print(p.getOggetto().getContenuto());
+                    out.print(p.getOggettoInventario().getContenuto());
                 } else 
                 {
                     out.println("Non ci sono oggetti che puoi leggere qui.");
