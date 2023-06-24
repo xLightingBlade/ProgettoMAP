@@ -297,14 +297,16 @@ public class OperazioniDatabase {
         soggiornoCasa.setSud(ripostiglioCasa);
         bagnoCasa.setOvest(soggiornoCasa);
         ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);
+        soggiornoCasa.setNord(corridoioPassaggio);  //Qui va fatto un check prima di farlo uscire di casa, se ha preso tutti gli oggetti
         corridoioPassaggio.setNord(cancello);
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
+        cancello.setNord(ingressoMetro);            //Su questo va fatto un check se il cancello è stato aperto
         stanzaQuadroElettrico.setOvest(cancello);
         ingressoMetro.setNord(binariMetro);
         binariMetro.setSud(ingressoMetro);
         binariMetro.setOvest(stanzaZattera);
+        binariMetro.setNord(ingressoOspedale);      //Qui ci va un check se è stata presa la zattera per attraversare
         stanzaZattera.setEst(binariMetro);
         dentroOspedale.setOvest(magazzino);
         dentroOspedale.setEst(infermeria);
