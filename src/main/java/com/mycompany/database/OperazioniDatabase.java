@@ -307,6 +307,7 @@ public class OperazioniDatabase {
         binariMetro.setOvest(stanzaZattera);
         stanzaZattera.setEst(binariMetro);
         dentroOspedale.setOvest(magazzino);
+        dentroOspedale.setEst(infermeria);
         magazzino.setEst(dentroOspedale);
         infermeria.setOvest(dentroOspedale);
         pianoSalaOperatoria.setEst(condotto);
