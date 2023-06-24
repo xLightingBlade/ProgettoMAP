@@ -21,6 +21,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.IllegalArgumentException;
 
 /**
  *
@@ -108,15 +109,27 @@ public class Engine
         
         VisualizzatoreFrasi visual = new VisualizzatoreFrasi(frasi);
         
-        try 
+        boolean val_err = true;
+        int secondiAttesa = 2;
+        do
         {
-            visual.mostraFrasi(1);
-        }
-        catch (InterruptedException ex) 
-        {
-            System.out.println("Riavvia il gioco\n");
-            return;
-        }
+            val_err = true;
+            try 
+            {
+                visual.mostraFrasi(secondiAttesa);
+            }
+            catch (InterruptedException ex)
+            {
+                System.out.println("Riavvia il gioco\n");
+                return;
+            }
+            catch(IllegalArgumentException ex2)
+            {
+                System.out.println("Il valore del tempo di attesa per la visualizzzione dei dialoghi non è permesso.\n Deve essere compresa tra 0 e 3 secondi.");
+                val_err = false;
+                secondiAttesa = 2;
+            }
+        }while(val_err == false);
         
         
         /*
