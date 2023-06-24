@@ -306,7 +306,8 @@ public class OperazioniDatabase {
         ingressoMetro.setNord(binariMetro);
         binariMetro.setSud(ingressoMetro);
         binariMetro.setOvest(stanzaZattera);
-        binariMetro.setNord(ingressoOspedale);      //Qui ci va un check se è stata presa la zattera per attraversare
+        binariMetro.setNord(ingressoOspedale); //Qui ci va un check se è stata presa la zattera per attraversare.
+        //Inoltre, non collego ingressoOspedale a nessuna altra stanza, per ora, siccome dovrebbe accadere un evento che in automatico ti sposta in dentroOspedale(dove si uccide marlene)
         stanzaZattera.setEst(binariMetro);
         dentroOspedale.setOvest(magazzino);
         dentroOspedale.setEst(infermeria);
