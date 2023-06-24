@@ -132,72 +132,96 @@ public class OperazioniDatabase {
     public static List<Stanza> creaStanze() {
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
-        stanze.add(soggiornoCasa);
         
         Stanza bagnoCasa = new Stanza(idStanze.get(1), nomiStanze.get(1), descrizioniStanze.get(1));
         bagnoCasa.setOsservazione(osservazioni.get(1));
-        stanze.add(bagnoCasa);
         
         Stanza ripostiglioCasa = new Stanza(idStanze.get(2), nomiStanze.get(2), descrizioniStanze.get(2));
         ripostiglioCasa.setOsservazione(osservazioni.get(2));
-        stanze.add(ripostiglioCasa);
         
         Stanza corridoioPassaggio = new Stanza(idStanze.get(3), nomiStanze.get(3), descrizioniStanze.get(3));
         corridoioPassaggio.setOsservazione(osservazioni.get(3));
-        stanze.add(corridoioPassaggio);
         
         Stanza cancello = new Stanza(idStanze.get(4), nomiStanze.get(4), descrizioniStanze.get(4));
         cancello.setOsservazione(osservazioni.get(4));
-        stanze.add(cancello);
         
         Stanza stanzaQuadroElettrico = new Stanza(idStanze.get(5), nomiStanze.get(5), descrizioniStanze.get(5));
         stanzaQuadroElettrico.setOsservazione(osservazioni.get(5));
-        stanze.add(stanzaQuadroElettrico);
         
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
-        stanze.add(ingressoMetro);
         
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
         binariMetro.setOsservazione(osservazioni.get(7));
-        stanze.add(binariMetro);
         
         Stanza stanzaZattera = new Stanza(idStanze.get(8), nomiStanze.get(8), descrizioniStanze.get(8));
         stanzaZattera.setOsservazione(osservazioni.get(8));
         stanzaZattera.setVisibile(false);
-        stanze.add(stanzaZattera);
         
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
-        stanze.add(ingressoOspedale);
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
-        stanze.add(dentroOspedale);
         
         Stanza magazzino = new Stanza(idStanze.get(11), nomiStanze.get(11), descrizioniStanze.get(11));
         magazzino.setOsservazione(osservazioni.get(11));
-        stanze.add(magazzino);
         
         Stanza infermeria = new Stanza(idStanze.get(12), nomiStanze.get(12), descrizioniStanze.get(12));
         infermeria.setOsservazione(osservazioni.get(12));
-        stanze.add(infermeria);
         
         Stanza pianoSalaOperatoria = new Stanza(idStanze.get(13), nomiStanze.get(13), descrizioniStanze.get(13));
         pianoSalaOperatoria.setOsservazione(osservazioni.get(13));
-        stanze.add(pianoSalaOperatoria);
         
         Stanza condotto = new Stanza(idStanze.get(14), nomiStanze.get(14), descrizioniStanze.get(14));
         condotto.setOsservazione(osservazioni.get(14));
-        stanze.add(condotto);
         
         Stanza stanzaCacciavite = new Stanza(idStanze.get(15), nomiStanze.get(15), descrizioniStanze.get(15));
         stanzaCacciavite.setOsservazione(osservazioni.get(15));
         stanzaCacciavite.setVisibile(false);
-        stanze.add(stanzaCacciavite);
         
         Stanza salaOperatoria = new Stanza(idStanze.get(16), nomiStanze.get(16), descrizioniStanze.get(16));
         salaOperatoria.setOsservazione(osservazioni.get(16));
+        
+        soggiornoCasa.setEst(bagnoCasa);
+        soggiornoCasa.setSud(ripostiglioCasa);
+        bagnoCasa.setOvest(soggiornoCasa);
+        ripostiglioCasa.setNord(soggiornoCasa);
+        soggiornoCasa.setNord(corridoioPassaggio);
+        corridoioPassaggio.setNord(cancello);
+        cancello.setSud(corridoioPassaggio);
+        cancello.setEst(stanzaQuadroElettrico);
+        stanzaQuadroElettrico.setOvest(cancello);
+        ingressoMetro.setNord(binariMetro);
+        binariMetro.setSud(ingressoMetro);
+        binariMetro.setOvest(stanzaZattera);
+        stanzaZattera.setEst(binariMetro);
+        dentroOspedale.setOvest(magazzino);
+        magazzino.setEst(dentroOspedale);
+        infermeria.setOvest(dentroOspedale);
+        pianoSalaOperatoria.setEst(condotto);
+        condotto.setOvest(pianoSalaOperatoria);
+        pianoSalaOperatoria.setOvest(stanzaCacciavite);
+        stanzaCacciavite.setEst(pianoSalaOperatoria);
+        
+        
+        
+        stanze.add(soggiornoCasa);
+        stanze.add(bagnoCasa);
+        stanze.add(ripostiglioCasa);
+        stanze.add(corridoioPassaggio);
+        stanze.add(cancello);
+        stanze.add(stanzaQuadroElettrico);
+        stanze.add(ingressoMetro);
+        stanze.add(binariMetro);
+        stanze.add(stanzaZattera);
+        stanze.add(ingressoOspedale);
+        stanze.add(dentroOspedale);
+        stanze.add(magazzino);
+        stanze.add(infermeria);
+        stanze.add(pianoSalaOperatoria);
+        stanze.add(condotto);
+        stanze.add(stanzaCacciavite);
         stanze.add(salaOperatoria);
         
         return stanze;

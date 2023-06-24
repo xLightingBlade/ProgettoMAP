@@ -6,6 +6,7 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
+import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
@@ -35,6 +36,10 @@ public class Avventura extends StrutturaGioco
     @Override
     public void init() throws Exception 
     {
+        OperazioniDatabase.connettiDatabase();
+        OperazioniDatabase.creaTabella();
+        OperazioniDatabase.popolaTabella();
+        OperazioniDatabase.caricaDatiStanze();
         //Comandi
         Comando nord = new Comando(TipoComando.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
@@ -71,124 +76,10 @@ public class Avventura extends StrutturaGioco
         getComandi().add(leggi);
         
         //Stanze
-        Stanza soggiornoCasa = new Stanza(0, "Soggiorno", "Il soggiorno della casa di Joel. Uno dei pochi posti ancora 'sicuri'");
-        soggiornoCasa.setOsservazione("Nel tavolo del soggiorno puoi vedere, una pistola, un coltello, "
-                + "una bottiglia di vetro e delle scatolette di cibo \n"
-                + "Inoltre, non puoi fare a meno di notare una foto appoggiata su un mobile vicino\n"
-                + "Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la porta principale." );
+        setStanze(OperazioniDatabase.creaStanze());
         
-        Stanza bagnoCasa = new Stanza(1, "Bagno", "Il bagno. Non in gran condizioni, ma potrebbe esserci qualcosa di utile");
-        bagnoCasa.setOsservazione("\nSotto lo specchio sporco c'è un mobiletto."
-                + "\n Andando ad ovest torneresti nel soggiorno.");
-        
-        Stanza ripostiglioCasa = new Stanza(2, "Ripostiglio", "Un ripostiglio impolverato.");
-        ripostiglioCasa.setOsservazione("\nCi sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola "
-                + "e una confezione di batterie. \n Andando a nord torneresti in soggiorno");
-        
-        Stanza corridoioPassaggio = new Stanza(3, "Corridoio", "Un corridodio del passaggio segreto");
-        corridoioPassaggio.setOsservazione("Noti che nel corridoio c'è una guarda che pattuglia la zona. "
-                + "Attorno a te c'è un grande masso dove nascondersi."
-                + "\nNoti dritto davanti a te, alla fine del corridoio, un cancello");
-        
-        Stanza cancello = new Stanza(4, "Cancello", "La stanza del cancello, l'uscita dalla ZQ");
-        cancello.setOsservazione("Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è privo di corrente"
-                + "\nGuardando ad est vedi una porta aperta verso una stanza."
-                + "\nGuardandoti dietro vedi il corridoio");
-        
-        Stanza stanzaQuadroElettrico = new Stanza(5, "QuadroElettrico", "Una stanza con un quadro elettrico ed una leva abbassata");
-        stanzaQuadroElettrico.setOsservazione("Osservi che forse qua potresti far tornare la corrente al cancello."
-                + "\nMa non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro, quasi nascosto, c'è un"
-                + "foglietto con una scritta."
-                + "\nAndando ad ovest ritorni al cancello");
-        
-        Stanza ingressoMetro = new Stanza(6, "IngressoMetro", "L'ingresso della metropolitana");
-        ingressoMetro.setOsservazione("Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso.."
-                + "\nGuardando bene, noti che addosso ha una torcia con delle pile."
-                + "\nAndando avanti a nord si scende giù");
-        
-        Stanza binariMetro = new Stanza(7, "BinariMetro", "I binari della metropolitana, c'è un problema però...");
-        binariMetro.setOsservazione("La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto."
-                + "\nAd ovest sembra esserci una stanzetta");
-        
-        Stanza stanzaZattera = new Stanza(8, "stanzaZattera", "Uno stanzino della metropolitana, completamente buio");
-        stanzaZattera.setVisibile(false); 
-        stanzaZattera.setOsservazione("Non si vede niente!");
-        
-        Stanza ingressoOspedale = new Stanza(9, "ingressoOspedale", "L'ingresso del Saint Mary's Hospital, QG delle Luci");
-        //arrivato all'ingresso non puoi osservare, avviene direttamente una scena e ti portano dentro
-        ingressoOspedale.setOsservazione("");
-        
-        Stanza dentroOspedale = new Stanza(10, "dentroOspedale", "Una stanza dentro l'ospedale..");
-        //suppongo avvenga prima tutta la scena prima di poter osservare qualcosa
-        dentroOspedale.setOsservazione("Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave."
-                + "\nSia ad est che ad ovest ci sono delle stanze");
-        
-        Stanza magazzino = new Stanza(11, "Magazzino", "Una stanza usata come magazzino.");
-        magazzino.setOsservazione("Noti un armadietto chiuso appoggiato ad una parete"
-                + "\nAndando ad est torneresti nella stanza di prima");
-        
-        Stanza infermeria = new Stanza(12, "Infermeria", "Un'infermeria un po' spoglia");
-        infermeria.setOsservazione("Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti."
-                + "\nCi trovi solamente una bottiglia d'alcol e delle garze"
-                + "\nAndando ad ovest torneresti nella stanza di prima");
-        
-        Stanza pianoSalaOperatoria = new Stanza(13, "pianoSala", "Il piano dell'ospedale dove c'è la sala operatoria");
-        pianoSalaOperatoria.setOsservazione("Davanti a te c'è un corridoio con una guardia ben armata, non c'è modo di attraversarlo senza farsi vedere."
-                + "\nPerò ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta."
-                + "\nInoltre, per terra noti un documento medico");
-        
-        Stanza condotto = new Stanza(14, "condotto", "C'è quella che sembra una grata di un condotto dell'aria molto largo");
-        condotto.setOsservazione("Ma la grata è fermamente salda, ci sono delle viti."
-                + "\nAndando ad ovest torneresti nella stanza precedente");
-        
-        Stanza stanzaCacciavite = new Stanza(15, "stanzaCacciavite", "Uno stanzino buio");
-        stanzaCacciavite.setVisibile(false);
-        stanzaCacciavite.setOsservazione("Non si vede niente");
-        
-        Stanza salaOperatoria = new Stanza(16, "salaOperatoria", "La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro");
-        salaOperatoria.setOsservazione("Guardi bene il tavolo e.... è Ellie!");
-        
-        //Mappa
-        /*Alcune stanze non hanno settato i collegamenti alle stanze successive.
-        *Questo perchè in alcune stanze bisogna sbloccarne l'entrata/uscita
-        */
-        soggiornoCasa.setEst(bagnoCasa);
-        soggiornoCasa.setSud(ripostiglioCasa);
-        bagnoCasa.setOvest(soggiornoCasa);
-        ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);
-        corridoioPassaggio.setNord(cancello);
-        cancello.setSud(corridoioPassaggio);
-        cancello.setEst(stanzaQuadroElettrico);
-        stanzaQuadroElettrico.setOvest(cancello);
-        ingressoMetro.setNord(binariMetro);
-        binariMetro.setSud(ingressoMetro);
-        binariMetro.setOvest(stanzaZattera);
-        stanzaZattera.setEst(binariMetro);
-        dentroOspedale.setOvest(magazzino);
-        magazzino.setEst(dentroOspedale);
-        infermeria.setOvest(dentroOspedale);
-        pianoSalaOperatoria.setEst(condotto);
-        condotto.setOvest(pianoSalaOperatoria);
-        pianoSalaOperatoria.setOvest(stanzaCacciavite);
-        stanzaCacciavite.setEst(pianoSalaOperatoria);
-        getStanze().add(soggiornoCasa);
-        getStanze().add(bagnoCasa);
-        getStanze().add(ripostiglioCasa);
-        getStanze().add(corridoioPassaggio);
-        getStanze().add(cancello);
-        getStanze().add(stanzaQuadroElettrico);
-        getStanze().add(ingressoMetro);
-        getStanze().add(binariMetro);
-        getStanze().add(stanzaZattera);
-        getStanze().add(ingressoOspedale);
-        getStanze().add(dentroOspedale);
-        getStanze().add(magazzino);
-        getStanze().add(infermeria);
-        getStanze().add(pianoSalaOperatoria);
-        getStanze().add(condotto);
-        getStanze().add(stanzaCacciavite);
-        getStanze().add(salaOperatoria);  
+        //TODO, FINIRE.
+        //SISTEMARE ANCHE COMANDI E OGGETTI DA DB
         
         //Oggetti
         //aggiungere un comando per leggere i documenti e un attributo a tali documenti dove metterne il contenuto
@@ -287,7 +178,7 @@ public class Avventura extends StrutturaGioco
         condotto.getOggetti().add(grata);
         
         //Stanza attuale
-        setStanzaCorrente(soggiornoCasa);
+        setStanzaCorrente(getStanze().get(0));
     }
 
     @Override
