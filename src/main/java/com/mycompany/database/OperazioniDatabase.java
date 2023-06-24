@@ -4,6 +4,8 @@
  */
 package com.mycompany.database;
 
+import com.mycompany.tipi.ContenitoreOggetti;
+import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,29 +20,43 @@ import java.util.List;
  */
 public class OperazioniDatabase {
     private static Connection con;
-    private static final List<Integer> idStanze = new ArrayList<>();
-    private static final List<String> nomiStanze = new ArrayList<>();
-    private static final List<String> descrizioniStanze = new ArrayList<>();
-    private static final List<String> osservazioni = new ArrayList<>();
-    private static final List<Stanza> stanze = new ArrayList<>();
+    private static List<Integer> idStanze = new ArrayList<>();
+    private static List<String> nomiStanze = new ArrayList<>();
+    private static List<String> descrizioniStanze = new ArrayList<>();
+    private static List<String> osservazioni = new ArrayList<>();
+    private static List<Stanza> stanze = new ArrayList<>();
+    private static List<Integer> idOggetti = new ArrayList<>();
+    private static List<String> nomiOggetti = new ArrayList<>();
+    private static List<String> descrizioniOggetti = new ArrayList<>();
+    private static List<String> contenutoOggetti = new ArrayList<>();
+    private static List<Oggetto> oggetti = new ArrayList<>();
+    private static List<Integer> stanzaOggetto = new ArrayList<>();
     
     public static void connettiDatabase() throws SQLException {
         OperazioniDatabase.con = DatabaseInit.getConnection();
     }
     
-    public static void creaTabella() throws SQLException {
-        String query = "create table STANZE " + "(ID_STANZA tinyint unsigned NOT NULL, " +
+    public static void creaTabelle() throws SQLException {
+        String query = "create table if not exists STANZE " + "(ID_STANZA int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(1000), " + "OSSERVA varchar(3000), " +
                 "PRIMARY KEY(ID_STANZA))";
         
+        String query2 = "create table if not exists OGGETTI " + "(ID_OGGETTO int NOT NULL, " +
+                "NOME varchar(50), " + "DESCRIZIONE varchar(200), " + "CONTENUTO varchar(1000), STANZA int, " +
+                "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) )";
+        
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate(query);
+            stmt.executeUpdate(query2);
         } catch (SQLException ex) {
-            System.out.println("Errore creazione tabella Stanze");
+            System.err.println("Errore creazione tabelle:\n");
+            System.err.print(ex.getErrorCode() + "\n");
+            System.err.print(ex.getSQLState() +"\n");
+            System.err.print(ex.getMessage()+ "\n");
         }
     }
 
-    public static void popolaTabella() throws SQLException {
+    public static void popolaTabellaStanze() throws SQLException {
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate("""
                                insert into STANZE values(0, 'Soggiorno', 'Il soggiorno della casa di Joel. Uno dei pochi posti ancora sicuri', 'Sul tavolo del soggiorno puoi vedere una pistola, un coltello, una bottiglia di vetro e delle scatolette di cibo.\n
@@ -60,7 +76,7 @@ public class OperazioniDatabase {
                                Noti dritto davanti a te, alla fine del corridoio, un cancello')""");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(4, 'Cancello', 'La stanza del cancello, l'uscita dalla ZQ', 'Affianco al cancello c''è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
+                               insert into STANZE values(4, 'Cancello', 'La stanza del cancello, l''uscita dalla ZQ', 'Affianco al cancello c''è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
                                 Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c''è il corridoio')""");
             
             stmt.executeUpdate("""
@@ -68,7 +84,7 @@ public class OperazioniDatabase {
                                 Andando ad ovest torneresti al cancello.')""");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(6, 'IngressoMetro', 'L'ingresso della metropolitana', 'Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso...
+                               insert into STANZE values(6, 'IngressoMetro', 'L''ingresso della metropolitana', 'Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso...
                                Guardando bene noti che addosso ha una torcia con delle pile.
                                 Andando avanti a nord si scende giù')""");
             
@@ -80,10 +96,10 @@ public class OperazioniDatabase {
                                "values(8, 'StanzaZattera', 'Uno stanzino della metropolitana, completamente buio', 'Non si vede niente!')");
             
             stmt.executeUpdate("insert into STANZE " + 
-                               "values(9, 'IngressoOspedale', 'L'ingresso del Saint Mary's Hospital, QG delle Luci', ' ')");
+                               "values(9, 'IngressoOspedale', 'L''ingresso del Saint Mary''s Hospital, QG delle Luci', ' ')");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(10, 'DentroOspedale', 'Una stanza dentro l'ospedale..', 'Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
+                               insert into STANZE values(10, 'DentroOspedale', 'Una stanza dentro l''ospedale..', 'Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
                                 Sia ad est che ad ovest ci sono delle stanze.')""");
             
             stmt.executeUpdate("""
@@ -91,31 +107,112 @@ public class OperazioniDatabase {
                                 Andando ad est torneresti nella stanza precedente.')""");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(12, 'Infermeria', 'Un'infermeria un po' spoglia', 'Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti.
+                               insert into STANZE values(12, 'Infermeria', 'Un''infermeria un po'' spoglia', 'Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti.
                                 Ci trovi solamente una bottiglia d''alcol e delle garze.
                                 Andando ad ovest torneresti nella stanza precedente.')""");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(13, 'PianoSala', 'Il piano dell'ospedale dove c''è la sala operatoria', 'Davanti a te c''è un corridoio con una guardia ben armata, non c''è modo di attraversarlo senza farsi vedere.
+                               insert into STANZE values(13, 'PianoSala', 'Il piano dell''ospedale dove c''è la sala operatoria', 'Davanti a te c''è un corridoio con una guardia ben armata, non c''è modo di attraversarlo senza farsi vedere.
                                Però ad est c''è qualcosa di interessante, mentre ad ovest una stanzina aperta.
                                Inoltre, per terra trovi un documento medico.')""");
             
             stmt.executeUpdate("""
-                               insert into STANZE values(14, 'Condotto', 'C''è quella che sembra una grata di un condotto dell'aria molto largo', 'La grata è fermamente salda, ci sono delle viti.
+                               insert into STANZE values(14, 'Condotto', 'C''è quella che sembra una grata di un condotto dell''aria molto largo', 'La grata è fermamente salda, ci sono delle viti.
                                Andando ad ovest torneresti nella stanza precedente.')""");
             
             stmt.executeUpdate("insert into STANZE " + 
                                "values(15, 'StanzaCacciavite', 'Uno stanzino buio', 'Non si vede niente')");
             
             stmt.executeUpdate("insert into STANZE " + 
-                               "values(16, 'SalaOperatoria', 'La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro', 'Guardi bene il tavolo e.... è Ellie!')");
+                               "values(16, 'SalaOperatoria', 'La sala operatoria, c''è un tavolo operatorio e dei dottori al lavoro', 'Guardi bene il tavolo e.... è Ellie!')");
         } catch (SQLException ex) {
-            System.out.println("Errore popolamento tabella");
+            System.err.println("\nErrore popolamento tabella stanze\n");
+            System.err.print(ex.getErrorCode() + "\n");
+            System.err.print(ex.getSQLState() + "\n");
+            System.err.print(ex.getMessage() + "\n");
         }
     }
     
-    public static void caricaDatiStanze() throws SQLException {
+    public static void popolaTabellaOggetti() throws SQLException {
+        //manca l'alcol e le garze in infermeria
+        try(Statement stmt = con.createStatement()) {
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(0, 'pistola', 'Una pistola 9mm', null, 0)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(1, 'coltello', 'Un coltello da caccia', null, 0)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(2, 'bottiglia', 'Una bottiglia di vetro vuota', null, 0)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(3, 'cibo', 'Una scatoletta di cibo, ancora buono(forse)', null, 0)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(4, 'foto', 'Una foto di te con tua figlia. Un ricordo di ciò che non c''è più', null, 0)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(5, 'mobile', 'Un mobiletto da bagno. Chissà cosa c''è dentro..', null, 1)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(6, 'garza', 'Una garza sterile(più o meno)', null, null)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(7, 'alcol', 'Una bottiglia di alcol etilico', null, null)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(8, 'forbici', 'Un paio di forbici dalla punta decisamente non arrotondata', null, null)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(9, 'munizioni', 'Un pacco di munizioni 9mm per la pistola. Io le prenderei..', null, 2)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(10, 'batterie', 'Un pacco di batterie, forse per una torcia', null, 2)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(11, 'roccia', 'Una grande roccia, più grande di te', null, 3)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(12, 'tastierino', 'Il tastierino numerico per aprire il cancello', null, 4)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(13, 'fogliettoQuadroElettrico', 'Un foglio con sopra un enigma riguardante un codice', 'CONTENUTO FOGLIO ENIGMA', 5)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(14, 'leva', 'Una leva, forse per riattivare il quadro elettrico', null, 5)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(15, 'torcia', 'Una torcia, tornerà utile prima o poi', null, 6)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(16, 'documentoMetro', 'Un documento', 'CONTENUTO DOCUMENTO METROPOLITANA', 7)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(17, 'zattera', 'Assi di legno a mo'' di zattera. Abbastanza da reggere una ragazzina', null, 8)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(18, 'chiaveArmadietto', 'Una chiave, non sai bene cosa apre', null, 10)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(19, 'armadietto', 'Un armadietto chiuso a chiave', null, 11)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(20, 'tesserino', 'Un tesserino con scritto ''Infermeria''', null, null)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(21, 'cacciavite', 'Un cacciavite', null, 15)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(22, 'documentoMedico', 'Un documento medico', 'CONTENUTO DOCUMENTO MEDICO OSPEDALE', 13)");
+            
+            stmt.executeUpdate("insert into OGGETTI " +
+                               "values(23, 'grata', 'Una grata, chiusa con delle viti', null, 14)");
+        }
+    }
+    
+    public static void caricaDati() throws SQLException {
         String query = "select ID_STANZA, NOME, DESCRIZIONE, OSSERVA from STANZE";
+        String query2 = "select ID_OGGETTO, NOME, DESCRIZIONE, CONTENUTO, STANZA from OGGETTI";
         try(Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
@@ -127,9 +224,22 @@ public class OperazioniDatabase {
         } catch(SQLException ex) {
             System.out.println("Errore caricamento dati stanze");
         }
+        
+        try(Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query2);
+            while(rs.next()) {
+                idOggetti.add(rs.getInt("ID_OGGETTO"));
+                nomiOggetti.add(rs.getString("NOME"));
+                descrizioniOggetti.add(rs.getString("DESCRIZIONE"));
+                contenutoOggetti.add(rs.getString("CONTENUTO"));
+                stanzaOggetto.add(rs.getInt("STANZA"));
+            }
+        } catch(SQLException ex) {
+            System.out.println("Errore caricamento dati oggetti");
+        }
     }
     
-    public static List<Stanza> creaStanze() {
+    public static void creaStanze() {
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
         
@@ -224,6 +334,158 @@ public class OperazioniDatabase {
         stanze.add(stanzaCacciavite);
         stanze.add(salaOperatoria);
         
-        return stanze;
+    }
+    
+    public static List<Stanza> creaOggetti() {
+        //IN ATTESA DI TROVARE UN METODO MIGLIORE PER METTERE GLI OGGETTI NELLE STANZE
+        //forse cambiare l'index in stanze.get mettendoci la colonna 'stanza' della tabella oggetti pigliandola con qualche query
+        //insomma, qualcosa che non sia mettere manualmente l'index della stanza in stanze.get
+        Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
+        pistola.setAlias(new String[] {"arma"});
+        stanze.get(0).getOggetti().add(pistola);
+        
+        Oggetto coltello = new Oggetto(idOggetti.get(1), nomiOggetti.get(1), descrizioniOggetti.get(1));
+        coltello.setAlias(new String[]{"lama"});
+        stanze.get(0).getOggetti().add(coltello);
+
+        Oggetto bottigliaVuota = new Oggetto(idOggetti.get(2), nomiOggetti.get(2), descrizioniOggetti.get(2));
+        bottigliaVuota.setAlias(new String[]{});
+        stanze.get(0).getOggetti().add(bottigliaVuota);
+
+        Oggetto scatolettaCibo = new Oggetto(idOggetti.get(3), nomiOggetti.get(3), descrizioniOggetti.get(3));
+        scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
+        stanze.get(0).getOggetti().add(scatolettaCibo);
+
+        Oggetto foto = new Oggetto(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
+        foto.setAlias(new String[]{"immagine"});
+        foto.setPrendibile(false);
+        stanze.get(0).getOggetti().add(foto);
+
+        ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
+        mobileBagno.setAlias(new String[]{"mobiletto"});
+        mobileBagno.setApribile(true);
+        mobileBagno.setPrendibile(false);
+        mobileBagno.setAperto(false);
+        stanze.get(1).getOggetti().add(mobileBagno);
+
+        Oggetto garza = new Oggetto(idOggetti.get(6), nomiOggetti.get(6), descrizioniOggetti.get(6));
+        garza.setAlias(new String[]{"garze"});        
+        Oggetto alcol = new Oggetto(idOggetti.get(7), nomiOggetti.get(7), descrizioniOggetti.get(7));
+        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
+        Oggetto forbici = new Oggetto(idOggetti.get(8), nomiOggetti.get(8), descrizioniOggetti.get(8));
+        forbici.setAlias(new String[]{"forbice"});
+        mobileBagno.add(garza);
+        mobileBagno.add(alcol);
+        mobileBagno.add(forbici);
+        Oggetto munizioni = new Oggetto(idOggetti.get(9), nomiOggetti.get(9), descrizioniOggetti.get(9));
+        munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto"});
+        stanze.get(2).getOggetti().add(munizioni);
+
+        Oggetto batterie = new Oggetto(idOggetti.get(10), nomiOggetti.get(10), descrizioniOggetti.get(10));
+        batterie.setAlias(new String[]{"batteria"});
+        stanze.get(2).getOggetti().add(batterie);
+
+        Oggetto roccia = new Oggetto(idOggetti.get(11), nomiOggetti.get(11), descrizioniOggetti.get(11));
+        roccia.setAlias(new String[]{"masso"});
+        roccia.setPrendibile(false);
+        stanze.get(3).getOggetti().add(roccia);
+
+        Oggetto tastierino = new Oggetto(idOggetti.get(12), nomiOggetti.get(12), descrizioniOggetti.get(12));
+        tastierino.setAlias(new String[]{});        
+        tastierino.setPrendibile(false);
+        stanze.get(4).getOggetti().add(tastierino);
+
+        Oggetto foglioQuadro = new Oggetto(idOggetti.get(13), nomiOggetti.get(13), descrizioniOggetti.get(13));
+        foglioQuadro.setLeggibile(true);
+        foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
+        foglioQuadro.setContenuto("CONTENUTO FOGLIO ENIGMA");
+        stanze.get(5).getOggetti().add(foglioQuadro);
+
+        Oggetto levaCorrente = new Oggetto(idOggetti.get(14), nomiOggetti.get(14), descrizioniOggetti.get(14));
+        levaCorrente.setAlias(new String[]{});
+        levaCorrente.setPrendibile(false);
+        stanze.get(5).getOggetti().add(levaCorrente);
+
+        Oggetto torcia = new Oggetto(idOggetti.get(15), nomiOggetti.get(15), descrizioniOggetti.get(15));
+        torcia.setAlias(new String[]{});
+        stanze.get(6).getOggetti().add(torcia);
+
+        Oggetto documentoMetro = new Oggetto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));
+        documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
+        documentoMetro.setLeggibile(true);
+        documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
+        stanze.get(7).getOggetti().add(documentoMetro);
+
+        Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
+        zattera.setAlias(new String[]{"legno"});
+        stanze.get(8).getOggetti().add(zattera);
+
+        Oggetto chiaveArmadietto = new Oggetto(idOggetti.get(18), nomiOggetti.get(18), descrizioniOggetti.get(18));
+        chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
+        stanze.get(10).getOggetti().add(chiaveArmadietto);
+
+        ContenitoreOggetti armadietto = new ContenitoreOggetti(idOggetti.get(19), nomiOggetti.get(19), descrizioniOggetti.get(19));
+        armadietto.setAlias(new String[]{});
+        armadietto.setApribile(false);
+        armadietto.setPrendibile(false);
+        armadietto.setAperto(false);
+        armadietto.add(forbici);
+        Oggetto tesserino = new Oggetto(idOggetti.get(20), nomiOggetti.get(20), descrizioniOggetti.get(20));
+        tesserino.setAlias(new String[]{"tessera"});
+        armadietto.add(tesserino);
+        stanze.get(11).getOggetti().add(armadietto);
+
+        Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
+        cacciavite.setAlias(new String[]{});
+        stanze.get(15).getOggetti().add(cacciavite);
+
+        Oggetto documentoMedico = new Oggetto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
+        documentoMedico.setAlias(new String[]{"referto", "documento medico"});
+        documentoMedico.setLeggibile(true);
+        documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
+        stanze.get(13).getOggetti().add(documentoMedico);
+
+        Oggetto grata = new Oggetto(idOggetti.get(23), nomiOggetti.get(23), descrizioniOggetti.get(23));
+        grata.setAlias(new String[]{});
+        grata.setPrendibile(false);
+        grata.setSpingibile(false);
+        grata.setApribile(false);
+        stanze.get(14).getOggetti().add(grata);
+        
+        oggetti.add(pistola);
+        oggetti.add(coltello);
+        oggetti.add(bottigliaVuota);
+        oggetti.add(scatolettaCibo);
+        oggetti.add(foto);
+        oggetti.add(mobileBagno);
+        oggetti.add(garza);
+        oggetti.add(alcol);
+        oggetti.add(forbici);
+        oggetti.add(munizioni);
+        oggetti.add(batterie);
+        oggetti.add(roccia);
+        oggetti.add(tastierino);
+        oggetti.add(foglioQuadro);
+        oggetti.add(levaCorrente);
+        oggetti.add(torcia);
+        oggetti.add(documentoMetro);
+        oggetti.add(zattera);
+        oggetti.add(chiaveArmadietto);
+        oggetti.add(tesserino);
+        oggetti.add(cacciavite);
+        oggetti.add(documentoMedico);
+        oggetti.add(grata);
+        
+        return stanze;        
+    }
+    
+    public static void resetDatabase() throws SQLException {
+        try(Statement stmt = con.createStatement()) {
+            stmt.executeUpdate("DROP ALL OBJECTS");
+        } catch(SQLException ex) {
+            System.err.println("Errore reset database\n");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getMessage());
+        }
     }
 }
