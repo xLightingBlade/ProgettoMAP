@@ -2,6 +2,7 @@ package com.mycompany.avventura;
 
 
 import java.util.List;
+import java.lang.IllegalArgumentException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,12 +24,19 @@ public class VisualizzatoreFrasi
         this.frasi = frasi;
     }
     
-    public void mostraFrasi(Integer secondiAttesa) throws InterruptedException
+    public void mostraFrasi(Integer secondiAttesa) throws InterruptedException, IllegalArgumentException
     {
-        for(String s : frasi)
+        if(secondiAttesa >= 0 && secondiAttesa <= 3)
         {
-            System.out.println(s);
-            Thread.sleep(secondiAttesa*1000);
+            for(String s : frasi)
+            {
+                System.out.println(s);
+                Thread.sleep(secondiAttesa*1000);
+            }
+        }
+        else
+        {
+            throw new IllegalArgumentException(); 
         }
     }
     
