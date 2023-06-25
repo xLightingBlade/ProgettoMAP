@@ -1,0 +1,12 @@
+TIPO,NOME
+NORD,nord
+INVENTARIO,inventario
+SUD,sud
+EST,est
+OVEST,ovest
+FINE,end
+GUARDA,osserva
+PRENDI,raccogli
+APRI,apri
+SPINGI,premi
+LEGGI,leggi

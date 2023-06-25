@@ -44,14 +44,15 @@ public class OperazioniDatabase {
     public static void creaTabelle() throws SQLException {
         String query = "create table if not exists STANZE " + "(ID_STANZA int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(1000), " + "OSSERVA varchar(3000), " +
-                "PRIMARY KEY(ID_STANZA))";
+                "PRIMARY KEY(ID_STANZA)) as select ID,NOME,DESCRIZIONE,OSSERVA from csvread('./resources/stanze.csv')";
         
         String query2 = "create table if not exists OGGETTI " + "(ID_OGGETTO int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(200), " + "CONTENUTO varchar(1000), STANZA int, " +
-                "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) )";
+                "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) ) " +
+                "as select ID,NOME,DESCRIZIONE,CONTENUTO,STANZA from csvread('./resources/oggetti.csv')";
         
         String query3 = "create table if not exists COMANDI " + "(TIPO_COMANDO varchar(50) NOT NULL, " +
-                "NOME varchar(50), PRIMARY KEY(TIPO_COMANDO))";
+                "NOME varchar(50), PRIMARY KEY(TIPO_COMANDO)) as select TIPO,NOME  from csvread('./resources/comandi.csv')";
         
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate(query);
@@ -65,6 +66,7 @@ public class OperazioniDatabase {
         }
     }
 
+    
     public static void popolaTabellaStanze() throws SQLException {
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate("""
@@ -218,11 +220,12 @@ public class OperazioniDatabase {
                                "values(23, 'grata', 'Una grata, chiusa con delle viti', null, 14)");
         } catch (SQLException ex) {
             System.err.print("Errore popolamento tabella oggetti");
-            System.err.print(ex.getErrorCode());
-            System.err.print(ex.getSQLState());
-            System.err.print(ex.getMessage());
+            System.err.print(ex.getErrorCode() + "\n");
+            System.err.print(ex.getSQLState() + "\n");
+            System.err.print(ex.getMessage() + "\n");
         }
     }
+    
     
     public static void popolaTabellaComandi() throws SQLException {
         try (Statement stmt = con.createStatement()) {

@@ -37,9 +37,9 @@ public class Avventura extends StrutturaGioco {
         OperazioniDatabase.connettiDatabase();
         OperazioniDatabase.resetDatabase();
         OperazioniDatabase.creaTabelle();
-        OperazioniDatabase.popolaTabellaStanze();
-        OperazioniDatabase.popolaTabellaOggetti();
-        OperazioniDatabase.popolaTabellaComandi();
+        //OperazioniDatabase.popolaTabellaStanze();
+        //OperazioniDatabase.popolaTabellaOggetti();
+        //OperazioniDatabase.popolaTabellaComandi();
         OperazioniDatabase.caricaDati();
         OperazioniDatabase.creaStanze();
         
