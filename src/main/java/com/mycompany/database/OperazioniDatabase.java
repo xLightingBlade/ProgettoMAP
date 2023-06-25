@@ -4,6 +4,8 @@
  */
 package com.mycompany.database;
 
+import com.mycompany.tipi.Comando;
+import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
@@ -31,6 +33,9 @@ public class OperazioniDatabase {
     private static List<String> contenutoOggetti = new ArrayList<>();
     private static List<Oggetto> oggetti = new ArrayList<>();
     private static List<Integer> stanzaOggetto = new ArrayList<>();
+    private static List<String> tipoComandi = new ArrayList<>();
+    private static List<String> nomeComandi = new ArrayList<>();
+    private static List<Comando> comandi = new ArrayList<>();
     
     public static void connettiDatabase() throws SQLException {
         OperazioniDatabase.con = DatabaseInit.getConnection();
@@ -45,9 +50,13 @@ public class OperazioniDatabase {
                 "NOME varchar(50), " + "DESCRIZIONE varchar(200), " + "CONTENUTO varchar(1000), STANZA int, " +
                 "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) )";
         
+        String query3 = "create table if not exists COMANDI " + "(TIPO_COMANDO varchar(50) NOT NULL, " +
+                "NOME varchar(50), PRIMARY KEY(TIPO_COMANDO))";
+        
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate(query);
             stmt.executeUpdate(query2);
+            stmt.executeUpdate(query3);
         } catch (SQLException ex) {
             System.err.println("Errore creazione tabelle:\n");
             System.err.print(ex.getErrorCode() + "\n");
@@ -207,12 +216,60 @@ public class OperazioniDatabase {
             
             stmt.executeUpdate("insert into OGGETTI " +
                                "values(23, 'grata', 'Una grata, chiusa con delle viti', null, 14)");
+        } catch (SQLException ex) {
+            System.err.print("Errore popolamento tabella oggetti");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.print(ex.getMessage());
+        }
+    }
+    
+    public static void popolaTabellaComandi() throws SQLException {
+        try (Statement stmt = con.createStatement()) {
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('NORD', 'nord')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('INVENTARIO', 'inventario')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('SUD', 'sud')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('EST', 'est')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('OVEST', 'ovest')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('FINE', 'end')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('GUARDA', 'osserva')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('PRENDI', 'raccogli')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('APRI', 'apri')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('SPINGI', 'premi')");
+            
+            stmt.executeUpdate("insert into COMANDI " +
+                               "values('LEGGI', 'leggi')");
+        } catch (SQLException ex) {
+            System.err.println("Errore popolamento tabella comandi");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.println(ex.getMessage());
         }
     }
     
     public static void caricaDati() throws SQLException {
         String query = "select ID_STANZA, NOME, DESCRIZIONE, OSSERVA from STANZE";
         String query2 = "select ID_OGGETTO, NOME, DESCRIZIONE, CONTENUTO, STANZA from OGGETTI";
+        String query3 = "select TIPO_COMANDO, NOME from COMANDI";
         try(Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
@@ -235,7 +292,23 @@ public class OperazioniDatabase {
                 stanzaOggetto.add(rs.getInt("STANZA"));
             }
         } catch(SQLException ex) {
-            System.out.println("Errore caricamento dati oggetti");
+            System.err.println("Errore caricamento dati oggetti");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.print(ex.getMessage());
+        }
+        
+        try(Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query3);
+            while(rs.next()) {
+                tipoComandi.add(rs.getString("TIPO_COMANDO"));
+                nomeComandi.add(rs.getString("NOME"));
+            }
+        } catch(SQLException ex) {
+            System.err.println("Errore caricamento dati comandi");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.print(ex.getMessage());
         }
     }
     
@@ -341,9 +414,6 @@ public class OperazioniDatabase {
     }
     
     public static List<Stanza> creaOggetti() {
-        //IN ATTESA DI TROVARE UN METODO MIGLIORE PER METTERE GLI OGGETTI NELLE STANZE
-        //forse cambiare l'index in stanze.get mettendoci la colonna 'stanza' della tabella oggetti pigliandola con qualche query
-        //insomma, qualcosa che non sia mettere manualmente l'index della stanza in stanze.get
         Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
         pistola.setAlias(new String[] {"arma"});
         stanze.get(0).getOggetti().add(pistola);
@@ -483,12 +553,52 @@ public class OperazioniDatabase {
         return stanze;        
     }
     
+    public static List<Comando> creaComandi() throws SQLException {
+        Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));
+        nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
+        Comando inventario = new Comando(TipoComando.valueOf(tipoComandi.get(1)), nomeComandi.get(1));
+        inventario.setAlias(new String[]{"inv"});
+        Comando sud = new Comando(TipoComando.valueOf(tipoComandi.get(2)), nomeComandi.get(2));
+        sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
+        Comando est = new Comando(TipoComando.valueOf(tipoComandi.get(3)), nomeComandi.get(3));
+        est.setAlias(new String[]{"e", "E", "Est", "EST"});
+        Comando ovest = new Comando(TipoComando.valueOf(tipoComandi.get(4)), nomeComandi.get(4));
+        ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
+        Comando fine = new Comando(TipoComando.valueOf(tipoComandi.get(5)), nomeComandi.get(5));
+        fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
+        Comando osserva = new Comando(TipoComando.valueOf(tipoComandi.get(6)), nomeComandi.get(6));
+        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
+        Comando prendi = new Comando(TipoComando.valueOf(tipoComandi.get(7)), nomeComandi.get(7));
+        prendi.setAlias(new String[]{"prendi"});
+        Comando apri = new Comando(TipoComando.valueOf(tipoComandi.get(8)), nomeComandi.get(8));
+        apri.setAlias(new String[]{});
+        Comando spingi = new Comando(TipoComando.valueOf(tipoComandi.get(9)), nomeComandi.get(9));
+        spingi.setAlias(new String[]{"spingi", "attiva"});
+        Comando leggi = new Comando(TipoComando.valueOf(tipoComandi.get(10)), nomeComandi.get(10));
+        leggi.setAlias(new String[]{"sfoglia"});
+        
+        comandi.add(nord);
+        comandi.add(inventario);
+        comandi.add(sud);
+        comandi.add(est);
+        comandi.add(ovest);
+        comandi.add(fine);
+        comandi.add(osserva);
+        comandi.add(prendi);
+        comandi.add(apri);
+        comandi.add(spingi);
+        comandi.add(leggi);
+        
+        return comandi;
+    }
+    
     public static void resetDatabase() throws SQLException {
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate("DROP ALL OBJECTS");
         } catch(SQLException ex) {
             System.err.println("Errore reset database\n");
             System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
             System.err.print(ex.getMessage());
         }
     }

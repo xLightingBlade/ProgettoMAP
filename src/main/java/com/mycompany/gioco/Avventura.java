@@ -39,50 +39,15 @@ public class Avventura extends StrutturaGioco {
         OperazioniDatabase.creaTabelle();
         OperazioniDatabase.popolaTabellaStanze();
         OperazioniDatabase.popolaTabellaOggetti();
+        OperazioniDatabase.popolaTabellaComandi();
         OperazioniDatabase.caricaDati();
         OperazioniDatabase.creaStanze();
-        //Comandi
-        Comando nord = new Comando(TipoComando.NORD, "nord");
-        nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
-        getComandi().add(nord);
-        Comando inventario = new Comando(TipoComando.INVENTARIO, "inventario");
-        inventario.setAlias(new String[]{"inv"});
-        getComandi().add(inventario);
-        Comando sud = new Comando(TipoComando.SUD, "sud");
-        sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
-        getComandi().add(sud);
-        Comando est = new Comando(TipoComando.EST, "est");
-        est.setAlias(new String[]{"e", "E", "Est", "EST"});
-        getComandi().add(est);
-        Comando ovest = new Comando(TipoComando.OVEST, "ovest");
-        ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
-        getComandi().add(ovest);
-        Comando fine = new Comando(TipoComando.FINE, "end");
-        fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
-        getComandi().add(fine);
-        Comando osserva = new Comando(TipoComando.GUARDA, "osserva");
-        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
-        getComandi().add(osserva);
-        Comando prendi = new Comando(TipoComando.PRENDI, "raccogli");
-        prendi.setAlias(new String[]{"prendi"});
-        getComandi().add(prendi);
-        Comando apri = new Comando(TipoComando.APRI, "apri");
-        apri.setAlias(new String[]{});
-        getComandi().add(apri);
-        Comando spingi = new Comando(TipoComando.SPINGI, "premi");
-        spingi.setAlias(new String[]{"spingi", "attiva"});
-        getComandi().add(spingi);
-        Comando leggi = new Comando(TipoComando.LEGGI, "leggi");
-        leggi.setAlias(new String[]{"sfoglia"});
-        getComandi().add(leggi);
-
-        //Stanze
+        
+        
+        setComandi(OperazioniDatabase.creaComandi());
         setStanze(OperazioniDatabase.creaOggetti());
 
-        //TODO, FINIRE.
-        //SISTEMARE ANCHE COMANDI DA DB
-        //Oggetti
-        //aggiungere un comando per leggere i documenti e un attributo a tali documenti dove metterne il contenuto
+
         /*
         Questa parte credo possa essere eliminata in modo sicuro, ma la tengo commentata come misura di backup
         Oggetto pistola = new Oggetto(0, "pistola", "Una pistola 9mm");
