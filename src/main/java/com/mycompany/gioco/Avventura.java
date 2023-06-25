@@ -6,6 +6,7 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
+import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
@@ -29,12 +30,17 @@ import java.util.Iterator;
  *
  * @author gabri
  */
-public class Avventura extends StrutturaGioco 
-{
-
+public class Avventura extends StrutturaGioco {
+    
     @Override
-    public void init() throws Exception 
-    {
+    public void init() throws Exception {
+        OperazioniDatabase.connettiDatabase();
+        OperazioniDatabase.resetDatabase();
+        OperazioniDatabase.creaTabelle();
+        OperazioniDatabase.popolaTabellaStanze();
+        OperazioniDatabase.popolaTabellaOggetti();
+        OperazioniDatabase.caricaDati();
+        OperazioniDatabase.creaStanze();
         //Comandi
         Comando nord = new Comando(TipoComando.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
@@ -69,131 +75,18 @@ public class Avventura extends StrutturaGioco
         Comando leggi = new Comando(TipoComando.LEGGI, "leggi");
         leggi.setAlias(new String[]{"sfoglia"});
         getComandi().add(leggi);
-        
+
         //Stanze
-        Stanza soggiornoCasa = new Stanza(0, "Soggiorno", "Il soggiorno della casa di Joel. Uno dei pochi posti ancora 'sicuri'");
-        soggiornoCasa.setOsservazione("Nel tavolo del soggiorno puoi vedere, una pistola, un coltello, "
-                + "una bottiglia di vetro e delle scatolette di cibo \n"
-                + "Inoltre, non puoi fare a meno di notare una foto appoggiata su un mobile vicino\n"
-                + "Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la porta principale." );
-        
-        Stanza bagnoCasa = new Stanza(1, "Bagno", "Il bagno. Non in gran condizioni, ma potrebbe esserci qualcosa di utile");
-        bagnoCasa.setOsservazione("\nSotto lo specchio sporco c'è un mobiletto."
-                + "\n Andando ad ovest torneresti nel soggiorno.");
-        
-        Stanza ripostiglioCasa = new Stanza(2, "Ripostiglio", "Un ripostiglio impolverato.");
-        ripostiglioCasa.setOsservazione("\nCi sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola "
-                + "e una confezione di batterie. \n Andando a nord torneresti in soggiorno");
-        
-        Stanza corridoioPassaggio = new Stanza(3, "Corridoio", "Un corridodio del passaggio segreto");
-        corridoioPassaggio.setOsservazione("Noti che nel corridoio c'è una guarda che pattuglia la zona. "
-                + "Attorno a te c'è un grande masso dove nascondersi."
-                + "\nNoti dritto davanti a te, alla fine del corridoio, un cancello");
-        
-        Stanza cancello = new Stanza(4, "Cancello", "La stanza del cancello, l'uscita dalla ZQ");
-        cancello.setOsservazione("Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è privo di corrente"
-                + "\nGuardando ad est vedi una porta aperta verso una stanza."
-                + "\nGuardandoti dietro vedi il corridoio");
-        
-        Stanza stanzaQuadroElettrico = new Stanza(5, "QuadroElettrico", "Una stanza con un quadro elettrico ed una leva abbassata");
-        stanzaQuadroElettrico.setOsservazione("Osservi che forse qua potresti far tornare la corrente al cancello."
-                + "\nMa non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro, quasi nascosto, c'è un"
-                + "foglietto con una scritta."
-                + "\nAndando ad ovest ritorni al cancello");
-        
-        Stanza ingressoMetro = new Stanza(6, "IngressoMetro", "L'ingresso della metropolitana");
-        ingressoMetro.setOsservazione("Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso.."
-                + "\nGuardando bene, noti che addosso ha una torcia con delle pile."
-                + "\nAndando avanti a nord si scende giù");
-        
-        Stanza binariMetro = new Stanza(7, "BinariMetro", "I binari della metropolitana, c'è un problema però...");
-        binariMetro.setOsservazione("La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto."
-                + "\nAd ovest sembra esserci una stanzetta");
-        
-        Stanza stanzaZattera = new Stanza(8, "stanzaZattera", "Uno stanzino della metropolitana, completamente buio");
-        stanzaZattera.setVisibile(false); 
-        stanzaZattera.setOsservazione("Non si vede niente!");
-        
-        Stanza ingressoOspedale = new Stanza(9, "ingressoOspedale", "L'ingresso del Saint Mary's Hospital, QG delle Luci");
-        //arrivato all'ingresso non puoi osservare, avviene direttamente una scena e ti portano dentro
-        ingressoOspedale.setOsservazione("");
-        
-        Stanza dentroOspedale = new Stanza(10, "dentroOspedale", "Una stanza dentro l'ospedale..");
-        //suppongo avvenga prima tutta la scena prima di poter osservare qualcosa
-        dentroOspedale.setOsservazione("Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave."
-                + "\nSia ad est che ad ovest ci sono delle stanze");
-        
-        Stanza magazzino = new Stanza(11, "Magazzino", "Una stanza usata come magazzino.");
-        magazzino.setOsservazione("Noti un armadietto chiuso appoggiato ad una parete"
-                + "\nAndando ad est torneresti nella stanza di prima");
-        
-        Stanza infermeria = new Stanza(12, "Infermeria", "Un'infermeria un po' spoglia");
-        infermeria.setOsservazione("Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti."
-                + "\nCi trovi solamente una bottiglia d'alcol e delle garze"
-                + "\nAndando ad ovest torneresti nella stanza di prima");
-        
-        Stanza pianoSalaOperatoria = new Stanza(13, "pianoSala", "Il piano dell'ospedale dove c'è la sala operatoria");
-        pianoSalaOperatoria.setOsservazione("Davanti a te c'è un corridoio con una guardia ben armata, non c'è modo di attraversarlo senza farsi vedere."
-                + "\nPerò ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta."
-                + "\nInoltre, per terra noti un documento medico");
-        
-        Stanza condotto = new Stanza(14, "condotto", "C'è quella che sembra una grata di un condotto dell'aria molto largo");
-        condotto.setOsservazione("Ma la grata è fermamente salda, ci sono delle viti."
-                + "\nAndando ad ovest torneresti nella stanza precedente");
-        
-        Stanza stanzaCacciavite = new Stanza(15, "stanzaCacciavite", "Uno stanzino buio");
-        stanzaCacciavite.setVisibile(false);
-        stanzaCacciavite.setOsservazione("Non si vede niente");
-        
-        Stanza salaOperatoria = new Stanza(16, "salaOperatoria", "La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro");
-        salaOperatoria.setOsservazione("Guardi bene il tavolo e.... è Ellie!");
-        
-        //Mappa
-        /*Alcune stanze non hanno settato i collegamenti alle stanze successive.
-        *Questo perchè in alcune stanze bisogna sbloccarne l'entrata/uscita
-        */
-        soggiornoCasa.setEst(bagnoCasa);
-        soggiornoCasa.setSud(ripostiglioCasa);
-        bagnoCasa.setOvest(soggiornoCasa);
-        ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);
-        corridoioPassaggio.setNord(cancello);
-        cancello.setSud(corridoioPassaggio);
-        cancello.setEst(stanzaQuadroElettrico);
-        stanzaQuadroElettrico.setOvest(cancello);
-        ingressoMetro.setNord(binariMetro);
-        binariMetro.setSud(ingressoMetro);
-        binariMetro.setOvest(stanzaZattera);
-        stanzaZattera.setEst(binariMetro);
-        dentroOspedale.setOvest(magazzino);
-        magazzino.setEst(dentroOspedale);
-        infermeria.setOvest(dentroOspedale);
-        pianoSalaOperatoria.setEst(condotto);
-        condotto.setOvest(pianoSalaOperatoria);
-        pianoSalaOperatoria.setOvest(stanzaCacciavite);
-        stanzaCacciavite.setEst(pianoSalaOperatoria);
-        getStanze().add(soggiornoCasa);
-        getStanze().add(bagnoCasa);
-        getStanze().add(ripostiglioCasa);
-        getStanze().add(corridoioPassaggio);
-        getStanze().add(cancello);
-        getStanze().add(stanzaQuadroElettrico);
-        getStanze().add(ingressoMetro);
-        getStanze().add(binariMetro);
-        getStanze().add(stanzaZattera);
-        getStanze().add(ingressoOspedale);
-        getStanze().add(dentroOspedale);
-        getStanze().add(magazzino);
-        getStanze().add(infermeria);
-        getStanze().add(pianoSalaOperatoria);
-        getStanze().add(condotto);
-        getStanze().add(stanzaCacciavite);
-        getStanze().add(salaOperatoria);  
-        
+        setStanze(OperazioniDatabase.creaOggetti());
+
+        //TODO, FINIRE.
+        //SISTEMARE ANCHE COMANDI DA DB
         //Oggetti
         //aggiungere un comando per leggere i documenti e un attributo a tali documenti dove metterne il contenuto
+        /*
+        Questa parte credo possa essere eliminata in modo sicuro, ma la tengo commentata come misura di backup
         Oggetto pistola = new Oggetto(0, "pistola", "Una pistola 9mm");
-        pistola.setAlias(new String[] {"arma"});
+        pistola.setAlias(new String[]{"arma"});
         soggiornoCasa.getOggetti().add(pistola);
         Oggetto coltello = new Oggetto(1, "coltello", "Un coltello da caccia");
         coltello.setAlias(new String[]{"lama"});
@@ -202,7 +95,7 @@ public class Avventura extends StrutturaGioco
         bottigliaVuota.setAlias(new String[]{});
         soggiornoCasa.getOggetti().add(bottigliaVuota);
         Oggetto scatolettaCibo = new Oggetto(3, "cibo", "Una scatoletta di cibo, ancora buono(forse)");
-        scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
+        scatolettaCibo.setAlias(new String[]{"scatoletta", "lattina"});
         soggiornoCasa.getOggetti().add(scatolettaCibo);
         Oggetto foto = new Oggetto(4, "foto", "Una foto di te con tua figlia. Un ricordo di ciò che non c'è più");
         foto.setAlias(new String[]{"immagine"});
@@ -285,145 +178,103 @@ public class Avventura extends StrutturaGioco
         grata.setSpingibile(false);
         grata.setApribile(false);
         condotto.getOggetti().add(grata);
-        
+        */
         //Stanza attuale
-        setStanzaCorrente(soggiornoCasa);
+        setStanzaCorrente(getStanze().get(0));
     }
-
+    
     @Override
     //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
-    public void prossimaMossa(ParserOutput p, PrintStream out) 
-    {
-        if (p.getComando() == null) 
-        {
+    public void prossimaMossa(ParserOutput p, PrintStream out) {
+        if (p.getComando() == null) {
             out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
-        } 
-        else 
-        {
+        } else {
             //move
             boolean nienteStanza = false;
             boolean movimento = false;
-            
+
             //se vado a nord
             if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
             {
                 //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                if (getStanzaCorrente().getNord() != null)
-                {
+                if (getStanzaCorrente().getNord() != null) {
                     setStanzaCorrente(getStanzaCorrente().getNord());
                     movimento = true;
-                }
-                else
-                {
+                } else {
                     nienteStanza = true;
                 }
-            }
-            else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
+            } else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
             {
                 //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
-                if (getStanzaCorrente().getSud() != null) 
-                {
+                if (getStanzaCorrente().getSud() != null) {
                     setStanzaCorrente(getStanzaCorrente().getSud());
                     movimento = true;
-                }
-                else 
-                {
+                } else {
                     nienteStanza = true;
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
+            } else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
             {
                 //setta la nuova stanzaCorrente a quella a est della stanza corrente attuale
-                if (getStanzaCorrente().getEst() != null) 
-                {
+                if (getStanzaCorrente().getEst() != null) {
                     setStanzaCorrente(getStanzaCorrente().getEst());
                     movimento = true;
-                } 
-                else 
-                {
+                } else {
                     nienteStanza = true;
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
+            } else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
             {
                 //setta la nuova stanzaCorrente a quella ad ovest della stanza corrente attuale
-                if (getStanzaCorrente().getOvest() != null) {setStanzaCorrente(getStanzaCorrente().getOvest());
+                if (getStanzaCorrente().getOvest() != null) {
+                    setStanzaCorrente(getStanzaCorrente().getOvest());
                     movimento = true;
-                } 
-                else 
-                {
+                } else {
                     nienteStanza = true;
                 }
-            }
-            //Motra inventario
-            else if (p.getComando().getTipo() == TipoComando.INVENTARIO)
-            {
+            } //Motra inventario
+            else if (p.getComando().getTipo() == TipoComando.INVENTARIO) {
                 out.println("Nel tuo inventario ci sono:");
                 
-                for (Oggetto o : getInventario()) 
-                {
+                for (Oggetto o : getInventario()) {
                     out.println(o.getNome() + ": " + o.getDescrizione());
                 }
                 
-            } 
-            else if (p.getComando().getTipo() == TipoComando.GUARDA) 
-            {
+            } else if (p.getComando().getTipo() == TipoComando.GUARDA) {
                 if (getStanzaCorrente().getOsservazione() != null) {
                     out.println(getStanzaCorrente().getOsservazione());
-                } 
-                else 
-                {
+                } else {
                     out.println("Non c'è niente di interessante da osserva qui.");
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.PRENDI) 
-            {
-                if (p.getOggetto() != null) 
-                {
-                    if (p.getOggetto().isPrendibile()) 
-                    {
+            } else if (p.getComando().getTipo() == TipoComando.PRENDI) {
+                if (p.getOggetto() != null) {
+                    if (p.getOggetto().isPrendibile()) {
                         getInventario().add(p.getOggetto());
                         getStanzaCorrente().getOggetti().remove(p.getOggetto());
                         out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
-                    } 
-                    else 
-                    {
+                    } else {
                         out.println("Non puoi raccogliere questo oggetto.");
                     }
-                } 
-                else 
-                {
+                } else {
                     out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.APRI) 
-            {
+            } else if (p.getComando().getTipo() == TipoComando.APRI) {
                 /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
                 * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
                 * Potrebbe non esssere la soluzione ottimale.
                  */
-                if (p.getOggetto() == null && p.getOggettoInventario() == null) 
-                {
+                if (p.getOggetto() == null && p.getOggettoInventario() == null) {
                     out.println("Non c'è niente da aprire qui.");
-                } 
-                else 
-                {
-                    if (p.getOggetto() != null) 
-                    {
-                        if (p.getOggetto().isApribile() && p.getOggetto().isAperto() == false) 
-                        {
-                            if (p.getOggetto() instanceof ContenitoreOggetti) 
-                            {
+                } else {
+                    if (p.getOggetto() != null) {
+                        if (p.getOggetto().isApribile() && p.getOggetto().isAperto() == false) {
+                            if (p.getOggetto() instanceof ContenitoreOggetti) {
                                 out.println("Hai aperto: " + p.getOggetto().getNome());
                                 ContenitoreOggetti c = (ContenitoreOggetti) p.getOggetto();
-                                if (!c.getList().isEmpty()) 
-                                {
+                                if (!c.getList().isEmpty()) {
                                     out.print(c.getNome() + " contiene:");
                                     Iterator<Oggetto> it = c.getList().iterator();
                                     
-                                    while (it.hasNext()) 
-                                    {
+                                    while (it.hasNext()) {
                                         Oggetto next = it.next();
                                         getStanzaCorrente().getOggetti().add(next);
                                         out.print(" " + next.getNome());
@@ -432,34 +283,25 @@ public class Avventura extends StrutturaGioco
                                     out.println();
                                 }
                                 p.getOggetto().setAperto(true);
-                            } 
-                            else 
-                            {
+                            } else {
                                 out.println("Hai aperto: " + p.getOggetto().getNome());
                                 p.getOggetto().setAperto(true);
                             }
-                        } 
-                        else 
-                        {
+                        } else {
                             out.println("Non puoi aprire questo oggetto.");
                         }
                     }
                     
-                    if (p.getOggettoInventario() != null) 
-                    {
-                        if (p.getOggettoInventario().isApribile() && p.getOggettoInventario().isAperto() == false) 
-                        {
-                            if (p.getOggettoInventario() instanceof ContenitoreOggetti) 
-                            {
+                    if (p.getOggettoInventario() != null) {
+                        if (p.getOggettoInventario().isApribile() && p.getOggettoInventario().isAperto() == false) {
+                            if (p.getOggettoInventario() instanceof ContenitoreOggetti) {
                                 ContenitoreOggetti c = (ContenitoreOggetti) p.getOggettoInventario();
                                 
-                                if (!c.getList().isEmpty()) 
-                                {
+                                if (!c.getList().isEmpty()) {
                                     out.print(c.getNome() + " contiene:");
                                     Iterator<Oggetto> it = c.getList().iterator();
                                     
-                                    while (it.hasNext()) 
-                                    {
+                                    while (it.hasNext()) {
                                         Oggetto next = it.next();
                                         getInventario().add(next);
                                         out.print(" " + next.getNome());
@@ -469,58 +311,38 @@ public class Avventura extends StrutturaGioco
                                 }
                                 
                                 p.getOggettoInventario().setAperto(true);
-                            } 
-                            else 
-                            {
+                            } else {
                                 p.getOggettoInventario().setAperto(true);
                             }
                             
                             out.println("Hai aperto nel tuo inventario: " + p.getOggettoInventario().getNome());
-                        }
-                        else 
-                        {
+                        } else {
                             out.println("Non puoi aprire questo oggetto.");
                         }
                     }
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.SPINGI) 
-            {
+            } else if (p.getComando().getTipo() == TipoComando.SPINGI) {
                 //ricerca oggetti pushabili
-                if (p.getOggetto() != null && p.getOggetto().isSpingibile()) 
-                {
+                if (p.getOggetto() != null && p.getOggetto().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggetto().getNome());
-                } 
-                else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) 
-                {
+                } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggettoInventario().getNome());
-                } 
-                else 
-                {
+                } else {
                     out.println("Non ci sono oggetti che puoi premere qui.");
                 }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.LEGGI) 
-            {
-                if (p.getOggetto() != null && p.getOggetto().isLeggibile()) 
-                {
+            } else if (p.getComando().getTipo() == TipoComando.LEGGI) {
+                if (p.getOggetto() != null && p.getOggetto().isLeggibile()) {
                     out.print(p.getOggetto().getContenuto());
-                } 
-                else if (p.getOggettoInventario() != null && p.getOggettoInventario().isLeggibile()) 
-                {
+                } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isLeggibile()) {
                     out.print(p.getOggettoInventario().getContenuto());
-                } else 
-                {
+                } else {
                     out.println("Non ci sono oggetti che puoi leggere qui.");
                 }
             }
             
-            if (nienteStanza) 
-            {
+            if (nienteStanza) {
                 out.println("Da quella parte non si può andare c'è un muro!\n");
-            } 
-            else if (movimento) 
-            {
+            } else if (movimento) {
                 out.println(getStanzaCorrente().getNome());
                 out.println("================================================");
                 out.println(getStanzaCorrente().getDescrizione());

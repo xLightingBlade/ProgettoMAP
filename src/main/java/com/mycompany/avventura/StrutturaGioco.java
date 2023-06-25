@@ -21,7 +21,7 @@ import java.util.List;
  */
 public abstract class StrutturaGioco {
 
-    private final List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
+    private List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
 
     private final List<Comando> comandi = new ArrayList<>();//la lista dei comandi del gioco
 
@@ -31,6 +31,10 @@ public abstract class StrutturaGioco {
 
     public List<Stanza> getStanze() {
         return stanze;
+    }
+    
+    public void setStanze(List<Stanza> stanze) {
+        this.stanze = stanze;
     }
 
     public List<Comando> getComandi() {
