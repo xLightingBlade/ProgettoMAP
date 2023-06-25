@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.IllegalArgumentException;
+import com.mycompany.avventura.LoaderPrinterFileText;
 
 /**
  *
@@ -72,25 +73,28 @@ public class Engine
     //Questo metodo fa partire il gioco, rendendolo giocabile all'utente
     public void esegui()
     {
-        //frasi introduttive
-        List<String> frasi = new ArrayList<>();
-        frasi.add("Prod: Antonio Mennuni , Danilo Santo , Gabriele Nigro");
-        frasi.add("================================");
-        frasi.add("The last of us PART 1");
-        frasi.add("================================");
-        frasi.add("Siamo nel 2050 e 37 anni fa, esattamente il 26/09/2013, un fungo chiamato cordyceps");
-        frasi.add("ha causato una pandemia globale che ha infettato il 90% della popolazione mondiale,");
-        frasi.add("trasformandola in bestie assetate di sangue (simili a zombie) che attaccano e sbranano chiunque gli si ponga davanti.");
-        frasi.add("Nel frattempo l'esercito ha creato delle ZQ, cioè delle aree murate in cui la popolazione ha ripreso a vivere");
-        frasi.add("e in cui vige il pugno di ferro dell'esercito. Siamo nella ZQ di Boston e un contrabbandiere di nome Joel deve recuperare");
-        frasi.add("un carico di armi che gli è stato rubato da un tale Robert, un truffatore noto nella ZQ. Dopo una iniziale colluttazione,");
-        frasi.add("Robert confessa a Joel che le sue armi sono state vendute alle luci. Chi sono le luci? Le luci sono un gruppo di resistenza");
-        frasi.add("(da molti definiti terroristi) che si oppone all'oppressione dell'esercito e cerca di trovare una cura per la pandemia causata dal fungo.");
-        frasi.add("Saputo ciò, Joel incontra il capo delle luci, una tale Marlene, e spiega l'accaduto per riavere indietro le sue armi.");
-        frasi.add("Marlene propone a Joel un patto: deve portare fuori dalla ZQ, in uno stabilimento delle luci a Nord, una bambina di 12 anni di nome Ellie.");
-        frasi.add("Joel decide, dopo un iniziale rifiuto, di accettare il patto e organizza così il viaggio...");
-        frasi.add("\n");
+        //caricamento frasi introduttive e dialoghi iniziali
+        try
+        {
+            BufferedReader fileIn = new BufferedReader(new FileReader("./introduzione_al_gioco.txt"));
+            LoaderPrinterFileText frasiIntro = new LoaderPrinterFileText();
+            frasiIntro.carica(fileIn);
+            
+            frasiIntro.stampaAdIntervallo(System.out, 2);
+        }
+        catch(FileNotFoundException ex)
+        {
+            System.out.println("Errore nel caricamento dati. File non trovato.");
+        } 
+        catch (InterruptedException | IllegalArgumentException ex) 
+        {
+            System.out.println("Errore nel caricamento dati.");
+        }
         
+        
+        
+        
+        /*
         frasi.add("Boston, 2050");
         frasi.add("\n");
         frasi.add(gioco.getStanzaCorrente().getNome());
@@ -130,6 +134,7 @@ public class Engine
                 secondiAttesa = 2;
             }
         }while(val_err == false);
+        */
         
         
         /*
