@@ -51,7 +51,7 @@ public class Engine
         //caricamento frasi introduttive e dialoghi iniziali da file tramite thread 
         try
         {
-            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_u(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
+            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
             CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
             loader_introduzione.start();//caricamento e visualizzazione intro e dialoghi con thread       
             
