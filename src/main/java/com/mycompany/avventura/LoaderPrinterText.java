@@ -43,10 +43,12 @@ public class LoaderPrinterText
         catch(FileNotFoundException ex)
         {
             System.out.println("Errore nel caricamento dati. File non trovato.");
+            System.exit(0);
         }
         catch(IOException ex)
         {
-            System.out.println("Errore nel caricamento dati. Riavvia il gioco."); 
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         }
         finally
         {
@@ -57,6 +59,7 @@ public class LoaderPrinterText
             catch(IOException ex2)
             {
                 System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+                System.exit(0);
             }
         }     
     }

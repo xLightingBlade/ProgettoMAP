@@ -51,7 +51,7 @@ public class Engine
         //caricamento frasi introduttive e dialoghi iniziali da file tramite thread 
         try
         {
-            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
+            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_u(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
             CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
             loader_introduzione.start();//caricamento e visualizzazione intro e dialoghi con thread       
             
@@ -60,15 +60,19 @@ public class Engine
         }
         catch(FileNotFoundException ex)
         {
-            System.out.println("Errore nel caricamento dati. File non trovato.");
+            System.out.println("Errore nel caricamento dati. File per i dialoghi iniziali non trovato. "
+            + "\nRiavvia il gioco.");
+            System.exit(0);
         } 
         catch (InterruptedException | IllegalArgumentException ex) 
         {
-            System.out.println("Errore nel caricamento dati.");
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         } 
         catch (Exception ex)
         {
             System.err.println(ex);
+            System.exit(0);
         }
         
         try
@@ -79,7 +83,8 @@ public class Engine
         }
         catch (IOException ex)
         {
-            System.err.println(ex);
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         }
     }
     //
