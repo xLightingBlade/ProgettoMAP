@@ -44,7 +44,6 @@ public class Avventura extends StrutturaGioco {
         setComandi(OperazioniDatabase.creaComandi());
         setStanze(OperazioniDatabase.creaOggetti());
 
-
         /*
         Questa parte credo possa essere eliminata in modo sicuro, ma la tengo commentata come misura di backup
         Oggetto pistola = new Oggetto(0, "pistola", "Una pistola 9mm");
