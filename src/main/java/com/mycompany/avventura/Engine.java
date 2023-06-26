@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.IllegalArgumentException;
-import com.mycompany.avventura.LoaderPrinterFileText;
+import com.mycompany.avventura.LoaderPrinterText;
 
 /**
  *
@@ -76,8 +76,8 @@ public class Engine
         //caricamento frasi introduttive e dialoghi iniziali
         try
         {
-            BufferedReader fileIn = new BufferedReader(new FileReader("./introduzione_al_gioco.txt"));
-            LoaderPrinterFileText frasiIntro = new LoaderPrinterFileText();
+            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
+            LoaderPrinterText frasiIntro = new LoaderPrinterText();
             frasiIntro.carica(fileIn);
             
             frasiIntro.stampaAdIntervallo(System.out, 2);
@@ -90,51 +90,6 @@ public class Engine
         {
             System.out.println("Errore nel caricamento dati.");
         }
-        
-        
-        
-        
-        /*
-        frasi.add("Boston, 2050");
-        frasi.add("\n");
-        frasi.add(gioco.getStanzaCorrente().getNome());
-        frasi.add(gioco.getStanzaCorrente().getDescrizione() + "\n");
-        
-        //Dialoghi iniziali
-        frasi.add("Ellie:   Ho sentito una sparatoria, cosa è successo?");
-        frasi.add("Joel :   Le luci..");
-        frasi.add("Joel:    Come conosci il capo delle luci?");
-        frasi.add("Ellie:   Marlene conosceva mia mamma e, si è presa cura di me.");
-        frasi.add("Joel:    E così al posto di andare a scuola ti sei unita alle luci.");
-        frasi.add("Ellie:   Non ti dirò perchè mi stai facendo uscire se è questo che vuoi sapere.");
-        frasi.add("Joel:    Sai qual è il bello del mio lavoro? Che non devo sapere il perchè");
-        frasi.add("Joel:    Non me ne frega niente del perchè devi uscire da qui.");
-        frasi.add("Joel:    Muoviamoci, questa storia mi ha già stancato.\n");
-        
-        VisualizzatoreFrasi visual = new VisualizzatoreFrasi(frasi);
-        
-        boolean val_err = true;
-        int secondiAttesa = 2;
-        do
-        {
-            val_err = true;
-            try 
-            {
-                visual.mostraFrasi(secondiAttesa);
-            }
-            catch (InterruptedException ex)
-            {
-                System.out.println("Riavvia il gioco\n");
-                return;
-            }
-            catch(IllegalArgumentException ex2)
-            {
-                System.out.println("Il valore del tempo di attesa per la visualizzzione dei dialoghi non è permesso.\n Deve essere compresa tra 0 e 3 secondi.");
-                val_err = false;
-                secondiAttesa = 2;
-            }
-        }while(val_err == false);
-        */
         
         
         /*

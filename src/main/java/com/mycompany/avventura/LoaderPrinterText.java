@@ -15,12 +15,12 @@ import java.util.List;
  *
  * @author Antonio
  */
-public class LoaderPrinterFileText
+public class LoaderPrinterText
 {
     private final List<String> frasi;
 
     //Costruttore
-    public LoaderPrinterFileText() 
+    public LoaderPrinterText() 
     {
         this.frasi = new ArrayList<>();
     }
