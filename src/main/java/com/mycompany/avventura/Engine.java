@@ -48,10 +48,24 @@ public class Engine
     {
         this.gioco = game;
         
+        //caricamento frasi introduttive e dialoghi iniziali da file tramite thread 
         try
         {
+            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
+            CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
+            loader_introduzione.start();//caricamento e visualizzazione intro e dialoghi con thread       
+            
             this.gioco.init();//Questa chiamata fa partire il caricamento dei dati del gioco
+            loader_introduzione.join();
         }
+        catch(FileNotFoundException ex)
+        {
+            System.out.println("Errore nel caricamento dati. File non trovato.");
+        } 
+        catch (InterruptedException | IllegalArgumentException ex) 
+        {
+            System.out.println("Errore nel caricamento dati.");
+        } 
         catch (Exception ex)
         {
             System.err.println(ex);
@@ -72,26 +86,7 @@ public class Engine
     
     //Questo metodo fa partire il gioco, rendendolo giocabile all'utente
     public void esegui()
-    {
-        //caricamento frasi introduttive e dialoghi iniziali
-        try
-        {
-            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
-            LoaderPrinterText frasiIntro = new LoaderPrinterText();
-            frasiIntro.carica(fileIn);
-            
-            frasiIntro.stampaAdIntervallo(System.out, 2);
-        }
-        catch(FileNotFoundException ex)
-        {
-            System.out.println("Errore nel caricamento dati. File non trovato.");
-        } 
-        catch (InterruptedException | IllegalArgumentException ex) 
-        {
-            System.out.println("Errore nel caricamento dati.");
-        }
-        
-        
+    {           
         /*
         Viene preso un comando in input, viene analizzato dal parser.
         In base all'output del parser si procede con il gioco.
