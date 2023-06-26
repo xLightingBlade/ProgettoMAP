@@ -1,0 +1,25 @@
+ID,NOME,DESCRIZIONE,CONTENUTO,STANZA
+0,pistola,Una pistola 9mm,,,0
+1,coltello,Un coltello da caccia,,,0
+2,bottiglia,Una bottiglia di vetro vuota,,,0
+3,cibo,"Una scatoletta di cibo, ancora buono(forse)",,,0
+4,foto,Una foto di te con tua figlia. Un ricordo di ciò che non c'è più,,,0
+5,mobile,Un mobiletto da bagno. Chissa cosa c'è dentro..,,,1
+6,garza,Una garza sterile(più o meno),,,,
+7,alcol,Una bottiglia di alcol etilico,,,,
+8,forbici,Un paio di forbici dalla punta decisamente non arrotondata,,,,
+9,munizioni,Un pacco di munizioni 9mm per la pistola. Io le prenderei..,,,2
+10,batterie,"Un pacco di batterie, forse per una torcia",,,2
+11,roccia,"Una grande roccia, più grande di te",,,3
+12,tastierino,Il tastierino numerico per aprire il cancello,,,4
+13,fogliettoQuadroElettrico,Un foglio con sopra un enigma riguardante un codice,CONTENUTO FOGLIO ENIGMA,5
+14,leva,"Una leva, forse per riattivare il quadro elettrico",,,5
+15,torcia,"Una torcia, tornerà utile prima o poi",,,6
+16,documentoMetro,Un documento,CONTENUTO DOCUMENTO METROPOLITANA,7
+17,zattera,"Assi di legno a mo' di zattera. Abbastanza da reggere una ragazzina",,,8
+18,chiaveArmadietto,"Una chiave, non sai bene cosa apre",,,10
+19,armadietto,Un armadietto chiuso a chiave,,,11
+20,tesserino,Un tesserino con scritto 'infermeria',,,,
+21,cacciavite,Un cacciavite,,,15
+22,documentoMedico,Un documento medico,CONTENUTO DOCUMENTO MEDICO OSPEDALE,13
+23,grata,"Una grata, chiusa con delle viti",,,14

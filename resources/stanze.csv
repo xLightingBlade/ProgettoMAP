@@ -1,0 +1,35 @@
+ID,NOME,DESCRIZIONE,OSSERVA
+0,Soggiorno,Il soggiorno della casa di Joel. Uno dei pochi posti ancora sicuri,"Sul tavolo del soggiorno puoi vedere una pistola, un coltello, una bottiglia di vetro e delle scatolette di cibo.
+Inoltre non puoi fare a meno di notare una foto appoggiata sul mobile vicino.
+Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la porta principale."
+1,Bagno,"Il bagno. Non in gran condizioni, ma potrebbe esserci qualcosa di utile","Sotto lo specchio sporco c'è un mobiletto.
+Andando ad ovest torneresti nel soggiorno."
+2,Ripostiglio,Un ripostiglio impolverato.,"Ci sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola e una confezione di batterie.
+Andando a nord torneresti in soggiorno."
+3,Corridoio,Un corridoio del passaggio segreto, "Noti che nel corridoio c'è una guardia che pattuglia la zona. Attorno a te c'è un grande masso dietro cui nascondersi.
+Noti dritto davanti a te, alla fine del corridoio, un cancello"
+4,Cancello,"La stanza del cancello, l'uscita dalla ZQ", "Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
+Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c'è il corridoio"
+5,QuadroElettrico,Una stanza con un quadro elettrico ed una leva abbassata,"Osservi che forse qui potresti far tornare la corrente al cancello.
+Ma non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro elettrico, quasi nascosto, c'è un foglietto con una scritta.
+Andando ad ovest torneresti al cancello."
+6,IngressoMetro,"L'ingresso della metropolitana","Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso... 
+Guardando bene noti che addosso ha una torcia con delle pile.
+Andando avanti a nord si scende giù"
+7,BinariMetro,"I binari della metropolitana, c'è un problema però","La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto.
+Ad ovest sembra esserci una stanzetta."
+8,StanzaZattera,"Uno stanzino della metropolitana, completamente buio",Non si vede niente!
+9,IngressoOspedale,"L'ingresso del Saint Mary's Hospital, QG delle Luci", 
+10,DentroOspedale,Una stanza dentro l'ospedale..,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
+Sia ad est che ad ovest ci sono delle stanze."
+11,Magazzino,Una stanza usata come magazzino,"Noti un armadietto chiuso a chiave, appoggiato ad una parete.
+Andando ad est torneresti nella stanza precedente."
+12,Infermeria,Un infermeria un po' spoglia, "Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti.Ci trovi solamente una bottiglia d'alcol e delle garze.
+Andando ad ovest torneresti nella stanza precedente."
+13,PianoSala,Il piano dell'ospedale dove c'è la sala operatoria,"Davanti a te c'è un corridoio con una guardia ben armata, non c'è modo di attraversarlo senza farsi vedere.
+Però ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta.
+Inoltre, per terra trovi un documento medico."
+14,Condotto,C'è quella che sembra una grata di un condotto dell'aria molto largo,"La grata è fermamente salda, ci sono delle viti.
+Andando ad ovest torneresti nella stanza precedente."
+15,StanzaCacciavite,Uno stanzino buio,Non si vede niente!
+16,SalaOperatoria,"La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro",Guardi bene il tavolo e.... è Ellie!
