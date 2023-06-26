@@ -1,17 +1,18 @@
 # ProgettoMAP
 
-##Idee per implementare quello che chiede Pippo:
+## Idee per implementare quello che chiede Pippo:
 
-1)Uso dei DB: Creare una tabella di DB che contiene le stanze, caricarle da lì
+1)Uso dei DB: Creare una tabella di DB che contiene stanze, oggetti e comandi caricandone i dati da file csv: **FATTO**
 
-2)Uso dei file: pensarci
+2)Uso dei file: file di dialoghi, file csv sopraccitati, serializzazione per salvare lo stato della partita: **IN CORSO**
 
-3)Uso dei thread: Nella sezione del passsaggio segreto, una volta che ti nascondi dalla guardia, si può usare un thread che faccia sparire la guardia dopo tot secondi.
+3)Uso dei thread: Nella sezione del passsaggio segreto, una volta che ti nascondi dalla guardia, si può usare un thread che faccia sparire la guardia dopo tot secondi: **IN CORSO**
+Inoltre, uso dei thread per inizializzazre dal database mentre scorrono i dialoghi: **FATTO**
 
-4)Uso dei socket: pensarci
+4)Uso dei socket/REST APIs: Possibili chiamate api per raccogliere dati come dati sulla zona attuale(meteo,data,ora ecc..). Pensare ad altri possibili usi: **TO DO**
 
 5)Uso di SWING: menù principale, finestra per inserire i comandi, finestre per i dialoghi, vediamo un po' cosa fare poi.
-Si è detto anche di usare swing per mostrare il contenuto di qualche documento che verrà trovato.
+Si è detto anche di usare swing per mostrare il contenuto di qualche documento che verrà trovato: **IN CORSO**
 
 6)Lamba expressions: pensarci
 
