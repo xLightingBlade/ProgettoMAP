@@ -5,8 +5,6 @@
 package com.mycompany.avventura;
 
 import java.io.BufferedReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +34,7 @@ public class CaricamentoDati extends Thread
         catch (InterruptedException ex) 
         {
             System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         } 
         catch (IllegalArgumentException ex) 
         {
@@ -46,6 +45,7 @@ public class CaricamentoDati extends Thread
             catch (InterruptedException | IllegalArgumentException ex1) 
             {
                 System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+                System.exit(0);
             }
         }
     }

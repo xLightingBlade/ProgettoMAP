@@ -60,15 +60,19 @@ public class Engine
         }
         catch(FileNotFoundException ex)
         {
-            System.out.println("Errore nel caricamento dati. File non trovato.");
+            System.out.println("Errore nel caricamento dati. File per i dialoghi iniziali non trovato. "
+            + "\nRiavvia il gioco.");
+            System.exit(0);
         } 
         catch (InterruptedException | IllegalArgumentException ex) 
         {
-            System.out.println("Errore nel caricamento dati.");
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         } 
         catch (Exception ex)
         {
             System.err.println(ex);
+            System.exit(0);
         }
         
         try
@@ -79,7 +83,8 @@ public class Engine
         }
         catch (IOException ex)
         {
-            System.err.println(ex);
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         }
     }
     //
