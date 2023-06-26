@@ -31,6 +31,7 @@ import java.util.Iterator;
  * @author gabri
  */
 public class Avventura extends StrutturaGioco {
+    ControlloSpostamenti controller = new ControlloSpostamenti();
     
     @Override
     public void init() throws Exception {
@@ -40,10 +41,8 @@ public class Avventura extends StrutturaGioco {
         OperazioniDatabase.caricaDati();
         OperazioniDatabase.creaStanze();
         
-        
         setComandi(OperazioniDatabase.creaComandi());
         setStanze(OperazioniDatabase.creaOggetti());
-
         //Stanza attuale
         setStanzaCorrente(getStanze().get(0));
     }
@@ -62,12 +61,14 @@ public class Avventura extends StrutturaGioco {
             //se vado a nord
             if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
             {
-                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                if (getStanzaCorrente().getNord() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getNord());
-                    movimento = true;
-                } else {
-                    nienteStanza = true;
+                if(controller.checkZattera(this) && controller.checkOggettiCasa(this)){
+                    //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
+                    if (getStanzaCorrente().getNord() != null) {
+                        setStanzaCorrente(getStanzaCorrente().getNord());
+                        movimento = true;
+                    } else {
+                        nienteStanza = true;
+                    }
                 }
             } else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
             {
