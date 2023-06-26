@@ -4,6 +4,8 @@
  */
 package com.mycompany.database;
 
+import com.mycompany.tipi.Comando;
+import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
@@ -31,6 +33,9 @@ public class OperazioniDatabase {
     private static List<String> contenutoOggetti = new ArrayList<>();
     private static List<Oggetto> oggetti = new ArrayList<>();
     private static List<Integer> stanzaOggetto = new ArrayList<>();
+    private static List<String> tipoComandi = new ArrayList<>();
+    private static List<String> nomeComandi = new ArrayList<>();
+    private static List<Comando> comandi = new ArrayList<>();
     
     public static void connettiDatabase() throws SQLException {
         OperazioniDatabase.con = DatabaseInit.getConnection();
@@ -39,15 +44,20 @@ public class OperazioniDatabase {
     public static void creaTabelle() throws SQLException {
         String query = "create table if not exists STANZE " + "(ID_STANZA int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(1000), " + "OSSERVA varchar(3000), " +
-                "PRIMARY KEY(ID_STANZA))";
+                "PRIMARY KEY(ID_STANZA)) as select ID,NOME,DESCRIZIONE,OSSERVA from csvread('./resources/stanze.csv')";
         
         String query2 = "create table if not exists OGGETTI " + "(ID_OGGETTO int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(200), " + "CONTENUTO varchar(1000), STANZA int, " +
-                "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) )";
+                "PRIMARY KEY(ID_OGGETTO), FOREIGN KEY(STANZA) REFERENCES STANZE(ID_STANZA) ) " +
+                "as select ID,NOME,DESCRIZIONE,CONTENUTO,STANZA from csvread('./resources/oggetti.csv')";
+        
+        String query3 = "create table if not exists COMANDI " + "(TIPO_COMANDO varchar(50) NOT NULL, " +
+                "NOME varchar(50), PRIMARY KEY(TIPO_COMANDO)) as select TIPO,NOME  from csvread('./resources/comandi.csv')";
         
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate(query);
             stmt.executeUpdate(query2);
+            stmt.executeUpdate(query3);
         } catch (SQLException ex) {
             System.err.println("Errore creazione tabelle:\n");
             System.err.print(ex.getErrorCode() + "\n");
@@ -55,164 +65,11 @@ public class OperazioniDatabase {
             System.err.print(ex.getMessage()+ "\n");
         }
     }
-
-    public static void popolaTabellaStanze() throws SQLException {
-        try(Statement stmt = con.createStatement()) {
-            stmt.executeUpdate("""
-                               insert into STANZE values(0, 'Soggiorno', 'Il soggiorno della casa di Joel. Uno dei pochi posti ancora sicuri', 'Sul tavolo del soggiorno puoi vedere una pistola, un coltello, una bottiglia di vetro e delle scatolette di cibo.\n
-                                Inoltre non puoi fare a meno di notare una foto appoggiata sul mobile vicino.\n
-                                Ad est c''è la porta del bagno, a sud quella del ripostiglio. A nord c''è la porta principale.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(1, 'Bagno', 'Il bagno. Non in gran condizioni, ma potrebbe esserci qualcosa di utile', 'Sotto lo specchio sporco c''è un mobiletto.
-                                Andando ad ovest torneresti nel soggiorno. ')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(2, 'Ripostiglio', 'Un ripostiglio impolverato.', 'Ci sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola e una confezione di batterie.
-                                Andando a nord torneresti in soggiorno.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(3, 'Corridoio', 'Un corridodio del passaggio segreto', 'Noti che nel corridoio c''è una guardia che pattuglia la zona. Attorno a te c''è un grande masso dietro cui nascondersi.
-                               Noti dritto davanti a te, alla fine del corridoio, un cancello')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(4, 'Cancello', 'La stanza del cancello, l''uscita dalla ZQ', 'Affianco al cancello c''è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
-                                Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c''è il corridoio')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(5, 'QuadroElettrico', 'Una stanza con un quadro elettrico ed una leva abbassata', 'Osservi che forse qui potresti far tornare la corrente al cancello. Ma non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro elettrico, quasi nascosto, c''è un foglietto con una scritta.
-                                Andando ad ovest torneresti al cancello.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(6, 'IngressoMetro', 'L''ingresso della metropolitana', 'Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso...
-                               Guardando bene noti che addosso ha una torcia con delle pile.
-                                Andando avanti a nord si scende giù')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(7, 'BinariMetro', 'I binari della metropolitana, c''è un problema però...', 'La metropolitana è completamente allagata e l''acqua ti arriva ad altezza petto.
-                               Ad ovest sembra esserci una stanzetta.')""");
-            
-            stmt.executeUpdate("insert into STANZE " + 
-                               "values(8, 'StanzaZattera', 'Uno stanzino della metropolitana, completamente buio', 'Non si vede niente!')");
-            
-            stmt.executeUpdate("insert into STANZE " + 
-                               "values(9, 'IngressoOspedale', 'L''ingresso del Saint Mary''s Hospital, QG delle Luci', ' ')");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(10, 'DentroOspedale', 'Una stanza dentro l''ospedale..', 'Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
-                                Sia ad est che ad ovest ci sono delle stanze.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(11, 'Magazzino', 'Una stanza usata come magazzino.', 'Noti un armadietto chiuso a chiave, appoggiato ad una parete.
-                                Andando ad est torneresti nella stanza precedente.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(12, 'Infermeria', 'Un''infermeria un po'' spoglia', 'Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti.
-                                Ci trovi solamente una bottiglia d''alcol e delle garze.
-                                Andando ad ovest torneresti nella stanza precedente.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(13, 'PianoSala', 'Il piano dell''ospedale dove c''è la sala operatoria', 'Davanti a te c''è un corridoio con una guardia ben armata, non c''è modo di attraversarlo senza farsi vedere.
-                               Però ad est c''è qualcosa di interessante, mentre ad ovest una stanzina aperta.
-                               Inoltre, per terra trovi un documento medico.')""");
-            
-            stmt.executeUpdate("""
-                               insert into STANZE values(14, 'Condotto', 'C''è quella che sembra una grata di un condotto dell''aria molto largo', 'La grata è fermamente salda, ci sono delle viti.
-                               Andando ad ovest torneresti nella stanza precedente.')""");
-            
-            stmt.executeUpdate("insert into STANZE " + 
-                               "values(15, 'StanzaCacciavite', 'Uno stanzino buio', 'Non si vede niente')");
-            
-            stmt.executeUpdate("insert into STANZE " + 
-                               "values(16, 'SalaOperatoria', 'La sala operatoria, c''è un tavolo operatorio e dei dottori al lavoro', 'Guardi bene il tavolo e.... è Ellie!')");
-        } catch (SQLException ex) {
-            System.err.println("\nErrore popolamento tabella stanze\n");
-            System.err.print(ex.getErrorCode() + "\n");
-            System.err.print(ex.getSQLState() + "\n");
-            System.err.print(ex.getMessage() + "\n");
-        }
-    }
-    
-    public static void popolaTabellaOggetti() throws SQLException {
-        //manca l'alcol e le garze in infermeria
-        try(Statement stmt = con.createStatement()) {
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(0, 'pistola', 'Una pistola 9mm', null, 0)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(1, 'coltello', 'Un coltello da caccia', null, 0)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(2, 'bottiglia', 'Una bottiglia di vetro vuota', null, 0)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(3, 'cibo', 'Una scatoletta di cibo, ancora buono(forse)', null, 0)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(4, 'foto', 'Una foto di te con tua figlia. Un ricordo di ciò che non c''è più', null, 0)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(5, 'mobile', 'Un mobiletto da bagno. Chissà cosa c''è dentro..', null, 1)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(6, 'garza', 'Una garza sterile(più o meno)', null, null)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(7, 'alcol', 'Una bottiglia di alcol etilico', null, null)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(8, 'forbici', 'Un paio di forbici dalla punta decisamente non arrotondata', null, null)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(9, 'munizioni', 'Un pacco di munizioni 9mm per la pistola. Io le prenderei..', null, 2)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(10, 'batterie', 'Un pacco di batterie, forse per una torcia', null, 2)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(11, 'roccia', 'Una grande roccia, più grande di te', null, 3)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(12, 'tastierino', 'Il tastierino numerico per aprire il cancello', null, 4)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(13, 'fogliettoQuadroElettrico', 'Un foglio con sopra un enigma riguardante un codice', 'CONTENUTO FOGLIO ENIGMA', 5)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(14, 'leva', 'Una leva, forse per riattivare il quadro elettrico', null, 5)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(15, 'torcia', 'Una torcia, tornerà utile prima o poi', null, 6)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(16, 'documentoMetro', 'Un documento', 'CONTENUTO DOCUMENTO METROPOLITANA', 7)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(17, 'zattera', 'Assi di legno a mo'' di zattera. Abbastanza da reggere una ragazzina', null, 8)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(18, 'chiaveArmadietto', 'Una chiave, non sai bene cosa apre', null, 10)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(19, 'armadietto', 'Un armadietto chiuso a chiave', null, 11)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(20, 'tesserino', 'Un tesserino con scritto ''Infermeria''', null, null)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(21, 'cacciavite', 'Un cacciavite', null, 15)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(22, 'documentoMedico', 'Un documento medico', 'CONTENUTO DOCUMENTO MEDICO OSPEDALE', 13)");
-            
-            stmt.executeUpdate("insert into OGGETTI " +
-                               "values(23, 'grata', 'Una grata, chiusa con delle viti', null, 14)");
-        }
-    }
     
     public static void caricaDati() throws SQLException {
         String query = "select ID_STANZA, NOME, DESCRIZIONE, OSSERVA from STANZE";
         String query2 = "select ID_OGGETTO, NOME, DESCRIZIONE, CONTENUTO, STANZA from OGGETTI";
+        String query3 = "select TIPO_COMANDO, NOME from COMANDI";
         try(Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
@@ -235,7 +92,23 @@ public class OperazioniDatabase {
                 stanzaOggetto.add(rs.getInt("STANZA"));
             }
         } catch(SQLException ex) {
-            System.out.println("Errore caricamento dati oggetti");
+            System.err.println("Errore caricamento dati oggetti");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.print(ex.getMessage());
+        }
+        
+        try(Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query3);
+            while(rs.next()) {
+                tipoComandi.add(rs.getString("TIPO_COMANDO"));
+                nomeComandi.add(rs.getString("NOME"));
+            }
+        } catch(SQLException ex) {
+            System.err.println("Errore caricamento dati comandi");
+            System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
+            System.err.print(ex.getMessage());
         }
     }
     
@@ -341,9 +214,6 @@ public class OperazioniDatabase {
     }
     
     public static List<Stanza> creaOggetti() {
-        //IN ATTESA DI TROVARE UN METODO MIGLIORE PER METTERE GLI OGGETTI NELLE STANZE
-        //forse cambiare l'index in stanze.get mettendoci la colonna 'stanza' della tabella oggetti pigliandola con qualche query
-        //insomma, qualcosa che non sia mettere manualmente l'index della stanza in stanze.get
         Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
         pistola.setAlias(new String[] {"arma"});
         stanze.get(0).getOggetti().add(pistola);
@@ -483,12 +353,52 @@ public class OperazioniDatabase {
         return stanze;        
     }
     
+    public static List<Comando> creaComandi() throws SQLException {
+        Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));
+        nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
+        Comando inventario = new Comando(TipoComando.valueOf(tipoComandi.get(1)), nomeComandi.get(1));
+        inventario.setAlias(new String[]{"inv"});
+        Comando sud = new Comando(TipoComando.valueOf(tipoComandi.get(2)), nomeComandi.get(2));
+        sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
+        Comando est = new Comando(TipoComando.valueOf(tipoComandi.get(3)), nomeComandi.get(3));
+        est.setAlias(new String[]{"e", "E", "Est", "EST"});
+        Comando ovest = new Comando(TipoComando.valueOf(tipoComandi.get(4)), nomeComandi.get(4));
+        ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
+        Comando fine = new Comando(TipoComando.valueOf(tipoComandi.get(5)), nomeComandi.get(5));
+        fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
+        Comando osserva = new Comando(TipoComando.valueOf(tipoComandi.get(6)), nomeComandi.get(6));
+        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
+        Comando prendi = new Comando(TipoComando.valueOf(tipoComandi.get(7)), nomeComandi.get(7));
+        prendi.setAlias(new String[]{"prendi"});
+        Comando apri = new Comando(TipoComando.valueOf(tipoComandi.get(8)), nomeComandi.get(8));
+        apri.setAlias(new String[]{});
+        Comando spingi = new Comando(TipoComando.valueOf(tipoComandi.get(9)), nomeComandi.get(9));
+        spingi.setAlias(new String[]{"spingi", "attiva"});
+        Comando leggi = new Comando(TipoComando.valueOf(tipoComandi.get(10)), nomeComandi.get(10));
+        leggi.setAlias(new String[]{"sfoglia"});
+        
+        comandi.add(nord);
+        comandi.add(inventario);
+        comandi.add(sud);
+        comandi.add(est);
+        comandi.add(ovest);
+        comandi.add(fine);
+        comandi.add(osserva);
+        comandi.add(prendi);
+        comandi.add(apri);
+        comandi.add(spingi);
+        comandi.add(leggi);
+        
+        return comandi;
+    }
+    
     public static void resetDatabase() throws SQLException {
         try(Statement stmt = con.createStatement()) {
             stmt.executeUpdate("DROP ALL OBJECTS");
         } catch(SQLException ex) {
             System.err.println("Errore reset database\n");
             System.err.print(ex.getErrorCode());
+            System.err.print(ex.getSQLState());
             System.err.print(ex.getMessage());
         }
     }

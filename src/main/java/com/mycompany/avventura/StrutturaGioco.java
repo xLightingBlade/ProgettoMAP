@@ -23,7 +23,7 @@ public abstract class StrutturaGioco {
 
     private List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
 
-    private final List<Comando> comandi = new ArrayList<>();//la lista dei comandi del gioco
+    private List<Comando> comandi = new ArrayList<>();//la lista dei comandi del gioco
 
     private final List<Oggetto> inventario = new ArrayList<>();//la lista degli oggetti del gioco
 
@@ -39,6 +39,10 @@ public abstract class StrutturaGioco {
 
     public List<Comando> getComandi() {
         return comandi;
+    }
+    
+    public void setComandi(List<Comando> comandi) {
+        this.comandi = comandi;
     }
 
     public Stanza getStanzaCorrente() {
