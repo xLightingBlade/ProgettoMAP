@@ -255,7 +255,7 @@ public class Avventura extends StrutturaGioco {
     private void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
          if (oggetto != null) {
                     if (oggetto.isPrendibile()) {
-                        getInventario().add(oggetto);
+                        inventarioGiocatore.add(oggetto);
                         stanzaCorrente.getOggetti().remove(oggetto);
                         if (!oggetto.isInvisibile()) {
                             System.out.println("Hai raccolto: " + oggetto.getDescrizione());
@@ -275,7 +275,7 @@ public class Avventura extends StrutturaGioco {
                        //Creare metodo più generico qui.
                        //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
                        if (oggetto.getId() == 14) {
-                           getInventario().add(oggetto);
+                           inventarioGiocatore.add(oggetto);
                            stanzaCorrente.getOggetti().remove(oggetto);
                        }
             } else {
