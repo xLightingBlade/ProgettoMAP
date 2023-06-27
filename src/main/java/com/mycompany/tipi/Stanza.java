@@ -33,8 +33,10 @@ public class Stanza {
     private Stanza est = null;
 
     private Stanza ovest = null;
-    //
-     
+    
+    
+    private List<Oggetto> oggettiNecessariPerAccedere = new ArrayList<>();
+    
     private final List<Oggetto> oggetti=new ArrayList<>();//la lista degli oggetti che si trovano nella stanza
 
     //costruttori
@@ -49,6 +51,9 @@ public class Stanza {
     }
     //
     
+    public int getId() {
+        return id;
+    }
     
     public String getNome() {
         return nome;
@@ -64,6 +69,10 @@ public class Stanza {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+    
+    public List<Oggetto> getOggettiNecessari() {
+        return oggettiNecessariPerAccedere;
     }
     
     //utilizzato per capire se una stanza deve essere visibile nella mappa o no

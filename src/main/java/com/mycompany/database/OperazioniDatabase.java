@@ -124,6 +124,10 @@ public class OperazioniDatabase {
         
         Stanza corridoioPassaggio = new Stanza(idStanze.get(3), nomiStanze.get(3), descrizioniStanze.get(3));
         corridoioPassaggio.setOsservazione(osservazioni.get(3));
+        corridoioPassaggio.getOggettiNecessari().add(new Oggetto(0));
+        corridoioPassaggio.getOggettiNecessari().add(new Oggetto(1));
+        corridoioPassaggio.getOggettiNecessari().add(new Oggetto(3));
+        corridoioPassaggio.getOggettiNecessari().add(new Oggetto(9));
         
         Stanza cancello = new Stanza(idStanze.get(4), nomiStanze.get(4), descrizioniStanze.get(4));
         cancello.setOsservazione(osservazioni.get(4));
@@ -133,6 +137,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
+        ingressoMetro.getOggettiNecessari().add(new Oggetto(14));
         
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
         binariMetro.setOsservazione(osservazioni.get(7));
@@ -143,6 +148,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
+        ingressoOspedale.getOggettiNecessari().add(new Oggetto(17));
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
@@ -278,6 +284,8 @@ public class OperazioniDatabase {
         Oggetto levaCorrente = new Oggetto(idOggetti.get(14), nomiOggetti.get(14), descrizioniOggetti.get(14));
         levaCorrente.setAlias(new String[]{});
         levaCorrente.setPrendibile(false);
+        levaCorrente.setSpingibile(true);
+        levaCorrente.setInvisibile(true);
         stanze.get(5).getOggetti().add(levaCorrente);
 
         Oggetto torcia = new Oggetto(idOggetti.get(15), nomiOggetti.get(15), descrizioniOggetti.get(15));

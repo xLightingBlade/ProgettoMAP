@@ -15,6 +15,7 @@ import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
 import java.io.PrintStream;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -31,6 +32,7 @@ import java.util.Iterator;
  * @author gabri
  */
 public class Avventura extends StrutturaGioco {
+    ControlloSpostamenti controller = new ControlloSpostamenti();
     
     @Override
     public void init() throws Exception {
@@ -40,106 +42,8 @@ public class Avventura extends StrutturaGioco {
         OperazioniDatabase.caricaDati();
         OperazioniDatabase.creaStanze();
         
-        
         setComandi(OperazioniDatabase.creaComandi());
         setStanze(OperazioniDatabase.creaOggetti());
-
-        /*
-        Questa parte credo possa essere eliminata in modo sicuro, ma la tengo commentata come misura di backup
-        Oggetto pistola = new Oggetto(0, "pistola", "Una pistola 9mm");
-        pistola.setAlias(new String[]{"arma"});
-        soggiornoCasa.getOggetti().add(pistola);
-        Oggetto coltello = new Oggetto(1, "coltello", "Un coltello da caccia");
-        coltello.setAlias(new String[]{"lama"});
-        soggiornoCasa.getOggetti().add(coltello);
-        Oggetto bottigliaVuota = new Oggetto(2, "bottiglia", "Una bottiglia di vetro vuota");
-        bottigliaVuota.setAlias(new String[]{});
-        soggiornoCasa.getOggetti().add(bottigliaVuota);
-        Oggetto scatolettaCibo = new Oggetto(3, "cibo", "Una scatoletta di cibo, ancora buono(forse)");
-        scatolettaCibo.setAlias(new String[]{"scatoletta", "lattina"});
-        soggiornoCasa.getOggetti().add(scatolettaCibo);
-        Oggetto foto = new Oggetto(4, "foto", "Una foto di te con tua figlia. Un ricordo di ciò che non c'è più");
-        foto.setAlias(new String[]{"immagine"});
-        soggiornoCasa.getOggetti().add(foto);
-        ContenitoreOggetti mobileBagno = new ContenitoreOggetti(5, "mobile", "Un mobiletto da bagno. Chissà cosa c'è dentro..");
-        mobileBagno.setAlias(new String[]{"mobiletto"});
-        mobileBagno.setApribile(true);
-        mobileBagno.setPrendibile(false);
-        mobileBagno.setAperto(false);
-        bagnoCasa.getOggetti().add(mobileBagno);
-        Oggetto garza = new Oggetto(6, "garza", "Una garza sterile(piu o meno)");
-        garza.setAlias(new String[]{"garze"});        
-        Oggetto alcol = new Oggetto(7, "alcol", "Una bottiglia di alcol etilico");
-        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
-        Oggetto forbici = new Oggetto(8, "forbici", "Un paio di forbici dalla punta decisamente non arrotondata");
-        forbici.setAlias(new String[]{"forbice"});
-        mobileBagno.add(garza);
-        mobileBagno.add(alcol);
-        mobileBagno.add(forbici);
-        Oggetto munizioni = new Oggetto(9, "munizioni", "Un pacco di munizioni 9mm per la pistola. Io le prenderei..");
-        munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto"});
-        ripostiglioCasa.getOggetti().add(munizioni);
-        Oggetto batterie = new Oggetto(10, "batterie", "Un pacco di batterie, forse per una torcia");
-        batterie.setAlias(new String[]{"batteria"});
-        ripostiglioCasa.getOggetti().add(batterie);
-        Oggetto roccia = new Oggetto(11, "roccia", "Una grande roccia, più grande di te");
-        roccia.setAlias(new String[]{"masso"});
-        roccia.setPrendibile(false);
-        corridoioPassaggio.getOggetti().add(roccia);
-        Oggetto tastierino = new Oggetto(12, "tastierino", "Il tastierino numerico per aprire il cancello");
-        tastierino.setAlias(new String[]{});        
-        tastierino.setPrendibile(false);
-        cancello.getOggetti().add(tastierino);
-        Oggetto foglioQuadro = new Oggetto(13, "fogliettoQuadroElettrico", "Un foglio con sopra un enigma riguardante un codice");
-        foglioQuadro.setLeggibile(true);
-        foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
-        foglioQuadro.setContenuto("CONTENUTO FOGLIO ENIGMA");
-        stanzaQuadroElettrico.getOggetti().add(foglioQuadro);
-        Oggetto levaCorrente = new Oggetto(14, "leva", "Una leva, forse per riattivare il quadro elettrico");
-        levaCorrente.setAlias(new String[]{});
-        levaCorrente.setPrendibile(false);
-        stanzaQuadroElettrico.getOggetti().add(levaCorrente);
-        Oggetto torcia = new Oggetto(15, "torcia", "Una torcia, tornerà utile prima o poi");
-        torcia.setAlias(new String[]{});
-        ingressoMetro.getOggetti().add(torcia);
-        Oggetto documentoMetro = new Oggetto(16, "documentoMetro", "Un documento");
-        documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
-        documentoMetro.setLeggibile(true);
-        documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
-        binariMetro.getOggetti().add(documentoMetro);
-        Oggetto zattera = new Oggetto(17, "zattera", "Assi di legno a mo' di zattera. Abbastanza da reggere una ragazzina");
-        zattera.setAlias(new String[]{"legno"});
-        stanzaZattera.getOggetti().add(zattera);
-        Oggetto chiaveArmadietto = new Oggetto(18, "chiaveArmadietto", "Una chiave, non sai bene cosa apre");
-        chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
-        dentroOspedale.getOggetti().add(chiaveArmadietto);
-        ContenitoreOggetti armadietto = new ContenitoreOggetti(19, "armadietto", "Un armadietto chiuso a chiave");
-        armadietto.setAlias(new String[]{});
-        armadietto.setApribile(false);
-        armadietto.setPrendibile(false);
-        armadietto.setAperto(false);
-        armadietto.add(forbici);
-        Oggetto tesserino = new Oggetto(20, "tesserino", "Un tesserino con scritto 'Infermeria'");
-        tesserino.setAlias(new String[]{"tessera"});
-        armadietto.add(tesserino);
-        magazzino.getOggetti().add(armadietto);
-        infermeria.getOggetti().add(alcol);
-        infermeria.getOggetti().add(garza);
-        Oggetto cacciavite = new Oggetto(21, "cacciavite", "Un cacciavite");
-        cacciavite.setAlias(new String[]{});
-        stanzaCacciavite.getOggetti().add(cacciavite);
-        Oggetto documentoMedico = new Oggetto(22, "documentoMedico", "Un documento medico");
-        documentoMedico.setAlias(new String[]{"referto", "documento medico"});
-        documentoMedico.setLeggibile(true);
-        documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
-        pianoSalaOperatoria.getOggetti().add(documentoMedico);
-        Oggetto grata = new Oggetto(23, "grata", "Una grata, chiusa con delle viti");
-        grata.setAlias(new String[]{});
-        grata.setPrendibile(false);
-        grata.setSpingibile(false);
-        grata.setApribile(false);
-        condotto.getOggetti().add(grata);
-        */
         //Stanza attuale
         setStanzaCorrente(getStanze().get(0));
     }
@@ -154,50 +58,70 @@ public class Avventura extends StrutturaGioco {
             //move
             boolean nienteStanza = false;
             boolean movimento = false;
-
+            Stanza stanzacorrente = getStanzaCorrente();
+            List<Oggetto> inventarioGiocatore = getInventario();
+            
             //se vado a nord
             if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
             {
-                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
                 if (getStanzaCorrente().getNord() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getNord());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
+                        //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
+                            setStanzaCorrente(getStanzaCorrente().getNord());
+                            movimento = true;
+                    }else{
+                        out.println("Non puoi accedere alla stanza.");
+                    }    
                 } else {
-                    nienteStanza = true;
+                   nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
+            }
+            else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
             {
                 //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
                 if (getStanzaCorrente().getSud() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getSud());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getSud());
+                        movimento = true;
+                    } else {
+                        out.println("Non puoi accedere alla stanza.");
+                    }
                 } else {
                     nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
+            }
+            else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
             {
                 //setta la nuova stanzaCorrente a quella a est della stanza corrente attuale
                 if (getStanzaCorrente().getEst() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getEst());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getEst());
+                        movimento = true;
+                    } else {
+                        out.println("Non puoi accedere alla stanza.");
+                    }
                 } else {
                     nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
+            } 
+            else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
             {
                 //setta la nuova stanzaCorrente a quella ad ovest della stanza corrente attuale
                 if (getStanzaCorrente().getOvest() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getOvest());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getOvest());
+                        movimento = true; 
+                    }
                 } else {
                     nienteStanza = true;
                 }
             } //Motra inventario
             else if (p.getComando().getTipo() == TipoComando.INVENTARIO) {
                 out.println("Nel tuo inventario ci sono:");
-                
                 for (Oggetto o : getInventario()) {
-                    out.println(o.getNome() + ": " + o.getDescrizione());
+                    if(!o.isInvisibile()) {
+                        out.println(o.getNome() + ": " + o.getDescrizione());
+                    }
                 }
                 
             } else if (p.getComando().getTipo() == TipoComando.GUARDA) {
@@ -211,7 +135,9 @@ public class Avventura extends StrutturaGioco {
                     if (p.getOggetto().isPrendibile()) {
                         getInventario().add(p.getOggetto());
                         getStanzaCorrente().getOggetti().remove(p.getOggetto());
-                        out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
+                        if (!p.getOggetto().isInvisibile()) {
+                            out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
+                        }
                     } else {
                         out.println("Non puoi raccogliere questo oggetto.");
                     }
@@ -286,6 +212,12 @@ public class Avventura extends StrutturaGioco {
                 //ricerca oggetti pushabili
                 if (p.getOggetto() != null && p.getOggetto().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggetto().getNome());
+                    //Creare metodo più generico qui.
+                    //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
+                    if (p.getOggetto().getId() == 14) {
+                        getInventario().add(p.getOggetto());
+                        getStanzaCorrente().getOggetti().remove(p.getOggetto());
+                    }
                 } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggettoInventario().getNome());
                 } else {

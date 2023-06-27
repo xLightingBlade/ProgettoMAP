@@ -39,6 +39,8 @@ public class Oggetto {
     private boolean aperto = false;
 
     private boolean spinto = false;
+    
+    private boolean invisibile = false;
 
     
     //Costruttori
@@ -132,6 +134,14 @@ public class Oggetto {
     
     public void setLeggibile(boolean leggibile) {
         this.leggibile = leggibile;
+    }
+    
+    public boolean isInvisibile() {
+        return invisibile;
+    }
+    
+    public void setInvisibile(boolean invisibile) {
+        this.invisibile = invisibile;
     }
     
     //Usato per capire se un oggetto è aperto
