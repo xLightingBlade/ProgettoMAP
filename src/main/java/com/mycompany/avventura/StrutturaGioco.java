@@ -10,6 +10,7 @@ import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Stanza;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * Questa classe astratta modella la struttura fondamentale 
  * che una qualunque avventura testuale deve avere.
  */
-public abstract class StrutturaGioco {
+public abstract class StrutturaGioco implements Serializable  {
 
     private List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
 

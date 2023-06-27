@@ -7,12 +7,13 @@ package com.mycompany.parser;
 
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Comando;
+import java.io.Serializable;
 
 /**
  *
  * @author gabri
  */
-public class ParserOutput {
+public class ParserOutput implements Serializable {
 
     private Comando comando;
 

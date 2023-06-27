@@ -8,34 +8,33 @@ package com.mycompany.avventura;
 import com.mycompany.gioco.Avventura;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
+import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.TipoComando;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.lang.IllegalArgumentException;
-import com.mycompany.avventura.LoaderPrinterText;
+import java.io.Serializable;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
  * @author gabri
- * Da questa classe partirà l'esecuzione del gioco ero e proprio. Essa è fatta in modo che possa
+ * Da questa classe parto che possa
  * eseguire qualsiasi gioco che estende StrutturaGioco, in questo modo si
  * possono creare più gioci utilizzando lo stesso Engine.
  */
-public class Engine
+public class Engine implements Serializable 
 {
-
     private final StrutturaGioco gioco;
-
+    
     private Parser parser;
 
     //Costruttore
@@ -101,33 +100,47 @@ public class Engine
         {
             String command = scanner.nextLine();//comando preso in input dall'utente
             
-            //E' presente l'output del parser dopo aver processato il comando dell'utente
-            ParserOutput p = parser.parse(command, gioco.getComandi(), gioco.getStanzaCorrente().getOggetti(), gioco.getInventario());
-            
-            if (p == null || p.getComando() == null)
+            if(command.equals("salva"))
             {
-                System.out.println("Non capisco quello che mi vuoi dire.");
-                System.out.println();
-            }
-            else if (p.getComando() != null && p.getComando().getTipo() == TipoComando.FINE)
-            {
-                System.out.println("Partita terminata");
-                break;
+                CaricamentoSalvataggioPartita.salva(this);
             }
             else
             {
-                gioco.prossimaMossa(p, System.out);//avanzo con il gioco
+                //E' presente l'output del parser dopo aver processato il comando dell'utente
+                ParserOutput p = parser.parse(command, gioco.getComandi(), gioco.getStanzaCorrente().getOggetti(), gioco.getInventario());
+
+                if (p == null || p.getComando() == null)
+                {
+                    System.out.println("Non capisco quello che mi vuoi dire.");
+                    System.out.println();
+                }
+                else if (p.getComando() != null && p.getComando().getTipo() == TipoComando.FINE)
+                {
+                    System.out.println("Partita terminata");
+                    break;
+                }
+                else
+                {
+                    gioco.prossimaMossa(p, System.out);//avanzo con il gioco
+                }
             }
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args)
-    {
-        Engine engine = new Engine(new Avventura());
-        engine.esegui();//partenza del gioco
-    }
 
+    public static void main(String[] args)           
+    {
+        //Avvia di una nuova partita. Da eseguire quando l'utente schiaccia il bottone nuova partita.
+        Engine partita = new Engine(new Avventura());
+        CaricamentoSalvataggioPartita.avviaPartita(partita);
+        
+        
+        //CaricamentoSalvataggioPartita.carica();
+    }
+    
+    
+    public StrutturaGioco getGioco()
+    {
+        return this.gioco; 
+    }
 }
