@@ -61,6 +61,6 @@ public abstract class StrutturaGioco {
     //inizializzerà tutti i dati del gioco, come stanze, oggetti ecc...
 
      
-    public abstract void prossimaMossa(ParserOutput p, PrintStream out);//In questo metodo è racchiusa la storia dell'avventura testuale
+    public abstract void prossimaMossa(ParserOutput p);//In questo metodo è racchiusa la storia dell'avventura testuale
 
 }

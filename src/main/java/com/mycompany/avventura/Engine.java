@@ -119,7 +119,7 @@ public class Engine
             }
             else
             {
-                gioco.prossimaMossa(p, System.out);//avanzo con il gioco
+                gioco.prossimaMossa(p);//avanzo con il gioco
             }
         }
     }
