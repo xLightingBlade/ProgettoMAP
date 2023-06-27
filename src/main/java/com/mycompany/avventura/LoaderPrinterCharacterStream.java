@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +16,12 @@ import java.util.List;
  *
  * @author Antonio
  */
-public class LoaderPrinterText
+public class LoaderPrinterCharacterStream implements Serializable 
 {
     private final List<String> frasi;
 
     //Costruttore
-    public LoaderPrinterText() 
+    public LoaderPrinterCharacterStream() 
     {
         this.frasi = new ArrayList<>();
     }

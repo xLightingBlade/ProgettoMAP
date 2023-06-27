@@ -5,6 +5,7 @@
  */
 package com.mycompany.tipi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author gabri
  */
-public class Inventario {
+public class Inventario implements Serializable {
 
     private List<Oggetto> list = new ArrayList<>();
 

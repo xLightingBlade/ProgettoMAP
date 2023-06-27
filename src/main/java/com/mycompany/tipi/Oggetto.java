@@ -5,6 +5,7 @@
  */
 package com.mycompany.tipi;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author gabri
  * Questa classe modella la struttura che un oggetto del gioco (utilizzato dall'utente) deve avere
  */
-public class Oggetto {
+public class Oggetto implements Serializable {
 
     private final int id;
 

@@ -14,6 +14,7 @@ import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import java.util.List;
  *
  * @author gabri
  */
-public class Avventura extends StrutturaGioco {
+public class Avventura extends StrutturaGioco implements Serializable {
     ControlloSpostamenti controller = new ControlloSpostamenti();
     
     @Override

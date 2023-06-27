@@ -5,6 +5,7 @@
  */
 package com.mycompany.tipi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author gabri
  * Questa classe modella la struttura che ogni stanza deve avere.
  */
-public class Stanza {
+public class Stanza implements Serializable {
 
     private final int id;
 
