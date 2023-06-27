@@ -44,6 +44,7 @@ import java.util.List;
 public class Avventura extends StrutturaGioco {
     ControlloSpostamenti controller = new ControlloSpostamenti();
     boolean haAccessoAllaStanza = false;
+    boolean assenzaStanza = false;
     @Override
     public void init() throws Exception {
         OperazioniDatabase.connettiDatabase();
@@ -65,9 +66,8 @@ public class Avventura extends StrutturaGioco {
         if (p.getComando() == null) {
             System.out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
         } else {
-            //move
-            boolean nienteStanza = false;
-            
+            this.haAccessoAllaStanza = false;
+            this.assenzaStanza = false;
             Stanza stanzacorrente = getStanzaCorrente();
             List<Oggetto> inventarioGiocatore = getInventario();
             Oggetto oggetto = p.getOggetto();
@@ -121,58 +121,67 @@ public class Avventura extends StrutturaGioco {
                 System.out.println(getStanzaCorrente().getNome());
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
-            } else {
+            }
+            if (this.assenzaStanza) {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }
     }
     
     private void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-         if (stanzacorrente.getNord() != null) {
-                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
-                        //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                            setStanzaCorrente(stanzacorrente.getNord());
-                            this.haAccessoAllaStanza = true;
-                    }else{
-                        System.out.println("Non puoi accedere alla stanza.");
-                    }    
-         }
+        if (stanzacorrente.getNord() != null) {
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
+                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
+                setStanzaCorrente(stanzacorrente.getNord());
+                    this.haAccessoAllaStanza = true;
+                }else{  
+                    System.out.println("Non puoi accedere alla stanza.");
+                }    
+        }else {
+            assenzaStanza = true;
+        }
     }
     
     private void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getSud() != null) {
              if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
-                 setStanzaCorrente(stanzacorrente.getSud());
-                 this.haAccessoAllaStanza = true;
-             } else {
-                 System.out.println("Non puoi accedere alla stanza.");
-             }
+                setStanzaCorrente(stanzacorrente.getSud());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
 
-         }
+        }else {
+            assenzaStanza = true;
+        }
     }
     
     private void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getEst() != null) {
-             if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
-                 setStanzaCorrente(stanzacorrente.getEst());
-                 this.haAccessoAllaStanza = true;
-             } else {
-                 System.out.println("Non puoi accedere alla stanza.");
-             }
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
+                setStanzaCorrente(stanzacorrente.getEst());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
 
-         }
+        }else {
+            assenzaStanza = true;
+        }
     }
     
     private void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getOvest() != null) {
-             if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
-                 setStanzaCorrente(stanzacorrente.getOvest());
-                 this.haAccessoAllaStanza = true;
-             } else {
-                 System.out.println("Non puoi accedere alla stanza.");
-             }
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
+                setStanzaCorrente(stanzacorrente.getOvest());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
 
-         }
+        } else {
+            assenzaStanza = true;
+        }
     }
     
     private void printInventarioContent(List<Oggetto> inventarioGiocatore){
