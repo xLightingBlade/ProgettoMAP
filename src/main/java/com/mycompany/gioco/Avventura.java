@@ -80,26 +80,38 @@ public class Avventura extends StrutturaGioco {
             {
                 //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
                 if (getStanzaCorrente().getSud() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getSud());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getSud());
+                        movimento = true;
+                    } else {
+                        out.println("Non puoi accedere alla stanza.");
+                    }
                 } else {
                     nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
+            }
+            else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
             {
                 //setta la nuova stanzaCorrente a quella a est della stanza corrente attuale
                 if (getStanzaCorrente().getEst() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getEst());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getEst());
+                        movimento = true;
+                    } else {
+                        out.println("Non puoi accedere alla stanza.");
+                    }
                 } else {
                     nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
+            } 
+            else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
             {
                 //setta la nuova stanzaCorrente a quella ad ovest della stanza corrente attuale
                 if (getStanzaCorrente().getOvest() != null) {
-                    setStanzaCorrente(getStanzaCorrente().getOvest());
-                    movimento = true;
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
+                        setStanzaCorrente(getStanzaCorrente().getOvest());
+                        movimento = true; 
+                    }
                 } else {
                     nienteStanza = true;
                 }
