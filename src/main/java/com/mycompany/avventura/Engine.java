@@ -37,6 +37,8 @@ public class Engine
     private final StrutturaGioco gioco;
 
     private Parser parser;
+    
+    
 
     //Costruttore
     /*Il costruttore fa principalmente 2 cose:
@@ -96,6 +98,7 @@ public class Engine
         Viene preso un comando in input, viene analizzato dal parser.
         In base all'output del parser si procede con il gioco.
         */    
+        
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) 
         {
