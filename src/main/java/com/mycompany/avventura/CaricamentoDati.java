@@ -24,7 +24,7 @@ public class CaricamentoDati extends Thread
     @Override
     public void run() 
     {
-        Integer secondiAttesa = 2;
+        Integer secondiAttesa = 1;
         LoaderPrinterText frasiIntro = new LoaderPrinterText();
         try 
         {

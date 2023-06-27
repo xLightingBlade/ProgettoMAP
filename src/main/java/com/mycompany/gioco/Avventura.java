@@ -7,7 +7,10 @@ package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
+import com.mycompany.exception.DimException;
+import com.mycompany.exception.ImgException;
 import com.mycompany.parser.ParserOutput;
+import com.mycompany.swing.ImgFrame;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Comando;
@@ -16,6 +19,8 @@ import com.mycompany.tipi.Stanza;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -133,8 +138,20 @@ public class Avventura extends StrutturaGioco {
             } else if (p.getComando().getTipo() == TipoComando.PRENDI) {
                 if (p.getOggetto() != null) {
                     if (p.getOggetto().isPrendibile()) {
-                        getInventario().add(p.getOggetto());
-                        getStanzaCorrente().getOggetti().remove(p.getOggetto());
+                        if (p.getOggetto().getNome().equals("foto")){
+                            try {
+                                ImgFrame ig = new ImgFrame(".//resources//img//fotoSoggiorno960x660.jpg", "quando si stava bene...");
+                                ig.setVisible(true);                // quando viene eseguita questa istruzione, appare la finestra                 
+                            } catch (ImgException ex) {
+                                Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (DimException ex) {
+                                Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        } else {
+                            getInventario().add(p.getOggetto());
+                            getStanzaCorrente().getOggetti().remove(p.getOggetto());
+                        }
                         if (!p.getOggetto().isInvisibile()) {
                             out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
                         }
