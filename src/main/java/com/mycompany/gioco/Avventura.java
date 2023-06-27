@@ -75,46 +75,31 @@ public class Avventura extends StrutturaGioco {
             TipoComando comando = p.getComando().getTipo();
             
             switch(comando){
-                case NORD :
-                    checkNordAccess(stanzacorrente,inventarioGiocatore);
-                    break;
-                case SUD :
-                    checkSudAccess( stanzacorrente,inventarioGiocatore);
-                    break;
-                case EST :
-                    checkEstAccess(stanzacorrente, inventarioGiocatore);
-                    break;
-                case OVEST :
-                    checkWestAccess(stanzacorrente,inventarioGiocatore);
-                    break;
-                case INVENTARIO :
-                    printInventarioContent(inventarioGiocatore);
-                    break;
-                case GUARDA :
-                     printOsservazione(stanzacorrente);
-                    break;
-                case PRENDI :
-                    prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
-                    break;
-                case APRI :
-                     apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
-                    break;
-                case SPINGI :
+                case NORD -> checkNordAccess(stanzacorrente,inventarioGiocatore);
+                case SUD -> checkSudAccess( stanzacorrente,inventarioGiocatore);
+                case EST -> checkEstAccess(stanzacorrente, inventarioGiocatore);
+                case OVEST -> checkWestAccess(stanzacorrente,inventarioGiocatore);
+                case INVENTARIO -> printInventarioContent(inventarioGiocatore);
+                case GUARDA -> printOsservazione(stanzacorrente);
+                case PRENDI -> prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
+                case APRI -> apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
+                case SPINGI -> {
                     if(oggetto!= null){
                         spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
                     }else{
                         spingiOggetto(oggettoInventario, inventarioGiocatore, stanzacorrente);
                     }
-                    break;
-                case LEGGI :
+                }
+                case LEGGI -> {
                     if(oggetto!= null){
                         leggiOggetto(oggetto);
                     }else{
                         leggiOggetto(oggettoInventario);
                     }
-                    break;
-                default:
+                }
+                default -> {
                     return;
+                }
             }
             
             if (this.haAccessoAllaStanza) {
