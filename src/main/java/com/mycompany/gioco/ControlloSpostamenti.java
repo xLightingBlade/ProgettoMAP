@@ -5,36 +5,27 @@
 package com.mycompany.gioco;
 
 import com.mycompany.tipi.Oggetto;
+import com.mycompany.tipi.Stanza;
+import java.util.List;
 
 /**
  *
  * @author gabri
  */
+
 public class ControlloSpostamenti {
-    public boolean checkZattera(Avventura a) {
-        if(a.getStanzaCorrente().getNome().equals("BinariMetro")) {
-            //Controlla di avere la zattera
-            if(a.getInventario().contains(new Oggetto(17))){
-                 return true;
-            } else {
-                 System.out.println("Non puoi attraversare i binari, Ellie non sa nuotare");
-                 return false;
-             }
-        }
-        return true;
-    }
-    
-    public boolean checkOggettiCasa(Avventura a) {
-        if(a.getStanzaCorrente().getNome().equals("Soggiorno")) {
-            //Controlla di avere nell'inventario: pistola, coltello, cibo e munizioni
-            if (a.getInventario().contains(new Oggetto(0)) && a.getInventario().contains(new Oggetto(1))
-            && a.getInventario().contains(new Oggetto(3)) && a.getInventario().contains(new Oggetto(9))) {
-                return true;
-            } else {
-                System.out.println("Senti di non essere preparato a sufficienza per uscire di casa");
-                return false;
+    //Questo è un metodo bello generico, può controllare in ogni stanza cosa serve avere per entrarci
+    public boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
+        int counterOggettiStanza = stanza.getOggettiNecessari().size();
+        int counterOggettiTrovati = 0;
+        for(Oggetto oggettoStanza : stanza.getOggettiNecessari()) {
+            for(Oggetto oggettoInventario : inventarioGiocatore) {
+                if(oggettoStanza.equals(oggettoInventario)){
+                    counterOggettiTrovati+= 1;
+                }
             }
         }
-        return true;
+        return counterOggettiStanza == counterOggettiTrovati;
     }
+    
 }

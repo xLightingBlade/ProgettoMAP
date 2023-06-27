@@ -15,6 +15,7 @@ import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
 import java.io.PrintStream;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -57,20 +58,25 @@ public class Avventura extends StrutturaGioco {
             //move
             boolean nienteStanza = false;
             boolean movimento = false;
-
+            Stanza stanzacorrente = getStanzaCorrente();
+            List<Oggetto> inventarioGiocatore = getInventario();
+            
             //se vado a nord
             if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
             {
-                if(controller.checkZattera(this) && controller.checkOggettiCasa(this)){
-                    //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                    if (getStanzaCorrente().getNord() != null) {
-                        setStanzaCorrente(getStanzaCorrente().getNord());
-                        movimento = true;
-                    } else {
-                        nienteStanza = true;
-                    }
+                if (getStanzaCorrente().getNord() != null) {
+                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
+                        //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
+                            setStanzaCorrente(getStanzaCorrente().getNord());
+                            movimento = true;
+                    }else{
+                        out.println("Non puoi accedere alla stanza.");
+                    }    
+                } else {
+                   nienteStanza = true;
                 }
-            } else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
+            }
+            else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
             {
                 //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
                 if (getStanzaCorrente().getSud() != null) {
@@ -100,9 +106,10 @@ public class Avventura extends StrutturaGioco {
             } //Motra inventario
             else if (p.getComando().getTipo() == TipoComando.INVENTARIO) {
                 out.println("Nel tuo inventario ci sono:");
-                
                 for (Oggetto o : getInventario()) {
-                    out.println(o.getNome() + ": " + o.getDescrizione());
+                    if(!o.isInvisibile()) {
+                        out.println(o.getNome() + ": " + o.getDescrizione());
+                    }
                 }
                 
             } else if (p.getComando().getTipo() == TipoComando.GUARDA) {
@@ -116,7 +123,9 @@ public class Avventura extends StrutturaGioco {
                     if (p.getOggetto().isPrendibile()) {
                         getInventario().add(p.getOggetto());
                         getStanzaCorrente().getOggetti().remove(p.getOggetto());
-                        out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
+                        if (!p.getOggetto().isInvisibile()) {
+                            out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
+                        }
                     } else {
                         out.println("Non puoi raccogliere questo oggetto.");
                     }
@@ -191,6 +200,12 @@ public class Avventura extends StrutturaGioco {
                 //ricerca oggetti pushabili
                 if (p.getOggetto() != null && p.getOggetto().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggetto().getNome());
+                    //Creare metodo più generico qui.
+                    //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
+                    if (p.getOggetto().getId() == 14) {
+                        getInventario().add(p.getOggetto());
+                        getStanzaCorrente().getOggetti().remove(p.getOggetto());
+                    }
                 } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) {
                     out.println("Hai premuto: " + p.getOggettoInventario().getNome());
                 } else {
