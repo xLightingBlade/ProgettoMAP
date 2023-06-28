@@ -10,17 +10,21 @@ import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.exception.DimException;
 import com.mycompany.exception.ImgException;
 import com.mycompany.parser.ParserOutput;
-import com.mycompany.swing.ImgFrame;
+import com.mycompany.swing.ImgJFrame;
+import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
+import java.awt.Component;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -140,14 +144,13 @@ public class Avventura extends StrutturaGioco {
                     if (p.getOggetto().isPrendibile()) {
                         if (p.getOggetto().getNome().equals("foto")){
                             try {
-                                ImgFrame ig = new ImgFrame(".//resources//img//fotoSoggiorno960x660.jpg", "quando si stava bene...");
-                                ig.setVisible(true);                // quando viene eseguita questa istruzione, appare la finestra                 
+                                ImgJFrame img = new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg", "img Soggiorno");
+                                //img.setVisible(true);                                
                             } catch (ImgException ex) {
                                 Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (DimException ex) {
                                 Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
                         } else {
                             getInventario().add(p.getOggetto());
                             getStanzaCorrente().getOggetti().remove(p.getOggetto());
