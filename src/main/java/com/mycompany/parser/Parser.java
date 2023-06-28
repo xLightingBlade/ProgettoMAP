@@ -8,6 +8,7 @@ package com.mycompany.parser;
 import com.mycompany.avventura.Utils;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Comando;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import java.util.Set;
  *
  * @author gabri
  */
-public class Parser 
+public class Parser implements Serializable 
 {
 
     private final Set<String> stopwords;

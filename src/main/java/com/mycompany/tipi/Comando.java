@@ -5,6 +5,7 @@
  */
 package com.mycompany.tipi;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import java.util.Set;
  * @author gabri
  * Questa classe modella la struttura che un comando (che sarà fornito dall'utente) deve avere.
  */
-public class Comando {
+public class Comando implements Serializable {
 
     private final TipoComando tipo;//definisce il tipo di azione che il comando eseguirà
 

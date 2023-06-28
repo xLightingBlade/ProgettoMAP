@@ -5,6 +5,7 @@
  */
 package com.mycompany.tipi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.Set;
  *
  * @author pierpaolo
  */
-public class ContenitoreOggetti extends Oggetto {
+public class ContenitoreOggetti extends Oggetto implements Serializable {
 
     private List<Oggetto> list = new ArrayList<>();
 

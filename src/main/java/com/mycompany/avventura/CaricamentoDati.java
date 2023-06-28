@@ -5,6 +5,7 @@
 package com.mycompany.avventura;
 
 import java.io.BufferedReader;
+import java.io.Serializable;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.io.BufferedReader;
  * Questa classe vuole velocizzare le operazioni di input/output per il caricamento dei dati 
  * del gioco da un dispositivo di input e per la stampa a schermo, rendendole eseguibili in parallelo grazie all'utilizzo dei thread .
  */
-public class CaricamentoDati extends Thread 
+public class CaricamentoDati extends Thread implements Serializable 
 {
     private final BufferedReader in;
     
@@ -24,8 +25,8 @@ public class CaricamentoDati extends Thread
     @Override
     public void run() 
     {
-        Integer secondiAttesa = 2;
-        LoaderPrinterText frasiIntro = new LoaderPrinterText();
+        Integer secondiAttesa = 1;
+        LoaderPrinterCharacterStream frasiIntro = new LoaderPrinterCharacterStream();
         try 
         {
             frasiIntro.carica(in);//caricamento effettivo della intro e dialoghi iniziali da file

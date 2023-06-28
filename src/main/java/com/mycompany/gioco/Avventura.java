@@ -24,6 +24,7 @@ import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,7 +42,7 @@ import java.util.List;
  *
  * @author gabri
  */
-public class Avventura extends StrutturaGioco {
+public class Avventura extends StrutturaGioco implements Serializable {
     ControlloSpostamenti controller = new ControlloSpostamenti();
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;

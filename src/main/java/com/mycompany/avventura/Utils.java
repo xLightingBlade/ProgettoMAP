@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.Set;
  *    3) pulire il contenuto della stringa passata in input al metodo parseString dalle stopwords 
  * 
  */
-public class Utils
+public class Utils implements Serializable 
 {
     //Carica la lista dele stopwords da file e la restituisce sotto forma di set di stringhe
     public static Set<String> caricaStopwords(File file) throws IOException 
