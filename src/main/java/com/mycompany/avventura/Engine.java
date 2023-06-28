@@ -8,7 +8,6 @@ package com.mycompany.avventura;
 import com.mycompany.gioco.Avventura;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
-import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.TipoComando;
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,18 +17,13 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.Serializable;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  *
  * @author gabri
- * Da questa classe parto che possa
+ * Questa classe può
  * eseguire qualsiasi gioco che estende StrutturaGioco, in questo modo si
- * possono creare più gioci utilizzando lo stesso Engine.
+ * possono creare più giochi utilizzando lo stesso Engine.
  */
 public class Engine implements Serializable 
 {
@@ -61,8 +55,9 @@ public class Engine implements Serializable
         }
         catch(FileNotFoundException ex)
         {
-            System.out.println("Errore nel caricamento dati. File per i dialoghi iniziali non trovato. "
-            + "\nRiavvia il gioco.");
+            System.out.println("""
+                               Errore nel caricamento dati. File per i dialoghi iniziali non trovato. 
+                               Riavvia il gioco.""");
             System.exit(0);
         } 
         catch (InterruptedException | IllegalArgumentException ex) 
@@ -138,11 +133,11 @@ public class Engine implements Serializable
     public static void main(String[] args)           
     {
         //Avvia di una nuova partita. Da eseguire quando l'utente schiaccia il bottone nuova partita.
-        Engine partita = new Engine(new Avventura());
+        /*Engine partita = new Engine(new Avventura());
         CaricamentoSalvataggioPartita.avviaPartita(partita);
+        */
         
-        
-        //CaricamentoSalvataggioPartita.carica();
+        CaricamentoSalvataggioPartita.carica();
     }
     
     
