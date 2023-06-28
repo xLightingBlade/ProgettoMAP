@@ -118,7 +118,7 @@ public class Engine implements Serializable
                 else if (p.getComando() != null && p.getComando().getTipo() == TipoComando.FINE)
                 {
                     System.out.println("Partita terminata");
-                    break;
+                    System.exit(0);
                 }
                 else
                 {
@@ -133,11 +133,11 @@ public class Engine implements Serializable
     public static void main(String[] args)           
     {
         //Avvia di una nuova partita. Da eseguire quando l'utente schiaccia il bottone nuova partita.
-        /*Engine partita = new Engine(new Avventura());
+        Engine partita = new Engine(new Avventura());
         CaricamentoSalvataggioPartita.avviaPartita(partita);
-        */
         
-        CaricamentoSalvataggioPartita.carica();
+        
+        //CaricamentoSalvataggioPartita.carica();
     }
     
     

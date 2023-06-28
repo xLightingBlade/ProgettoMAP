@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    public Menu(String pathImg) throws ImgException{
+    public Menu(String pathImg) throws ImgException {
         if(CheckImg.isImage(pathImg)) {
             ImageIcon imgIcon = new ImageIcon(pathImg);
             initComponents();
