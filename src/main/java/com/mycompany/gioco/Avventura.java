@@ -324,7 +324,5 @@ public class Avventura extends StrutturaGioco implements Serializable {
         }else{
             System.out.println("Nessun Oggetto da Leggere.");
         }
-    }
-    
-    
+    }  
 }
