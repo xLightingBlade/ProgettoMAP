@@ -12,7 +12,6 @@ import com.mycompany.parser.ParserOutput;
 import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
-import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
 import static com.mycompany.tipi.TipoComando.APRI;
@@ -25,10 +24,10 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
-import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -100,6 +99,8 @@ public class Avventura extends StrutturaGioco implements Serializable {
                         leggiOggetto(oggettoInventario);
                     }
                 }
+                case FINE -> chiudiPartita();
+                
                 default -> {
                     return;
                 }
@@ -114,6 +115,11 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }
+    }
+    
+    private void chiudiPartita() {
+        System.out.println("Partita terminata");
+        System.exit(0);
     }
     
     private void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
