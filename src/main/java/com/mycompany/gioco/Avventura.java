@@ -66,53 +66,49 @@ public class Avventura extends StrutturaGioco implements Serializable {
     //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
     public void prossimaMossa(ParserOutput p) {
-        if (p.getComando() == null) {
-            System.out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
-        } else {
-            this.haAccessoAllaStanza = false;
-            this.assenzaStanza = false;
-            Stanza stanzacorrente = getStanzaCorrente();
-            List<Oggetto> inventarioGiocatore = getInventario();
-            Oggetto oggetto = p.getOggetto();
-            Oggetto oggettoInventario = p.getOggettoInventario();
-            TipoComando comando = p.getComando().getTipo();
+        this.haAccessoAllaStanza = false;
+        this.assenzaStanza = false;
+        Stanza stanzacorrente = getStanzaCorrente();
+        List<Oggetto> inventarioGiocatore = getInventario();
+        Oggetto oggetto = p.getOggetto();
+        Oggetto oggettoInventario = p.getOggettoInventario();
+        TipoComando comando = p.getComando().getTipo();
             
-            switch(comando){
-                case NORD -> checkNordAccess(stanzacorrente,inventarioGiocatore);
-                case SUD -> checkSudAccess( stanzacorrente,inventarioGiocatore);
-                case EST -> checkEstAccess(stanzacorrente, inventarioGiocatore);
-                case OVEST -> checkWestAccess(stanzacorrente,inventarioGiocatore);
-                case INVENTARIO -> printInventarioContent(inventarioGiocatore);
-                case GUARDA -> printOsservazione(stanzacorrente);
-                case PRENDI -> prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
-                case APRI -> apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
-                case SPINGI -> {
-                    if(oggetto!= null){
-                        spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
-                    }else{
+        switch(comando){
+            case NORD -> checkNordAccess(stanzacorrente,inventarioGiocatore);
+            case SUD -> checkSudAccess( stanzacorrente,inventarioGiocatore);
+            case EST -> checkEstAccess(stanzacorrente, inventarioGiocatore);
+            case OVEST -> checkWestAccess(stanzacorrente,inventarioGiocatore);
+            case INVENTARIO -> printInventarioContent(inventarioGiocatore);
+            case GUARDA -> printOsservazione(stanzacorrente);
+            case PRENDI -> prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
+            case APRI -> apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
+            case SPINGI -> {
+                if(oggetto!= null){
+                    spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
+                }else{
                         spingiOggetto(oggettoInventario, inventarioGiocatore, stanzacorrente);
-                    }
-                }
-                case LEGGI -> {
-                    if(oggetto!= null){
-                        leggiOggetto(oggetto);
-                    }else{
-                        leggiOggetto(oggettoInventario);
-                    }
-                }
-                default -> {
-                    return;
                 }
             }
+            case LEGGI -> {
+                if(oggetto!= null){
+                    leggiOggetto(oggetto);
+                }else{
+                    leggiOggetto(oggettoInventario);
+                }
+            }
+            default -> {
+                return;
+            }
+        }
             
-            if (this.haAccessoAllaStanza) {
-                System.out.println(getStanzaCorrente().getNome());
-                System.out.println("================================================");
-                System.out.println(getStanzaCorrente().getDescrizione());
-            }
-            if (this.assenzaStanza) {
-                System.out.println("Da quella parte non si può andare c'è un muro!\n");
-            }
+        if (this.haAccessoAllaStanza) {
+            System.out.println(getStanzaCorrente().getNome());
+            System.out.println("================================================");
+            System.out.println(getStanzaCorrente().getDescrizione());
+        }
+        if (this.assenzaStanza) {
+            System.out.println("Da quella parte non si può andare c'è un muro!\n");
         }
     }
     
