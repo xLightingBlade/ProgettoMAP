@@ -4,11 +4,11 @@
  */
 package com.mycompany.avventura;
 
-import com.mycompany.tipi.Oggetto;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -30,8 +30,11 @@ public class CaricamentoSalvataggioPartita implements Serializable
             ObjectOutputStream outStream = new ObjectOutputStream(outFile);
             outStream.writeObject(partita);
             outStream.close();
-            outFile.close();
-        } 
+        }
+        catch(NotSerializableException ex)
+        {
+            System.out.println("Errore durante il processo di caricamento. Riprova più tardi");
+        }
         catch(IOException ex) 
         {
             System.out.println("Impossibile salvare la partita ora. Riprova più tardi o riavvia il gioco.");
@@ -41,6 +44,7 @@ public class CaricamentoSalvataggioPartita implements Serializable
     //da eseguire quando l'utente schiaccia sul bottone "carica partita salvata"
     public static boolean carica()
     {
+        System.out.println("Caricamento partita salvata");
         Engine partita = null;
         
         try
@@ -49,11 +53,17 @@ public class CaricamentoSalvataggioPartita implements Serializable
             ObjectInputStream inStream = new ObjectInputStream(inFile);
             partita = (Engine) inStream.readObject();//recupera la partita creata
             inStream.close();
+            /*
+            System.out.println(partita.getGioco().getStanzaCorrente().getNome());
+            System.out.println(partita.getGioco().getStanzaCorrente().getDescrizione());
+            */
             
             if(partita == null)
             {
                 throw new FileVuotoException();
             }
+            
+            System.out.println("Partita caricata, riprendi a giocare!\n");
         }
         catch(FileNotFoundException fnf)
         {
