@@ -98,28 +98,25 @@ public class Engine implements Serializable
         {
             String command = scanner.nextLine();//comando preso in input dall'utente
             
-            if(command.equals("salva"))
+            //E' presente l'output del parser dopo aver processato il comando dell'utente
+            ParserOutput p = parser.parse(command, gioco.getComandi(), gioco.getStanzaCorrente().getOggetti(), gioco.getInventario());
+
+            //il comando è incomprensibile
+            if (p == null || p.getComando() == null)
             {
+                System.out.println("Non capisco quello che mi vuoi dire.");
+                System.out.println();
+            }
+            //il comando è salva
+            else if(p != null && p.getComando().getTipo() == TipoComando.SALVA)
+            {
+                //salvataggio
                 CaricamentoSalvataggioPartita.salva(this);
             }
-            else if(command.equals("carica")) {
-                CaricamentoSalvataggioPartita.carica();
-            }
+            //il comando è corretto
             else
             {
-                //E' presente l'output del parser dopo aver processato il comando dell'utente
-                ParserOutput p = parser.parse(command, gioco.getComandi(), gioco.getStanzaCorrente().getOggetti(), gioco.getInventario());
-
-                if (p == null || p.getComando() == null)
-                {
-                    System.out.println("Non capisco quello che mi vuoi dire.");
-                    System.out.println();
-                }
-                else
-                {
-                    gioco.prossimaMossa(p);//avanzo con il gioco
-                }
-
+                gioco.prossimaMossa(p);//avanzo con il gioco
             }
         }
     }
@@ -130,9 +127,6 @@ public class Engine implements Serializable
         //Avvia di una nuova partita. Da eseguire quando l'utente schiaccia il bottone nuova partita.
         Engine partita = new Engine(new Avventura());
         CaricamentoSalvataggioPartita.avviaPartita(partita);
-        
-        
-        //CaricamentoSalvataggioPartita.carica();
     }
     
     

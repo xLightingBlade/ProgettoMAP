@@ -386,6 +386,8 @@ public class OperazioniDatabase {
         leggi.setAlias(new String[]{"sfoglia"});
         Comando accendi = new Comando(TipoComando.valueOf(tipoComandi.get(11)), nomeComandi.get(11));
         accendi.setAlias(new String[]{});
+        Comando salva = new Comando(TipoComando.valueOf(tipoComandi.get(12)), nomeComandi.get(12));
+        salva.setAlias(new String[]{"salvataggio","salva partita"});
         
         comandi.add(nord);
         comandi.add(inventario);
@@ -399,6 +401,7 @@ public class OperazioniDatabase {
         comandi.add(spingi);
         comandi.add(leggi);
         comandi.add(accendi);
+        comandi.add(salva);
         
         return comandi;
     }

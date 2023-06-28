@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.swing;
+import com.mycompany.avventura.CaricamentoSalvataggioPartita;
 import com.mycompany.avventura.Engine;
 import com.mycompany.exception.ImgException;
 import java.awt.BorderLayout;
@@ -161,7 +162,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void caricaPartitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartitaButtonActionPerformed
         // qui ci sarà la chiamata al metodo per ricaricare la partita
-        System.out.println("Ciao");
+        dispose();
+        CaricamentoSalvataggioPartita.carica();
     }//GEN-LAST:event_caricaPartitaButtonActionPerformed
 
     /**
