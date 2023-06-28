@@ -118,7 +118,7 @@ public class Engine implements Serializable
                 else if (p.getComando() != null && p.getComando().getTipo() == TipoComando.FINE)
                 {
                     System.out.println("Partita terminata");
-                    break;
+                    System.exit(0);
                 }
                 else
                 {
