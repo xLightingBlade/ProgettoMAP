@@ -238,7 +238,7 @@ public class OperazioniDatabase {
 
         Oggetto foto = new Oggetto(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
         foto.setAlias(new String[]{"immagine"});
-        foto.setPrendibile(false);
+        foto.setPrendibile(true);
         stanze.get(0).getOggetti().add(foto);
 
         ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));

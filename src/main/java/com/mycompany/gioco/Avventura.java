@@ -7,7 +7,9 @@ package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
+import com.mycompany.exception.ImgException;
 import com.mycompany.parser.ParserOutput;
+import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Comando;
@@ -253,20 +255,44 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 }
     }
     
-    private void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
-         if (oggetto != null) {
-                    if (oggetto.isPrendibile()) {
-                        inventarioGiocatore.add(oggetto);
-                        stanzaCorrente.getOggetti().remove(oggetto);
-                        if (!oggetto.isInvisibile()) {
-                            System.out.println("Hai raccolto: " + oggetto.getDescrizione());
-                        }
-                    } else {
-                        System.out.println("Non puoi raccogliere questo oggetto.");
+    private void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente) {
+        if (oggetto != null) 
+        {
+            if (oggetto.isPrendibile()) 
+            {
+                if(oggetto.getNome().equals("foto")) 
+                {
+                    try
+                    {
+                        ImgJFrame img = new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg","");
+                        System.out.println("Stai guardando: "+oggetto.getDescrizione());
                     }
-                } else {
-                    System.out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
+                    catch(ImgException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
                 }
+                else
+                {
+                    inventarioGiocatore.add(oggetto);
+                    stanzaCorrente.getOggetti().remove(oggetto);
+                    
+                }
+                
+                if (!oggetto.isInvisibile() && !oggetto.getNome().equals("foto")) 
+                {
+                    System.out.println("Hai raccolto: " + oggetto.getDescrizione());
+                }
+            }
+            else 
+            {
+                System.out.println("Non puoi raccogliere questo oggetto.");
+            }
+        }
+        else 
+        {
+            System.out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
+        }
     }
     
     private void spingiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
