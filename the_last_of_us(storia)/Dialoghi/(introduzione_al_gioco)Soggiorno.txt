@@ -1,3 +1,4 @@
+
 Siamo nel 2050 e 37 anni fa, esattamente il 26/09/2013, prima un fungo, chiamato cordyceps ha causato una pandemia globale che ha infettato il 90% della popolazione mondiale,
 trasformandola in bestie assetate di sangue (simili a zombie) che attaccano e sbranano chiunque gli si ponga davanti. Nel frattempo l'esercito ha creato delle ZQ, 
 cioè delle aree murate in cui la popolazione ha ripreso a vivere e in cui vige il pugno di ferro dell'esercito.
@@ -24,3 +25,5 @@ Ellie:   Non ti dirò perchè mi stai facendo uscire se è questo che vuoi saper
 Joel:    Sai qual è il bello del mio lavoro? Che non devo sapere il perchè.
 Joel:    Non me ne frega niente del perchè devi uscire da qui. 
 Joel:    Muoviamoci, questa storia mi ha già stancato.
+
+

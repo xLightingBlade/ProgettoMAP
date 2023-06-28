@@ -6,6 +6,7 @@ package com.mycompany.gioco;
 
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author gabri
  */
 
-public class ControlloSpostamenti {
+public class ControlloSpostamenti implements Serializable{
     //Questo è un metodo bello generico, può controllare in ogni stanza cosa serve avere per entrarci
     public boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
         int counterOggettiStanza = stanza.getOggettiNecessari().size();
