@@ -44,9 +44,12 @@ import java.util.Scanner;
  * @author gabri
  */
 public class Avventura extends StrutturaGioco implements Serializable {
+    private static final long serialVersionUID = -4185062833257302102L;
+    
     ControlloSpostamenti controller = new ControlloSpostamenti();
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
+
     @Override
     public void init() throws Exception {
         OperazioniDatabase.connettiDatabase();
@@ -68,19 +71,21 @@ public class Avventura extends StrutturaGioco implements Serializable {
         if (p.getComando() == null) {
             System.out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
         } else {
+            EsecuzioneComandi esec = new EsecuzioneComandi(this);
             this.haAccessoAllaStanza = false;
             this.assenzaStanza = false;
             Stanza stanzacorrente = getStanzaCorrente();
             List<Oggetto> inventarioGiocatore = getInventario();
+            List<Stanza> stanze = getStanze();
             Oggetto oggetto = p.getOggetto();
             Oggetto oggettoInventario = p.getOggettoInventario();
             TipoComando comando = p.getComando().getTipo();
             
             switch(comando){
-                case NORD -> checkNordAccess(stanzacorrente,inventarioGiocatore);
-                case SUD -> checkSudAccess( stanzacorrente,inventarioGiocatore);
-                case EST -> checkEstAccess(stanzacorrente, inventarioGiocatore);
-                case OVEST -> checkWestAccess(stanzacorrente,inventarioGiocatore);
+                case NORD -> esec.checkNordAccess(stanzacorrente,inventarioGiocatore);
+                case SUD -> esec.checkSudAccess( stanzacorrente,inventarioGiocatore);
+                case EST -> esec.checkEstAccess(stanzacorrente, inventarioGiocatore);
+                case OVEST -> esec.checkWestAccess(stanzacorrente,inventarioGiocatore);
                 case INVENTARIO -> printInventarioContent(inventarioGiocatore);
                 case GUARDA -> printOsservazione(stanzacorrente);
                 case PRENDI -> prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
@@ -99,7 +104,7 @@ public class Avventura extends StrutturaGioco implements Serializable {
                         leggiOggetto(oggettoInventario);
                     }
                 }
-                case FINE -> chiudiPartita();
+                case FINE -> esec.chiudiPartita();
                 
                 default -> {
                     return;
@@ -117,66 +122,6 @@ public class Avventura extends StrutturaGioco implements Serializable {
         }
     }
     
-    private void chiudiPartita() {
-        System.out.println("Partita terminata");
-        System.exit(0);
-    }
-    
-    private void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getNord() != null) {
-            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
-                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                setStanzaCorrente(stanzacorrente.getNord());
-                    this.haAccessoAllaStanza = true;
-                }else{  
-                    System.out.println("Non puoi accedere alla stanza.");
-                }    
-        }else {
-            assenzaStanza = true;
-        }
-    }
-    
-    private void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getSud() != null) {
-             if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
-                setStanzaCorrente(stanzacorrente.getSud());
-                this.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        }else {
-            assenzaStanza = true;
-        }
-    }
-    
-    private void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getEst() != null) {
-            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
-                setStanzaCorrente(stanzacorrente.getEst());
-                this.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        }else {
-            assenzaStanza = true;
-        }
-    }
-    
-    private void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getOvest() != null) {
-            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
-                setStanzaCorrente(stanzacorrente.getOvest());
-                this.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        } else {
-            assenzaStanza = true;
-        }
-    }
     
     private void printInventarioContent(List<Oggetto> inventarioGiocatore){
         System.out.println("Nel tuo inventario ci sono:");

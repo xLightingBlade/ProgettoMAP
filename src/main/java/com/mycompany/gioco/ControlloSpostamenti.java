@@ -14,7 +14,7 @@ import java.util.List;
  * @author gabri
  */
 
-public class ControlloSpostamenti implements Serializable{
+public class ControlloSpostamenti implements Serializable {
     //Questo è un metodo bello generico, può controllare in ogni stanza cosa serve avere per entrarci
     public boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
         int counterOggettiStanza = stanza.getOggettiNecessari().size();
