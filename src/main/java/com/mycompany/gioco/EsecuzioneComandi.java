@@ -31,6 +31,20 @@ public class EsecuzioneComandi implements Serializable{
         System.exit(0);
     }
     
+    //Per ora accende solo la torcia
+    void accendiQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
+        if(oggetto != null){
+            if(oggetto.getNome().equalsIgnoreCase("torcia") && stanzacorrente.isVisibile() == false) {
+                stanzacorrente.setVisibile(true);
+                System.out.println("Hai acceso la tua torcia, adesso riesci a vedere cosa c'è nella stanza");
+            } else if(stanzacorrente.isVisibile() == false) {
+                System.out.println("La stanza è già abbastanza illuminata");
+            }
+        } else {
+            System.out.println("Non c'è niente da accendere");
+        }
+    }
+    
     void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getNord() != null) {
             if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
@@ -99,7 +113,11 @@ public class EsecuzioneComandi implements Serializable{
     void printOsservazione(Stanza stanzaCorrente){
     
          if (stanzaCorrente.getOsservazione() != null) {
-                    System.out.println(stanzaCorrente.getOsservazione());
+             if(stanzaCorrente.isVisibile() == true) {
+                 System.out.println(stanzaCorrente.getOsservazione());
+             } else {
+                 System.out.println("Non si vede niente!");
+             }    
                 } else {
                     System.out.println("Non c'è niente di interessante da osserva qui.");
                 }

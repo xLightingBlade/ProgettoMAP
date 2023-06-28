@@ -99,6 +99,12 @@ public class Avventura extends StrutturaGioco implements Serializable {
                     }
                 }
                 case FINE -> esec.chiudiPartita();
+                case ACCENDI -> {
+                    if(oggetto!= null)
+                        esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                    else
+                        esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                    }
                 
                 default -> {
                     return;
