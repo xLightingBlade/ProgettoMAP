@@ -110,16 +110,14 @@ public class Avventura extends StrutturaGioco implements Serializable {
                     return;
                 }
             }
-            
-            if (this.haAccessoAllaStanza) {
-                System.out.println(getStanzaCorrente().getNome());
-                System.out.println("================================================");
-                System.out.println(getStanzaCorrente().getDescrizione());
-            }
-            if (this.assenzaStanza) {
-                System.out.println("Da quella parte non si può andare c'è un muro!\n");
-            }
+        if (this.haAccessoAllaStanza) {
+            System.out.println(getStanzaCorrente().getNome());
+            System.out.println("================================================");
+            System.out.println(getStanzaCorrente().getDescrizione());
+        }
+        if (this.assenzaStanza) {
+            System.out.println("Da quella parte non si può andare c'è un muro!\n");
+        }
         }
     }
-    
 }

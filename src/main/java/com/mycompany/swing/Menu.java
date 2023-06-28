@@ -70,6 +70,7 @@ public class Menu extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         avviaPartitaButton = new javax.swing.JButton();
         indietroButton = new javax.swing.JButton();
+        caricaPartitaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menù di gioco");
@@ -104,6 +105,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        caricaPartitaButton.setBackground(new java.awt.Color(0, 0, 0));
+        caricaPartitaButton.setForeground(new java.awt.Color(255, 255, 255));
+        caricaPartitaButton.setText("Carica partita");
+        caricaPartitaButton.setToolTipText("Cliccando qui riprenderai a giocare dall'ultimo salvataggio effettuato");
+        caricaPartitaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                caricaPartitaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,8 +128,9 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(423, 423, 423)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(indietroButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(avviaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(329, Short.MAX_VALUE))
+                            .addComponent(avviaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(caricaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(329, 329, 329))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,9 +138,11 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(176, 176, 176)
                 .addComponent(avviaPartitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
+                .addComponent(caricaPartitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(indietroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 141, Short.MAX_VALUE))
+                .addGap(0, 108, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -144,6 +158,11 @@ public class Menu extends javax.swing.JFrame {
     private void indietroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indietroButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_indietroButtonActionPerformed
+
+    private void caricaPartitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartitaButtonActionPerformed
+        // qui ci sarà la chiamata al metodo per ricaricare la partita
+        System.out.println("Ciao");
+    }//GEN-LAST:event_caricaPartitaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +206,7 @@ public class Menu extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton avviaPartitaButton;
+    private javax.swing.JButton caricaPartitaButton;
     private javax.swing.JButton indietroButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel titleLabel;
