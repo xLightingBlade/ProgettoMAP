@@ -73,7 +73,7 @@ public class LoaderPrinterCharacterStream implements Serializable
             for(String s : frasi)
             {
                 out.println(s);
-                Thread.sleep(secondiAttesa*1000);
+                Thread.sleep(secondiAttesa*0);
             }
         }
         else

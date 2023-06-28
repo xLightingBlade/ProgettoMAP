@@ -102,6 +102,9 @@ public class Engine implements Serializable
             {
                 CaricamentoSalvataggioPartita.salva(this);
             }
+            else if(command.equals("carica")) {
+                CaricamentoSalvataggioPartita.carica();
+            }
             else
             {
                 //E' presente l'output del parser dopo aver processato il comando dell'utente
@@ -119,8 +122,9 @@ public class Engine implements Serializable
                 }
                 else
                 {
-                    gioco.prossimaMossa(p, System.out);//avanzo con il gioco
+                    gioco.prossimaMossa(p);//avanzo con il gioco
                 }
+
             }
         }
     }

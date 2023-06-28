@@ -38,6 +38,7 @@ public class CaricamentoSalvataggioPartita implements Serializable
         catch(IOException ex) 
         {
             System.out.println("Impossibile salvare la partita ora. Riprova più tardi o riavvia il gioco.");
+            ex.printStackTrace();
         }
     }
     
@@ -68,16 +69,19 @@ public class CaricamentoSalvataggioPartita implements Serializable
         catch(FileNotFoundException fnf)
         {
             System.out.println("Impossibile caricare la partita. Non vi è nessuna partita salvata.");
+            fnf.printStackTrace();
             return false;
         }
         catch(FileVuotoException ex)
         {
             System.out.println("Impossibile caricare la partita. Ne hai salvata una ma è vuota.");
+            ex.printStackTrace();
             return false;
         }
         catch(IOException | ClassNotFoundException ex) 
         {
             System.out.println("Impossibile caricare la partita salvata. Riprova più tardi.");
+            ex.printStackTrace();
             return false;
         }
         

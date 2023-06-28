@@ -13,6 +13,16 @@ import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
+import static com.mycompany.tipi.TipoComando.APRI;
+import static com.mycompany.tipi.TipoComando.EST;
+import static com.mycompany.tipi.TipoComando.GUARDA;
+import static com.mycompany.tipi.TipoComando.INVENTARIO;
+import static com.mycompany.tipi.TipoComando.LEGGI;
+import static com.mycompany.tipi.TipoComando.NORD;
+import static com.mycompany.tipi.TipoComando.OVEST;
+import static com.mycompany.tipi.TipoComando.PRENDI;
+import static com.mycompany.tipi.TipoComando.SPINGI;
+import static com.mycompany.tipi.TipoComando.SUD;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -34,7 +44,8 @@ import java.util.List;
  */
 public class Avventura extends StrutturaGioco implements Serializable {
     ControlloSpostamenti controller = new ControlloSpostamenti();
-    
+    boolean haAccessoAllaStanza = false;
+    boolean assenzaStanza = false;
     @Override
     public void init() throws Exception {
         OperazioniDatabase.connettiDatabase();
@@ -52,195 +63,242 @@ public class Avventura extends StrutturaGioco implements Serializable {
     @Override
     //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
-    public void prossimaMossa(ParserOutput p, PrintStream out) {
+    public void prossimaMossa(ParserOutput p) {
         if (p.getComando() == null) {
-            out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
+            System.out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
         } else {
-            //move
-            boolean nienteStanza = false;
-            boolean movimento = false;
+            this.haAccessoAllaStanza = false;
+            this.assenzaStanza = false;
             Stanza stanzacorrente = getStanzaCorrente();
             List<Oggetto> inventarioGiocatore = getInventario();
+            Oggetto oggetto = p.getOggetto();
+            Oggetto oggettoInventario = p.getOggettoInventario();
+            TipoComando comando = p.getComando().getTipo();
             
-            //se vado a nord
-            if (p.getComando().getTipo() == TipoComando.NORD) //se vado a nord
-            {
-                if (getStanzaCorrente().getNord() != null) {
-                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
-                        //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
-                            setStanzaCorrente(getStanzaCorrente().getNord());
-                            movimento = true;
+            switch(comando){
+                case NORD -> checkNordAccess(stanzacorrente,inventarioGiocatore);
+                case SUD -> checkSudAccess( stanzacorrente,inventarioGiocatore);
+                case EST -> checkEstAccess(stanzacorrente, inventarioGiocatore);
+                case OVEST -> checkWestAccess(stanzacorrente,inventarioGiocatore);
+                case INVENTARIO -> printInventarioContent(inventarioGiocatore);
+                case GUARDA -> printOsservazione(stanzacorrente);
+                case PRENDI -> prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
+                case APRI -> apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
+                case SPINGI -> {
+                    if(oggetto!= null){
+                        spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
                     }else{
-                        out.println("Non puoi accedere alla stanza.");
-                    }    
-                } else {
-                   nienteStanza = true;
-                }
-            }
-            else if (p.getComando().getTipo() == TipoComando.SUD) //se vado a sud
-            {
-                //setta la nuova stanzaCorrente a quella a sud della stanza corrente attuale
-                if (getStanzaCorrente().getSud() != null) {
-                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
-                        setStanzaCorrente(getStanzaCorrente().getSud());
-                        movimento = true;
-                    } else {
-                        out.println("Non puoi accedere alla stanza.");
-                    }
-                } else {
-                    nienteStanza = true;
-                }
-            }
-            else if (p.getComando().getTipo() == TipoComando.EST) //se vado ad est
-            {
-                //setta la nuova stanzaCorrente a quella a est della stanza corrente attuale
-                if (getStanzaCorrente().getEst() != null) {
-                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
-                        setStanzaCorrente(getStanzaCorrente().getEst());
-                        movimento = true;
-                    } else {
-                        out.println("Non puoi accedere alla stanza.");
-                    }
-                } else {
-                    nienteStanza = true;
-                }
-            } 
-            else if (p.getComando().getTipo() == TipoComando.OVEST) //se vado ad ovest
-            {
-                //setta la nuova stanzaCorrente a quella ad ovest della stanza corrente attuale
-                if (getStanzaCorrente().getOvest() != null) {
-                    if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
-                        setStanzaCorrente(getStanzaCorrente().getOvest());
-                        movimento = true; 
-                    }
-                } else {
-                    nienteStanza = true;
-                }
-            } //Motra inventario
-            else if (p.getComando().getTipo() == TipoComando.INVENTARIO) {
-                out.println("Nel tuo inventario ci sono:");
-                for (Oggetto o : getInventario()) {
-                    if(!o.isInvisibile()) {
-                        out.println(o.getNome() + ": " + o.getDescrizione());
+                        spingiOggetto(oggettoInventario, inventarioGiocatore, stanzacorrente);
                     }
                 }
-                
-            } else if (p.getComando().getTipo() == TipoComando.GUARDA) {
-                if (getStanzaCorrente().getOsservazione() != null) {
-                    out.println(getStanzaCorrente().getOsservazione());
-                } else {
-                    out.println("Non c'è niente di interessante da osserva qui.");
-                }
-            } else if (p.getComando().getTipo() == TipoComando.PRENDI) {
-                if (p.getOggetto() != null) {
-                    if (p.getOggetto().isPrendibile()) {
-                        getInventario().add(p.getOggetto());
-                        getStanzaCorrente().getOggetti().remove(p.getOggetto());
-                        if (!p.getOggetto().isInvisibile()) {
-                            out.println("Hai raccolto: " + p.getOggetto().getDescrizione());
-                        }
-                    } else {
-                        out.println("Non puoi raccogliere questo oggetto.");
-                    }
-                } else {
-                    out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
-                }
-            } else if (p.getComando().getTipo() == TipoComando.APRI) {
-                /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
-                * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
-                * Potrebbe non esssere la soluzione ottimale.
-                 */
-                if (p.getOggetto() == null && p.getOggettoInventario() == null) {
-                    out.println("Non c'è niente da aprire qui.");
-                } else {
-                    if (p.getOggetto() != null) {
-                        if (p.getOggetto().isApribile() && p.getOggetto().isAperto() == false) {
-                            if (p.getOggetto() instanceof ContenitoreOggetti) {
-                                out.println("Hai aperto: " + p.getOggetto().getNome());
-                                ContenitoreOggetti c = (ContenitoreOggetti) p.getOggetto();
-                                if (!c.getList().isEmpty()) {
-                                    out.print(c.getNome() + " contiene:");
-                                    Iterator<Oggetto> it = c.getList().iterator();
-                                    
-                                    while (it.hasNext()) {
-                                        Oggetto next = it.next();
-                                        getStanzaCorrente().getOggetti().add(next);
-                                        out.print(" " + next.getNome());
-                                        it.remove();
-                                    }
-                                    out.println();
-                                }
-                                p.getOggetto().setAperto(true);
-                            } else {
-                                out.println("Hai aperto: " + p.getOggetto().getNome());
-                                p.getOggetto().setAperto(true);
-                            }
-                        } else {
-                            out.println("Non puoi aprire questo oggetto.");
-                        }
-                    }
-                    
-                    if (p.getOggettoInventario() != null) {
-                        if (p.getOggettoInventario().isApribile() && p.getOggettoInventario().isAperto() == false) {
-                            if (p.getOggettoInventario() instanceof ContenitoreOggetti) {
-                                ContenitoreOggetti c = (ContenitoreOggetti) p.getOggettoInventario();
-                                
-                                if (!c.getList().isEmpty()) {
-                                    out.print(c.getNome() + " contiene:");
-                                    Iterator<Oggetto> it = c.getList().iterator();
-                                    
-                                    while (it.hasNext()) {
-                                        Oggetto next = it.next();
-                                        getInventario().add(next);
-                                        out.print(" " + next.getNome());
-                                        it.remove();
-                                    }
-                                    out.println();
-                                }
-                                
-                                p.getOggettoInventario().setAperto(true);
-                            } else {
-                                p.getOggettoInventario().setAperto(true);
-                            }
-                            
-                            out.println("Hai aperto nel tuo inventario: " + p.getOggettoInventario().getNome());
-                        } else {
-                            out.println("Non puoi aprire questo oggetto.");
-                        }
+                case LEGGI -> {
+                    if(oggetto!= null){
+                        leggiOggetto(oggetto);
+                    }else{
+                        leggiOggetto(oggettoInventario);
                     }
                 }
-            } else if (p.getComando().getTipo() == TipoComando.SPINGI) {
-                //ricerca oggetti pushabili
-                if (p.getOggetto() != null && p.getOggetto().isSpingibile()) {
-                    out.println("Hai premuto: " + p.getOggetto().getNome());
-                    //Creare metodo più generico qui.
-                    //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
-                    if (p.getOggetto().getId() == 14) {
-                        getInventario().add(p.getOggetto());
-                        getStanzaCorrente().getOggetti().remove(p.getOggetto());
-                    }
-                } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isSpingibile()) {
-                    out.println("Hai premuto: " + p.getOggettoInventario().getNome());
-                } else {
-                    out.println("Non ci sono oggetti che puoi premere qui.");
-                }
-            } else if (p.getComando().getTipo() == TipoComando.LEGGI) {
-                if (p.getOggetto() != null && p.getOggetto().isLeggibile()) {
-                    out.print(p.getOggetto().getContenuto());
-                } else if (p.getOggettoInventario() != null && p.getOggettoInventario().isLeggibile()) {
-                    out.print(p.getOggettoInventario().getContenuto());
-                } else {
-                    out.println("Non ci sono oggetti che puoi leggere qui.");
+                default -> {
+                    return;
                 }
             }
             
-            if (nienteStanza) {
-                out.println("Da quella parte non si può andare c'è un muro!\n");
-            } else if (movimento) {
-                out.println(getStanzaCorrente().getNome());
-                out.println("================================================");
-                out.println(getStanzaCorrente().getDescrizione());
+            if (this.haAccessoAllaStanza) {
+                System.out.println(getStanzaCorrente().getNome());
+                System.out.println("================================================");
+                System.out.println(getStanzaCorrente().getDescrizione());
+            }
+            if (this.assenzaStanza) {
+                System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }
     }
+    
+    private void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
+        if (stanzacorrente.getNord() != null) {
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
+                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
+                setStanzaCorrente(stanzacorrente.getNord());
+                    this.haAccessoAllaStanza = true;
+                }else{  
+                    System.out.println("Non puoi accedere alla stanza.");
+                }    
+        }else {
+            assenzaStanza = true;
+        }
+    }
+    
+    private void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
+        if (stanzacorrente.getSud() != null) {
+             if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
+                setStanzaCorrente(stanzacorrente.getSud());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
+
+        }else {
+            assenzaStanza = true;
+        }
+    }
+    
+    private void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
+        if (stanzacorrente.getEst() != null) {
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
+                setStanzaCorrente(stanzacorrente.getEst());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
+
+        }else {
+            assenzaStanza = true;
+        }
+    }
+    
+    private void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
+        if (stanzacorrente.getOvest() != null) {
+            if(controller.checkAccessoStanza(getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
+                setStanzaCorrente(stanzacorrente.getOvest());
+                this.haAccessoAllaStanza = true;
+            }else {
+                System.out.println("Non puoi accedere alla stanza.");
+            }
+
+        } else {
+            assenzaStanza = true;
+        }
+    }
+    
+    private void printInventarioContent(List<Oggetto> inventarioGiocatore){
+        System.out.println("Nel tuo inventario ci sono:");
+                for (Oggetto o : inventarioGiocatore) {
+                    if(!o.isInvisibile()) {
+                        System.out.println(o.getNome() + ": " + o.getDescrizione());
+                    }
+                }
+    }
+    
+    private void printOsservazione(Stanza stanzaCorrente){
+    
+         if (stanzaCorrente.getOsservazione() != null) {
+                    System.out.println(stanzaCorrente.getOsservazione());
+                } else {
+                    System.out.println("Non c'è niente di interessante da osserva qui.");
+                }
+    }
+    /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
+    * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
+    * Potrebbe non esssere la soluzione ottimale.
+     */
+    private void apriOggetto(Oggetto oggetto, Oggetto oggettoInventario, Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore ){
+        if (oggetto == null && oggettoInventario == null) {
+                    System.out.println("Non c'è niente da aprire qui.");
+                } else {
+                    if (oggetto != null) {
+                        if (oggetto.isApribile() && oggetto.isAperto() == false) {
+                            if (oggetto instanceof ContenitoreOggetti) {
+                                System.out.println("Hai aperto: " + oggetto.getNome());
+                                ContenitoreOggetti c = (ContenitoreOggetti) oggetto;
+                                if (!c.getList().isEmpty()) {
+                                    System.out.print(c.getNome() + " contiene:");
+                                    Iterator<Oggetto> it = c.getList().iterator();
+                                    
+                                    while (it.hasNext()) {
+                                        Oggetto next = it.next();
+                                        stanzaCorrente.getOggetti().add(next);
+                                        System.out.print(" " + next.getNome());
+                                        it.remove();
+                                    }
+                                    System.out.println();
+                                }
+                                oggetto.setAperto(true);
+                            } else {
+                                System.out.println("Hai aperto: " + oggetto.getNome());
+                                oggetto.setAperto(true);
+                            }
+                        } else {
+                            System.out.println("Non puoi aprire questo oggetto.");
+                        }
+                    }
+                    
+                    if (oggettoInventario != null) {
+                        if (oggettoInventario.isApribile() && oggettoInventario.isAperto() == false) {
+                            if (oggettoInventario instanceof ContenitoreOggetti) {
+                                ContenitoreOggetti c = (ContenitoreOggetti) oggettoInventario;
+                                
+                                if (!c.getList().isEmpty()) {
+                                    System.out.print(c.getNome() + " contiene:");
+                                    Iterator<Oggetto> it = c.getList().iterator();
+                                    
+                                    while (it.hasNext()) {
+                                        Oggetto next = it.next();
+                                        inventarioGiocatore.add(next);
+                                        System.out.print(" " + next.getNome());
+                                        it.remove();
+                                    }
+                                    System.out.println();
+                                }
+                                
+                                oggettoInventario.setAperto(true);
+                            } else {
+                                oggettoInventario.setAperto(true);
+                            }
+                            
+                            System.out.println("Hai aperto nel tuo inventario: " + oggettoInventario.getNome());
+                        } else {
+                            System.out.println("Non puoi aprire questo oggetto.");
+                        }
+                    }
+                }
+    }
+    
+    private void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
+         if (oggetto != null) {
+                    if (oggetto.isPrendibile()) {
+                        inventarioGiocatore.add(oggetto);
+                        stanzaCorrente.getOggetti().remove(oggetto);
+                        if (!oggetto.isInvisibile()) {
+                            System.out.println("Hai raccolto: " + oggetto.getDescrizione());
+                        }
+                    } else {
+                        System.out.println("Non puoi raccogliere questo oggetto.");
+                    }
+                } else {
+                    System.out.println("\nQuesto oggetto non è presente in questa stanza,\no forse non c'è niente da raccogliere qui.");
+                }
+    }
+    
+    private void spingiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
+        if(oggetto != null){
+            if (oggetto.isSpingibile()) {
+                       System.out.println("Hai premuto: " + oggetto.getNome());
+                       //Creare metodo più generico qui.
+                       //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
+                       if (oggetto.getId() == 14) {
+                           inventarioGiocatore.add(oggetto);
+                           stanzaCorrente.getOggetti().remove(oggetto);
+                       }
+            } else {
+                System.out.println("Non ci sono oggetti che puoi premere qui.");
+            }
+        }else{
+            System.out.println("Nessun Oggetto da spingere.");
+        }
+    }
+    
+    private void leggiOggetto(Oggetto oggetto){
+        if(oggetto != null){
+            if (oggetto.isLeggibile()) {
+                    System.out.print(oggetto.getContenuto());
+
+            } else {
+                System.out.println("Non ci sono oggetti che puoi leggere qui.");
+            }
+        }else{
+            System.out.println("Nessun Oggetto da Leggere.");
+        }
+    }
+    
+    
 }

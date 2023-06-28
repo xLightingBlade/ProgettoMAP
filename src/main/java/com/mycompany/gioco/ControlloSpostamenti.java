@@ -28,5 +28,4 @@ public class ControlloSpostamenti implements Serializable{
         }
         return counterOggettiStanza == counterOggettiTrovati;
     }
-    
 }
