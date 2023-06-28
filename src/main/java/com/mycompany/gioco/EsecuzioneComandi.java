@@ -9,7 +9,6 @@ import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
-import com.mycompany.tipi.TipoComando;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +21,6 @@ import java.util.List;
 public class EsecuzioneComandi implements Serializable{
     Avventura a;
     ControlloSpostamenti controller = new ControlloSpostamenti();
-    
     
     public EsecuzioneComandi(Avventura a) {
         this.a = a;

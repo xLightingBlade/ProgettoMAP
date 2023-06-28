@@ -7,11 +7,8 @@ package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
-import com.mycompany.exception.ImgException;
 import com.mycompany.parser.ParserOutput;
-import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.Oggetto;
-import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
 import static com.mycompany.tipi.TipoComando.APRI;
@@ -25,9 +22,7 @@ import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -46,7 +41,6 @@ import java.util.Scanner;
 public class Avventura extends StrutturaGioco implements Serializable {
     private static final long serialVersionUID = -4185062833257302102L;
     
-    ControlloSpostamenti controller = new ControlloSpostamenti();
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
 
