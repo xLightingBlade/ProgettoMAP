@@ -115,11 +115,6 @@ public class Engine implements Serializable
                     System.out.println("Non capisco quello che mi vuoi dire.");
                     System.out.println();
                 }
-                else if (p.getComando() != null && p.getComando().getTipo() == TipoComando.FINE)
-                {
-                    System.out.println("Partita terminata");
-                    System.exit(0);
-                }
                 else
                 {
                     gioco.prossimaMossa(p);//avanzo con il gioco

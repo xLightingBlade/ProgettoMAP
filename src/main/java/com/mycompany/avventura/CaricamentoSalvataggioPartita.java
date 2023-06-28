@@ -30,6 +30,7 @@ public class CaricamentoSalvataggioPartita implements Serializable
             ObjectOutputStream outStream = new ObjectOutputStream(outFile);
             outStream.writeObject(partita);
             outStream.close();
+            System.out.println("Salvataggio completato");
         }
         catch(NotSerializableException ex)
         {
