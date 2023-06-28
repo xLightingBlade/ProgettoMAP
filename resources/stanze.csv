@@ -18,7 +18,7 @@ Guardando bene noti che addosso ha una torcia con delle pile.
 Andando avanti a nord si scende giù"
 7,BinariMetro,"I binari della metropolitana, c'è un problema però","La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto.
 Ad ovest sembra esserci una stanzetta."
-8,StanzaZattera,"Uno stanzino della metropolitana, completamente buio",Non si vede niente!
+8,StanzaZattera,"Uno stanzino della metropolitana, completamente buio","Tra polvere e immondizia, noti una serie di assi di legno legate assieme"
 9,IngressoOspedale,"L'ingresso del Saint Mary's Hospital, QG delle Luci", 
 10,DentroOspedale,Una stanza dentro l'ospedale..,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
 Sia ad est che ad ovest ci sono delle stanze."
@@ -31,5 +31,5 @@ Però ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta.
 Inoltre, per terra trovi un documento medico."
 14,Condotto,C'è quella che sembra una grata di un condotto dell'aria molto largo,"La grata è fermamente salda, ci sono delle viti.
 Andando ad ovest torneresti nella stanza precedente."
-15,StanzaCacciavite,Uno stanzino buio,Non si vede niente!
+15,StanzaCacciavite,Uno stanzino buio,"Una stanzetta probabilmente usata per lavori manuali. Sopra una cassa c'è ancora un cacciavite"
 16,SalaOperatoria,"La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro",Guardi bene il tavolo e.... è Ellie!

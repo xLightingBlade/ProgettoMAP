@@ -37,6 +37,8 @@ public class EsecuzioneComandi implements Serializable{
             if(oggetto.getNome().equalsIgnoreCase("torcia") && stanzacorrente.isVisibile() == false) {
                 stanzacorrente.setVisibile(true);
                 System.out.println("Hai acceso la tua torcia, adesso riesci a vedere cosa c'è nella stanza");
+            } else if(stanzacorrente.isVisibile() == false) {
+                System.out.println("La stanza è già abbastanza illuminata");
             }
         } else {
             System.out.println("Non c'è niente da accendere");
@@ -111,7 +113,11 @@ public class EsecuzioneComandi implements Serializable{
     void printOsservazione(Stanza stanzaCorrente){
     
          if (stanzaCorrente.getOsservazione() != null) {
-                    System.out.println(stanzaCorrente.getOsservazione());
+             if(stanzaCorrente.isVisibile() == true) {
+                 System.out.println(stanzaCorrente.getOsservazione());
+             } else {
+                 System.out.println("Non si vede niente!");
+             }    
                 } else {
                     System.out.println("Non c'è niente di interessante da osserva qui.");
                 }
