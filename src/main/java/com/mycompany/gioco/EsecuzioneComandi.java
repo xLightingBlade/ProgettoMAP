@@ -45,6 +45,15 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    //per ora si nasconde solo dietro la roccia
+    void nasconditi(Stanza stanzacorrente) {
+        if(stanzacorrente.getOggetti().contains(new Oggetto(11))) {
+            System.out.println("Ti sei nascosto dietro la grande roccia.");
+        } else {
+            System.out.println("Non vedi un posto dove nasconderti.");
+        }
+    }
+    
     void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getNord() != null) {
             if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
