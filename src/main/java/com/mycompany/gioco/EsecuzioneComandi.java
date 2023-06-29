@@ -202,6 +202,7 @@ public class EsecuzioneComandi implements Serializable{
         {
             if (oggetto.isPrendibile()) 
             {
+                //da migliorare
                 if(oggetto.getNome().equals("foto")) 
                 {
                     try

@@ -124,9 +124,9 @@ public class Engine implements Serializable
 
     public static void main(String[] args)           
     {
-        //Avvia di una nuova partita. Da eseguire quando l'utente schiaccia il bottone nuova partita.
+        //Avvia una nuova partita
         Engine partita = new Engine(new Avventura());
-        CaricamentoSalvataggioPartita.avviaPartita(partita);
+        partita.esegui();
     }
     
     

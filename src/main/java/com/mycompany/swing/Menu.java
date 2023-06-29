@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -24,6 +25,8 @@ public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
+     * @param pathImg
+     * @throws com.mycompany.exception.ImgException
      */
     public Menu(String pathImg) throws ImgException {
         if(CheckImg.isImage(pathImg)) {
@@ -160,12 +163,31 @@ public class Menu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_indietroButtonActionPerformed
 
+    
     private void caricaPartitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartitaButtonActionPerformed
         // qui ci sarà la chiamata al metodo per ricaricare la partita
-        dispose();
-        CaricamentoSalvataggioPartita.carica();
+        
+        switch (CaricamentoSalvataggioPartita.carica()) 
+        {    
+            //file partita salvata non trovato
+            case 1 -> JOptionPane.showMessageDialog(null, "Nessuna partita salvata. Avviare una nuova partita.", "Partita non salvata",JOptionPane.ERROR_MESSAGE);
+            
+            //file partita salvata vuoto
+            case 2 -> JOptionPane.showMessageDialog(null, "La partita salvata è vuota. Avviare una nuova partita.", "Partita salvata vuota",JOptionPane.ERROR_MESSAGE);
+                
+            //Errore nel caricamento del file della partita salvata    
+            case 3 -> JOptionPane.showMessageDialog(null, "Errore nel caricamento della partita salvata.\n Riprova oppure avvia una nuova partita.", "Errore nel caricamento della partita salvata",JOptionPane.ERROR_MESSAGE);
+        
+            //partita caricata correttamente
+            case 4 -> 
+            {
+                dispose();
+                CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+            }
+        }
     }//GEN-LAST:event_caricaPartitaButtonActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
