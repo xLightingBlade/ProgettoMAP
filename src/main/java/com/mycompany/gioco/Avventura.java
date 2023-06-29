@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+*/
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
@@ -58,6 +58,7 @@ public class Avventura extends StrutturaGioco implements Serializable {
         setStanzaCorrente(getStanze().get(0));
     }
     
+
     @Override
     //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.

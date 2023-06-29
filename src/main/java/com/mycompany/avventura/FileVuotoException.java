@@ -10,5 +10,9 @@ package com.mycompany.avventura;
  */
 public class FileVuotoException extends Exception
 {
-    
+    @Override
+    public String getMessage()
+    {
+        return "Impossibile caricare la partita. Ne hai salvata una ma è vuota.";
+    }
 }

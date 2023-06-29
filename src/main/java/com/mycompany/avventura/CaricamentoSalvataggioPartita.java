@@ -21,11 +21,15 @@ import java.io.Serializable;
  */
 public class CaricamentoSalvataggioPartita implements Serializable
 {
+    //questo attributo statico conterrà una partita salvata, oppure null se non è stata salvata nessuna partita
+    private static Engine partitaSalvata;
+            
     //permette di salvare una partita
     public static void salva(Engine partita)
     {
         try
         {
+            partitaSalvata = partita;
             FileOutputStream outFile = new FileOutputStream("user.dat");
             ObjectOutputStream outStream = new ObjectOutputStream(outFile);
             outStream.writeObject(partita);
@@ -39,28 +43,29 @@ public class CaricamentoSalvataggioPartita implements Serializable
         catch(IOException ex) 
         {
             System.out.println("Impossibile salvare la partita ora. Riprova più tardi o riavvia il gioco.");
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
     
-    //da eseguire quando l'utente schiaccia sul bottone "carica partita salvata"
-    public static boolean carica()
-    {
-        System.out.println("Caricamento partita salvata");
-        Engine partita = null;
-        
+    
+    /*
+      Questo metodo carica una partita salvata precedentemente, se presente.
+      Il metodo restituisce :
+        1 se il file user.dat non esiste
+        2 se il file user.dat è vuoto
+        3 se c'è un errore di I/O o un errore durante il casting per inserire l'oggetto letto nell'oggetto partita
+        4 se la partita salvata è stata caricata correttamente
+    */
+    public static int carica()
+    {   
         try
         {
             FileInputStream inFile = new FileInputStream("user.dat");
             ObjectInputStream inStream = new ObjectInputStream(inFile);
-            partita = (Engine) inStream.readObject();//recupera la partita creata
+            partitaSalvata = (Engine) inStream.readObject();//recupera la partita creata
             inStream.close();
-            /*
-            System.out.println(partita.getGioco().getStanzaCorrente().getNome());
-            System.out.println(partita.getGioco().getStanzaCorrente().getDescrizione());
-            */
             
-            if(partita == null)
+            if(partitaSalvata == null)
             {
                 throw new FileVuotoException();
             }
@@ -69,30 +74,30 @@ public class CaricamentoSalvataggioPartita implements Serializable
         }
         catch(FileNotFoundException fnf)
         {
-            System.out.println("Impossibile caricare la partita. Non vi è nessuna partita salvata.");
-            fnf.printStackTrace();
-            return false;
+            //fnf.printStackTrace();
+            return 1;
         }
         catch(FileVuotoException ex)
         {
-            System.out.println("Impossibile caricare la partita. Ne hai salvata una ma è vuota.");
-            ex.printStackTrace();
-            return false;
+            //ex.printStackTrace();
+            return 2;
         }
         catch(IOException | ClassNotFoundException ex) 
         {
-            System.out.println("Impossibile caricare la partita salvata. Riprova più tardi.");
-            ex.printStackTrace();
-            return false;
+            //ex.printStackTrace();
+            return 3;
         }
-        
-        avviaPartita(partita);
-        return true;
+ 
+        return 4;
     }
     
-    //Avvia una qualunque partita
-    public static void avviaPartita(Engine partita)
+    
+    //Avvia la partita salvata
+    public static void avviaPartitaSalvata()
     {
-        partita.esegui();
+        partitaSalvata.esegui();
     }
+    
+    
+    
 }
