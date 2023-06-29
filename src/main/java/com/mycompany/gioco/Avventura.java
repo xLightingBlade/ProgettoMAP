@@ -105,6 +105,7 @@ public class Avventura extends StrutturaGioco implements Serializable {
                     else
                         esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
                     }
+                case NASCONDITI -> esec.nasconditi(stanzacorrente);
                 
                 default -> {
                     return;
