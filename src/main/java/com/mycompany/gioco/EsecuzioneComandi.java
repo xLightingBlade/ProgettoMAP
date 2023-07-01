@@ -207,7 +207,7 @@ public class EsecuzioneComandi implements Serializable{
                 {
                     try
                     {
-                        ImgJFrame img = new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg","");
+                        new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg","").setVisible(true);
                         System.out.println("Stai guardando: "+oggetto.getDescrizione());
                     }
                     catch(ImgException e)

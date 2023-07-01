@@ -6,6 +6,8 @@ package com.mycompany.swing;
 import com.mycompany.exception.ImgException;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -39,6 +41,7 @@ public class ImgJFrame extends javax.swing.JFrame {
 
     
     private void myInit(ImageIcon imgIcon, String toolTipText) {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);     //DISPOSE_ON_CLOSE chiude solo il frame corrente e libera le risorse associate ad esso, ma l'esecuzione del programma continua normalmente.      
         setSize(1200, 800);
         setResizable(false);    
         setLocationRelativeTo(null);
@@ -48,7 +51,6 @@ public class ImgJFrame extends javax.swing.JFrame {
         if(!toolTipText.isEmpty())
             imgLabel.setToolTipText(toolTipText);
         getContentPane().add(imgLabel, BorderLayout.CENTER);
-        JOptionPane.showMessageDialog(null, imgIcon, "img Soggiorno", JOptionPane.PLAIN_MESSAGE);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,14 +71,15 @@ public class ImgJFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
-        try {
-            ImgJFrame img = new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg", "");
-            //img.setVisible(true);   
-        } catch (ImgException ex) {
-            Logger.getLogger(ImgJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg", "").setVisible(true);
+                } catch (ImgException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });                
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

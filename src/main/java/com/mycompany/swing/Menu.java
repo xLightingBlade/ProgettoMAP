@@ -9,6 +9,11 @@ import com.mycompany.exception.ImgException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -22,16 +27,17 @@ import javax.swing.SwingConstants;
  * @author santo
  */
 public class Menu extends javax.swing.JFrame {
-
+    OpzioniMenu sceltaUtente;
     /**
      * Creates new form Menu
      * @param pathImg
      * @throws com.mycompany.exception.ImgException
      */
-    public Menu(String pathImg) throws ImgException {
+    public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException {
         if(CheckImg.isImage(pathImg)) {
             ImageIcon imgIcon = new ImageIcon(pathImg);
             initComponents();
+            this.sceltaUtente = sceltaUtente;
             myInit(imgIcon);
         } else {
             throw new ImgException();
@@ -155,8 +161,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void avviaPartitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avviaPartitaButtonActionPerformed
+        sceltaUtente.setStatoCorrente(OpzioniMenu.Stato.AVVIA);
         dispose();
-        Engine.main(new String[0]);
     }//GEN-LAST:event_avviaPartitaButtonActionPerformed
 
     private void indietroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indietroButtonActionPerformed
@@ -181,8 +187,8 @@ public class Menu extends javax.swing.JFrame {
             //partita caricata correttamente
             case 4 -> 
             {
-                dispose();
-                CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+                    sceltaUtente.setStatoCorrente(OpzioniMenu.Stato.CARICA);
+                    dispose();                
             }
         }
     }//GEN-LAST:event_caricaPartitaButtonActionPerformed
@@ -214,17 +220,30 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
+        OpzioniMenu sceltaUtente = new OpzioniMenu();
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Menu(".//resources//img//sfondoMenuTheLastofUS.jpg").setVisible(true);
+                    new Menu(".//resources//img//sfondoMenuTheLastofUS.jpg", sceltaUtente).setVisible(true);
                 } catch (ImgException ex) {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+        
+        while(sceltaUtente.getStatoCorrente()==null) {
+        }
+        
+        switch(sceltaUtente.getStatoCorrente()) {
+            case AVVIA:  
+                Engine.main(new String[0]);
+                break;
+                
+            case CARICA: 
+                CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+                break;
+        }
     }
 
     
