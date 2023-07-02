@@ -35,7 +35,7 @@ public class BehaviourController {
                 && checkOggettoInventario(inventarioGiocatore, "forbici"));
     }
     
-    public static boolean checkOggettoInventario(List<Oggetto> inventarioGiocatore, String nomeOgg) {
+    private static boolean checkOggettoInventario(List<Oggetto> inventarioGiocatore, String nomeOgg) {
         return inventarioGiocatore.stream().anyMatch(obj -> obj.getNome().equalsIgnoreCase(nomeOgg));
     }
 }
