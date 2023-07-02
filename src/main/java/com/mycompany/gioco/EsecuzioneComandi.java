@@ -20,7 +20,6 @@ import java.util.List;
 
 public class EsecuzioneComandi implements Serializable{
     Avventura a;
-    ControlloSpostamenti controller = new ControlloSpostamenti();
     
     public EsecuzioneComandi(Avventura a) {
         this.a = a;
@@ -56,7 +55,7 @@ public class EsecuzioneComandi implements Serializable{
     
     void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getNord() != null) {
-            if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
+            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
                 //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
                 a.setStanzaCorrente(stanzacorrente.getNord());
                     a.haAccessoAllaStanza = true;
@@ -70,7 +69,7 @@ public class EsecuzioneComandi implements Serializable{
     
     void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getSud() != null) {
-             if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
+             if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
                 a.setStanzaCorrente(stanzacorrente.getSud());
                 a.haAccessoAllaStanza = true;
             }else {
@@ -84,7 +83,7 @@ public class EsecuzioneComandi implements Serializable{
     
     void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getEst() != null) {
-            if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
+            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
                 a.setStanzaCorrente(stanzacorrente.getEst());
                 a.haAccessoAllaStanza = true;
             }else {
@@ -98,7 +97,7 @@ public class EsecuzioneComandi implements Serializable{
     
     void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getOvest() != null) {
-            if(controller.checkAccessoStanza(a.getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
+            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
                 a.setStanzaCorrente(stanzacorrente.getOvest());
                 a.haAccessoAllaStanza = true;
             }else {
@@ -270,7 +269,7 @@ public class EsecuzioneComandi implements Serializable{
     }
 
     void curati(List<Oggetto> inventarioGiocatore) {
-        if (controller.controllaInventarioPerCura(inventarioGiocatore)) {
+        if (BehaviourController.controllaInventarioPerCura(inventarioGiocatore)) {
             System.out.println("Ti sei curato");
             inventarioGiocatore.remove(new Oggetto(6, "garza"));
             inventarioGiocatore.remove(new Oggetto(7, "alcol"));

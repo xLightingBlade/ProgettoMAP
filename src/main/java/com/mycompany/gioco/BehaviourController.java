@@ -14,9 +14,9 @@ import java.util.List;
  * @author gabri
  */
 
-public class ControlloSpostamenti implements Serializable {
+public class BehaviourController {
     //Questo è un metodo bello generico, può controllare in ogni stanza cosa serve avere per entrarci
-    public boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
+    public static boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
         int counterOggettiStanza = stanza.getOggettiNecessari().size();
         int counterOggettiTrovati = 0;
         for(Oggetto oggettoStanza : stanza.getOggettiNecessari()) {
@@ -29,13 +29,13 @@ public class ControlloSpostamenti implements Serializable {
         return counterOggettiStanza == counterOggettiTrovati;
     }
 
-    boolean controllaInventarioPerCura(List<Oggetto> inventarioGiocatore) {
+    public static boolean controllaInventarioPerCura(List<Oggetto> inventarioGiocatore) {
         return (checkOggettoInventario(inventarioGiocatore, "garza")
                 && checkOggettoInventario(inventarioGiocatore, "alcol")
                 && checkOggettoInventario(inventarioGiocatore, "forbici"));
     }
     
-    boolean checkOggettoInventario(List<Oggetto> inventarioGiocatore, String nomeOgg) {
+    public static boolean checkOggettoInventario(List<Oggetto> inventarioGiocatore, String nomeOgg) {
         return inventarioGiocatore.stream().anyMatch(obj -> obj.getNome().equalsIgnoreCase(nomeOgg));
     }
 }
