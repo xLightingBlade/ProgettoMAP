@@ -268,4 +268,15 @@ public class EsecuzioneComandi implements Serializable{
             System.out.println("Nessun Oggetto da Leggere.");
         }
     }
+
+    void curati(List<Oggetto> inventarioGiocatore) {
+        if (controller.controllaInventarioPerCura(inventarioGiocatore)) {
+            System.out.println("Ti sei curato");
+            inventarioGiocatore.remove(new Oggetto(6, "garza"));
+            inventarioGiocatore.remove(new Oggetto(7, "alcol"));
+            inventarioGiocatore.remove(new Oggetto(9, "forbici"));
+        } else {
+            System.out.println("Non possiedi ciò che ti serve per curarti, cerca meglio");
+        }
+    }
 }

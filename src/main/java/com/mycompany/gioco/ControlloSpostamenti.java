@@ -28,4 +28,14 @@ public class ControlloSpostamenti implements Serializable {
         }
         return counterOggettiStanza == counterOggettiTrovati;
     }
+
+    boolean controllaInventarioPerCura(List<Oggetto> inventarioGiocatore) {
+        return (checkOggettoInventario(inventarioGiocatore, "garza")
+                && checkOggettoInventario(inventarioGiocatore, "alcol")
+                && checkOggettoInventario(inventarioGiocatore, "forbici"));
+    }
+    
+    boolean checkOggettoInventario(List<Oggetto> inventarioGiocatore, String nomeOgg) {
+        return inventarioGiocatore.stream().anyMatch(obj -> obj.getNome().equalsIgnoreCase(nomeOgg));
+    }
 }
