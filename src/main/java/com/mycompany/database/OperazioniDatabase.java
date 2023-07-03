@@ -138,8 +138,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
-        //leva richiesta
-        ingressoMetro.getOggettiNecessari().add(new Oggetto(14));
+
         
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
         binariMetro.setOsservazione(osservazioni.get(7));
@@ -150,8 +149,6 @@ public class OperazioniDatabase {
         
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
-        //zattera richiesta
-        ingressoOspedale.getOggettiNecessari().add(new Oggetto(17));
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
@@ -180,16 +177,23 @@ public class OperazioniDatabase {
         salaOperatoria.setOsservazione(osservazioni.get(16));
         
         Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
+        //leva richiesta per uscire
+        uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
+        uscitaPassaggio.setOsservazione(osservazioni.get(17));
         
         Stanza uscitaMetro = new Stanza(idStanze.get(18), nomiStanze.get(18), descrizioniStanze.get(18));
+        uscitaMetro.setOsservazione(osservazioni.get(18));
+        //zattera richiesta
+        uscitaMetro.getOggettiNecessari().add(new Oggetto(17));
         
         Stanza finale = new Stanza(idStanze.get(19), nomiStanze.get(19), descrizioniStanze.get(19));
+        finale.setOsservazione(osservazioni.get(19));
         
         soggiornoCasa.setEst(bagnoCasa);
         soggiornoCasa.setSud(ripostiglioCasa);
         bagnoCasa.setOvest(soggiornoCasa);
         ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);  //Qui va fatto un check prima di farlo uscire di casa, se ha preso tutti gli oggetti
+        soggiornoCasa.setNord(corridoioPassaggio);
         corridoioPassaggio.setNord(cancello);
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
