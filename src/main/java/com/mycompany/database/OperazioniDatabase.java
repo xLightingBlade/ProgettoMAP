@@ -179,6 +179,12 @@ public class OperazioniDatabase {
         Stanza salaOperatoria = new Stanza(idStanze.get(16), nomiStanze.get(16), descrizioniStanze.get(16));
         salaOperatoria.setOsservazione(osservazioni.get(16));
         
+        Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
+        
+        Stanza uscitaMetro = new Stanza(idStanze.get(18), nomiStanze.get(18), descrizioniStanze.get(18));
+        
+        Stanza finale = new Stanza(idStanze.get(19), nomiStanze.get(19), descrizioniStanze.get(19));
+        
         soggiornoCasa.setEst(bagnoCasa);
         soggiornoCasa.setSud(ripostiglioCasa);
         bagnoCasa.setOvest(soggiornoCasa);
@@ -223,6 +229,9 @@ public class OperazioniDatabase {
         stanze.add(condotto);
         stanze.add(stanzaCacciavite);
         stanze.add(salaOperatoria);
+        stanze.add(uscitaPassaggio);
+        stanze.add(uscitaMetro);
+        stanze.add(finale);
         
     }
     

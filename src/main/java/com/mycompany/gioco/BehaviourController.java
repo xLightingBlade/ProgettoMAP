@@ -52,9 +52,48 @@ public class BehaviourController {
 
     public static void selezioneDialogoIngressoStanza(Stanza stanzaCorrente) throws FileNotFoundException {
         String filePath = null;
-        switch(stanzaCorrente.getId()) {
-            case 3 -> {
+        switch(stanzaCorrente.getNome()) {
+            case "Corridoio" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "UscitaPassaggio" -> {
+                //Questa stanza andrebbe creata al fine di visualizzare questo dialogo e poi passare direttamente alla prossima stanza
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Uscita_passaggio_segreto.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "BinariMetro" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Metropolitana_allagata.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "StanzaZattera" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Stanza_della_zattera.txt";
+                mostraDialogoStanza(filePath);
+            }
+            //anche questa stanza andrebbe creata per il dialogo
+            case "UscitaMetro" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Uscita_metropolitana.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "IngressoOspedale" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Arrivo_all_ospedale.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "DentroOspedale" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Dentro_ospedale.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "PianoSala" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Piano_della_sala_operatoria.txt";
+                mostraDialogoStanza(filePath);
+            }
+            case "SalaOperatoria" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Sala_operatoria.txt";
+                mostraDialogoStanza(filePath);
+            }
+            //creare
+            case "StanzaFinale" -> {
+                filePath = ".//the_last_of_us(storia)//Dialoghi//Dialoghi_finali.txt";
                 mostraDialogoStanza(filePath);
             }
         }
