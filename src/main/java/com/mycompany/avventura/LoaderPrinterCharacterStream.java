@@ -18,14 +18,13 @@ import java.util.List;
  */
 public class LoaderPrinterCharacterStream implements Serializable 
 {
-    private final List<String> frasi;
+    private List<String> frasi;
 
     //Costruttore
     public LoaderPrinterCharacterStream() 
     {
         this.frasi = new ArrayList<>();
     }
-    
     
     //caricamento stream di caratteri da un generico dispositivo di input
     public void carica(BufferedReader in)
