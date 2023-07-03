@@ -193,13 +193,14 @@ public class OperazioniDatabase {
         corridoioPassaggio.setNord(cancello);
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
-        cancello.setNord(ingressoMetro);            //Su questo va fatto un check se il cancello è stato aperto
+        cancello.setNord(uscitaPassaggio);            //Su questo va fatto un check se il cancello è stato aperto
+        uscitaPassaggio.setNord(ingressoMetro);
         stanzaQuadroElettrico.setOvest(cancello);
         ingressoMetro.setNord(binariMetro);
         binariMetro.setSud(ingressoMetro);
         binariMetro.setOvest(stanzaZattera);
-        binariMetro.setNord(ingressoOspedale); //Qui ci va un check se è stata presa la zattera per attraversare.
-        //Inoltre, non collego ingressoOspedale a nessuna altra stanza, per ora, siccome dovrebbe accadere un evento che in automatico ti sposta in dentroOspedale(dove si uccide marlene)
+        binariMetro.setNord(uscitaMetro);
+        uscitaMetro.setNord(ingressoOspedale);
         stanzaZattera.setEst(binariMetro);
         dentroOspedale.setOvest(magazzino);
         dentroOspedale.setEst(infermeria);
@@ -210,6 +211,7 @@ public class OperazioniDatabase {
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
         stanzaCacciavite.setEst(pianoSalaOperatoria);
         condotto.setNord(salaOperatoria);   //dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria
+        salaOperatoria.setNord(finale); //per ora, a fini di testing
         
         
         stanze.add(soggiornoCasa);
