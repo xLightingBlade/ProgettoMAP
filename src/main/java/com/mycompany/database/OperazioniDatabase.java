@@ -124,6 +124,7 @@ public class OperazioniDatabase {
         
         Stanza corridoioPassaggio = new Stanza(idStanze.get(3), nomiStanze.get(3), descrizioniStanze.get(3));
         corridoioPassaggio.setOsservazione(osservazioni.get(3));
+        //richiesti cibo, colpi, pistola e coltello
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(0));
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(1));
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(3));
@@ -137,6 +138,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
+        //leva richiesta
         ingressoMetro.getOggettiNecessari().add(new Oggetto(14));
         
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
@@ -148,6 +150,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
+        //zattera richiesta
         ingressoOspedale.getOggettiNecessari().add(new Oggetto(17));
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
@@ -158,12 +161,16 @@ public class OperazioniDatabase {
         
         Stanza infermeria = new Stanza(idStanze.get(12), nomiStanze.get(12), descrizioniStanze.get(12));
         infermeria.setOsservazione(osservazioni.get(12));
+        //tesserino richiesto
+        infermeria.getOggettiNecessari().add(new Oggetto(20));
         
         Stanza pianoSalaOperatoria = new Stanza(idStanze.get(13), nomiStanze.get(13), descrizioniStanze.get(13));
         pianoSalaOperatoria.setOsservazione(osservazioni.get(13));
         
         Stanza condotto = new Stanza(idStanze.get(14), nomiStanze.get(14), descrizioniStanze.get(14));
         condotto.setOsservazione(osservazioni.get(14));
+        //cacciavite richiesto, per la grata
+        condotto.getOggettiNecessari().add(new Oggetto(21));
         
         Stanza stanzaCacciavite = new Stanza(idStanze.get(15), nomiStanze.get(15), descrizioniStanze.get(15));
         stanzaCacciavite.setOsservazione(osservazioni.get(15));
@@ -196,7 +203,7 @@ public class OperazioniDatabase {
         condotto.setOvest(pianoSalaOperatoria);
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
         stanzaCacciavite.setEst(pianoSalaOperatoria);
-        
+        condotto.setNord(salaOperatoria);   //dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria
         
         
         stanze.add(soggiornoCasa);
@@ -390,6 +397,8 @@ public class OperazioniDatabase {
         salva.setAlias(new String[]{"salvataggio","salva partita"});
         Comando nasconditi = new Comando(TipoComando.valueOf(tipoComandi.get(13)), nomeComandi.get(13));
         nasconditi.setAlias(new String[]{});
+        Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
+        nasconditi.setAlias(new String[]{});
         
         comandi.add(nord);
         comandi.add(inventario);
@@ -405,6 +414,7 @@ public class OperazioniDatabase {
         comandi.add(accendi);
         comandi.add(salva);
         comandi.add(nasconditi);
+        comandi.add(curati);
         
         return comandi;
     }
