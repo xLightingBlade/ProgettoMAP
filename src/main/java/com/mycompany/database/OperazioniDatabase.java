@@ -413,7 +413,7 @@ public class OperazioniDatabase {
         Comando nasconditi = new Comando(TipoComando.valueOf(tipoComandi.get(13)), nomeComandi.get(13));
         nasconditi.setAlias(new String[]{});
         Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
-        nasconditi.setAlias(new String[]{});
+        curati.setAlias(new String[]{"risanati"});
         
         comandi.add(nord);
         comandi.add(inventario);

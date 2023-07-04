@@ -237,13 +237,9 @@ public class Menu extends javax.swing.JFrame {
         }
         
         switch(sceltaUtente.getStatoCorrente()) {
-            case AVVIA:  
-                Engine.main(new String[0]);
-                break;
+            case AVVIA -> Engine.main(new String[0]);
                 
-            case CARICA: 
-                CaricamentoSalvataggioPartita.avviaPartitaSalvata();
-                break;
+            case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
         }
     }
 
