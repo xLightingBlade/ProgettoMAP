@@ -6,6 +6,7 @@ package com.mycompany.swing;
 import com.mycompany.avventura.CaricamentoSalvataggioPartita;
 import com.mycompany.avventura.Engine;
 import com.mycompany.exception.ImgException;
+import com.mycompany.gioco.Avventura;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -237,9 +238,13 @@ public class Menu extends javax.swing.JFrame {
         }
         
         switch(sceltaUtente.getStatoCorrente()) {
-            case AVVIA -> Engine.main(new String[0]);
-                
-            case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+            case AVVIA: 
+                        Engine e = new Engine(new Avventura());
+                        e.esegui();
+                        break;
+            case CARICA: 
+                        CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+                        break;   
         }
     }
 
