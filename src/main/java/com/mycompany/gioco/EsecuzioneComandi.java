@@ -36,29 +36,33 @@ public class EsecuzioneComandi implements Serializable{
     }
     
     
-    //Per ora accende solo la torcia
+    //controllo se ci sono oggetti nell'inventario che possano far luce. Nel caso ce ne sia uno, lo accendo.
     void accendiQualcosa(Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
         boolean trovato = false;
         
         //se la stanza è al buio
         if(stanzaCorrente.isVisibile() == false) 
         {
-            //controllo se ci sono oggetti che possano far luce
-            for(Oggetto o: stanzaCorrente.getOggetti())
+            //se l'oggetto scritto nel comando si trova nell'inventario
+            if(inventarioGiocatore.contains(oggetto))
             {
-                if(o.isAccendibile() == true && oggetto.getNome().equalsIgnoreCase(o.getNome()))
+                //controlla se l'oggetto si può accendere
+                if(oggetto.isAccendibile())
                 {
                     trovato = true;
                     stanzaCorrente.setVisibile(true);
-                    System.out.println("Hai acceso la tua torcia, adesso riesci a vedere cosa c'è nella stanza");
+                    System.out.println("Hai acceso l'oggetto " + oggetto.getNome() + " ,adesso riesci a vedere cosa c'è nella stanza");
+                }
+                else
+                {
+                    System.out.println("Questo oggetto non può essere acceso");
                 }
             }
-
-            if(!trovato)
+            else
             {
-                System.out.println("Quest oggetto non può essere acceso");
+                System.out.println("Devi prima raccogliere questo oggetto");
             }
-        } 
+        }
         else 
         {
             System.out.println("La stanza è già abbastanza illuminata");
