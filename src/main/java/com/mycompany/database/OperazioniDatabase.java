@@ -191,6 +191,7 @@ public class OperazioniDatabase {
         
         soggiornoCasa.setEst(bagnoCasa);
         soggiornoCasa.setSud(ripostiglioCasa);
+        
         bagnoCasa.setOvest(soggiornoCasa);
         ripostiglioCasa.setNord(soggiornoCasa);
         soggiornoCasa.setNord(corridoioPassaggio);
