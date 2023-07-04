@@ -10,11 +10,6 @@ import com.mycompany.gioco.Avventura;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -238,13 +233,9 @@ public class Menu extends javax.swing.JFrame {
         }
         
         switch(sceltaUtente.getStatoCorrente()) {
-            case AVVIA: 
-                        Engine e = new Engine(new Avventura());
-                        e.esegui();
-                        break;
-            case CARICA: 
-                        CaricamentoSalvataggioPartita.avviaPartitaSalvata();
-                        break;   
+            case AVVIA -> new Engine(new Avventura()).esegui();
+                
+            case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
         }
     }
 

@@ -21,11 +21,9 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
-import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -79,55 +77,82 @@ public class Avventura extends StrutturaGioco implements Serializable {
             Oggetto oggettoInventario = p.getOggettoInventario();
             TipoComando comando = p.getComando().getTipo();
             
-            switch(comando){
+            switch(comando)
+            {
                 case NORD -> esec.checkNordAccess(stanzacorrente,inventarioGiocatore);
+                
                 case SUD -> esec.checkSudAccess( stanzacorrente,inventarioGiocatore);
+                
                 case EST -> esec.checkEstAccess(stanzacorrente, inventarioGiocatore);
+                
                 case OVEST -> esec.checkWestAccess(stanzacorrente,inventarioGiocatore);
+                
                 case INVENTARIO -> esec.printInventarioContent(inventarioGiocatore);
+                
                 case GUARDA -> esec.printOsservazione(stanzacorrente);
+                
                 case PRENDI -> esec.prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
+                
                 case APRI -> esec.apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
-                case SPINGI -> {
-                    if(oggetto!= null){
+                
+                case SPINGI -> 
+                {
+                    if(oggetto!= null)
+                    {
                         esec.spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
-                    }else{
+                    }
+                    else
+                    {
                         esec.spingiOggetto(oggettoInventario, inventarioGiocatore, stanzacorrente);
                     }
                 }
-                case LEGGI -> {
-                    if(oggetto!= null){
+                
+                case LEGGI -> 
+                {
+                    if(oggetto!= null)
+                    {
                         esec.leggiOggetto(oggetto);
-                    }else{
+                    }
+                    else
+                    {
                         esec.leggiOggetto(oggettoInventario);
                     }
                 }
                 case FINE -> esec.chiudiPartita();
-                case ACCENDI -> {
+                
+                case ACCENDI -> 
+                {
                     if(oggetto!= null)
                         esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
                     else
                         esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
-                    }
-                case NASCONDITI -> esec.nasconditi(stanzacorrente);
+                }
+                
+                case NASCONDITI -> 
+                {
+                    esec.nasconditi(stanzacorrente);
+                }
+
                 case CURATI -> esec.curati(inventarioGiocatore);
                 
-                default -> {
+                default -> 
+                {
                     return;
                 }
             }
-            if (this.haAccessoAllaStanza) {
+            
+            
+            if (this.haAccessoAllaStanza) 
+            {
                 System.out.println(getStanzaCorrente().getNome());
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
-                try {
-                    //Partenza idea per dialoghi, 2 luglio:
-                    BehaviourController.checkDialoghi(getStanzaCorrente());
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
+                //Partenza idea per dialoghi, 2 luglio:
+                BehaviourController.checkDialoghi(getStanzaCorrente());
             }
-            if (this.assenzaStanza) {
+            if (this.assenzaStanza) 
+            {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }

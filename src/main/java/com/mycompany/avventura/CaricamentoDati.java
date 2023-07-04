@@ -25,7 +25,7 @@ public class CaricamentoDati extends Thread implements Serializable
     @Override
     public void run() 
     {
-        Integer secondiAttesa = 1;
+        Integer secondiAttesa = 0;
         LoaderPrinterCharacterStream frasiIntro = new LoaderPrinterCharacterStream();
         try 
         {
@@ -41,7 +41,7 @@ public class CaricamentoDati extends Thread implements Serializable
         {
             try 
             {
-                frasiIntro.stampaAdIntervallo(System.out, secondiAttesa-1);
+                frasiIntro.stampaAdIntervallo(System.out, 0);
             } 
             catch (InterruptedException | IllegalArgumentException ex1) 
             {

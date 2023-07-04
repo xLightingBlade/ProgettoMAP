@@ -6,8 +6,7 @@ Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la por
 Andando ad ovest torneresti nel soggiorno."
 2,Ripostiglio,Un ripostiglio impolverato.,"Ci sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola e una confezione di batterie.
 Andando a nord torneresti in soggiorno."
-3,Corridoio,Un corridoio del passaggio segreto, "Noti che nel corridoio c'è una guardia che pattuglia la zona. Attorno a te c'è un grande masso dietro cui nascondersi.
-Noti dritto davanti a te, alla fine del corridoio, un cancello"
+3,Corridoio,Un corridoio del passaggio segreto, "Attorno a te c'è un grande masso dietro cui nascondersi in caso di pericolo. Dritto davanti a te, alla fine del corridoio, c'è un cancello"
 4,Cancello,"La stanza del cancello, l'uscita dalla ZQ", "Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
 Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c'è il corridoio"
 5,QuadroElettrico,Una stanza con un quadro elettrico ed una leva abbassata,"Osservi che forse qui potresti far tornare la corrente al cancello.

@@ -4,13 +4,12 @@
  */
 package com.mycompany.gioco;
 
-import com.mycompany.avventura.LoaderPrinterCharacterStream;
+import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -43,16 +42,18 @@ public class BehaviourController {
         return inventarioGiocatore.stream().anyMatch(obj -> obj.getNome().equalsIgnoreCase(nomeOgg));
     }
 
-    public static void checkDialoghi(Stanza stanzaCorrente) throws FileNotFoundException {
+    public static void checkDialoghi(Stanza stanzaCorrente){
         if(!stanzaCorrente.accessoFatto()) {
             selezioneDialogoIngressoStanza(stanzaCorrente);
             stanzaCorrente.setPrimoAccessoFatto(true);
         }
     }
 
-    public static void selezioneDialogoIngressoStanza(Stanza stanzaCorrente) throws FileNotFoundException {
+    public static void selezioneDialogoIngressoStanza(Stanza stanzaCorrente){
         String filePath = null;
+        
         switch(stanzaCorrente.getNome()) {
+            
             case "Corridoio" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt";
                 mostraDialogoStanza(filePath);
@@ -99,10 +100,31 @@ public class BehaviourController {
         }
     }
 
-    public static void mostraDialogoStanza(String filePath) throws FileNotFoundException {
-        LoaderPrinterCharacterStream streamFrasi = new LoaderPrinterCharacterStream();
-        BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
-        streamFrasi.carica(fileIn);
-        streamFrasi.stampa(System.out);
+    public static void mostraDialogoStanza(String filePath){    
+        try 
+        {
+            /*LoaderPrinterCharacterStream streamFrasi = new LoaderPrinterCharacterStream();
+            BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
+            streamFrasi.carica(fileIn);
+            streamFrasi.stampa(System.out);
+            */
+            
+            BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
+            CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
+            loader_introduzione.start();
+            loader_introduzione.join();
+        } 
+        catch(FileNotFoundException ex)
+        {
+            System.out.println("""
+                               Errore nel caricamento dati. 
+                               Riavvia il gioco.""");
+            System.exit(0);
+        } 
+        catch (InterruptedException | IllegalArgumentException ex) 
+        {
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
+        } 
     }
 }
