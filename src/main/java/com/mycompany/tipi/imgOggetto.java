@@ -10,11 +10,11 @@ import java.util.Set;
  *
  * @author santo
  */
-public class imgOggetto extends Oggetto {
-    
-    String pathImg;
+public class ImgOggetto extends Oggetto {
+        
+    private String pathImg;
 
-    public imgOggetto(int id, String nome, String descrizione, Set<String> alias, String contenuto, String relativePathImg) {
+    public ImgOggetto(int id, String nome, String descrizione, Set<String> alias, String contenuto, String relativePathImg) {
         super(id, nome, descrizione, alias, contenuto);
         this.pathImg = relativePathImg;
     }
@@ -26,4 +26,5 @@ public class imgOggetto extends Oggetto {
     public String getPathImg() {
         return this.pathImg;
     }
+    
 }
