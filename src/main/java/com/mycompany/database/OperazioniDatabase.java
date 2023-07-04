@@ -138,8 +138,7 @@ public class OperazioniDatabase {
         
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
-        //leva richiesta
-        ingressoMetro.getOggettiNecessari().add(new Oggetto(14));
+
         
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
         binariMetro.setOsservazione(osservazioni.get(7));
@@ -150,8 +149,6 @@ public class OperazioniDatabase {
         
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
-        //zattera richiesta
-        ingressoOspedale.getOggettiNecessari().add(new Oggetto(17));
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
@@ -179,21 +176,35 @@ public class OperazioniDatabase {
         Stanza salaOperatoria = new Stanza(idStanze.get(16), nomiStanze.get(16), descrizioniStanze.get(16));
         salaOperatoria.setOsservazione(osservazioni.get(16));
         
+        Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
+        //leva richiesta per uscire
+        uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
+        uscitaPassaggio.setOsservazione(osservazioni.get(17));
+        
+        Stanza uscitaMetro = new Stanza(idStanze.get(18), nomiStanze.get(18), descrizioniStanze.get(18));
+        uscitaMetro.setOsservazione(osservazioni.get(18));
+        //zattera richiesta
+        uscitaMetro.getOggettiNecessari().add(new Oggetto(17));
+        
+        Stanza finale = new Stanza(idStanze.get(19), nomiStanze.get(19), descrizioniStanze.get(19));
+        finale.setOsservazione(osservazioni.get(19));
+        
         soggiornoCasa.setEst(bagnoCasa);
         soggiornoCasa.setSud(ripostiglioCasa);
         bagnoCasa.setOvest(soggiornoCasa);
         ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);  //Qui va fatto un check prima di farlo uscire di casa, se ha preso tutti gli oggetti
+        soggiornoCasa.setNord(corridoioPassaggio);
         corridoioPassaggio.setNord(cancello);
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
-        cancello.setNord(ingressoMetro);            //Su questo va fatto un check se il cancello è stato aperto
+        cancello.setNord(uscitaPassaggio);            //Su questo va fatto un check se il cancello è stato aperto
+        uscitaPassaggio.setNord(ingressoMetro);
         stanzaQuadroElettrico.setOvest(cancello);
         ingressoMetro.setNord(binariMetro);
         binariMetro.setSud(ingressoMetro);
         binariMetro.setOvest(stanzaZattera);
-        binariMetro.setNord(ingressoOspedale); //Qui ci va un check se è stata presa la zattera per attraversare.
-        //Inoltre, non collego ingressoOspedale a nessuna altra stanza, per ora, siccome dovrebbe accadere un evento che in automatico ti sposta in dentroOspedale(dove si uccide marlene)
+        binariMetro.setNord(uscitaMetro);
+        uscitaMetro.setNord(ingressoOspedale);
         stanzaZattera.setEst(binariMetro);
         dentroOspedale.setOvest(magazzino);
         dentroOspedale.setEst(infermeria);
@@ -204,6 +215,7 @@ public class OperazioniDatabase {
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
         stanzaCacciavite.setEst(pianoSalaOperatoria);
         condotto.setNord(salaOperatoria);   //dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria
+        salaOperatoria.setNord(finale); //per ora, a fini di testing
         
         
         stanze.add(soggiornoCasa);
@@ -223,6 +235,9 @@ public class OperazioniDatabase {
         stanze.add(condotto);
         stanze.add(stanzaCacciavite);
         stanze.add(salaOperatoria);
+        stanze.add(uscitaPassaggio);
+        stanze.add(uscitaMetro);
+        stanze.add(finale);
         
     }
     
@@ -371,34 +386,48 @@ public class OperazioniDatabase {
     public static List<Comando> creaComandi() throws SQLException {
         Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
+        
         Comando inventario = new Comando(TipoComando.valueOf(tipoComandi.get(1)), nomeComandi.get(1));
         inventario.setAlias(new String[]{"inv"});
+        
         Comando sud = new Comando(TipoComando.valueOf(tipoComandi.get(2)), nomeComandi.get(2));
         sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
+        
         Comando est = new Comando(TipoComando.valueOf(tipoComandi.get(3)), nomeComandi.get(3));
         est.setAlias(new String[]{"e", "E", "Est", "EST"});
+        
         Comando ovest = new Comando(TipoComando.valueOf(tipoComandi.get(4)), nomeComandi.get(4));
         ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
+        
         Comando fine = new Comando(TipoComando.valueOf(tipoComandi.get(5)), nomeComandi.get(5));
         fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
+        
         Comando osserva = new Comando(TipoComando.valueOf(tipoComandi.get(6)), nomeComandi.get(6));
         osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
+        
         Comando prendi = new Comando(TipoComando.valueOf(tipoComandi.get(7)), nomeComandi.get(7));
         prendi.setAlias(new String[]{"prendi"});
+        
         Comando apri = new Comando(TipoComando.valueOf(tipoComandi.get(8)), nomeComandi.get(8));
         apri.setAlias(new String[]{});
+        
         Comando spingi = new Comando(TipoComando.valueOf(tipoComandi.get(9)), nomeComandi.get(9));
         spingi.setAlias(new String[]{"spingi", "attiva"});
+        
         Comando leggi = new Comando(TipoComando.valueOf(tipoComandi.get(10)), nomeComandi.get(10));
         leggi.setAlias(new String[]{"sfoglia"});
+        
         Comando accendi = new Comando(TipoComando.valueOf(tipoComandi.get(11)), nomeComandi.get(11));
         accendi.setAlias(new String[]{});
+        
         Comando salva = new Comando(TipoComando.valueOf(tipoComandi.get(12)), nomeComandi.get(12));
         salva.setAlias(new String[]{"salvataggio","salva partita"});
+        
         Comando nasconditi = new Comando(TipoComando.valueOf(tipoComandi.get(13)), nomeComandi.get(13));
         nasconditi.setAlias(new String[]{});
+        
         Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
-        nasconditi.setAlias(new String[]{});
+        curati.setAlias(new String[]{"risanati"});
         
         comandi.add(nord);
         comandi.add(inventario);

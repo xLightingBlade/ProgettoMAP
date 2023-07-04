@@ -21,8 +21,11 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
@@ -117,6 +120,12 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 System.out.println(getStanzaCorrente().getNome());
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
+                try {
+                    //Partenza idea per dialoghi, 2 luglio:
+                    BehaviourController.checkDialoghi(getStanzaCorrente());
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (this.assenzaStanza) {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");

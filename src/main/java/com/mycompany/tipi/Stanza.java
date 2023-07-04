@@ -35,6 +35,8 @@ public class Stanza implements Serializable {
 
     private Stanza ovest = null;
     
+    private boolean primoAccessoFatto = false;
+    
     
     private List<Oggetto> oggettiNecessariPerAccedere = new ArrayList<>();
     
@@ -119,6 +121,14 @@ public class Stanza implements Serializable {
 
     public List<Oggetto> getOggetti() {
         return oggetti;
+    }
+    
+    public boolean accessoFatto () {
+        return primoAccessoFatto;
+    }
+    
+    public void setPrimoAccessoFatto(boolean b) {
+        this.primoAccessoFatto = b;
     }
 
     @Override
