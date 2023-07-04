@@ -6,14 +6,10 @@ package com.mycompany.swing;
 import com.mycompany.avventura.CaricamentoSalvataggioPartita;
 import com.mycompany.avventura.Engine;
 import com.mycompany.exception.ImgException;
+import com.mycompany.gioco.Avventura;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -237,7 +233,7 @@ public class Menu extends javax.swing.JFrame {
         }
         
         switch(sceltaUtente.getStatoCorrente()) {
-            case AVVIA -> Engine.main(new String[0]);
+            case AVVIA -> new Engine(new Avventura()).esegui();
                 
             case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
         }

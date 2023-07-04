@@ -120,14 +120,6 @@ public class Engine implements Serializable
             }
         }
     }
-
-
-    public static void main(String[] args)           
-    {
-        //Avvia una nuova partita
-        Engine partita = new Engine(new Avventura());
-        partita.esegui();
-    }
     
     
     public StrutturaGioco getGioco()
