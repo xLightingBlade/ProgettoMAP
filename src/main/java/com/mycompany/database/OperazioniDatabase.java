@@ -7,6 +7,7 @@ package com.mycompany.database;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.ContenitoreOggetti;
+import com.mycompany.tipi.ImgOggetto;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
 import java.sql.Connection;
@@ -258,9 +259,10 @@ public class OperazioniDatabase {
         scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
         stanze.get(0).getOggetti().add(scatolettaCibo);
 
-        Oggetto foto = new Oggetto(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
+        ImgOggetto foto = new ImgOggetto(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
         foto.setAlias(new String[]{"immagine"});
         foto.setPrendibile(true);
+        foto.setImgPath(".//resources/img/fotoSoggiorno960x660.jpg");
         stanze.get(0).getOggetti().add(foto);
 
         ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
