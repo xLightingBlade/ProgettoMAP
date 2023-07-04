@@ -371,34 +371,48 @@ public class OperazioniDatabase {
     public static List<Comando> creaComandi() throws SQLException {
         Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
+        
         Comando inventario = new Comando(TipoComando.valueOf(tipoComandi.get(1)), nomeComandi.get(1));
         inventario.setAlias(new String[]{"inv"});
+        
         Comando sud = new Comando(TipoComando.valueOf(tipoComandi.get(2)), nomeComandi.get(2));
         sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
+        
         Comando est = new Comando(TipoComando.valueOf(tipoComandi.get(3)), nomeComandi.get(3));
         est.setAlias(new String[]{"e", "E", "Est", "EST"});
+        
         Comando ovest = new Comando(TipoComando.valueOf(tipoComandi.get(4)), nomeComandi.get(4));
         ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
+        
         Comando fine = new Comando(TipoComando.valueOf(tipoComandi.get(5)), nomeComandi.get(5));
         fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
+        
         Comando osserva = new Comando(TipoComando.valueOf(tipoComandi.get(6)), nomeComandi.get(6));
         osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
+        
         Comando prendi = new Comando(TipoComando.valueOf(tipoComandi.get(7)), nomeComandi.get(7));
         prendi.setAlias(new String[]{"prendi"});
+        
         Comando apri = new Comando(TipoComando.valueOf(tipoComandi.get(8)), nomeComandi.get(8));
         apri.setAlias(new String[]{});
+        
         Comando spingi = new Comando(TipoComando.valueOf(tipoComandi.get(9)), nomeComandi.get(9));
         spingi.setAlias(new String[]{"spingi", "attiva"});
+        
         Comando leggi = new Comando(TipoComando.valueOf(tipoComandi.get(10)), nomeComandi.get(10));
         leggi.setAlias(new String[]{"sfoglia"});
+        
         Comando accendi = new Comando(TipoComando.valueOf(tipoComandi.get(11)), nomeComandi.get(11));
         accendi.setAlias(new String[]{});
+        
         Comando salva = new Comando(TipoComando.valueOf(tipoComandi.get(12)), nomeComandi.get(12));
         salva.setAlias(new String[]{"salvataggio","salva partita"});
+        
         Comando nasconditi = new Comando(TipoComando.valueOf(tipoComandi.get(13)), nomeComandi.get(13));
-        nasconditi.setAlias(new String[]{});
+        nasconditi.setAlias(new String[]{"riparati","rifugiati"});
+        
         Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
-        nasconditi.setAlias(new String[]{});
+        curati.setAlias(new String[]{"risanati"});
         
         comandi.add(nord);
         comandi.add(inventario);

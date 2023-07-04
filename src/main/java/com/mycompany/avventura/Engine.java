@@ -91,7 +91,7 @@ public class Engine implements Serializable
         /*
         Viene preso un comando in input, viene analizzato dal parser.
         In base all'output del parser si procede con il gioco.
-        */    
+        */
         
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) 
