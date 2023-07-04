@@ -7,6 +7,7 @@ package com.mycompany.gioco;
 import com.mycompany.exception.ImgException;
 import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
+import com.mycompany.tipi.ImgOggetto;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
 import java.io.Serializable;
@@ -202,11 +203,11 @@ public class EsecuzioneComandi implements Serializable{
             if (oggetto.isPrendibile()) 
             {
                 //da migliorare
-                if(oggetto.getNome().equals("foto")) 
+                if(oggetto instanceof ImgOggetto) 
                 {
                     try
                     {
-                        new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg","").setVisible(true);
+                        new ImgJFrame(((ImgOggetto) oggetto).getPathImg()).setVisible(true);
                         System.out.println("Stai guardando: "+oggetto.getDescrizione());
                     }
                     catch(ImgException e)
@@ -221,7 +222,7 @@ public class EsecuzioneComandi implements Serializable{
                     
                 }
                 
-                if (!oggetto.isInvisibile() && !oggetto.getNome().equals("foto")) 
+                if (!oggetto.isInvisibile() && !(oggetto instanceof ImgOggetto)) 
                 {
                     System.out.println("Hai raccolto: " + oggetto.getDescrizione());
                 }
