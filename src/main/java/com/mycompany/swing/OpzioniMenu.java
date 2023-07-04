@@ -9,7 +9,7 @@ package com.mycompany.swing;
  * @author santo
  */
 public class OpzioniMenu {
-    Stato statoCorrente;
+    private Stato statoCorrente;
     
     public enum Stato {
         AVVIA,

@@ -220,6 +220,7 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
         OpzioniMenu sceltaUtente = new OpzioniMenu();
         
         java.awt.EventQueue.invokeLater(new Runnable() {
