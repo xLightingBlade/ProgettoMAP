@@ -4,11 +4,15 @@
  */
 package com.mycompany.gioco;
 
+import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.exception.ImgException;
 import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -25,33 +29,96 @@ public class EsecuzioneComandi implements Serializable{
         this.a = a;
     }
     
+    
     void chiudiPartita() {
         System.out.println("Partita terminata");
         System.exit(0);
     }
     
+    
     //Per ora accende solo la torcia
-    void accendiQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
-        if(oggetto != null){
-            if(oggetto.getNome().equalsIgnoreCase("torcia") && stanzacorrente.isVisibile() == false) {
-                stanzacorrente.setVisibile(true);
-                System.out.println("Hai acceso la tua torcia, adesso riesci a vedere cosa c'è nella stanza");
-            } else if(stanzacorrente.isVisibile() == false) {
-                System.out.println("La stanza è già abbastanza illuminata");
+    void accendiQualcosa(Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
+        boolean trovato = false;
+        
+        //se la stanza è al buio
+        if(stanzaCorrente.isVisibile() == false) 
+        {
+            //controllo se ci sono oggetti che possano far luce
+            for(Oggetto o: stanzaCorrente.getOggetti())
+            {
+                if(o.isAccendibile() == true && oggetto.getNome().equalsIgnoreCase(o.getNome()))
+                {
+                    trovato = true;
+                    stanzaCorrente.setVisibile(true);
+                    System.out.println("Hai acceso la tua torcia, adesso riesci a vedere cosa c'è nella stanza");
+                }
             }
-        } else {
-            System.out.println("Non c'è niente da accendere");
+
+            if(!trovato)
+            {
+                System.out.println("Quest oggetto non può essere acceso");
+            }
+        } 
+        else 
+        {
+            System.out.println("La stanza è già abbastanza illuminata");
         }
     }
     
+    
     //per ora si nasconde solo dietro la roccia
-    void nasconditi(Stanza stanzacorrente) {
-        if(stanzacorrente.getOggetti().contains(new Oggetto(11))) {
+    void nasconditi(Stanza stanzacorrente) 
+    {
+        if(stanzacorrente.getOggetti().contains(new Oggetto(11))) 
+        {
             System.out.println("Ti sei nascosto dietro la grande roccia.");
-        } else {
-            System.out.println("Non vedi un posto dove nasconderti.");
+            BufferedReader fileIn = null;
+            CaricamentoDati loader_introduzione = null;
+
+            try 
+            {     
+                //dialoghi dietro la roccia                    
+                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt"));
+                loader_introduzione = new CaricamentoDati(fileIn);
+                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
+
+                //usato per simulare il fatto che le guardie stanno passando.
+                //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
+                loader_introduzione.join();
+
+                //dialoghi appena le guardie sono passate                    
+                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt"));
+                loader_introduzione = new CaricamentoDati(fileIn);
+                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
+
+                //usato per simulare il fatto che le guardie sono passate.
+                loader_introduzione.join();
+            } 
+            catch(FileNotFoundException ex)
+            {
+                System.out.println("""
+                    Errore nel caricamento dati.
+                    Riavvia il gioco.""");
+                System.exit(0);
+            } 
+            catch (IllegalArgumentException ex) 
+            {
+                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+                System.exit(0);
+            } 
+            catch (InterruptedException ex)
+            {
+                System.err.println(ex);
+                System.exit(0);
+            }
+            
+        } 
+        else 
+        {
+            System.out.println("Non c'è bisogno di nascondersi qui.\n");
         }
     }
+    
     
     void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getNord() != null) {
@@ -67,6 +134,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
     void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getSud() != null) {
              if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
@@ -80,6 +148,7 @@ public class EsecuzioneComandi implements Serializable{
             a.assenzaStanza = true;
         }
     }
+    
     
     void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getEst() != null) {
@@ -95,6 +164,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
     void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getOvest() != null) {
             if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
@@ -109,6 +179,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
     void printInventarioContent(List<Oggetto> inventarioGiocatore){
         System.out.println("Nel tuo inventario ci sono:");
                 for (Oggetto o : inventarioGiocatore) {
@@ -117,6 +188,7 @@ public class EsecuzioneComandi implements Serializable{
                     }
                 }
     }
+    
     
     void printOsservazione(Stanza stanzaCorrente){
     
@@ -130,6 +202,8 @@ public class EsecuzioneComandi implements Serializable{
                     System.out.println("Non c'è niente di interessante da osserva qui.");
                 }
     }
+    
+    
     /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
     * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
     * Potrebbe non esssere la soluzione ottimale.
@@ -196,6 +270,7 @@ public class EsecuzioneComandi implements Serializable{
                 }
     }
     
+    
     void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente) {
         if (oggetto != null) 
         {
@@ -237,6 +312,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
     void spingiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
         if(oggetto != null){
             if (oggetto.isSpingibile()) {
@@ -255,6 +331,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
     void leggiOggetto(Oggetto oggetto){
         if(oggetto != null){
             if (oggetto.isLeggibile()) {
@@ -268,6 +345,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
 
+    
     void curati(List<Oggetto> inventarioGiocatore) {
         if (BehaviourController.controllaInventarioPerCura(inventarioGiocatore)) {
             System.out.println("Ti sei curato");

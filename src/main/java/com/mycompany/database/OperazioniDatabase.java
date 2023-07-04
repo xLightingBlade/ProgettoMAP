@@ -272,13 +272,17 @@ public class OperazioniDatabase {
 
         Oggetto garza = new Oggetto(idOggetti.get(6), nomiOggetti.get(6), descrizioniOggetti.get(6));
         garza.setAlias(new String[]{"garze"});        
+        
         Oggetto alcol = new Oggetto(idOggetti.get(7), nomiOggetti.get(7), descrizioniOggetti.get(7));
         alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
+        
         Oggetto forbici = new Oggetto(idOggetti.get(8), nomiOggetti.get(8), descrizioniOggetti.get(8));
         forbici.setAlias(new String[]{"forbice"});
+        
         mobileBagno.add(garza);
         mobileBagno.add(alcol);
         mobileBagno.add(forbici);
+        
         Oggetto munizioni = new Oggetto(idOggetti.get(9), nomiOggetti.get(9), descrizioniOggetti.get(9));
         munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto"});
         stanze.get(2).getOggetti().add(munizioni);
@@ -312,6 +316,7 @@ public class OperazioniDatabase {
 
         Oggetto torcia = new Oggetto(idOggetti.get(15), nomiOggetti.get(15), descrizioniOggetti.get(15));
         torcia.setAlias(new String[]{});
+        torcia.setAccendibile(true);
         stanze.get(6).getOggetti().add(torcia);
 
         Oggetto documentoMetro = new Oggetto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));

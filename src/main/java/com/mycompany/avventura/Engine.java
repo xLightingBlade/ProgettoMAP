@@ -56,7 +56,7 @@ public class Engine implements Serializable
         catch(FileNotFoundException ex)
         {
             System.out.println("""
-                               Errore nel caricamento dati. File per i dialoghi iniziali non trovato. 
+                               Errore nel caricamento dati. 
                                Riavvia il gioco.""");
             System.exit(0);
         } 
