@@ -5,7 +5,6 @@
  */
 package com.mycompany.avventura;
 
-import com.mycompany.gioco.Avventura;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.TipoComando;

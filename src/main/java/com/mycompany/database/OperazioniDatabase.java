@@ -7,8 +7,10 @@ package com.mycompany.database;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.ContenitoreOggetti;
-import com.mycompany.tipi.ImgOggetto;
+import com.mycompany.tipi.Documento;
+import com.mycompany.tipi.OggettoImmagine;
 import com.mycompany.tipi.Oggetto;
+import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,9 +40,11 @@ public class OperazioniDatabase {
     private static List<String> nomeComandi = new ArrayList<>();
     private static List<Comando> comandi = new ArrayList<>();
     
+    
     public static void connettiDatabase() throws SQLException {
         OperazioniDatabase.con = DatabaseInit.getConnection();
     }
+    
     
     public static void creaTabelle() throws SQLException {
         String query = "create table if not exists STANZE " + "(ID_STANZA int NOT NULL, " +
@@ -66,6 +70,7 @@ public class OperazioniDatabase {
             System.err.print(ex.getMessage()+ "\n");
         }
     }
+    
     
     public static void caricaDati() throws SQLException {
         String query = "select ID_STANZA, NOME, DESCRIZIONE, OSSERVA from STANZE";
@@ -113,7 +118,10 @@ public class OperazioniDatabase {
         }
     }
     
-    public static void creaStanze() {
+    
+    public static void creaStanze() 
+    {
+        //stanze casa di Joel. richiesti cibo, colpi, pistola e coltello        
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
         
@@ -121,11 +129,13 @@ public class OperazioniDatabase {
         bagnoCasa.setOsservazione(osservazioni.get(1));
         
         Stanza ripostiglioCasa = new Stanza(idStanze.get(2), nomiStanze.get(2), descrizioniStanze.get(2));
-        ripostiglioCasa.setOsservazione(osservazioni.get(2));
+        ripostiglioCasa.setOsservazione(osservazioni.get(2));       
+        //
         
+        
+        //Stanze passaggio segreto. Spingere leva per la corrente al tastierino e combinazione al tastierino per uscire       
         Stanza corridoioPassaggio = new Stanza(idStanze.get(3), nomiStanze.get(3), descrizioniStanze.get(3));
-        corridoioPassaggio.setOsservazione(osservazioni.get(3));
-        //richiesti cibo, colpi, pistola e coltello
+        corridoioPassaggio.setOsservazione(osservazioni.get(3));   
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(0));
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(1));
         corridoioPassaggio.getOggettiNecessari().add(new Oggetto(3));
@@ -137,10 +147,19 @@ public class OperazioniDatabase {
         Stanza stanzaQuadroElettrico = new Stanza(idStanze.get(5), nomiStanze.get(5), descrizioniStanze.get(5));
         stanzaQuadroElettrico.setOsservazione(osservazioni.get(5));
         
+        Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
+        uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
+        uscitaPassaggio.setOsservazione(osservazioni.get(17));      
+        //      
+        
+        /*
+        Stanze metropolitana allagata. 
+        Torcia richiesta per capire che nella stanza della zattera c'è la zattera.
+        Zattera richiesta per uscire dalla metro.
+        */    
         Stanza ingressoMetro = new Stanza(idStanze.get(6), nomiStanze.get(6), descrizioniStanze.get(6));
         ingressoMetro.setOsservazione(osservazioni.get(6));
-
-        
+       
         Stanza binariMetro = new Stanza(idStanze.get(7), nomiStanze.get(7), descrizioniStanze.get(7));
         binariMetro.setOsservazione(osservazioni.get(7));
         
@@ -148,6 +167,12 @@ public class OperazioniDatabase {
         stanzaZattera.setOsservazione(osservazioni.get(8));
         stanzaZattera.setVisibile(false);
         
+        Stanza uscitaMetro = new Stanza(idStanze.get(18), nomiStanze.get(18), descrizioniStanze.get(18));
+        uscitaMetro.setOsservazione(osservazioni.get(18));
+        uscitaMetro.getOggettiNecessari().add(new Oggetto(17));       
+        //
+        
+        //Stanze ospedale San Maries   
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
         
@@ -164,11 +189,11 @@ public class OperazioniDatabase {
         
         Stanza pianoSalaOperatoria = new Stanza(idStanze.get(13), nomiStanze.get(13), descrizioniStanze.get(13));
         pianoSalaOperatoria.setOsservazione(osservazioni.get(13));
+        pianoSalaOperatoria.getOggettiNecessari().add(new Oggetto(24));
         
+         //cacciavite richiesto per aprire il condotto e andare verso nord, nella sala operatoria.
         Stanza condotto = new Stanza(idStanze.get(14), nomiStanze.get(14), descrizioniStanze.get(14));
         condotto.setOsservazione(osservazioni.get(14));
-        //cacciavite richiesto, per la grata
-        condotto.getOggettiNecessari().add(new Oggetto(21));
         
         Stanza stanzaCacciavite = new Stanza(idStanze.get(15), nomiStanze.get(15), descrizioniStanze.get(15));
         stanzaCacciavite.setOsservazione(osservazioni.get(15));
@@ -176,48 +201,59 @@ public class OperazioniDatabase {
         
         Stanza salaOperatoria = new Stanza(idStanze.get(16), nomiStanze.get(16), descrizioniStanze.get(16));
         salaOperatoria.setOsservazione(osservazioni.get(16));
-        
-        Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
-        //leva richiesta per uscire
-        uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
-        uscitaPassaggio.setOsservazione(osservazioni.get(17));
-        
-        Stanza uscitaMetro = new Stanza(idStanze.get(18), nomiStanze.get(18), descrizioniStanze.get(18));
-        uscitaMetro.setOsservazione(osservazioni.get(18));
-        //zattera richiesta
-        uscitaMetro.getOggettiNecessari().add(new Oggetto(17));
-        
+        salaOperatoria.getOggettiNecessari().add(new Oggetto(21));
+      
         Stanza finale = new Stanza(idStanze.get(19), nomiStanze.get(19), descrizioniStanze.get(19));
-        finale.setOsservazione(osservazioni.get(19));
+        finale.setOsservazione(osservazioni.get(19));          
+        //
         
+        
+        //Setta mappa
+        
+        //casa di Joel
         soggiornoCasa.setEst(bagnoCasa);
         soggiornoCasa.setSud(ripostiglioCasa);
-        
+        soggiornoCasa.setNord(corridoioPassaggio);
         bagnoCasa.setOvest(soggiornoCasa);
         ripostiglioCasa.setNord(soggiornoCasa);
-        soggiornoCasa.setNord(corridoioPassaggio);
-        corridoioPassaggio.setNord(cancello);
+        //
+        
+        //passaggio segreto
+        corridoioPassaggio.setNord(cancello);      
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
-        cancello.setNord(uscitaPassaggio);            //Su questo va fatto un check se il cancello è stato aperto
-        uscitaPassaggio.setNord(ingressoMetro);
+        cancello.setNord(uscitaPassaggio);//Su questo va fatto un check se il cancello è stato aperto
         stanzaQuadroElettrico.setOvest(cancello);
-        ingressoMetro.setNord(binariMetro);
+        uscitaPassaggio.setNord(ingressoMetro);
+        //
+        
+        //metropolitana allagata
+        ingressoMetro.setNord(binariMetro); 
         binariMetro.setSud(ingressoMetro);
         binariMetro.setOvest(stanzaZattera);
         binariMetro.setNord(uscitaMetro);
-        uscitaMetro.setNord(ingressoOspedale);
         stanzaZattera.setEst(binariMetro);
+        uscitaMetro.setNord(ingressoOspedale);
+        //
+        
+        ingressoOspedale.setNord(dentroOspedale);
+        
+        //ospedale piano terra
         dentroOspedale.setOvest(magazzino);
         dentroOspedale.setEst(infermeria);
-        magazzino.setEst(dentroOspedale);
+        dentroOspedale.setNord(pianoSalaOperatoria);
+        magazzino.setEst(dentroOspedale);    
         infermeria.setOvest(dentroOspedale);
+        //
+        
+        //ospedale (mdificare)
         pianoSalaOperatoria.setEst(condotto);
-        condotto.setOvest(pianoSalaOperatoria);
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
+        condotto.setOvest(pianoSalaOperatoria);
+        condotto.setNord(salaOperatoria);//dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria   
         stanzaCacciavite.setEst(pianoSalaOperatoria);
-        condotto.setNord(salaOperatoria);   //dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria
         salaOperatoria.setNord(finale); //per ora, a fini di testing
+        //
         
         
         stanze.add(soggiornoCasa);
@@ -243,7 +279,9 @@ public class OperazioniDatabase {
         
     }
     
-    public static List<Stanza> creaOggetti() {
+    
+    public static List<Stanza> creaOggetti() 
+    {
         Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
         pistola.setAlias(new String[] {"arma"});
         stanze.get(0).getOggetti().add(pistola);
@@ -260,12 +298,14 @@ public class OperazioniDatabase {
         scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
         stanze.get(0).getOggetti().add(scatolettaCibo);
 
-        ImgOggetto foto = new ImgOggetto(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
+        //////////////////////////////
+        Documento foto = new OggettoImmagine(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
         foto.setAlias(new String[]{"immagine"});
         foto.setPrendibile(true);
-        foto.setImgPath(".//resources/img/fotoSoggiorno960x660.jpg");
+        foto.setPathDocumento(".//resources/img/fotoSoggiorno960x660.jpg");
         stanze.get(0).getOggetti().add(foto);
-
+        //////////////////////////////
+        
         ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
         mobileBagno.setAlias(new String[]{"mobiletto"});
         mobileBagno.setApribile(true);
@@ -322,11 +362,13 @@ public class OperazioniDatabase {
         torcia.setAccendibile(true);
         stanze.get(6).getOggetti().add(torcia);
 
+        ////////////////////////
         Oggetto documentoMetro = new Oggetto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));
         documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
         documentoMetro.setLeggibile(true);
         documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
         stanze.get(7).getOggetti().add(documentoMetro);
+        ////////////////////////
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
         zattera.setAlias(new String[]{"legno"});
@@ -335,6 +377,10 @@ public class OperazioniDatabase {
         Oggetto chiaveArmadietto = new Oggetto(idOggetti.get(18), nomiOggetti.get(18), descrizioniOggetti.get(18));
         chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
         stanze.get(10).getOggetti().add(chiaveArmadietto);
+        
+        Oggetto tesserino = new Oggetto(idOggetti.get(20), nomiOggetti.get(20), descrizioniOggetti.get(20));
+        tesserino.setAlias(new String[]{"tessera"});
+
 
         ContenitoreOggetti armadietto = new ContenitoreOggetti(idOggetti.get(19), nomiOggetti.get(19), descrizioniOggetti.get(19));
         armadietto.setAlias(new String[]{});
@@ -342,21 +388,24 @@ public class OperazioniDatabase {
         armadietto.setPrendibile(false);
         armadietto.setAperto(false);
         armadietto.add(forbici);
-        Oggetto tesserino = new Oggetto(idOggetti.get(20), nomiOggetti.get(20), descrizioniOggetti.get(20));
-        tesserino.setAlias(new String[]{"tessera"});
         armadietto.add(tesserino);
         stanze.get(11).getOggetti().add(armadietto);
+        
+        stanze.get(12).getOggetti().add(alcol);
+        stanze.get(12).getOggetti().add(garza);
 
         Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
         cacciavite.setAlias(new String[]{});
         stanze.get(15).getOggetti().add(cacciavite);
 
-        Oggetto documentoMedico = new Oggetto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
+        //////////////////////////////
+        Documento documentoMedico = new OggettoFoglietto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
         documentoMedico.setAlias(new String[]{"referto", "documento medico"});
         documentoMedico.setLeggibile(true);
         documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
         stanze.get(13).getOggetti().add(documentoMedico);
-
+        //////////////////////////////
+        
         Oggetto grata = new Oggetto(idOggetti.get(23), nomiOggetti.get(23), descrizioniOggetti.get(23));
         grata.setAlias(new String[]{});
         grata.setPrendibile(false);
@@ -364,6 +413,14 @@ public class OperazioniDatabase {
         grata.setApribile(false);
         stanze.get(14).getOggetti().add(grata);
         
+        /*
+        Oggetto curato = new Oggetto(idOggetti.get(24), nomiOggetti.get(24), descrizioniOggetti.get(24));
+        curato.setAlias(new String[]{});        
+        curato.setPrendibile(false);
+        curato.setSpingibile(false);
+        curato.setApribile(false);
+        curato.setInvisibile(true);
+        */
         oggetti.add(pistola);
         oggetti.add(coltello);
         oggetti.add(bottigliaVuota);
@@ -387,9 +444,11 @@ public class OperazioniDatabase {
         oggetti.add(cacciavite);
         oggetti.add(documentoMedico);
         oggetti.add(grata);
+        //oggetti.add(curato);
         
         return stanze;        
     }
+    
     
     public static List<Comando> creaComandi() throws SQLException {
         Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));

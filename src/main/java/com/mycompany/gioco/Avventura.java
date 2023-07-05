@@ -8,6 +8,7 @@ package com.mycompany.gioco;
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.parser.ParserOutput;
+import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.TipoComando;
 import com.mycompany.tipi.Stanza;
@@ -63,10 +64,14 @@ public class Avventura extends StrutturaGioco implements Serializable {
     @Override
     //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
-    public void prossimaMossa(ParserOutput p) {
-        if (p.getComando() == null) {
+    public void prossimaMossa(ParserOutput p) 
+    {
+        if (p.getComando() == null) 
+        {
             System.out.println("Non ho capito cosa devo fare! Prova con un altro comando.");
-        } else {
+        } 
+        else 
+        {
             EsecuzioneComandi esec = new EsecuzioneComandi(this);
             this.haAccessoAllaStanza = false;
             this.assenzaStanza = false;
@@ -150,6 +155,11 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 
                 //Partenza idea per dialoghi, 2 luglio:
                 BehaviourController.checkDialoghi(getStanzaCorrente());
+                
+                if(getStanzaCorrente().getNome().equalsIgnoreCase("IngressoOspedale"))
+                {
+                    prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
+                }
             }
             if (this.assenzaStanza) 
             {

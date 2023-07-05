@@ -5,11 +5,10 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.CaricamentoDati;
-import com.mycompany.exception.ImgException;
-import com.mycompany.swing.ImgJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
-import com.mycompany.tipi.ImgOggetto;
+import com.mycompany.tipi.OggettoImmagine;
 import com.mycompany.tipi.Oggetto;
+import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -38,7 +37,8 @@ public class EsecuzioneComandi implements Serializable{
     
     
     //controllo se ci sono oggetti nell'inventario che possano far luce. Nel caso ce ne sia uno, lo accendo.
-    void accendiQualcosa(Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
+    void accendiQualcosa(Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) 
+    {
         
         //se la stanza è al buio
         if(stanzaCorrente.isVisibile() == false) 
@@ -113,8 +113,7 @@ public class EsecuzioneComandi implements Serializable{
             {
                 System.err.println(ex);
                 System.exit(0);
-            }
-            
+            }       
         } 
         else 
         {
@@ -211,97 +210,123 @@ public class EsecuzioneComandi implements Serializable{
     * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
     * Potrebbe non esssere la soluzione ottimale.
      */
-    void apriOggetto(Oggetto oggetto, Oggetto oggettoInventario, Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore ){
-        if (oggetto == null && oggettoInventario == null) {
-                    System.out.println("Non c'è niente da aprire qui.");
-                } else {
-                    if (oggetto != null) {
-                        if (oggetto.isApribile() && oggetto.isAperto() == false) {
-                            if (oggetto instanceof ContenitoreOggetti) {
-                                System.out.println("Hai aperto: " + oggetto.getNome());
-                                ContenitoreOggetti c = (ContenitoreOggetti) oggetto;
-                                if (!c.getList().isEmpty()) {
-                                    System.out.print(c.getNome() + " contiene:");
-                                    Iterator<Oggetto> it = c.getList().iterator();
-                                    
-                                    while (it.hasNext()) {
-                                        Oggetto next = it.next();
-                                        stanzaCorrente.getOggetti().add(next);
-                                        System.out.print(" " + next.getNome());
-                                        it.remove();
-                                    }
-                                    System.out.println();
-                                }
-                                oggetto.setAperto(true);
-                            } else {
-                                System.out.println("Hai aperto: " + oggetto.getNome());
-                                oggetto.setAperto(true);
-                            }
-                        } else {
-                            System.out.println("Non puoi aprire questo oggetto.");
-                        }
-                    }
-                    
-                    if (oggettoInventario != null) {
-                        if (oggettoInventario.isApribile() && oggettoInventario.isAperto() == false) {
-                            if (oggettoInventario instanceof ContenitoreOggetti) {
-                                ContenitoreOggetti c = (ContenitoreOggetti) oggettoInventario;
-                                
-                                if (!c.getList().isEmpty()) {
-                                    System.out.print(c.getNome() + " contiene:");
-                                    Iterator<Oggetto> it = c.getList().iterator();
-                                    
-                                    while (it.hasNext()) {
-                                        Oggetto next = it.next();
-                                        inventarioGiocatore.add(next);
-                                        System.out.print(" " + next.getNome());
-                                        it.remove();
-                                    }
-                                    System.out.println();
-                                }
-                                
-                                oggettoInventario.setAperto(true);
-                            } else {
-                                oggettoInventario.setAperto(true);
-                            }
-                            
-                            System.out.println("Hai aperto nel tuo inventario: " + oggettoInventario.getNome());
-                        } else {
-                            System.out.println("Non puoi aprire questo oggetto.");
-                        }
-                    }
+    void apriOggetto(Oggetto oggetto, Oggetto oggettoInventario, Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore )
+    {
+        if (oggetto == null && oggettoInventario == null) 
+        {
+            System.out.println("Non c'è niente da aprire qui.");
+        } 
+        else 
+        {
+            if (oggetto != null) 
+            {
+                if(oggetto.getNome().equals("armadietto") && inventarioGiocatore.contains( ( new Oggetto(18))))
+                {
+                    oggetto.setApribile(true);
                 }
+                
+                if (oggetto.isApribile() && oggetto.isAperto() == false)
+                {
+                    if (oggetto instanceof ContenitoreOggetti)
+                    {
+                        System.out.println("Hai aperto: " + oggetto.getNome());
+                        ContenitoreOggetti c = (ContenitoreOggetti) oggetto;
+                        
+                        if (!c.getList().isEmpty()) 
+                        {
+                            System.out.print(c.getNome() + " contiene:");
+                            Iterator<Oggetto> it = c.getList().iterator();
+
+                            while (it.hasNext()) 
+                            {
+                                Oggetto next = it.next();
+                                stanzaCorrente.getOggetti().add(next);
+                                System.out.print(" " + next.getNome());
+                                it.remove();
+                            }
+                            System.out.println();
+                        }
+                        
+                        oggetto.setAperto(true);
+                        
+                    } 
+                    else 
+                    {
+                        System.out.println("Hai aperto: " + oggetto.getNome());
+                        oggetto.setAperto(true);
+                    }
+                } 
+                else 
+                {
+                    System.out.println("Non puoi aprire questo oggetto.");
+                }
+            }
+                    
+            if (oggettoInventario != null) 
+            {
+                if (oggettoInventario.isApribile() && oggettoInventario.isAperto() == false) 
+                {
+                    if (oggettoInventario instanceof ContenitoreOggetti)
+                    {
+                        ContenitoreOggetti c = (ContenitoreOggetti) oggettoInventario;
+
+                        if (!c.getList().isEmpty()) 
+                        {
+                            System.out.print(c.getNome() + " contiene:");
+                            Iterator<Oggetto> it = c.getList().iterator();
+
+                            while (it.hasNext()) 
+                            {
+                                Oggetto next = it.next();
+                                inventarioGiocatore.add(next);
+                                System.out.print(" " + next.getNome());
+                                it.remove();
+                            }
+                            System.out.println();
+                        }
+
+                        oggettoInventario.setAperto(true);
+
+                    } 
+                    else 
+                    {
+                        oggettoInventario.setAperto(true);
+                    }
+
+                    System.out.println("Hai aperto nel tuo inventario: " + oggettoInventario.getNome());
+                } 
+                else 
+                {
+                    System.out.println("Non puoi aprire questo oggetto.");
+                }
+            }
+        }
     }
     
     
-    void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente) {
+    void prendiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente) 
+    {
         if (oggetto != null) 
         {
             if (oggetto.isPrendibile()) 
             {
-                //da migliorare
-                if(oggetto instanceof ImgOggetto) 
+                //se l'oggetto
+                if(oggetto instanceof OggettoImmagine) 
                 {
-                    try
-                    {
-                        new ImgJFrame(((ImgOggetto) oggetto).getPathImg()).setVisible(true);
-                        System.out.println("Stai guardando: "+oggetto.getDescrizione());
-                    }
-                    catch(ImgException e)
-                    {
-                        System.out.println(e.getMessage());
-                    }
+                    ((OggettoImmagine) oggetto).visualizza();
+                    System.out.println("Stai guardando: "+oggetto.getDescrizione());
+                    
+                }
+                else if(oggetto instanceof OggettoFoglietto)
+                {
+                    ((OggettoFoglietto) oggetto).visualizza();
+                    System.out.println("Stai guardando: " + oggetto.getDescrizione());
                 }
                 else
                 {
+                    System.out.println("Hai raccolto: " + oggetto.getDescrizione());
                     inventarioGiocatore.add(oggetto);
                     stanzaCorrente.getOggetti().remove(oggetto);
-                    
-                }
-                
-                if (!oggetto.isInvisibile() && !(oggetto instanceof ImgOggetto)) 
-                {
-                    System.out.println("Hai raccolto: " + oggetto.getDescrizione());
                 }
             }
             else 
@@ -349,12 +374,25 @@ public class EsecuzioneComandi implements Serializable{
     }
 
     
-    void curati(List<Oggetto> inventarioGiocatore) {
-        if (BehaviourController.controllaInventarioPerCura(inventarioGiocatore)) {
+    void curati(List<Oggetto> inventarioGiocatore) 
+    {
+        if (BehaviourController.controllaInventarioPerCura(inventarioGiocatore))
+        {
             System.out.println("Ti sei curato");
             inventarioGiocatore.remove(new Oggetto(6, "garza"));
             inventarioGiocatore.remove(new Oggetto(7, "alcol"));
-        } else {
+            
+            //Questo oggetto serve per indicare che joel si è curato
+            Oggetto curato = new Oggetto(24, "curato");
+            curato.setAlias(new String[]{"salute"});        
+            curato.setPrendibile(false);
+            curato.setSpingibile(false);
+            curato.setApribile(false);
+            curato.setInvisibile(true);
+            inventarioGiocatore.add(curato);          
+        } 
+        else 
+        {
             System.out.println("Non possiedi ciò che ti serve per curarti, cerca meglio");
         }
     }

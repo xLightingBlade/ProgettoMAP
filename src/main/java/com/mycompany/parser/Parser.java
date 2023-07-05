@@ -56,6 +56,8 @@ public class Parser implements Serializable
     {
         for (int i = 0; i < oggetti.size(); i++) 
         {
+            //System.out.println(oggetti.get(i).getNome() + " : "  + oggetti.get(i).getAlias());
+            
             if (oggetti.get(i).getNome().equals(token) || oggetti.get(i).getAlias().contains(token)) 
             {
                 return i;
@@ -70,7 +72,7 @@ public class Parser implements Serializable
     * rimossi.
      */
     public ParserOutput parse(String comando, List<Comando> comandi, List<Oggetto> oggetti_stanza_corrente, List<Oggetto> inventario) 
-    {
+    {       
         //Il comando dell'utente viene suddiviso in token(cioè le parole separate da spazio nel comando originale).
         //Il comando suddiviso in token viene ripulito dalle stopwords avendo così una lista di token priva di stopwords 
         List<String> tokens = Utils.parseString(comando, stopwords);

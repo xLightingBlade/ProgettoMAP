@@ -58,57 +58,52 @@ public class BehaviourController {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "UscitaPassaggio" -> {
+            case "Uscita Passaggio" -> {
                 //Questa stanza andrebbe creata al fine di visualizzare questo dialogo e poi passare direttamente alla prossima stanza
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Uscita_passaggio_segreto.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "BinariMetro" -> {
+            case "Ingresso Metro" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Metropolitana_allagata.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "StanzaZattera" -> {
+            case "Stanza Zattera" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Stanza_della_zattera.txt";
                 mostraDialogoStanza(filePath);
             }
             //anche questa stanza andrebbe creata per il dialogo
-            case "UscitaMetro" -> {
+            case "Uscita Metro" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Uscita_metropolitana.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "IngressoOspedale" -> {
+            case "Ingresso Ospedale" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Arrivo_all_ospedale.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "DentroOspedale" -> {
+            case "Dentro Ospedale" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Dentro_ospedale.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "PianoSala" -> {
+            case "Piano Sala" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Piano_della_sala_operatoria.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "SalaOperatoria" -> {
+            case "Sala Operatoria" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Sala_operatoria.txt";
                 mostraDialogoStanza(filePath);
             }
             //creare
-            case "StanzaFinale" -> {
+            case "Salt Lake City, Utah" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Dialoghi_finali.txt";
                 mostraDialogoStanza(filePath);
             }
         }
     }
 
-    public static void mostraDialogoStanza(String filePath){    
+    public static void mostraDialogoStanza(String filePath)
+    {    
         try 
         {
-            /*LoaderPrinterCharacterStream streamFrasi = new LoaderPrinterCharacterStream();
-            BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
-            streamFrasi.carica(fileIn);
-            streamFrasi.stampa(System.out);
-            */
-            
             BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
             CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
             loader_introduzione.start();
