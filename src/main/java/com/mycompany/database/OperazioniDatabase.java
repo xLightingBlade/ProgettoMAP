@@ -422,6 +422,7 @@ public class OperazioniDatabase {
         curato.setInvisibile(true);
         
         Oggetto fittizio = new Oggetto(idOggetti.get(25), nomiOggetti.get(25), descrizioniOggetti.get(25));
+        fittizio.setInvisibile(true);
         
         oggetti.add(pistola);
         oggetti.add(coltello);
