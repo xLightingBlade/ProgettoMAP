@@ -131,7 +131,9 @@ public class TastierinoJFrame extends javax.swing.JFrame {
             if(errore)
                 JOptionPane.showMessageDialog(null, "La combinazione non è corretta", "COMBINAZIONE ERRATA", JOptionPane.ERROR_MESSAGE);
         } catch(NumberFormatException ex) { 
-            JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre. "+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            int startIndex = ex.getMessage().indexOf("\"")+1;
+            int lastIndex = ex.getMessage().lastIndexOf("\"");
+            JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre, "+ex.getMessage().substring(startIndex, lastIndex)+" non sembra essere una cifra !!", "Error", JOptionPane.ERROR_MESSAGE);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
