@@ -44,6 +44,8 @@ public class Oggetto implements Serializable {
     private boolean invisibile = false;
     
     private boolean accendibile = false;
+    
+    private boolean usabile = false;
 
     
     //Costruttori
@@ -212,6 +214,14 @@ public class Oggetto implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public boolean isUsabile() {
+        return this.usabile;
+    }
+
+    public void setUsabile(boolean b) {
+        this.usabile = b;
     }
 
 }

@@ -350,6 +350,11 @@ public class EsecuzioneComandi implements Serializable{
                        if (oggetto.getId() == 14) {
                            inventarioGiocatore.add(oggetto);
                            stanzaCorrente.getOggetti().remove(oggetto);
+                           for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) {
+                               if (o.getNome().equalsIgnoreCase("tastierino")) {
+                                   o.setUsabile(true);
+                               }
+                           }
                        }
             } else {
                 System.out.println("Non ci sono oggetti che puoi premere qui.");
@@ -394,6 +399,18 @@ public class EsecuzioneComandi implements Serializable{
         else 
         {
             System.out.println("Non possiedi ciò che ti serve per curarti, cerca meglio");
+        }
+    }
+
+    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
+        if(oggetto != null) {
+            if(oggetto.isUsabile()) {
+                switch(oggetto.getId()) {
+                    case 12 -> {
+                        //metodo per usare il tastierino e controllare che abbia messo le cifre giuste
+                    }
+                }
+            }
         }
     }
 }

@@ -149,6 +149,7 @@ public class OperazioniDatabase {
         
         Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
+        uscitaPassaggio.getOggettiNecessari().add(new Oggetto(25));
         uscitaPassaggio.setOsservazione(osservazioni.get(17));      
         //      
         
@@ -413,14 +414,15 @@ public class OperazioniDatabase {
         grata.setApribile(false);
         stanze.get(14).getOggetti().add(grata);
         
-        /*
         Oggetto curato = new Oggetto(idOggetti.get(24), nomiOggetti.get(24), descrizioniOggetti.get(24));
         curato.setAlias(new String[]{});        
         curato.setPrendibile(false);
         curato.setSpingibile(false);
         curato.setApribile(false);
         curato.setInvisibile(true);
-        */
+        
+        Oggetto fittizio = new Oggetto(idOggetti.get(25), nomiOggetti.get(25), descrizioniOggetti.get(25));
+        
         oggetti.add(pistola);
         oggetti.add(coltello);
         oggetti.add(bottigliaVuota);
@@ -444,7 +446,8 @@ public class OperazioniDatabase {
         oggetti.add(cacciavite);
         oggetti.add(documentoMedico);
         oggetti.add(grata);
-        //oggetti.add(curato);
+        oggetti.add(curato);
+        oggetti.add(fittizio);
         
         return stanze;        
     }
@@ -496,6 +499,9 @@ public class OperazioniDatabase {
         Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
         curati.setAlias(new String[]{"risanati"});
         
+        Comando usa = new Comando(TipoComando.valueOf(tipoComandi.get(15)), nomeComandi.get(15));
+        usa.setAlias(new String[]{});
+        
         comandi.add(nord);
         comandi.add(inventario);
         comandi.add(sud);
@@ -511,6 +517,7 @@ public class OperazioniDatabase {
         comandi.add(salva);
         comandi.add(nasconditi);
         comandi.add(curati);
+        comandi.add(usa);
         
         return comandi;
     }

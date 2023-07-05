@@ -140,6 +140,14 @@ public class Avventura extends StrutturaGioco implements Serializable {
 
                 case CURATI -> esec.curati(inventarioGiocatore);
                 
+                case USA -> {
+                    if(oggetto!= null){
+                        esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                    } else {
+                        esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                    }
+                }
+                
                 default -> 
                 {
                     return;
