@@ -17,7 +17,7 @@
 	STANZA 1) = Corridio del passaggio segreto, 
 	OGGETTI   = nascondigli(rocce o casse), guardie
 	
-	STANZA 2) = Uscita
+	STANZA 2) = Cancello
 	OGGETTI   = tastierino per aprire il cancello
 
 	STANZA 3) = Stanza del quadro elettrico
@@ -53,7 +53,7 @@
 	STANZA 2) = Magazzino
 	OGGETTI   = forbici, armadietto chiuso a chiave(con dentro il tesserino)
 
-	STANZA 3) = reparto di medicina generale
+	STANZA 3) = infermeria
 	OGGETTI   = alcool e garze
 
 	NOTA: "per curarsi Joel deve avere garze, alcool e forbici così

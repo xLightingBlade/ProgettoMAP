@@ -9,29 +9,30 @@ Andando a nord torneresti in soggiorno."
 3,Corridoio,Un corridoio del passaggio segreto, "Attorno a te c'è un grande masso dietro cui nascondersi in caso di pericolo. Dritto davanti a te, alla fine del corridoio, c'è un cancello"
 4,Cancello,"La stanza del cancello, l'uscita dalla ZQ", "Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
 Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c'è il corridoio"
-5,QuadroElettrico,Una stanza con un quadro elettrico ed una leva abbassata,"Osservi che forse qui potresti far tornare la corrente al cancello.
+5,"Quadro Elettrico",Una stanza con un quadro elettrico ed una leva abbassata,"Osservi che forse qui potresti far tornare la corrente al cancello.
 Ma non è tutto, perchè guardando bene noti che attaccato alla parete superiore del quadro elettrico, quasi nascosto, c'è un foglietto con una scritta.
 Andando ad ovest torneresti al cancello."
-6,IngressoMetro,"L'ingresso della metropolitana","Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso... 
+6,"Ingresso Metro","L'ingresso della metropolitana","Noti il corpo esanime di una guardia, ormai consumato dal tempo. Sembra avere qualcosa addosso... 
 Guardando bene noti che addosso ha una torcia con delle pile.
 Andando avanti a nord si scende giù"
-7,BinariMetro,"I binari della metropolitana, c'è un problema però","La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto.
-Ad ovest sembra esserci una stanzetta."
-8,StanzaZattera,"Uno stanzino della metropolitana, completamente buio","Tra polvere e immondizia, noti una serie di assi di legno legate assieme"
-9,IngressoOspedale,"L'ingresso del Saint Mary's Hospital, QG delle Luci", 
-10,DentroOspedale,Una stanza dentro l'ospedale..,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
-Sia ad est che ad ovest ci sono delle stanze."
+7,"Binari Metro","I binari della metropolitana, c'è un problema però","La metropolitana è completamente allagata e l'acqua ti arriva ad altezza petto.
+Ad ovest sembra esserci una stanzetta. Andando a nord c'è l'uscita."
+8,"Stanza Zattera","Uno stanzino della metropolitana, completamente buio","Tra polvere e immondizia, noti una serie di assi di legno legate assieme. Andando ad est torni ai binari della metro."
+9,"Ingresso Ospedale","L'ingresso del Saint Mary's Hospital, QG delle Luci", 
+10,"Dentro Ospedale",Una stanza dentro l'ospedale..,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
+Ad est c'è l'infermeria e ad ovest c'è un magazzino e a nord c'è l'ascensore per il piano della sala operatoria."
 11,Magazzino,Una stanza usata come magazzino,"Noti un armadietto chiuso a chiave, appoggiato ad una parete.
 Andando ad est torneresti nella stanza precedente."
-12,Infermeria,Un infermeria un po' spoglia, "Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti.Ci trovi solamente una bottiglia d'alcol e delle garze.
+12,Infermeria,"Un infermeria, ottimo posto per trovare medicinali", "Ci sono due tavoli e uno scaffale, ma sono praticamente vuoti. Ci trovi solamente una bottiglia d'alcol e delle garze.
 Andando ad ovest torneresti nella stanza precedente."
-13,PianoSala,Il piano dell'ospedale dove c'è la sala operatoria,"Davanti a te c'è un corridoio con una guardia ben armata, non c'è modo di attraversarlo senza farsi vedere.
-Però ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta.
+13,"Piano Sala",Il piano della sala operatoria,"Davanti a te c'è un corridoio pieno di guardie armate, non c'è modo di attraversarlo senza farsi vedere.
+Ad est c'è qualcosa di interessante, mentre ad ovest una stanzina aperta.
 Inoltre, per terra trovi un documento medico."
-14,Condotto,C'è quella che sembra una grata di un condotto dell'aria molto largo,"La grata è fermamente salda, ci sono delle viti.
-Andando ad ovest torneresti nella stanza precedente."
-15,StanzaCacciavite,Uno stanzino buio,"Una stanzetta probabilmente usata per lavori manuali. Sopra una cassa c'è ancora un cacciavite"
-16,SalaOperatoria,"La sala operatoria, c'è un tavolo operatorio e dei dottori al lavoro",Guardi bene il tavolo e.... è Ellie!
-17,UscitaPassaggio,"L'uscita dalla ZQ","Non c'è niente di rilevante"
-18,UscitaMetro,"Una cittadina appena fuori dalla metropolitana","Non c'è niente di rilevante"
-19,StanzaFinale,"L'auto di Joel"," "
+14,"Sistema di ventilazione",C'è quella che sembra una grata di un condotto dell'aria molto largo,"La grata è fermamente salda, ci sono delle viti.
+Andando ad ovest torneresti nella stanza precedente e andando a nord entreresti nel condotto."
+15,"Sala Attrezzi",Uno stanzino buio,"Una stanzetta probabilmente usata per lavori manuali alla struttura.
+Sopra una cassa c'è ancora un cacciavite. Ad est torni nella stanza precedente."
+16,"Sala Operatoria","La sala operatoria.","Nord per proseguire"
+17,"Uscita Passaggio","L'uscita dalla ZQ","Ellie e Joel devono fuggire dall esercito. Prosegui verso nord."
+18,"Uscita Metro","Una cittadina appena fuori dalla metropolitana","Andando a nord si prosegue."
+19,"Salt Lake City, Utah","Joel ed Ellie sono in auto"," "
