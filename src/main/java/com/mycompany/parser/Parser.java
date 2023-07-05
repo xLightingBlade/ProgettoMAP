@@ -55,9 +55,7 @@ public class Parser implements Serializable
     private int checkOggetto(String token, List<Oggetto> oggetti) 
     {
         for (int i = 0; i < oggetti.size(); i++) 
-        {
-            //System.out.println(oggetti.get(i).getNome() + " : "  + oggetti.get(i).getAlias());
-            
+        {   
             if (oggetti.get(i).getNome().equals(token) || oggetti.get(i).getAlias().contains(token)) 
             {
                 return i;

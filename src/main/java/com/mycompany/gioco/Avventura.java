@@ -149,14 +149,19 @@ public class Avventura extends StrutturaGioco implements Serializable {
             
             if (this.haAccessoAllaStanza) 
             {
+                System.out.println();
                 System.out.println(getStanzaCorrente().getNome());
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
-                
-                //Partenza idea per dialoghi, 2 luglio:
+                System.out.println();
+              
                 BehaviourController.checkDialoghi(getStanzaCorrente());
                 
-                if(getStanzaCorrente().getNome().equalsIgnoreCase("IngressoOspedale"))
+                if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
+                {
+                    prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
+                }
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Sala Operatoria"))
                 {
                     prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
                 }
