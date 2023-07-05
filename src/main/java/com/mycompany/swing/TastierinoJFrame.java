@@ -3,36 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.swing;
-
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author santo
  */
-public class EnigmaFrame extends javax.swing.JFrame {
-
+public class TastierinoJFrame extends javax.swing.JFrame {
+    private int num1;
+    private int num2;
+    private int num3;
     /**
-     * Creates new form EnigmaFrame
+     * Questi 3 parametri indicano le 3 cifre che l'utente dovrà indovinare.
+     * @param num1,
+     * @param num2,
+     * @param num3,
      */
-    public EnigmaFrame() {
+    public TastierinoJFrame(int num1, int num2, int num3) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.num3 = num3;
+        System.out.println(this.num1+" "+this.num2+" "+this.num3);
         initComponents();
         myInit();
     }
     
-    
     private void myInit() {
-        setSize(600, 400);
+        setTitle("QUELLA ZOCCOLONA DI TUA SORELLA");
         setResizable(false);    // non è possibile ridimensionare il frame
         setLocationRelativeTo(null);  // il frame appare al centro del desktop, quindi non bisogna trascinarlo al centro con il cursore
- 
-        jTextArea1.setText("Un lucchetto ti ostacola, la combinazione è sconosciuta\n"
-                + "Tre cifre dovrai trovare per aprire questa porta.\n\n"
-                + "Ascolta attentamente...\nquesti tre indizi ti diranno la sequenza corretta che dovrai indovinare:\n"
-                + "1. La somma delle tre cifre è 12\n"
-                + "2. Il primo numero è la metà del secondo\n"
-                + "3. La differenza tra il primo numero ed il terzo è 4.\n"
-                + "(sono cifre comprese tra 0 e 9)");    
-    
+
     }
 
     /**
@@ -44,19 +44,13 @@ public class EnigmaFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField1.setToolTipText("1° cifra");
 
@@ -72,38 +66,40 @@ public class EnigmaFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Inserire la combinazione per sbloccare il lucchetto.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(106, 106, 106)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(130, 130, 130)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -112,13 +108,13 @@ public class EnigmaFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean errore = false;
         try{
-            Double number1 = Double.parseDouble(jTextField1.getText()); // restituisce il testo che sta attualmente nella textFiled e lo trasforma in un double            
-            Double number2 = Double.parseDouble(jTextField2.getText());
-            Double number3 = Double.parseDouble(jTextField3.getText());
-      
-            if (number1.equals(4.0)) {
-                if(number2.equals(8.0)) {   
-                    if ( number3.equals(0.0)) {
+            Integer numberTextField1 = (int) Double.parseDouble(jTextField1.getText()); // restituisce il testo che sta attualmente nella textFiled e lo trasforma in un double            
+            Integer numberTextField2 = (int) Double.parseDouble(jTextField2.getText());
+            Integer numberTextField3 = (int) Double.parseDouble(jTextField3.getText());
+            
+            if (numberTextField1.equals(this.num1)) {
+                if(numberTextField2.equals(this.num2)) {   
+                    if ( numberTextField3.equals(this.num3)) {
                         // qui sicuramente sarà da settare un flag a true che verrà passato dalla stanza in cui is trova il giocatore ad indicare
                         // che ha sbloccato il passaggio
                         JOptionPane.showMessageDialog(null, "Bravissimo, la combinazione è giusta", "COMBINAZIONE CORRETTA", JOptionPane.INFORMATION_MESSAGE);
@@ -131,13 +127,12 @@ public class EnigmaFrame extends javax.swing.JFrame {
                 }
             } else {
                 errore = true;
-            }
-            
+            }           
             if(errore)
                 JOptionPane.showMessageDialog(null, "La combinazione non è corretta", "COMBINAZIONE ERRATA", JOptionPane.ERROR_MESSAGE);
         } catch(NumberFormatException ex) { 
             JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre. "+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -157,28 +152,28 @@ public class EnigmaFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EnigmaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TastierinoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EnigmaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TastierinoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EnigmaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TastierinoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EnigmaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TastierinoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EnigmaFrame().setVisible(true);
+                new TastierinoJFrame(4, 8, 0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
