@@ -56,7 +56,7 @@ public class Engine implements Serializable
         catch(FileNotFoundException ex)
         {
             System.out.println("""
-                               Errore nel caricamento dati. File per i dialoghi iniziali non trovato. 
+                               Errore nel caricamento dati. 
                                Riavvia il gioco.""");
             System.exit(0);
         } 
@@ -119,14 +119,6 @@ public class Engine implements Serializable
                 gioco.prossimaMossa(p);//avanzo con il gioco
             }
         }
-    }
-
-
-    public static void main(String[] args)           
-    {
-        //Avvia una nuova partita
-        Engine partita = new Engine(new Avventura());
-        partita.esegui();
     }
     
     

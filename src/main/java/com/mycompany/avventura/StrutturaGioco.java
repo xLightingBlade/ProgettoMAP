@@ -9,7 +9,6 @@ import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Stanza;
-import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

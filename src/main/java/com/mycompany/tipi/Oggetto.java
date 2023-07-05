@@ -42,6 +42,8 @@ public class Oggetto implements Serializable {
     private boolean spinto = false;
     
     private boolean invisibile = false;
+    
+    private boolean accendibile = false;
 
     
     //Costruttori
@@ -177,6 +179,14 @@ public class Oggetto implements Serializable {
 
     public int getId() {
         return id;
+    }
+    
+    public boolean isAccendibile() {
+        return accendibile;
+    }
+
+    public void setAccendibile(boolean accendibile) {
+        this.accendibile = accendibile;
     }
 
     @Override

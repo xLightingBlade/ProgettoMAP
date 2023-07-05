@@ -318,13 +318,9 @@ public class Menu extends javax.swing.JFrame {
         }
         
         switch(sceltaUtente.getStatoCorrente()) {
-            case AVVIA: 
-                        Engine e = new Engine(new Avventura());
-                        e.esegui();
-                        break;
-            case CARICA: 
-                        CaricamentoSalvataggioPartita.avviaPartitaSalvata();
-                        break;   
+            case AVVIA -> new Engine(new Avventura()).esegui();
+                
+            case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
         }
     }
 
