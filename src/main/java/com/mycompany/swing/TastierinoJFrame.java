@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.swing;
+import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +14,16 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     private int num1;
     private int num2;
     private int num3;
+    private static boolean corretto = false;
+    private static boolean aperto = true;
+    
+    public static boolean isCorretto() {
+        return TastierinoJFrame.corretto;
+    }
+    
+    public static boolean isAperto() {
+        return TastierinoJFrame.aperto;
+    }
     /**
      * Questi 3 parametri indicano le 3 cifre che l'utente dovrà indovinare.
      * @param num1,
@@ -51,6 +62,11 @@ public class TastierinoJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jTextField1.setToolTipText("1° cifra");
 
@@ -104,7 +120,7 @@ public class TastierinoJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean errore = false;
         try{
@@ -115,10 +131,10 @@ public class TastierinoJFrame extends javax.swing.JFrame {
             if (numberTextField1.equals(this.num1)) {
                 if(numberTextField2.equals(this.num2)) {   
                     if ( numberTextField3.equals(this.num3)) {
-                        // qui sicuramente sarà da settare un flag a true che verrà passato dalla stanza in cui is trova il giocatore ad indicare
-                        // che ha sbloccato il passaggio
+                        TastierinoJFrame.corretto = true;
                         JOptionPane.showMessageDialog(null, "Bravissimo, la combinazione è giusta", "COMBINAZIONE CORRETTA", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
+                        TastierinoJFrame.aperto = false;
                     } else {
                         errore = true;
                     }
@@ -136,6 +152,10 @@ public class TastierinoJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre, "+ex.getMessage().substring(startIndex, lastIndex)+" non sembra essere una cifra !!", "Error", JOptionPane.ERROR_MESSAGE);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        TastierinoJFrame.aperto = false;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

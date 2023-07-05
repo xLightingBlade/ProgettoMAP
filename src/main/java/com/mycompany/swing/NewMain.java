@@ -9,7 +9,7 @@ package com.mycompany.swing;
  * @author santo
  */
 public class NewMain {
-
+    
     /**
      * @param args the command line arguments
      */

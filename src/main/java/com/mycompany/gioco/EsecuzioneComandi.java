@@ -5,6 +5,8 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.CaricamentoDati;
+import com.mycompany.swing.NewMain;
+import com.mycompany.swing.TastierinoJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.OggettoImmagine;
 import com.mycompany.tipi.Oggetto;
@@ -402,15 +404,28 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
 
-    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) {
+    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException {
         if(oggetto != null) {
             if(oggetto.isUsabile()) {
                 switch(oggetto.getId()) {
                     case 12 -> {
-                        //metodo per usare il tastierino e controllare che abbia messo le cifre giuste
+                        if(usaTastierino()) {
+                            inventarioGiocatore.add(new Oggetto(25));
+                            System.out.println("ok");
+                        } else {
+                            System.out.println("Nope");
+                        }
                     }
                 }
             }
         }
+    }
+
+    private boolean usaTastierino() throws InterruptedException {
+        TastierinoJFrame.main(new String[0]);
+        while(TastierinoJFrame.isAperto()) {
+            Thread.sleep(1000);
+        }
+        return TastierinoJFrame.isCorretto();
     }
 }
