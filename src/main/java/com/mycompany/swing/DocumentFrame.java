@@ -28,14 +28,14 @@ public class DocumentFrame extends JFrame
     {
         super(title);
         //System.out.println("Sono entrato nel costruttore");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(900,500);         
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.BLACK);
         
 
-        String processText = text.replaceAll("[.;]", "$0<br>");
+        String processText = text.replaceAll("[.;:]", "$0<br>");
         
         textLabel = new JLabel("<html>"+processText+"</html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
