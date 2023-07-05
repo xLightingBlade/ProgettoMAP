@@ -51,7 +51,7 @@ public class DocumentFrame extends JFrame {
         textLabel.setBorder(compoundBorder);        
   
         
-        JScrollPane scrollPane = new JScrollPane(textLabel);
+        scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.getViewport().setBackground(Color.BLACK);

@@ -5,17 +5,27 @@
 package com.mycompany.swing;
 import com.mycompany.avventura.CaricamentoSalvataggioPartita;
 import com.mycompany.avventura.Engine;
+import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.exception.ImgException;
 import com.mycompany.gioco.Avventura;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -23,12 +33,9 @@ import javax.swing.SwingConstants;
  * @author santo
  */
 public class Menu extends javax.swing.JFrame {
-    OpzioniMenu sceltaUtente;
-    /**
-     * Creates new form Menu
-     * @param pathImg
-     * @throws com.mycompany.exception.ImgException
-     */
+    private OpzioniMenu sceltaUtente;
+    private JDialog manualeDialog;
+   
     public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException {
         if(CheckImg.isImage(pathImg)) {
             ImageIcon imgIcon = new ImageIcon(pathImg);
@@ -36,8 +43,7 @@ public class Menu extends javax.swing.JFrame {
             this.sceltaUtente = sceltaUtente;
             myInit(imgIcon);
         } else {
-            throw new ImgException();
-            
+            throw new ImgException();           
         }
     }
 
@@ -51,22 +57,83 @@ public class Menu extends javax.swing.JFrame {
     
         Image img = imgIcon.getImage();
         img = img.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
-        imgIcon = new ImageIcon(img);
-    
+        imgIcon = new ImageIcon(img); 
     
         jPanel1.setLayout(new BorderLayout());
         JLabel backgroundLabel = new JLabel(imgIcon);
         jPanel1.add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setBounds(0, 0, imgIcon.getIconWidth(), imgIcon.getIconHeight());
-        
-        
+               
         setResizable(false);    // non è possibile ridimensionare il frame
         setLocationRelativeTo(null);  // il frame appare al centro del desktop, quindi non bisogna trascinarlo al centro con il cursore
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);   // centro il testo contenuto nella lable al centro della lable stessa
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
- 
+            
+        initDialog();
     }
     
+    
+    private void initDialog() {
+        this.manualeDialog = new JDialog(this, "Finestra di dialogo", true);
+        manualeDialog.setSize(800, 600);
+        manualeDialog.setLayout(new BorderLayout());
+        manualeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);   //Questa opzione chiude la finestra di dialogo e libera tutte le risorse associate ad essa.
+        manualeDialog.setResizable(true);
+        
+        JPanel panelDialog = new JPanel(new BorderLayout());
+        JLabel textLabelDialog = new JLabel();
+        JLabel titleLabelDialog = new JLabel("BENVENUTO NEL GIOCO CAZZI E MAZZI!!");
+        JScrollPane scrollPane = new JScrollPane(textLabelDialog);
+                
+        // inizializzazione scrollPane
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.getViewport().setBackground(Color.BLACK);
+        
+        // inizializzazione pannello
+        panelDialog.setBackground(Color.BLACK);
+        
+        
+        // inizializzazione lable
+        titleLabelDialog.setForeground(Color.WHITE);
+        titleLabelDialog.setFont(new Font("Kristen ITC", Font.BOLD, 18));        
+        titleLabelDialog.setHorizontalAlignment(SwingConstants.CENTER);  
+
+        textLabelDialog.setForeground(Color.WHITE);
+        textLabelDialog.setFont(new Font("Kristen ITC", Font.BOLD, 14));   
+        textLabelDialog.setVerticalAlignment(SwingConstants.TOP);
+        textLabelDialog.setHorizontalAlignment(SwingConstants.LEFT);  
+        textLabelDialog.setText("<html>"+"<br>"+getTextToInsertLabel().replaceAll("\\n", "<br>"+"<html>"));         
+             
+       
+        panelDialog.add(scrollPane, BorderLayout.CENTER);
+        panelDialog.add(titleLabelDialog, BorderLayout.PAGE_START);
+        manualeDialog.add(panelDialog, BorderLayout.CENTER);
+    }
+    
+    
+    private String getTextToInsertLabel() {
+        
+        BufferedReader buff = null;       
+        try {
+             buff = new BufferedReader(new FileReader(new File(".//resources//istruzioniGioco.txt")));
+            //textLabelDialog.setText("hebwibwe");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+        loader.carica(buff);
+        List<String> list = loader.getFrasi();
+        StringBuilder sBuilder = new StringBuilder();
+        
+        for(String s : list) {
+            sBuilder.append(s).append("\n");
+        }
+        
+        String textLabel = sBuilder.toString();
+        return textLabel;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,6 +144,7 @@ public class Menu extends javax.swing.JFrame {
         avviaPartitaButton = new javax.swing.JButton();
         indietroButton = new javax.swing.JButton();
         caricaPartitaButton = new javax.swing.JButton();
+        manualeUtenteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menù di gioco");
@@ -121,6 +189,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        manualeUtenteButton.setBackground(new java.awt.Color(0, 0, 0));
+        manualeUtenteButton.setForeground(new java.awt.Color(255, 255, 255));
+        manualeUtenteButton.setText("Manuale utente");
+        manualeUtenteButton.setToolTipText("cliccando qui si aprirà una finestra contenente le istruzioni presenti nel gioco connla relativa descrizione");
+        manualeUtenteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manualeUtenteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,7 +213,8 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(indietroButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(avviaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(caricaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(caricaPartitaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manualeUtenteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(329, 329, 329))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,8 +226,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(caricaPartitaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(manualeUtenteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(indietroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 108, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -188,6 +269,10 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_caricaPartitaButtonActionPerformed
+
+    private void manualeUtenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualeUtenteButtonActionPerformed
+        manualeDialog.setVisible(true);
+    }//GEN-LAST:event_manualeUtenteButtonActionPerformed
 
     
     /**
@@ -245,6 +330,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton caricaPartitaButton;
     private javax.swing.JButton indietroButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton manualeUtenteButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

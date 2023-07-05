@@ -88,4 +88,8 @@ public class LoaderPrinterCharacterStream implements Serializable
             out.println(s);
         }     
     }
+    
+    public ArrayList<String> getFrasi() {
+        return new ArrayList<>(frasi);  // ritorno una copia
+    }
 }

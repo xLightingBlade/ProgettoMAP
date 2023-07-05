@@ -58,6 +58,7 @@
                               <Component id="indietroButton" max="32767" attributes="0"/>
                               <Component id="avviaPartitaButton" max="32767" attributes="0"/>
                               <Component id="caricaPartitaButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="manualeUtenteButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -74,8 +75,10 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="caricaPartitaButton" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="manualeUtenteButton" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="indietroButton" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="108" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,6 +140,21 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="caricaPartitaButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="manualeUtenteButton">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Manuale utente"/>
+            <Property name="toolTipText" type="java.lang.String" value="cliccando qui si aprir&#xe0; una finestra contenente le istruzioni presenti nel gioco connla relativa descrizione"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manualeUtenteButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
