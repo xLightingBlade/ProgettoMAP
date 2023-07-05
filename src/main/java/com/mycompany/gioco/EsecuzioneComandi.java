@@ -384,7 +384,7 @@ public class EsecuzioneComandi implements Serializable{
             
             //Questo oggetto serve per indicare che joel si è curato
             Oggetto curato = new Oggetto(24, "curato");
-            curato.setAlias(new String[]{});        
+            curato.setAlias(new String[]{"salute"});        
             curato.setPrendibile(false);
             curato.setSpingibile(false);
             curato.setApribile(false);
