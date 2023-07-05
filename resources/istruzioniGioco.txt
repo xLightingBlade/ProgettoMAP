@@ -1,0 +1,8 @@
+Sei in una stanza misteriosa e hai a disposizione i seguenti comandi:
+- prendi <oggetto>: Utilizza questo comando per prendere un oggetto nella stanza. Ad esempio, "prendi chiave".
+- apri <oggetto>: Utilizza questo comando per aprire un oggetto nella stanza. Ad esempio, "apri porta".
+- osserva <oggetto>: Utilizza questo comando per osservare un oggetto nella stanza. Ad esempio, "osserva tavolo".
+- nasconditi: Utilizza questo comando per nasconderti nella stanza.
+- esci: Utilizza questo comando per uscire dal gioco.
+Ricorda di esplorare attentamente la stanza, osservare gli oggetti presenti e utilizzare i comandi corretti per progredire nel gioco.
+Buona fortuna!
