@@ -417,7 +417,11 @@ public class EsecuzioneComandi implements Serializable{
                         }
                     }
                 }
+            }else {
+                System.out.println("Non puoi usare questo oggetto");
             }
+        }else {
+            System.out.println("Non esiste un tale oggetto");
         }
     }
 
