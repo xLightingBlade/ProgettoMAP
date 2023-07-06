@@ -7,6 +7,7 @@ package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
+import com.mycompany.openweatherAPI.MeteoAPI;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
@@ -51,7 +52,8 @@ public class Avventura extends StrutturaGioco implements Serializable
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
     boolean usaTimer = true;
-
+    Integer idMeteo = 0;
+    
     @Override
     public void init() throws Exception 
     {
@@ -65,6 +67,16 @@ public class Avventura extends StrutturaGioco implements Serializable
         setStanze(OperazioniDatabase.creaOggetti());
         //Stanza attuale
         setStanzaCorrente(getStanze().get(0));
+        
+        //sta roba viene printata in mezzo al caricamento del dialogo iniziale. Devo spostarlo
+        idMeteo = MeteoAPI.getMeteoID("Boston");
+        System.out.println("\nCiao\n");
+        if(idMeteo.toString().startsWith("80"))
+            System.out.println("\nDalla finestra vedi un cielo sereno. Un netto contrasto con la tristezza della città post-apocalittica");
+        else if(idMeteo.toString().startsWith("5"))
+            System.out.println("\nDalla finestra vedi un cielo plumbeo, sta piovendo.");
+        else if(idMeteo.toString().startsWith("6"))
+            System.out.println("Fuori dalla finestra vedi cadere la neve. Ti ricorda un po' l'infanzia");
     }
     
 
