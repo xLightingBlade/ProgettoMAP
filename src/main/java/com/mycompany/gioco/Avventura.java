@@ -28,10 +28,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+//<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+//=======
+//>>>>>>> main
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -150,6 +153,22 @@ public class Avventura extends StrutturaGioco implements Serializable
                 }
 
                 case CURATI -> esec.curati(inventarioGiocatore);
+                
+                case USA -> {
+                    if(oggetto!= null){
+                        try {
+                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        try {
+                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
                 
                 default -> 
                 {
