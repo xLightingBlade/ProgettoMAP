@@ -74,9 +74,8 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
-    public static void getMeteo(String citta) {
+    public static void getMeteoInSoggiorno(String citta) {
         try {
-            //sta roba viene printata in mezzo al caricamento del dialogo iniziale. Devo spostarlo
             idMeteo = MeteoAPI.getMeteoID(citta);
             if(idMeteo.toString().startsWith("80")) {
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
