@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.swing;
-import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,7 +34,6 @@ public class TastierinoJFrame extends javax.swing.JFrame {
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;
-        System.out.println(this.num1+" "+this.num2+" "+this.num3);
         initComponents();
         myInit();
     }
@@ -151,10 +149,14 @@ public class TastierinoJFrame extends javax.swing.JFrame {
             if(errore)
                 JOptionPane.showMessageDialog(null, "La combinazione non è corretta", "COMBINAZIONE ERRATA", JOptionPane.ERROR_MESSAGE);
         } catch(NumberFormatException ex) { 
-            int startIndex = ex.getMessage().indexOf("\"")+1;
-            int lastIndex = ex.getMessage().lastIndexOf("\"");
-            JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre, "+ex.getMessage().substring(startIndex, lastIndex)+" non sembra essere una cifra !!", "Error", JOptionPane.ERROR_MESSAGE);
-        }        // TODO add your handling code here:
+            if(!ex.getMessage().equalsIgnoreCase("empty String")) {
+                int startIndex = ex.getMessage().indexOf("\"")+1;
+                int lastIndex = ex.getMessage().lastIndexOf("\"");
+                JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre, \""+ex.getMessage().substring(startIndex, lastIndex)+"\" non sembra essere una cifra !!", "Error", JOptionPane.ERROR_MESSAGE);              
+            } else {
+                JOptionPane.showMessageDialog(this, "Cosa dovrei farmene di celle vuote !?!?", "Error", JOptionPane.ERROR_MESSAGE);              
+            }        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
