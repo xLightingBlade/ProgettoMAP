@@ -196,6 +196,9 @@ public class EsecuzioneComandi implements Serializable{
          if (stanzaCorrente.getOsservazione() != null) {
              if(stanzaCorrente.isVisibile() == true) {
                  System.out.println(stanzaCorrente.getOsservazione());
+                 if(stanzaCorrente.haInfoMeteo() && stanzaCorrente.getCitta() != null) {
+                     Avventura.dialoghiMeteoCitta(stanzaCorrente.getCitta());
+                 }
              } else {
                  System.out.println("Non si vede niente!");
              }    

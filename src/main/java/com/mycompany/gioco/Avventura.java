@@ -74,7 +74,11 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
-    public static void getMeteoInSoggiorno(String citta) {
+    /** Per info sui possibili valori dell'id meteo:
+     *  https://openweathermap.org/weather-conditions 
+    */
+    
+    public static void dialoghiMeteoSoggiorno(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
             if(idMeteo.toString().startsWith("80")) {
@@ -87,6 +91,17 @@ public class Avventura extends StrutturaGioco implements Serializable
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
                 leggiFile.start();  
             }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void dialoghiMeteoCitta(String citta) {
+        try {
+            idMeteo = MeteoAPI.getMeteoID(citta);
+            //prima controllare in che città siamo, poi controllare l'id del meteo.
         } catch (InterruptedException ex) {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

@@ -37,6 +37,9 @@ public class Stanza implements Serializable {
     
     private boolean primoAccessoFatto = false;
     
+    private boolean infoMeteo = false;
+    
+    private String citta = null;
     
     private List<Oggetto> oggettiNecessariPerAccedere = new ArrayList<>();
     
@@ -162,6 +165,22 @@ public class Stanza implements Serializable {
 
     public void setOsservazione(String osservazione) {
         this.osservazione = osservazione;
+    }
+
+    public boolean haInfoMeteo() {
+        return infoMeteo;
+    }
+    
+    public void setInfoMeteo(boolean b) {
+        this.infoMeteo = b;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+    
+    public void setCitta(String citta) {
+        this.citta = citta;
     }
 
 }
