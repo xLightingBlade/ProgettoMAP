@@ -86,8 +86,7 @@ public class Menu extends javax.swing.JFrame {
         scrollPane.getViewport().setBackground(Color.BLACK);
         
         // inizializzazione pannello
-        panelDialog.setBackground(Color.BLACK);
-        
+        panelDialog.setBackground(Color.BLACK);      
         
         // inizializzazione lable
         titleLabelDialog.setForeground(Color.WHITE);
@@ -106,38 +105,6 @@ public class Menu extends javax.swing.JFrame {
         panelDialog.add(titleLabelDialog, BorderLayout.PAGE_START);
         manualeDialog.add(panelDialog, BorderLayout.CENTER);
     }
-    
-    /*
-    private String getTextToInsert(String pathName) 
-    {
-        
-        //
-        BufferedReader buff = null;       
-        try 
-        {
-            //buff = new BufferedReader(new FileReader(new File(".//resources//istruzioniGioco.txt")));
-            buff = new BufferedReader(new FileReader(new File(pathName)));
-            //textLabelDialog.setText("hebwibwe");
-        } 
-        catch (FileNotFoundException ex) 
-        {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
-        loader.carica(buff);
-        List<String> list = loader.getFrasi();
-        StringBuilder sBuilder = new StringBuilder();
-        
-        for(String s : list) 
-        {
-            sBuilder.append(s).append("\n");
-        }
-        
-        String textLabel = sBuilder.toString();
-        return textLabel;
-    }
-    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
