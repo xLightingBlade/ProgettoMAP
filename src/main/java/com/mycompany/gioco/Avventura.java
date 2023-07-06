@@ -210,7 +210,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         }
     }
     
-    
+    //gestione dei timer di gioco
     @Override
     public void gestioneTimer()
     {
@@ -241,21 +241,11 @@ public class Avventura extends StrutturaGioco implements Serializable
             {
                 if(scanner.nextLine().equalsIgnoreCase("nasconditi"))//comando preso in input dall'utente)
                 {
-                    timer.cancel();
-
-                    try 
-                    {
-                        Set<String> stopwords = Utils.caricaStopwords(new File("./resources/stopwords"));
-                        Parser parser = new Parser(stopwords);//creazione del parser con le relative stopwords
-                        ParserOutput p = parser.parse("nasconditi", getComandi(), getStanzaCorrente().getOggetti(), getInventario());
-                        prossimaMossa(p);//avanzo con il gioco
-                        dentro = true;                  
-                    } 
-                    catch (IOException ex) 
-                    {
-                        System.out.println("Errore nel caricamento dati. Riavvia il gioco.\n");
-                        System.exit(0);
-                    }
+                    timer.cancel();//annulla il timer
+                    
+                    EsecuzioneComandi esec = new EsecuzioneComandi(this);
+                    esec.nasconditi(getStanzaCorrente());
+                    dentro = true;                  
                 }
                 else
                 {
