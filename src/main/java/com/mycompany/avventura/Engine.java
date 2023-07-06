@@ -5,6 +5,7 @@
  */
 package com.mycompany.avventura;
 
+import com.mycompany.gioco.Avventura;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.TipoComando;
@@ -51,6 +52,7 @@ public class Engine implements Serializable
             
             this.gioco.init();//Questa chiamata fa partire il caricamento dei dati del gioco
             loader_introduzione.join();
+            Avventura.getMeteo();
         }
         catch(FileNotFoundException ex)
         {

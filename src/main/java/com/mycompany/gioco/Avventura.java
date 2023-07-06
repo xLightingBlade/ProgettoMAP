@@ -55,7 +55,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
     boolean usaTimer = true;
-    Integer idMeteo = 0;
+    static Integer idMeteo = 0;
     
     @Override
     public void init() throws Exception 
@@ -70,7 +70,10 @@ public class Avventura extends StrutturaGioco implements Serializable
         setStanze(OperazioniDatabase.creaOggetti());
         //Stanza attuale
         setStanzaCorrente(getStanze().get(0));
-        
+          
+    }
+    
+    public static void getMeteo() {
         //sta roba viene printata in mezzo al caricamento del dialogo iniziale. Devo spostarlo
         idMeteo = MeteoAPI.getMeteoID("Boston");
         System.out.println("\nCiao\n");
@@ -83,7 +86,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         } else if(idMeteo.toString().startsWith("6")) {
             CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
             leggiFile.start();
-        }    
+        }  
     }
     
 
