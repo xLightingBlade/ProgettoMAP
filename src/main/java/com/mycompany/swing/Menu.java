@@ -12,11 +12,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -102,8 +97,9 @@ public class Menu extends javax.swing.JFrame {
         textLabelDialog.setForeground(Color.WHITE);
         textLabelDialog.setFont(new Font("Kristen ITC", Font.BOLD, 14));   
         textLabelDialog.setVerticalAlignment(SwingConstants.TOP);
-        textLabelDialog.setHorizontalAlignment(SwingConstants.LEFT);  
-        textLabelDialog.setText("<html>"+"<br>"+getTextToInsertLabel().replaceAll("\\n", "<br>"+"<html>"));         
+        textLabelDialog.setHorizontalAlignment(SwingConstants.LEFT);
+        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+        textLabelDialog.setText("<html>"+"<br>"+loader.ottieniComeTesto(".//resources//istruzioniGioco.txt").replaceAll("\\n", "<br>"+"<html>"));         
              
        
         panelDialog.add(scrollPane, BorderLayout.CENTER);
@@ -111,14 +107,20 @@ public class Menu extends javax.swing.JFrame {
         manualeDialog.add(panelDialog, BorderLayout.CENTER);
     }
     
-    
-    private String getTextToInsertLabel() {
+    /*
+    private String getTextToInsert(String pathName) 
+    {
         
+        //
         BufferedReader buff = null;       
-        try {
-             buff = new BufferedReader(new FileReader(new File(".//resources//istruzioniGioco.txt")));
+        try 
+        {
+            //buff = new BufferedReader(new FileReader(new File(".//resources//istruzioniGioco.txt")));
+            buff = new BufferedReader(new FileReader(new File(pathName)));
             //textLabelDialog.setText("hebwibwe");
-        } catch (FileNotFoundException ex) {
+        } 
+        catch (FileNotFoundException ex) 
+        {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -127,13 +129,15 @@ public class Menu extends javax.swing.JFrame {
         List<String> list = loader.getFrasi();
         StringBuilder sBuilder = new StringBuilder();
         
-        for(String s : list) {
+        for(String s : list) 
+        {
             sBuilder.append(s).append("\n");
         }
         
         String textLabel = sBuilder.toString();
         return textLabel;
     }
+    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -314,7 +314,7 @@ public class EsecuzioneComandi implements Serializable{
                 if(oggetto instanceof OggettoImmagine) 
                 {
                     ((OggettoImmagine) oggetto).visualizza();
-                    System.out.println("Stai guardando: "+oggetto.getDescrizione());
+                    System.out.println("Stai guardando: " + oggetto.getDescrizione());
                     
                 }
                 else if(oggetto instanceof OggettoFoglietto)
@@ -402,15 +402,26 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
 
-    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException {
-        if(oggetto != null) {
-            if(oggetto.isUsabile()) {
-                switch(oggetto.getId()) {
-                    case 12 -> {
-                        if(usaTastierino()) {
-                            inventarioGiocatore.add(new Oggetto(25));
-                            System.out.println("ok");
-                        } else {
+    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException 
+    {
+        if(oggetto != null) 
+        {
+            if(oggetto.isUsabile()) 
+            {
+                switch(oggetto.getId()) 
+                {
+                    case 12 -> 
+                    {
+                        if(usaTastierino()) 
+                        {
+                            Oggetto o = new Oggetto(25);
+                            o.setNome("");
+                            o.setAlias(new String[]{""});
+                            o.setInvisibile(true);
+                            inventarioGiocatore.add(o);
+                        } 
+                        else 
+                        {
                             System.out.println("Nope");
                         }
                     }

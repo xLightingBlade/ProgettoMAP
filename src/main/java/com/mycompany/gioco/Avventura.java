@@ -156,16 +156,23 @@ public class Avventura extends StrutturaGioco implements Serializable
                 case CURATI -> esec.curati(inventarioGiocatore);
                 
                 case USA -> {
-                    if(oggetto!= null){
-                        try {
+                    if(oggetto!= null)
+                    {
+                        try 
+                        {
                             esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } else {
-                        try {
+                    } 
+                    else 
+                    {
+                        try 
+                        {
                             esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
-                        } catch (InterruptedException ex) {
+                        } 
+                        catch (InterruptedException ex) 
+                        {
                             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
@@ -206,6 +213,11 @@ public class Avventura extends StrutturaGioco implements Serializable
             if (this.assenzaStanza) 
             {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
+            }
+            
+            if(getStanzaCorrente().getNome().equalsIgnoreCase("Salt Lake City, Utah"))
+            {
+                System.exit(0);
             }
         }
     }
