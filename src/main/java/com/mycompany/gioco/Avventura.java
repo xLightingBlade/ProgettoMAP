@@ -58,6 +58,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     private static final long serialVersionUID = -4185062833257302102L;
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
+    boolean usaTimer = true;
 
     @Override
     public void init() throws Exception 
@@ -195,11 +196,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 {
                     prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
                 }
-                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto"))
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto") && usaTimer)
                 {
+                    usaTimer = false;
                     gestioneTimer();
-                }
-                
+                }                
             }
             
             if (this.assenzaStanza) 

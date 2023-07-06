@@ -5,7 +5,6 @@
  */
 package com.mycompany.avventura;
 
-import com.mycompany.gioco.TimerGioco;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.TipoComando;
@@ -17,8 +16,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.Serializable;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
