@@ -124,7 +124,5 @@ public class Engine implements Serializable
     public StrutturaGioco getGioco()
     {
         return this.gioco; 
-    }
-    
-    
+    }  
 }

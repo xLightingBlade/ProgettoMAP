@@ -4,6 +4,8 @@
  */
 package com.mycompany.tipi;
 
+import com.mycompany.avventura.LoaderPrinterCharacterStream;
+
 /**
  *
  * @author Antonio
@@ -20,12 +22,15 @@ public abstract class Documento extends Oggetto
     public void setPathDocumento(String pathRelativoDocumento) 
     {
         this.pathDocumento = pathRelativoDocumento;
+
     }
     
     public String getPathDocumento() 
     {
         return this.pathDocumento;
     }
+    
+    
     
     public abstract void visualizza();
 }

@@ -80,7 +80,7 @@ public class BehaviourController {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Arrivo_all_ospedale.txt";
                 mostraDialogoStanza(filePath);
             }
-            case "Dentro Ospedale" -> {
+            case "Sala d'attesa ospedale" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Dentro_ospedale.txt";
                 mostraDialogoStanza(filePath);
             }

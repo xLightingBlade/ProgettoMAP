@@ -61,6 +61,5 @@ public class DocumentFrame extends JFrame
         add(scrollPane, BorderLayout.CENTER);    
         pack();
         //System.out.println("Sto uscnedo dal costruttore");
-        setVisible(true);
     }
 }

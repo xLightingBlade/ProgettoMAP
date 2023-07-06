@@ -15,13 +15,13 @@ ID,NOME,DESCRIZIONE,CONTENUTO,STANZA
 13,fogliettoQuadroElettrico,Un foglio con sopra un enigma riguardante un codice,CONTENUTO FOGLIO ENIGMA,5
 14,leva,"Una leva, forse per riattivare il quadro elettrico",,,5
 15,torcia,"Una torcia, tornerà utile prima o poi",,,6
-16,documentoMetro,Un documento,CONTENUTO DOCUMENTO METROPOLITANA,7
+16,"documento metro",Un documento,CONTENUTO DOCUMENTO METROPOLITANA,7
 17,zattera,"Assi di legno a mo' di zattera. Abbastanza da reggere una ragazzina",,,8
 18,chiaveArmadietto,"Una chiave, non sai bene cosa apre",,,10
 19,armadietto,Un armadietto chiuso a chiave,,,11
 20,tesserino,Un tesserino con scritto 'infermeria',,,,
 21,cacciavite,Un cacciavite,,,15
-22,documentoMedico,Un documento medico,CONTENUTO DOCUMENTO MEDICO OSPEDALE,13
+22,"documento medico",Un documento medico,CONTENUTO DOCUMENTO MEDICO OSPEDALE,13
 23,grata,"Una grata, chiusa con delle viti",,,14
 24,curato,"Oggetto fittizio per indicare che joel si è curato e può proseguire",,,,
 25,fittizio,,,,

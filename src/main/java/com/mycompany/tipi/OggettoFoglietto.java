@@ -4,6 +4,7 @@
  */
 package com.mycompany.tipi;
 
+import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.swing.DocumentFrame;
 
 /**
@@ -23,7 +24,9 @@ public class OggettoFoglietto extends Documento
     //basterà cambiare unicamente il codice di questo metodo.
     @Override
     public void visualizza()
-    {     
-        DocumentFrame documentFrame = new DocumentFrame("Documento medico", "Il cordycpes");
+    {
+        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+        DocumentFrame documentFrame = new DocumentFrame("Documento medico", loader.ottieniComeTesto(pathDocumento));
+        documentFrame.setVisible(true);
     }
 }
