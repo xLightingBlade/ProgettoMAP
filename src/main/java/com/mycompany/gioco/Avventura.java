@@ -6,9 +6,7 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
-import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
-import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
@@ -24,17 +22,11 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-//<<<<<<< HEAD
 import java.util.Scanner;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-//=======
-//>>>>>>> main
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
