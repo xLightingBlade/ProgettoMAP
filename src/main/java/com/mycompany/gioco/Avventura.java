@@ -6,7 +6,9 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
+import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
+import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
@@ -22,8 +24,16 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -40,14 +50,15 @@ import java.util.List;
  *
  * @author gabri
  */
-public class Avventura extends StrutturaGioco implements Serializable {
+public class Avventura extends StrutturaGioco implements Serializable 
+{
     private static final long serialVersionUID = -4185062833257302102L;
-    
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
 
     @Override
-    public void init() throws Exception {
+    public void init() throws Exception 
+    {
         OperazioniDatabase.connettiDatabase();
         OperazioniDatabase.resetDatabase();
         OperazioniDatabase.creaTabelle();
@@ -134,7 +145,7 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 }
                 
                 case NASCONDITI -> 
-                {
+                {       
                     esec.nasconditi(stanzacorrente);
                 }
 
@@ -154,9 +165,9 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
                 System.out.println();
-              
-                BehaviourController.checkDialoghi(getStanzaCorrente());
                 
+                BehaviourController.checkDialoghi(getStanzaCorrente());
+
                 if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
                 {
                     prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
@@ -165,11 +176,73 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 {
                     prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
                 }
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto"))
+                {
+                    gestioneTimer();
+                }
+                
             }
+            
             if (this.assenzaStanza) 
             {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }
+    }
+    
+    
+    @Override
+    public void gestioneTimer()
+    {
+        boolean dentro = false;
+        
+        Timer timer = new Timer();
+        
+        //avvio del timer per la prima volta
+        TimerGioco t = new TimerGioco();
+        TimerTask tempoScaduto = t;
+        timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+        
+        System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
+        
+        do
+        {
+            
+            if(t.isTempoScaduto())
+            {
+                t = new TimerGioco();
+                tempoScaduto = t;
+                timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+            }
+
+            //aspetta che l'utente si nasconda
+            Scanner scanner = new Scanner(System.in);
+            if(scanner.hasNextLine()) 
+            {
+                if(scanner.nextLine().equalsIgnoreCase("nasconditi"))//comando preso in input dall'utente)
+                {
+                    timer.cancel();
+
+                    try 
+                    {
+                        Set<String> stopwords = Utils.caricaStopwords(new File("./resources/stopwords"));
+                        Parser parser = new Parser(stopwords);//creazione del parser con le relative stopwords
+                        ParserOutput p = parser.parse("nasconditi", getComandi(), getStanzaCorrente().getOggetti(), getInventario());
+                        prossimaMossa(p);//avanzo con il gioco
+                        dentro = true;                  
+                    } 
+                    catch (IOException ex) 
+                    {
+                        System.out.println("Errore nel caricamento dati. Riavvia il gioco.\n");
+                        System.exit(0);
+                    }
+                }
+                else
+                {
+                    System.out.println("Nasconditi, o i soldati ti prenderanno.");
+                }
+            }           
+        }
+        while(dentro == false);
     }
 }

@@ -88,7 +88,6 @@ public class EsecuzioneComandi implements Serializable{
                 //usato per simulare il fatto che le guardie stanno passando.
                 //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
                 loader_introduzione.join();
-
                 //dialoghi appena le guardie sono passate                    
                 fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt"));
                 loader_introduzione = new CaricamentoDati(fileIn);
@@ -101,12 +100,12 @@ public class EsecuzioneComandi implements Serializable{
             {
                 System.out.println("""
                     Errore nel caricamento dati.
-                    Riavvia il gioco.""");
+                    Riavvia il giocoA.""");
                 System.exit(0);
             } 
             catch (IllegalArgumentException ex) 
             {
-                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+                System.out.println("Errore nel caricamento dati. Riavvia il gioco.B");
                 System.exit(0);
             } 
             catch (InterruptedException ex)

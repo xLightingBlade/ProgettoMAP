@@ -275,13 +275,14 @@ public class OperazioniDatabase {
         stanze.add(salaOperatoria);
         stanze.add(uscitaPassaggio);
         stanze.add(uscitaMetro);
-        stanze.add(finale);
-        
+        stanze.add(finale);    
     }
     
     
     public static List<Stanza> creaOggetti() 
     {
+        //Oggetti casa Joel
+        
         Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
         pistola.setAlias(new String[] {"arma"});
         stanze.get(0).getOggetti().add(pistola);
@@ -298,21 +299,12 @@ public class OperazioniDatabase {
         scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
         stanze.get(0).getOggetti().add(scatolettaCibo);
 
-        //////////////////////////////
         Documento foto = new OggettoImmagine(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
         foto.setAlias(new String[]{"immagine"});
         foto.setPrendibile(true);
         foto.setPathDocumento(".//resources/img/fotoSoggiorno960x660.jpg");
         stanze.get(0).getOggetti().add(foto);
-        //////////////////////////////
         
-        ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
-        mobileBagno.setAlias(new String[]{"mobiletto"});
-        mobileBagno.setApribile(true);
-        mobileBagno.setPrendibile(false);
-        mobileBagno.setAperto(false);
-        stanze.get(1).getOggetti().add(mobileBagno);
-
         Oggetto garza = new Oggetto(idOggetti.get(6), nomiOggetti.get(6), descrizioniOggetti.get(6));
         garza.setAlias(new String[]{"garze"});        
         
@@ -322,6 +314,12 @@ public class OperazioniDatabase {
         Oggetto forbici = new Oggetto(idOggetti.get(8), nomiOggetti.get(8), descrizioniOggetti.get(8));
         forbici.setAlias(new String[]{"forbice"});
         
+        ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
+        mobileBagno.setAlias(new String[]{"mobiletto"});
+        mobileBagno.setApribile(true);
+        mobileBagno.setPrendibile(false);
+        mobileBagno.setAperto(false);
+        stanze.get(1).getOggetti().add(mobileBagno);
         mobileBagno.add(garza);
         mobileBagno.add(alcol);
         mobileBagno.add(forbici);
@@ -333,7 +331,12 @@ public class OperazioniDatabase {
         Oggetto batterie = new Oggetto(idOggetti.get(10), nomiOggetti.get(10), descrizioniOggetti.get(10));
         batterie.setAlias(new String[]{"batteria"});
         stanze.get(2).getOggetti().add(batterie);
-
+        
+        //
+        
+        
+        //Oggetti passaggio segreto
+        
         Oggetto roccia = new Oggetto(idOggetti.get(11), nomiOggetti.get(11), descrizioniOggetti.get(11));
         roccia.setAlias(new String[]{"masso"});
         roccia.setPrendibile(false);
@@ -356,24 +359,36 @@ public class OperazioniDatabase {
         levaCorrente.setSpingibile(true);
         levaCorrente.setInvisibile(true);
         stanze.get(5).getOggetti().add(levaCorrente);
-
+        
+        //
+        
+        
+        //Oggetti metropolitana allagata
+        
         Oggetto torcia = new Oggetto(idOggetti.get(15), nomiOggetti.get(15), descrizioniOggetti.get(15));
         torcia.setAlias(new String[]{});
         torcia.setAccendibile(true);
         stanze.get(6).getOggetti().add(torcia);
-
-        ////////////////////////
+ 
         Oggetto documentoMetro = new Oggetto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));
         documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
         documentoMetro.setLeggibile(true);
         documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
         stanze.get(7).getOggetti().add(documentoMetro);
-        ////////////////////////
+        
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
         zattera.setAlias(new String[]{"legno"});
         stanze.get(8).getOggetti().add(zattera);
-
+        
+        //
+        
+        
+        //Oggetti Sala d'attesa ospedale
+        
+        stanze.get(12).getOggetti().add(alcol);
+        stanze.get(12).getOggetti().add(garza);
+        
         Oggetto chiaveArmadietto = new Oggetto(idOggetti.get(18), nomiOggetti.get(18), descrizioniOggetti.get(18));
         chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
         stanze.get(10).getOggetti().add(chiaveArmadietto);
@@ -381,30 +396,29 @@ public class OperazioniDatabase {
         Oggetto tesserino = new Oggetto(idOggetti.get(20), nomiOggetti.get(20), descrizioniOggetti.get(20));
         tesserino.setAlias(new String[]{"tessera"});
 
-
         ContenitoreOggetti armadietto = new ContenitoreOggetti(idOggetti.get(19), nomiOggetti.get(19), descrizioniOggetti.get(19));
         armadietto.setAlias(new String[]{});
         armadietto.setApribile(false);
         armadietto.setPrendibile(false);
         armadietto.setAperto(false);
         armadietto.add(forbici);
-        armadietto.add(tesserino);
+        armadietto.add(tesserino);        
         stanze.get(11).getOggetti().add(armadietto);
-        
-        stanze.get(12).getOggetti().add(alcol);
-        stanze.get(12).getOggetti().add(garza);
 
         Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
         cacciavite.setAlias(new String[]{});
         stanze.get(15).getOggetti().add(cacciavite);
-
-        //////////////////////////////
+        
+        //
+        
+        
+        //Oggetti piano sla operatoria
+        
         Documento documentoMedico = new OggettoFoglietto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
         documentoMedico.setAlias(new String[]{"referto", "documento medico"});
         documentoMedico.setLeggibile(true);
         documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
         stanze.get(13).getOggetti().add(documentoMedico);
-        //////////////////////////////
         
         Oggetto grata = new Oggetto(idOggetti.get(23), nomiOggetti.get(23), descrizioniOggetti.get(23));
         grata.setAlias(new String[]{});
@@ -412,15 +426,10 @@ public class OperazioniDatabase {
         grata.setSpingibile(false);
         grata.setApribile(false);
         stanze.get(14).getOggetti().add(grata);
+
         
-        /*
-        Oggetto curato = new Oggetto(idOggetti.get(24), nomiOggetti.get(24), descrizioniOggetti.get(24));
-        curato.setAlias(new String[]{});        
-        curato.setPrendibile(false);
-        curato.setSpingibile(false);
-        curato.setApribile(false);
-        curato.setInvisibile(true);
-        */
+        //Aggiungo tutti gli oggetti alla lista degli oggetti del gioco
+        
         oggetti.add(pistola);
         oggetti.add(coltello);
         oggetti.add(bottigliaVuota);
@@ -444,7 +453,6 @@ public class OperazioniDatabase {
         oggetti.add(cacciavite);
         oggetti.add(documentoMedico);
         oggetti.add(grata);
-        //oggetti.add(curato);
         
         return stanze;        
     }

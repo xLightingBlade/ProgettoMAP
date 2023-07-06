@@ -6,7 +6,7 @@ Ad est c'è la porta del bagno, a sud quella del ripostiglio. A nord c'è la por
 Andando ad ovest torneresti nel soggiorno."
 2,Ripostiglio,Un ripostiglio impolverato.,"Ci sono due scaffali, sopra di essi dei pacchetti di munizioni per la pistola e una confezione di batterie.
 Andando a nord torneresti in soggiorno."
-3,Corridoio,Un corridoio del passaggio segreto, "Attorno a te c'è un grande masso dietro cui nascondersi in caso di pericolo. Dritto davanti a te, alla fine del corridoio, c'è un cancello"
+3,"Corridoio passaggio segreto",Un corridoio del passaggio segreto, "Attorno a te c'è un grande masso dietro cui nascondersi in caso di pericolo. Dritto davanti a te, alla fine del corridoio, c'è un cancello"
 4,Cancello,"La stanza del cancello, l'uscita dalla ZQ", "Affianco al cancello c'è un tastierino numerico, sembra avrai bisogno di un qualche codice. Il cancello è inoltre privo di corrente.
 Guardando ad est vedi una porta aperta verso una stanza. Dietro di te c'è il corridoio"
 5,"Quadro Elettrico",Una stanza con un quadro elettrico ed una leva abbassata,"Osservi che forse qui potresti far tornare la corrente al cancello.
@@ -19,7 +19,7 @@ Andando avanti a nord si scende giù"
 Ad ovest sembra esserci una stanzetta. Andando a nord c'è l'uscita."
 8,"Stanza Zattera","Uno stanzino della metropolitana, completamente buio","Tra polvere e immondizia, noti una serie di assi di legno legate assieme. Andando ad est torni ai binari della metro."
 9,"Ingresso Ospedale","L'ingresso del Saint Mary's Hospital, QG delle Luci", 
-10,"Dentro Ospedale",Una stanza dentro l'ospedale..,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
+10,"Sala d'attesa ospedale",La sala d'attesa dell'ospedale.,"Il corpo morto di Marlene giace per terra. Nello scontro ha lasciato cadere una chiave.
 Ad est c'è l'infermeria e ad ovest c'è un magazzino e a nord c'è l'ascensore per il piano della sala operatoria."
 11,Magazzino,Una stanza usata come magazzino,"Noti un armadietto chiuso a chiave, appoggiato ad una parete.
 Andando ad est torneresti nella stanza precedente."
