@@ -15,7 +15,7 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     private int num2;
     private int num3;
     private static boolean corretto = false;
-    private static boolean aperto = true;
+    private static boolean aperto = false;
     
     public static boolean isCorretto() {
         return TastierinoJFrame.corretto;
@@ -31,6 +31,7 @@ public class TastierinoJFrame extends javax.swing.JFrame {
      * @param num3,
      */
     public TastierinoJFrame(int num1, int num2, int num3) {
+        TastierinoJFrame.aperto = true;
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;
@@ -65,6 +66,9 @@ public class TastierinoJFrame extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -156,6 +160,10 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         TastierinoJFrame.aperto = false;
     }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

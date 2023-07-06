@@ -426,7 +426,7 @@ public class EsecuzioneComandi implements Serializable{
     }
 
     private boolean usaTastierino() throws InterruptedException {
-        TastierinoJFrame.main(new String[0]);
+        new TastierinoJFrame(4,8,0).setVisible(true);
         while(TastierinoJFrame.isAperto()) {
             Thread.sleep(1000);
         }
