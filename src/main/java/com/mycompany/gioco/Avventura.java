@@ -101,7 +101,33 @@ public class Avventura extends StrutturaGioco implements Serializable
     public static void dialoghiMeteoCitta(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            //prima controllare in che città siamo, poi controllare l'id del meteo, infine caricare i dialoghi appositi
+            //esempi, tanto per adesso non verranno mai chiamati. Nemmeno i file di testo esistono, questo è un esempio dell'idea.
+            switch(citta) {
+                case "Boston" -> {
+                    if(idMeteo.toString().startsWith("80")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("5")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("6")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt")));
+                        leggiFile.start();
+                    }
+                }
+                case "Salt Lake City" -> {
+                    if(idMeteo.toString().startsWith("80")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("5")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("6")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt")));
+                        leggiFile.start();
+                    }
+                }
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
