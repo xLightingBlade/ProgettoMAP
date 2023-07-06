@@ -101,7 +101,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     public static void dialoghiMeteoCitta(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            //prima controllare in che città siamo, poi controllare l'id del meteo.
+            //prima controllare in che città siamo, poi controllare l'id del meteo, infine caricare i dialoghi appositi
         } catch (InterruptedException ex) {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
