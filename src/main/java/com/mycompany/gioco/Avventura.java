@@ -6,7 +6,9 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.StrutturaGioco;
+import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
+import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
@@ -22,8 +24,17 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+//<<<<<<< HEAD
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+//=======
+//>>>>>>> main
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,14 +53,16 @@ import java.util.logging.Logger;
  *
  * @author gabri
  */
-public class Avventura extends StrutturaGioco implements Serializable {
+public class Avventura extends StrutturaGioco implements Serializable 
+{
     private static final long serialVersionUID = -4185062833257302102L;
-    
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
+    boolean usaTimer = true;
 
     @Override
-    public void init() throws Exception {
+    public void init() throws Exception 
+    {
         OperazioniDatabase.connettiDatabase();
         OperazioniDatabase.resetDatabase();
         OperazioniDatabase.creaTabelle();
@@ -136,7 +149,7 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 }
                 
                 case NASCONDITI -> 
-                {
+                {       
                     esec.nasconditi(stanzacorrente);
                 }
 
@@ -167,22 +180,79 @@ public class Avventura extends StrutturaGioco implements Serializable {
             
             if (this.haAccessoAllaStanza) 
             {
+                System.out.println();
                 System.out.println(getStanzaCorrente().getNome());
                 System.out.println("================================================");
                 System.out.println(getStanzaCorrente().getDescrizione());
+                System.out.println();
                 
-                //Partenza idea per dialoghi, 2 luglio:
                 BehaviourController.checkDialoghi(getStanzaCorrente());
-                
-                if(getStanzaCorrente().getNome().equalsIgnoreCase("IngressoOspedale"))
+
+                if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
                 {
                     prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
                 }
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Sala Operatoria"))
+                {
+                    prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
+                }
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto") && usaTimer)
+                {
+                    usaTimer = false;
+                    gestioneTimer();
+                }                
             }
+            
             if (this.assenzaStanza) 
             {
                 System.out.println("Da quella parte non si può andare c'è un muro!\n");
             }
         }
+    }
+    
+    //gestione dei timer di gioco
+    @Override
+    public void gestioneTimer()
+    {
+        boolean dentro = false;
+        
+        Timer timer = new Timer();
+        
+        //avvio del timer per la prima volta
+        TimerGioco t = new TimerGioco();
+        TimerTask tempoScaduto = t;
+        timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+        
+        System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
+        
+        do
+        {
+            
+            if(t.isTempoScaduto())
+            {
+                t = new TimerGioco();
+                tempoScaduto = t;
+                timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+            }
+
+            //aspetta che l'utente si nasconda
+            Scanner scanner = new Scanner(System.in);
+            if(scanner.hasNextLine()) 
+            {
+                if(scanner.nextLine().equalsIgnoreCase("nasconditi"))//comando preso in input dall'utente)
+                {
+                    timer.cancel();//annulla il timer
+                    
+                    EsecuzioneComandi esec = new EsecuzioneComandi(this);
+                    esec.nasconditi(getStanzaCorrente());
+                    dentro = true;                  
+                }
+                else
+                {
+                    System.out.println("Nasconditi, o i soldati ti prenderanno.");
+                }
+            }           
+        }
+        while(dentro == false);
     }
 }

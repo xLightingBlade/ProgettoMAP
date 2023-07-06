@@ -54,7 +54,7 @@ public class BehaviourController {
         
         switch(stanzaCorrente.getNome()) {
             
-            case "Corridoio" -> {
+            case "Corridoio passaggio segreto" -> {
                 filePath = ".//the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt";
                 mostraDialogoStanza(filePath);
             }
