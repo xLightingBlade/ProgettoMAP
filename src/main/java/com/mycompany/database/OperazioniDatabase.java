@@ -413,14 +413,16 @@ public class OperazioniDatabase {
         //
         
         
-        //Oggetti piano sla operatoria
+        //Oggetti piano sala operatoria
         
         Documento documentoMedico = new OggettoFoglietto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
-        documentoMedico.setAlias(new String[]{"referto", "documento medico"});
+        documentoMedico.setAlias(new String[]{"referto", "documento medico","documento"});
         documentoMedico.setLeggibile(true);
+        documentoMedico.setPrendibile(true);
         documentoMedico.setContenuto("CONTENUTO DOCUMENTO MEDICO OSPEDALE");
+        documentoMedico.setPathDocumento(".//the_last_of_us(storia)//documenti_gioco(da raccogliere)//Documento_cordyceps.txt");
         stanze.get(13).getOggetti().add(documentoMedico);
-        
+       
         Oggetto grata = new Oggetto(idOggetti.get(23), nomiOggetti.get(23), descrizioniOggetti.get(23));
         grata.setAlias(new String[]{});
         grata.setPrendibile(false);

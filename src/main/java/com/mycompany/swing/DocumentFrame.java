@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.swing;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -61,6 +60,5 @@ public class DocumentFrame extends JFrame
         add(scrollPane, BorderLayout.CENTER);    
         pack();
         //System.out.println("Sto uscnedo dal costruttore");
-        setVisible(true);
     }
 }

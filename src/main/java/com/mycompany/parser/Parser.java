@@ -56,7 +56,10 @@ public class Parser implements Serializable
     {
         for (int i = 0; i < oggetti.size(); i++) 
         {   
-            if (oggetti.get(i).getNome().equals(token) || oggetti.get(i).getAlias().contains(token)) 
+            System.out.println(token);
+            System.out.println(i + " nome: " + oggetti.get(i).getNome() + " alias: " + oggetti.get(i).getAlias());
+            
+            if (oggetti.get(i).getNome().equalsIgnoreCase(token) || oggetti.get(i).getAlias().contains(token)) 
             {
                 return i;
             }

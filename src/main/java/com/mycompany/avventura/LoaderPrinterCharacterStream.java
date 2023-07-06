@@ -5,7 +5,9 @@
 package com.mycompany.avventura;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
@@ -19,12 +21,14 @@ import java.util.List;
 public class LoaderPrinterCharacterStream implements Serializable 
 {
     private List<String> frasi;
-
+    
+    
     //Costruttore
     public LoaderPrinterCharacterStream() 
     {
         this.frasi = new ArrayList<>();
     }
+    
     
     //caricamento stream di caratteri da un generico dispositivo di input
     public void carica(BufferedReader in)
@@ -64,6 +68,7 @@ public class LoaderPrinterCharacterStream implements Serializable
         }     
     }
     
+    
     //salvataggio stream di caratteri in un generico dispositivo di output
     public void stampaAdIntervallo(PrintStream out, int secondiAttesa) throws InterruptedException, IllegalArgumentException
     {
@@ -81,6 +86,7 @@ public class LoaderPrinterCharacterStream implements Serializable
         }       
     }
     
+    
     public void stampa(PrintStream out)
     {
         for(String s : frasi)
@@ -89,7 +95,37 @@ public class LoaderPrinterCharacterStream implements Serializable
         }     
     }
     
+    
     public ArrayList<String> getFrasi() {
         return new ArrayList<>(frasi);  // ritorno una copia
+    }
+    
+    
+    public String ottieniComeTesto(String pathName) 
+    {
+        BufferedReader buff = null;
+        
+        try 
+        {
+            buff = new BufferedReader(new FileReader(new File(pathName)));
+        }  
+        catch (FileNotFoundException ex) 
+        {
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
+        }
+        
+        carica(buff);
+        List<String> list = getFrasi();
+        StringBuilder sBuilder = new StringBuilder();
+        
+        for(String s : list) 
+        {
+            sBuilder.append(s).append("\n");
+        }
+        
+        String testo = sBuilder.toString();
+        
+        return testo;
     }
 }
