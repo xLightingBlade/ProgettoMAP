@@ -24,3 +24,4 @@ ID,NOME,DESCRIZIONE,CONTENUTO,STANZA
 22,documentoMedico,Un documento medico,CONTENUTO DOCUMENTO MEDICO OSPEDALE,13
 23,grata,"Una grata, chiusa con delle viti",,,14
 24,curato,"Oggetto fittizio per indicare che joel si è curato e può proseguire",,,,
+25,fittizio,,,,

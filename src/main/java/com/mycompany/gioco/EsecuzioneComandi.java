@@ -5,6 +5,8 @@
 package com.mycompany.gioco;
 
 import com.mycompany.avventura.CaricamentoDati;
+import com.mycompany.swing.NewMain;
+import com.mycompany.swing.TastierinoJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.OggettoImmagine;
 import com.mycompany.tipi.Oggetto;
@@ -350,6 +352,11 @@ public class EsecuzioneComandi implements Serializable{
                        if (oggetto.getId() == 14) {
                            inventarioGiocatore.add(oggetto);
                            stanzaCorrente.getOggetti().remove(oggetto);
+                           for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) {
+                               if (o.getNome().equalsIgnoreCase("tastierino")) {
+                                   o.setUsabile(true);
+                               }
+                           }
                        }
             } else {
                 System.out.println("Non ci sono oggetti che puoi premere qui.");
@@ -395,5 +402,34 @@ public class EsecuzioneComandi implements Serializable{
         {
             System.out.println("Non possiedi ciò che ti serve per curarti, cerca meglio");
         }
+    }
+
+    void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException {
+        if(oggetto != null) {
+            if(oggetto.isUsabile()) {
+                switch(oggetto.getId()) {
+                    case 12 -> {
+                        if(usaTastierino()) {
+                            inventarioGiocatore.add(new Oggetto(25));
+                            System.out.println("ok");
+                        } else {
+                            System.out.println("Nope");
+                        }
+                    }
+                }
+            }else {
+                System.out.println("Non puoi usare questo oggetto");
+            }
+        }else {
+            System.out.println("Non esiste un tale oggetto");
+        }
+    }
+
+    private boolean usaTastierino() throws InterruptedException {
+        new TastierinoJFrame(4,8,0).setVisible(true);
+        while(TastierinoJFrame.isAperto()) {
+            Thread.sleep(1000);
+        }
+        return TastierinoJFrame.isCorretto();
     }
 }

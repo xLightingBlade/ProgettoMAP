@@ -24,6 +24,8 @@ import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -139,6 +141,22 @@ public class Avventura extends StrutturaGioco implements Serializable {
                 }
 
                 case CURATI -> esec.curati(inventarioGiocatore);
+                
+                case USA -> {
+                    if(oggetto!= null){
+                        try {
+                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        try {
+                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
                 
                 default -> 
                 {
