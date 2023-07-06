@@ -26,6 +26,7 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
@@ -73,20 +74,25 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
-    public static void getMeteo() {
-        //sta roba viene printata in mezzo al caricamento del dialogo iniziale. Devo spostarlo
-        idMeteo = MeteoAPI.getMeteoID("Boston");
-        System.out.println("\nCiao\n");
-        if(idMeteo.toString().startsWith("80")) {
-            CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
-            leggiFile.start();  
-        } else if(idMeteo.toString().startsWith("5")) {
-            CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt")));
-            leggiFile.start();  
-        } else if(idMeteo.toString().startsWith("6")) {
-            CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
-            leggiFile.start();
-        }  
+    public static void getMeteo(String citta) {
+        try {
+            //sta roba viene printata in mezzo al caricamento del dialogo iniziale. Devo spostarlo
+            idMeteo = MeteoAPI.getMeteoID(citta);
+            if(idMeteo.toString().startsWith("80")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
+                leggiFile.start();
+            } else if(idMeteo.toString().startsWith("5")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt")));
+                leggiFile.start();
+            } else if(idMeteo.toString().startsWith("6")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
+                leggiFile.start();  
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 
