@@ -5,10 +5,12 @@
 */
 package com.mycompany.gioco;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.avventura.StrutturaGioco;
-import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
-import com.mycompany.parser.Parser;
+import com.mycompany.openweatherAPI.MeteoAPI;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
@@ -24,17 +26,12 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-//<<<<<<< HEAD
 import java.util.Scanner;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-//=======
-//>>>>>>> main
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,7 +56,8 @@ public class Avventura extends StrutturaGioco implements Serializable
     boolean haAccessoAllaStanza = false;
     boolean assenzaStanza = false;
     boolean usaTimer = true;
-
+    static Integer idMeteo = 0;
+    
     @Override
     public void init() throws Exception 
     {
@@ -73,6 +71,68 @@ public class Avventura extends StrutturaGioco implements Serializable
         setStanze(OperazioniDatabase.creaOggetti());
         //Stanza attuale
         setStanzaCorrente(getStanze().get(0));
+          
+    }
+    
+    /** Per info sui possibili valori dell'id meteo:
+     *  https://openweathermap.org/weather-conditions 
+    */
+    
+    public static void dialoghiMeteoSoggiorno(String citta) {
+        try {
+            idMeteo = MeteoAPI.getMeteoID(citta);
+            if(idMeteo.toString().startsWith("80")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
+                leggiFile.start();
+            } else if(idMeteo.toString().startsWith("5")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt")));
+                leggiFile.start();
+            } else if(idMeteo.toString().startsWith("6")) {
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
+                leggiFile.start();  
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void dialoghiMeteoCitta(String citta) {
+        try {
+            idMeteo = MeteoAPI.getMeteoID(citta);
+            //esempi, tanto per adesso non verranno mai chiamati. Nemmeno i file di testo esistono, questo è un esempio dell'idea.
+            switch(citta) {
+                case "Boston" -> {
+                    if(idMeteo.toString().startsWith("80")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("5")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("6")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt")));
+                        leggiFile.start();
+                    }
+                }
+                case "Salt Lake City" -> {
+                    if(idMeteo.toString().startsWith("80")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("5")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt")));
+                        leggiFile.start();
+                    }else if(idMeteo.toString().startsWith("6")) {
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt")));
+                        leggiFile.start();
+                    }
+                }
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 

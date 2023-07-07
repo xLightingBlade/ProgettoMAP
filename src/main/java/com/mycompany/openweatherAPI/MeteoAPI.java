@@ -12,6 +12,16 @@ import java.io.IOException;
 //Andrebbe migliorato un po', però non credo che l'utente mentre giochi voglia sapere che tempo fa.
 //Semplicemente possiamo scrivere alcune chiamate di nostro gradimento e usarle per mostrare dialoghi diversi in base alle condizioni meteo.
 public class MeteoAPI {
+    
+    public static int getMeteoID(String citta) throws InterruptedException, IOException {
+        int meteoId = 0;
+        try{
+            meteoId = MeteoAPIController.getWeatherByCity(citta).weather.get(0).id;
+        }catch(Exception ex) {
+            System.err.print(ex.getMessage());
+        }
+        return meteoId;
+    }
 
     public static void mostraTemperaturaCitta(String citta) throws IOException, InterruptedException {
         //in questo esempio stampa la temperatura. Chiaramente posso chiedergli altro
