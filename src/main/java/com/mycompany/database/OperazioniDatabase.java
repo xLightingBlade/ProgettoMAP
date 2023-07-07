@@ -203,6 +203,7 @@ public class OperazioniDatabase {
         Stanza salaOperatoria = new Stanza(idStanze.get(16), nomiStanze.get(16), descrizioniStanze.get(16));
         salaOperatoria.setOsservazione(osservazioni.get(16));
         salaOperatoria.getOggettiNecessari().add(new Oggetto(21));
+        salaOperatoria.getOggettiNecessari().add(new Oggetto(26));
       
         Stanza finale = new Stanza(idStanze.get(19), nomiStanze.get(19), descrizioniStanze.get(19));
         finale.setOsservazione(osservazioni.get(19));          
@@ -407,15 +408,17 @@ public class OperazioniDatabase {
         armadietto.add(forbici);
         armadietto.add(tesserino);        
         stanze.get(11).getOggetti().add(armadietto);
-
-        Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
-        cacciavite.setAlias(new String[]{});
-        stanze.get(15).getOggetti().add(cacciavite);
         
         //
         
         
         //Oggetti piano sala operatoria
+        
+        Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
+        cacciavite.setAlias(new String[]{});
+        cacciavite.setUsabile(true);
+        System.out.println(cacciavite.getNome() + " " + cacciavite.isUsabile());
+        stanze.get(15).getOggetti().add(cacciavite);
         
         Documento documentoMedico = new OggettoFoglietto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));
         documentoMedico.setAlias(new String[]{"referto", "documento medico","documento"});
