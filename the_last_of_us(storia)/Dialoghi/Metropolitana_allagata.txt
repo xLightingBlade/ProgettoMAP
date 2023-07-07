@@ -15,3 +15,5 @@ Joel:     Inoltre, qui sembra tutto allagato. Dovremo bagnarci un po'.
 Ellie:    Ehm, io non so nuotare.
 Joel:     Troveremo una soluzione, guardo in giro.
 
+OBIETTIVO : TROVA UN MODO PER OLTREPASSARE LA METROPOLITANA CON ELLIE
+

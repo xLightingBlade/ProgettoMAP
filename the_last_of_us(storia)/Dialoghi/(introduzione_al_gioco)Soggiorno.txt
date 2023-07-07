@@ -25,3 +25,6 @@ Ellie:   Non ti dirò perchè mi stai facendo uscire se è questo che vuoi saper
 Joel:    Sai qual è il bello del mio lavoro? Che non devo sapere il perchè.
 Joel:    Non me ne frega niente del perchè devi uscire da qui. 
 Joel:    Muoviamoci, questa storia mi ha già stancato.
+
+OBIETTIVO : RACCOGLI TUTTO IL NECESSARIO PER INIZIARE IL VIAGGIO CON ELLIE
+

@@ -39,7 +39,7 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     }
     
     private void myInit() {
-        setTitle("QUELLA ZOCCOLONA DI TUA SORELLA");
+        setTitle("Tastierino numerico elettronico");
         setResizable(false);    // non è possibile ridimensionare il frame
         setLocationRelativeTo(null);  // il frame appare al centro del desktop, quindi non bisogna trascinarlo al centro con il cursore
 
