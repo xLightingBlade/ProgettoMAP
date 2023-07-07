@@ -445,7 +445,11 @@ public class EsecuzioneComandi implements Serializable{
                                 o.setInvisibile(true);
                                 inventarioGiocatore.add(o);
                                 
-                                System.out.println("Joel:  bene ora potrò oltrepassare le guardie");
+                                //questo non permette al giocatore di usare di nuovo il cacciavite
+                                oggetto.setUsabile(false);
+                                
+                                System.out.println("Joel:  bene, la grata è aperta.");
+                                System.out.println("Ora potrò oltrepassare le guardie in silenzio");
                             }
                             else
                             {
@@ -461,7 +465,7 @@ public class EsecuzioneComandi implements Serializable{
             }
             else 
             {
-                System.out.println("Non puoi usare questo oggetto");
+                System.out.println("Non puoi usare questo oggetto, oppure lo hai già usato");
             }
         }
         else 

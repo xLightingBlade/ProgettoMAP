@@ -8,10 +8,12 @@ package com.mycompany.gioco;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import com.mycompany.avventura.CaricamentoDati;
+import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.openweatherAPI.MeteoAPI;
 import com.mycompany.parser.ParserOutput;
+import com.mycompany.swing.DocumentFrame;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.TipoComando;
@@ -26,6 +28,7 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
+import java.awt.Font;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -76,6 +79,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     
     /** Per info sui possibili valori dell'id meteo:
      *  https://openweathermap.org/weather-conditions 
+     * @param citta
     */
     
     public static void dialoghiMeteoSoggiorno(String citta) {
@@ -95,6 +99,7 @@ public class Avventura extends StrutturaGioco implements Serializable
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
     public static void dialoghiMeteoCitta(String citta) {
         try {
@@ -126,9 +131,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     }
                 }
             }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -173,6 +176,14 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case APRI -> esec.apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
                 
+                case HELP -> 
+                {
+                    LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+                    DocumentFrame manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
+                    manualeUtente.getTextLabel().setFont(new Font("Press Gothic", Font.BOLD, 15));
+                    manualeUtente.setVisible(true);
+                }
+                        
                 case SPINGI -> 
                 {
                     if(oggetto!= null)

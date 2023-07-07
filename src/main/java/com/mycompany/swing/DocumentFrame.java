@@ -23,7 +23,6 @@ public class DocumentFrame extends JFrame
     public DocumentFrame(String title, String text) 
     {
         super(title);
-        //System.out.println("Sono entrato nel costruttore");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(900,500);         
         setLayout(new BorderLayout());
@@ -37,7 +36,7 @@ public class DocumentFrame extends JFrame
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
         textLabel.setForeground(Color.WHITE);
-        textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
+        textLabel.setFont(new Font("Press Gothic", Font.BOLD, 17));
         
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

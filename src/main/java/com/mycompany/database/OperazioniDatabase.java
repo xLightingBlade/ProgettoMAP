@@ -286,11 +286,11 @@ public class OperazioniDatabase {
         //Oggetti casa Joel
         
         Oggetto pistola = new Oggetto(idOggetti.get(0), nomiOggetti.get(0), descrizioniOggetti.get(0));
-        pistola.setAlias(new String[] {"arma"});
+        pistola.setAlias(new String[] {"arma","pistoletta"});
         stanze.get(0).getOggetti().add(pistola);
         
         Oggetto coltello = new Oggetto(idOggetti.get(1), nomiOggetti.get(1), descrizioniOggetti.get(1));
-        coltello.setAlias(new String[]{"lama"});
+        coltello.setAlias(new String[]{"lama","coltellino"});
         stanze.get(0).getOggetti().add(coltello);
 
         Oggetto bottigliaVuota = new Oggetto(idOggetti.get(2), nomiOggetti.get(2), descrizioniOggetti.get(2));
@@ -298,26 +298,26 @@ public class OperazioniDatabase {
         stanze.get(0).getOggetti().add(bottigliaVuota);
 
         Oggetto scatolettaCibo = new Oggetto(idOggetti.get(3), nomiOggetti.get(3), descrizioniOggetti.get(3));
-        scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina"});
+        scatolettaCibo.setAlias(new String[] {"scatoletta", "lattina","scatolette di cibo"});
         stanze.get(0).getOggetti().add(scatolettaCibo);
 
         Documento foto = new OggettoImmagine(idOggetti.get(4), nomiOggetti.get(4), descrizioniOggetti.get(4));
-        foto.setAlias(new String[]{"immagine"});
+        foto.setAlias(new String[]{"immagine","documento"});
         foto.setPrendibile(true);
         foto.setPathDocumento(".//resources/img/fotoSoggiorno960x660.jpg");
         stanze.get(0).getOggetti().add(foto);
         
         Oggetto garza = new Oggetto(idOggetti.get(6), nomiOggetti.get(6), descrizioniOggetti.get(6));
-        garza.setAlias(new String[]{"garze"});        
+        garza.setAlias(new String[]{"garze","bende","fasciatura"});        
         
         Oggetto alcol = new Oggetto(idOggetti.get(7), nomiOggetti.get(7), descrizioniOggetti.get(7));
-        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool"});
+        alcol.setAlias(new String[]{"alcol etilico", "etilico", "alcool","bottiglia di alcol","bottiglietta di alcol","bottiglietta di alcool"});
         
         Oggetto forbici = new Oggetto(idOggetti.get(8), nomiOggetti.get(8), descrizioniOggetti.get(8));
         forbici.setAlias(new String[]{"forbice"});
         
         ContenitoreOggetti mobileBagno = new ContenitoreOggetti(idOggetti.get(5), nomiOggetti.get(5), descrizioniOggetti.get(5));
-        mobileBagno.setAlias(new String[]{"mobiletto"});
+        mobileBagno.setAlias(new String[]{"mobiletto","mobile","mobile impolverato"});
         mobileBagno.setApribile(true);
         mobileBagno.setPrendibile(false);
         mobileBagno.setAperto(false);
@@ -327,11 +327,11 @@ public class OperazioniDatabase {
         mobileBagno.add(forbici);
         
         Oggetto munizioni = new Oggetto(idOggetti.get(9), nomiOggetti.get(9), descrizioniOggetti.get(9));
-        munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto"});
+        munizioni.setAlias(new String[]{"colpi", "pacco", "pacchetto","pacco di munizioni","pacchetto di munizioni"});
         stanze.get(2).getOggetti().add(munizioni);
 
         Oggetto batterie = new Oggetto(idOggetti.get(10), nomiOggetti.get(10), descrizioniOggetti.get(10));
-        batterie.setAlias(new String[]{"batteria"});
+        batterie.setAlias(new String[]{"batteria","pile per torcia"});
         stanze.get(2).getOggetti().add(batterie);
         
         //
@@ -340,24 +340,24 @@ public class OperazioniDatabase {
         //Oggetti passaggio segreto
         
         Oggetto roccia = new Oggetto(idOggetti.get(11), nomiOggetti.get(11), descrizioniOggetti.get(11));
-        roccia.setAlias(new String[]{"masso"});
+        roccia.setAlias(new String[]{"masso","roccia"});
         roccia.setPrendibile(false);
         stanze.get(3).getOggetti().add(roccia);
 
         Oggetto tastierino = new Oggetto(idOggetti.get(12), nomiOggetti.get(12), descrizioniOggetti.get(12));
-        tastierino.setAlias(new String[]{});        
+        tastierino.setAlias(new String[]{"tastierino elettronico"});        
         tastierino.setPrendibile(false);
         stanze.get(4).getOggetti().add(tastierino);
 
         Documento foglioQuadro = new OggettoFoglietto(idOggetti.get(13), nomiOggetti.get(13), descrizioniOggetti.get(13));
         foglioQuadro.setLeggibile(true);
-        foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
+        foglioQuadro.setAlias(new String[]{"documento","foglio enigma", "foglietto", "enigma"});
         foglioQuadro.setContenuto("CONTENUTO FOGLIO ENIGMA");
         foglioQuadro.setPathDocumento(".//the_last_of_us(storia)//documenti_gioco(da raccogliere)//enigma.txt");
         stanze.get(5).getOggetti().add(foglioQuadro);
 
         Oggetto levaCorrente = new Oggetto(idOggetti.get(14), nomiOggetti.get(14), descrizioniOggetti.get(14));
-        levaCorrente.setAlias(new String[]{});
+        levaCorrente.setAlias(new String[]{"leva corrente","quadro elettrico"});
         levaCorrente.setPrendibile(false);
         levaCorrente.setSpingibile(true);
         levaCorrente.setInvisibile(true);
@@ -382,7 +382,7 @@ public class OperazioniDatabase {
         
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
-        zattera.setAlias(new String[]{"legno"});
+        zattera.setAlias(new String[]{"legno","assi","assi di legno","tavola","tavola di legno","tavoletta","tavoletta di legno","tavolette di legno"});
         stanze.get(8).getOggetti().add(zattera);
         
         //
@@ -394,11 +394,11 @@ public class OperazioniDatabase {
         stanze.get(12).getOggetti().add(garza);
         
         Oggetto chiaveArmadietto = new Oggetto(idOggetti.get(18), nomiOggetti.get(18), descrizioniOggetti.get(18));
-        chiaveArmadietto.setAlias(new String[]{"chiave", "chiave armadietto"});
+        chiaveArmadietto.setAlias(new String[]{"chiave","chiavi","chiave armadietto","chiavi armadietto"});
         stanze.get(10).getOggetti().add(chiaveArmadietto);
         
         Oggetto tesserino = new Oggetto(idOggetti.get(20), nomiOggetti.get(20), descrizioniOggetti.get(20));
-        tesserino.setAlias(new String[]{"tessera"});
+        tesserino.setAlias(new String[]{"tessera","tesserina","carta"});
 
         ContenitoreOggetti armadietto = new ContenitoreOggetti(idOggetti.get(19), nomiOggetti.get(19), descrizioniOggetti.get(19));
         armadietto.setAlias(new String[]{});
@@ -415,7 +415,7 @@ public class OperazioniDatabase {
         //Oggetti piano sala operatoria
         
         Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
-        cacciavite.setAlias(new String[]{});
+        cacciavite.setAlias(new String[]{"cacciaviti","giravite","giraviti"});
         cacciavite.setUsabile(true);
         stanze.get(15).getOggetti().add(cacciavite);
         
@@ -437,20 +437,9 @@ public class OperazioniDatabase {
         
         //Aggiungo tutti gli oggetti alla lista degli oggetti del gioco
         
-//<<<<<<< HEAD
-//=======
-        /*
-        Oggetto curato = new Oggetto(idOggetti.get(24), nomiOggetti.get(24), descrizioniOggetti.get(24));
-        curato.setAlias(new String[]{});        
-        curato.setPrendibile(false);
-        curato.setSpingibile(false);
-        curato.setApribile(false);
-        curato.setInvisibile(true);
-        */
         Oggetto fittizio = new Oggetto(idOggetti.get(25), nomiOggetti.get(25), descrizioniOggetti.get(25));
         fittizio.setInvisibile(true);
         
-//>>>>>>> main
         oggetti.add(pistola);
         oggetti.add(coltello);
         oggetti.add(bottigliaVuota);
@@ -473,21 +462,13 @@ public class OperazioniDatabase {
         oggetti.add(tesserino);
         oggetti.add(cacciavite);
         oggetti.add(documentoMedico);
-
-/*        oggetti.add(grata);
-<<<<<<< HEAD
-=======
-        
-        oggetti.add(curato);
-        oggetti.add(fittizio);
->>>>>>> main
-*/
         
         return stanze;        
     }
     
     
-    public static List<Comando> creaComandi() throws SQLException {
+    public static List<Comando> creaComandi() throws SQLException 
+    {
         Comando nord = new Comando(TipoComando.valueOf(tipoComandi.get(0)), nomeComandi.get(0));
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         
@@ -507,16 +488,16 @@ public class OperazioniDatabase {
         fine.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati", "exit"});
         
         Comando osserva = new Comando(TipoComando.valueOf(tipoComandi.get(6)), nomeComandi.get(6));
-        osserva.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi", "scruta"});
+        osserva.setAlias(new String[]{"oss","guarda", "vedi", "trova", "cerca", "descrivi", "scruta","perlustra"});
         
         Comando prendi = new Comando(TipoComando.valueOf(tipoComandi.get(7)), nomeComandi.get(7));
-        prendi.setAlias(new String[]{"prendi"});
+        prendi.setAlias(new String[]{"prendi","raccogli","raccogli da terra"});
         
         Comando apri = new Comando(TipoComando.valueOf(tipoComandi.get(8)), nomeComandi.get(8));
         apri.setAlias(new String[]{});
         
         Comando spingi = new Comando(TipoComando.valueOf(tipoComandi.get(9)), nomeComandi.get(9));
-        spingi.setAlias(new String[]{"spingi", "attiva"});
+        spingi.setAlias(new String[]{"spingi", "attiva","alza"});
         
         Comando leggi = new Comando(TipoComando.valueOf(tipoComandi.get(10)), nomeComandi.get(10));
         leggi.setAlias(new String[]{"sfoglia"});
@@ -531,10 +512,13 @@ public class OperazioniDatabase {
         nasconditi.setAlias(new String[]{});
         
         Comando curati = new Comando(TipoComando.valueOf(tipoComandi.get(14)), nomeComandi.get(14));
-        curati.setAlias(new String[]{"risanati"});
+        curati.setAlias(new String[]{"risanati","cura Joel"});
         
         Comando usa = new Comando(TipoComando.valueOf(tipoComandi.get(15)), nomeComandi.get(15));
-        usa.setAlias(new String[]{});
+        usa.setAlias(new String[]{"utilizza"});
+        
+        Comando help = new Comando(TipoComando.valueOf(tipoComandi.get(16)), nomeComandi.get(16));
+        help.setAlias(new String[]{"aiuto","aiutami","cosa faccio","cosa fare","che faccio","cosa devo fare","help me"});
         
         comandi.add(nord);
         comandi.add(inventario);
@@ -552,6 +536,7 @@ public class OperazioniDatabase {
         comandi.add(nasconditi);
         comandi.add(curati);
         comandi.add(usa);
+        comandi.add(help);
         
         return comandi;
     }
