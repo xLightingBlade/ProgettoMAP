@@ -37,3 +37,14 @@ Joel ha la meglio, e cercherà poi di trovare la stanza in cui stanno operando E
 Una volta curatosi Joel sale al piano della sala operatoria, che però è pattugliata da tantissime guardie, quindi dovrà trovare un modo per aggirarle.<br>
 Una volta oltrepassate le guardie Joel si dirige verso la sala operatoria dove trova Ellie completamente addormentata, circondata da dottori.<br>
 Joel riesce a portare via Ellie dall'ospedale e grazie ad un'auto trovata nel parcheggio al piano terra Joel riesce a fuggire con Ellie salvandole la vita.
+<br>
+<br>
+<br>
+## 2. **Gameplay di gioco**
+In questa avventuare testuale l'utente giocatore dovrà cercare di avanzare con la storia accedendo a delle stanze che si apriranno solo quando saranno risolti determinati enigmi.<br>
+L'utente quindi deve cercare di raccogliere ed utilizzare tutti gli oggetti necessari per aprire le porte e poter avanzare con il gioco.<br>
+Il tutto è contornato da una narrativa avvincente mostrata all'utente attraverso i dialoghi dei personaggi e da dei momenti di pericolo<br>
+in cui si chiede al giocatore di intervenire tempestivamente per salvare la vita dei personaggi.<br>
+Inoltre per rendere l'esperienza di gioco più comoda e divertente, l'utente ha a disposizione la possibilità di poter consultare un piccolo manuale utente,<br>
+in cui è spiegato il funzionamente di tutti i comandi del gioco, e la possibilità di salvare la partita e riprenderla quando desidera. 
+
