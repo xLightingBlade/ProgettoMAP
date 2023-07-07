@@ -403,6 +403,7 @@ public class EsecuzioneComandi implements Serializable{
             System.out.println("Non possiedi ciò che ti serve per curarti, cerca meglio");
         }
     }
+    
 
     void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException 
     {
@@ -412,6 +413,7 @@ public class EsecuzioneComandi implements Serializable{
             {
                 switch(oggetto.getId()) 
                 {
+                    //tastierino
                     case 12 -> 
                     {
                         if(usaTastierino()) 
@@ -421,11 +423,38 @@ public class EsecuzioneComandi implements Serializable{
                             o.setAlias(new String[]{""});
                             o.setInvisibile(true);
                             inventarioGiocatore.add(o);
-                            oggetto.setUsabile(false);//il tastierino non può essere usato di nuovo
+                            
+                            System.out.println("Joel:  bene ora potrò oltrepassare il cancello");
                         } 
-                        else 
+                    }
+                    
+                    
+                    //cacciavite
+                    case 21 ->
+                    {
+                        //se l'inventario contiene il cacciavite
+                        if(inventarioGiocatore.contains(oggetto))
                         {
-                            System.out.println("Nope");
+                            //se l'utente vuole usare il cacciavite nel sistema di ventilazione
+                            if(stanzacorrente.getNome().equalsIgnoreCase("Sistema di ventilazione"))
+                            {
+                                //apri la grata nel sistema di ventilazione
+                                Oggetto o = new Oggetto(26);
+                                o.setNome("");
+                                o.setAlias(new String[]{""});
+                                o.setInvisibile(true);
+                                inventarioGiocatore.add(o);
+                                
+                                System.out.println("Joel:  bene ora potrò oltrepassare le guardie");
+                            }
+                            else
+                            {
+                                System.out.println("Non puoi usare questo oggetto in questa stanza");
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("Devi prima raccogliere quest oggetto");
                         }
                     }
                 }
@@ -437,7 +466,7 @@ public class EsecuzioneComandi implements Serializable{
         }
         else 
         {
-            System.out.println("Non esiste un tale oggetto");
+            System.out.println("Non esiste un tale oggetto, o forse devi ancora raccoglierlo");
         }
     }
 
