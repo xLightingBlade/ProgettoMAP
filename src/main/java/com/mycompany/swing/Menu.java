@@ -16,11 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -29,7 +26,9 @@ import javax.swing.SwingConstants;
  */
 public class Menu extends javax.swing.JFrame {
     private OpzioniMenu sceltaUtente;
-    private JDialog manualeDialog;
+    //private JDialog manualeDialog;
+    private DocumentFrame manualeUtente;
+    
    
     public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException {
         if(CheckImg.isImage(pathImg)) {
@@ -64,46 +63,15 @@ public class Menu extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);   // centro il testo contenuto nella lable al centro della lable stessa
         titleLabel.setVerticalAlignment(SwingConstants.CENTER);
             
-        initDialog();
+        initManualeUtente();
     }
     
     
-    private void initDialog() {
-        this.manualeDialog = new JDialog(this, "Finestra di dialogo", true);
-        manualeDialog.setSize(800, 600);
-        manualeDialog.setLayout(new BorderLayout());
-        manualeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);   //Questa opzione chiude la finestra di dialogo e libera tutte le risorse associate ad essa.
-        manualeDialog.setResizable(true);
-        
-        JPanel panelDialog = new JPanel(new BorderLayout());
-        JLabel textLabelDialog = new JLabel();
-        JLabel titleLabelDialog = new JLabel("BENVENUTO NEL GIOCO CAZZI E MAZZI!!");
-        JScrollPane scrollPane = new JScrollPane(textLabelDialog);
-                
-        // inizializzazione scrollPane
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setBackground(Color.BLACK);
-        
-        // inizializzazione pannello
-        panelDialog.setBackground(Color.BLACK);      
-        
-        // inizializzazione lable
-        titleLabelDialog.setForeground(Color.WHITE);
-        titleLabelDialog.setFont(new Font("Kristen ITC", Font.BOLD, 18));        
-        titleLabelDialog.setHorizontalAlignment(SwingConstants.CENTER);  
-
-        textLabelDialog.setForeground(Color.WHITE);
-        textLabelDialog.setFont(new Font("Kristen ITC", Font.BOLD, 14));   
-        textLabelDialog.setVerticalAlignment(SwingConstants.TOP);
-        textLabelDialog.setHorizontalAlignment(SwingConstants.LEFT);
+    private void initManualeUtente()
+    {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
-        textLabelDialog.setText("<html>"+"<br>"+loader.ottieniComeTesto(".//resources//istruzioniGioco.txt").replaceAll("\\n", "<br>"+"<html>"));         
-             
-       
-        panelDialog.add(scrollPane, BorderLayout.CENTER);
-        panelDialog.add(titleLabelDialog, BorderLayout.PAGE_START);
-        manualeDialog.add(panelDialog, BorderLayout.CENTER);
+        manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
+        manualeUtente.getTextLabel().setFont(new Font("Press Gothic", Font.BOLD, 15));
     }
     
     @SuppressWarnings("unchecked")
@@ -163,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
         manualeUtenteButton.setBackground(new java.awt.Color(0, 0, 0));
         manualeUtenteButton.setForeground(new java.awt.Color(255, 255, 255));
         manualeUtenteButton.setText("Manuale utente");
-        manualeUtenteButton.setToolTipText("cliccando qui si aprirà una finestra contenente le istruzioni presenti nel gioco connla relativa descrizione");
+        manualeUtenteButton.setToolTipText("cliccando qui si aprirà una finestra contenente le istruzioni presenti nel gioco con la relativa descrizione");
         manualeUtenteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manualeUtenteButtonActionPerformed(evt);
@@ -242,7 +210,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_caricaPartitaButtonActionPerformed
 
     private void manualeUtenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manualeUtenteButtonActionPerformed
-        manualeDialog.setVisible(true);
+        manualeUtente.setVisible(true);
     }//GEN-LAST:event_manualeUtenteButtonActionPerformed
 
     
@@ -276,6 +244,7 @@ public class Menu extends javax.swing.JFrame {
         OpzioniMenu sceltaUtente = new OpzioniMenu();
         
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new Menu(".//resources//img//sfondoMenuTheLastofUS.jpg", sceltaUtente).setVisible(true);

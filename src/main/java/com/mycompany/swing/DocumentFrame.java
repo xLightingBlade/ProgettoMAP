@@ -6,12 +6,9 @@ package com.mycompany.swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -34,13 +31,12 @@ public class DocumentFrame extends JFrame
         getContentPane().setBackground(new Color(0, 77, 0));
         
 
-        String processText = text.replaceAll("[.;:||\n]", "$0<br>");
+        String processText = text.replaceAll("\n", "<br>");
         
-        textLabel = new JLabel("<html>"+processText+"</html>");
+        textLabel = new JLabel("<html><pre style='Press Gothic'>"+processText+"</pre></html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
         textLabel.setForeground(Color.WHITE);
-        //textLabel.setFont(new Font("Bodoni MT", Font.BOLD, 16));
         textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
         
         scrollPane = new JScrollPane(textLabel);
@@ -51,4 +47,9 @@ public class DocumentFrame extends JFrame
         add(scrollPane, BorderLayout.CENTER);    
         pack();
     }
+
+    public JLabel getTextLabel() {
+        return textLabel;
+    }
+    
 }

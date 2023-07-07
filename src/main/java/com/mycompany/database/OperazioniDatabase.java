@@ -417,7 +417,6 @@ public class OperazioniDatabase {
         Oggetto cacciavite = new Oggetto(idOggetti.get(21), nomiOggetti.get(21), descrizioniOggetti.get(21));
         cacciavite.setAlias(new String[]{});
         cacciavite.setUsabile(true);
-        System.out.println(cacciavite.getNome() + " " + cacciavite.isUsabile());
         stanze.get(15).getOggetti().add(cacciavite);
         
         Documento documentoMedico = new OggettoFoglietto(idOggetti.get(22), nomiOggetti.get(22), descrizioniOggetti.get(22));

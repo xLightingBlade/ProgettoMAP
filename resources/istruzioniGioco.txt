@@ -1,8 +1,33 @@
-Sei in una stanza misteriosa e hai a disposizione i seguenti comandi:
-- prendi <oggetto>: Utilizza questo comando per prendere un oggetto nella stanza. Ad esempio, "prendi chiave".
-- apri <oggetto>: Utilizza questo comando per aprire un oggetto nella stanza. Ad esempio, "apri porta".
-- osserva <oggetto>: Utilizza questo comando per osservare un oggetto nella stanza. Ad esempio, "osserva tavolo".
-- nasconditi: Utilizza questo comando per nasconderti nella stanza.
-- esci: Utilizza questo comando per uscire dal gioco.
-Ricorda di esplorare attentamente la stanza, osservare gli oggetti presenti e utilizzare i comandi corretti per progredire nel gioco.
+Ti trovi in una qualunque stanza :
+
+
+    Comandi per il movmimento :
+        - nord  , "per andare a nord"
+        - sud   , "per andare a sud"
+        - est   , "per andare a est"
+        - ovest , "per andare a ovest"
+
+
+    Comandi per gli oggetti :
+        - prendi Nomeoggetto  , "Utilizza questo comando per prendere un oggetto nella stanza. Ad esempio, "prendi chiave" ."
+        - apri Nomeoggetto    , "Utilizza questo comando per aprire un oggetto nella stanza. Ad esempio, "apri porta" ."
+        - osserva             , "Utilizza questo comando per osservare ciò che c'è nella stanza. Ad esempio ."
+        - nasconditi          , "Utilizza questo comando per nasconderti nella stanza in caso di pericolo ."
+        - usa Nomeoggetto     , "Utilizza questo comando per utilizzare un oggetto nella stanza. Ad esempio, "usa cacciavite" ."
+        - spingi Nomeoggetto  , "Utilizza questo comando per spingere un oggetto della stanza. Ad esempio, "spingi leva" ."
+        - leggi Nomeoggetto   , "Utilizza questo comando per leggere un oggetto della stanza. Ad esempio, "leggi libro" ."
+        - accendi Nomeoggetto , "Utilizza questo comando per accendere un oggetto della stanza. Ad esempio, "accendi candela" ."
+        - curati              , "Utilizza questo comando per curarti in caso di ferite ."
+        - inventario          , "Utilizza questo comando per visualizzare gli oggetti che hai raccolto ."
+        
+
+    Comandi per la partita corrente :
+        - salva              , "Utilizza questo comando per salvare la partita ."
+        - esci               , "Utilizza questo comando per uscire dal gioco ."
+
+
+Ricorda che gli oggetti non hanno un unico nome , ma bens'ì un nome e un alias. 
+Quindi potrai utilizzare il nome o l'alias per interagire con l'oggetto.
+Esplora attentamente la stanza, osservare gli oggetti presenti e utilizza i comandi corretti per progredire nel gioco.
+
 Buona fortuna!

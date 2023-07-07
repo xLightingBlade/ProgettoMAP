@@ -151,7 +151,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Manuale utente"/>
-            <Property name="toolTipText" type="java.lang.String" value="cliccando qui si aprir&#xe0; una finestra contenente le istruzioni presenti nel gioco connla relativa descrizione"/>
+            <Property name="toolTipText" type="java.lang.String" value="cliccando qui si aprir&#xe0; una finestra contenente le istruzioni presenti nel gioco con la relativa descrizione"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manualeUtenteButtonActionPerformed"/>

@@ -29,10 +29,9 @@ public class Engine implements Serializable
 {
     private final StrutturaGioco gioco;
     
-    private Parser parser;
-    
-    
+    private Parser parser;   
 
+    
     //Costruttore
     /*Il costruttore fa principalmente 2 cose:
         1)caricamento dei dati del gioco
@@ -85,6 +84,7 @@ public class Engine implements Serializable
         }
     }
     //
+    
     
     //Questo metodo fa partire il gioco, rendendolo giocabile all'utente
     public void esegui()
