@@ -43,16 +43,6 @@ public class DocumentFrame extends JFrame
         //textLabel.setFont(new Font("Bodoni MT", Font.BOLD, 16));
         textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
         
-        /*int spacing = 20;
-        Border emptyBorder = new EmptyBorder(spacing, spacing, spacing, spacing);
-        
-        Color borderColor = Color.GRAY;
-        int borderWidth = 2;
-        Border lineBorder = BorderFactory.createLineBorder(borderColor, borderWidth);
-        Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, lineBorder);
-        textLabel.setBorder(compoundBorder); 
-        */
-        
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
