@@ -91,9 +91,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
                 leggiFile.start();  
             }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -215,7 +213,8 @@ public class Avventura extends StrutturaGioco implements Serializable
 
                 case CURATI -> esec.curati(inventarioGiocatore);
                 
-                case USA -> {
+                case USA -> 
+                {
                     if(oggetto!= null)
                     {
                         try 

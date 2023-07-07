@@ -34,7 +34,7 @@ public class DocumentFrame extends JFrame
         getContentPane().setBackground(new Color(0, 77, 0));
         
 
-        String processText = text.replaceAll("[.;:]", "$0<br>");
+        String processText = text.replaceAll("[.;:||\n]", "$0<br>");
         
         textLabel = new JLabel("<html>"+processText+"</html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
@@ -43,7 +43,7 @@ public class DocumentFrame extends JFrame
         //textLabel.setFont(new Font("Bodoni MT", Font.BOLD, 16));
         textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
         
-        int spacing = 20;
+        /*int spacing = 20;
         Border emptyBorder = new EmptyBorder(spacing, spacing, spacing, spacing);
         
         Color borderColor = Color.GRAY;
@@ -51,6 +51,7 @@ public class DocumentFrame extends JFrame
         Border lineBorder = BorderFactory.createLineBorder(borderColor, borderWidth);
         Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, lineBorder);
         textLabel.setBorder(compoundBorder); 
+        */
         
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -59,6 +60,5 @@ public class DocumentFrame extends JFrame
         
         add(scrollPane, BorderLayout.CENTER);    
         pack();
-        //System.out.println("Sto uscnedo dal costruttore");
     }
 }
