@@ -520,6 +520,9 @@ public class OperazioniDatabase {
         Comando help = new Comando(TipoComando.valueOf(tipoComandi.get(16)), nomeComandi.get(16));
         help.setAlias(new String[]{"aiuto","aiutami","cosa faccio","cosa fare","che faccio","cosa devo fare","help me"});
         
+        Comando attacca = new Comando(TipoComando.valueOf(tipoComandi.get(17)), nomeComandi.get(17));
+        attacca.setAlias(new String[]{"attaccalo","colpisci","ferisci","colpiscilo","feriscilo"});
+        
         comandi.add(nord);
         comandi.add(inventario);
         comandi.add(sud);
@@ -537,6 +540,7 @@ public class OperazioniDatabase {
         comandi.add(curati);
         comandi.add(usa);
         comandi.add(help);
+        comandi.add(attacca);
         
         return comandi;
     }

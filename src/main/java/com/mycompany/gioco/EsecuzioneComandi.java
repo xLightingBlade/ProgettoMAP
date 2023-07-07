@@ -69,12 +69,57 @@ public class EsecuzioneComandi implements Serializable{
     }
     
     
+    //Questo metodo simula l'attacco nel gioco
+    void attacca(Stanza stanzacorrente)
+    {
+        //diloghi attacco
+        if(stanzacorrente.getNome().equalsIgnoreCase("Stanza Zattera")) 
+        {
+            BufferedReader fileIn = null;
+            CaricamentoDati loader_introduzione = null;
+
+            try 
+            {     
+                //dialoghi post attacco di Joel                   
+                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt"));
+                loader_introduzione = new CaricamentoDati(fileIn);
+                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
+
+                //usato per simulare il fatto che le guardie stanno passando.
+                //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
+                loader_introduzione.join();
+            } 
+            catch(FileNotFoundException ex)
+            {
+                System.out.println("""
+                    Errore nel caricamento dati.
+                    Riavvia il giocoA.""");
+                System.exit(0);
+            } 
+            catch (IllegalArgumentException ex) 
+            {
+                System.out.println("Errore nel caricamento dati. Riavvia il gioco.B");
+                System.exit(0);
+            } 
+            catch (InterruptedException ex)
+            {
+                System.err.println(ex);
+                System.exit(0);
+            }       
+        } 
+        else 
+        {
+            System.out.println("Non c'è bisogno di attaccare qui.\n");
+        }
+    }
+    
+    
     //per ora si nasconde solo dietro la roccia
     void nasconditi(Stanza stanzacorrente) 
     {
         if(stanzacorrente.getOggetti().contains(new Oggetto(11))) 
         {
-            System.out.println("Ti sei nascosto dietro la grande roccia.");
+            System.out.println("Ti sei nascosto, attendi il momento migliore per fuggire.");
             BufferedReader fileIn = null;
             CaricamentoDati loader_introduzione = null;
 
@@ -449,7 +494,7 @@ public class EsecuzioneComandi implements Serializable{
                                 oggetto.setUsabile(false);
                                 
                                 System.out.println("Joel:  bene, la grata è aperta.");
-                                System.out.println("Ora potrò oltrepassare le guardie in silenzio");
+                                System.out.println("Joel:  Ora potrò oltrepassare le guardie in silenzio");
                             }
                             else
                             {

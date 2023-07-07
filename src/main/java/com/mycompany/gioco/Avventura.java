@@ -10,8 +10,10 @@ import java.io.FileReader;
 import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.avventura.StrutturaGioco;
+import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.openweatherAPI.MeteoAPI;
+import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
 import com.mycompany.swing.DocumentFrame;
 import com.mycompany.tipi.Comando;
@@ -29,10 +31,12 @@ import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.awt.Font;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -183,6 +187,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                     manualeUtente.getTextLabel().setFont(new Font("Press Gothic", Font.BOLD, 15));
                     manualeUtente.setVisible(true);
                 }
+                
+                case ATTACCA ->
+                {
+                    esec.attacca(stanzacorrente);
+                }
                         
                 case SPINGI -> 
                 {
@@ -276,8 +285,24 @@ public class Avventura extends StrutturaGioco implements Serializable
                 else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto") && usaTimer)
                 {
                     usaTimer = false;
-                    gestioneTimer();
-                }                
+                    System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
+                    gestioneTimer("nasconditi","the_last_of_us(storia)//Dialoghi//guardie_prendono_Joel_e_Ellie.txt","the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt");
+                }
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Stanza Zattera") && usaTimer)
+                {   
+                    //il timer viene disattivato, altrimenti l'utente potrebbe avanzare, tornare indietro e
+                    //doversi nascondere di nuovo dalle guardie. Il che non avrebbe senso, visto che lo ha già fatto prima.
+                    usaTimer = false;
+                    
+                    System.out.println("Attacca il clicker prima che ti uccida.\n Hai ancora pochi secondi per farlo.\n");
+                    gestioneTimer("attacca","the_last_of_us(storia)//Dialoghi//infetti_uccidono_Joel.txt","the_last_of_us(storia)//Dialoghi//Stanza_della_zattera.txt");
+                }
+                
+                //questo if serve per resettare il timer (disattivato prima) e renderlo utilizzabile nelle prossime fasi di gioco.
+                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Uscita Passaggio"))
+                {
+                    usaTimer = true;
+                }
             }
             
             if (this.assenzaStanza) 
@@ -292,46 +317,64 @@ public class Avventura extends StrutturaGioco implements Serializable
         }
     }
     
-    //gestione dei timer di gioco
+    //gestione dei timer di gioco    
+    /**
+     *
+     * @param comando
+     * @param fileFrasi
+     * @param dialoghiTimerScaduto
+     */
+    //Questo metodo di occupa di avviare il timer e gestirlo in modo generico dalla situazione di gioco in cui viene usato.
+    //Verranno caricati i dialoghi specific allo scadere del timer e finchè l'utente non inserisce il comando corretto
+    //il timer si resetta e vengono ricaricati i dialoghi iniziali che venivano caricati all'ingresso della stanza
     @Override
-    public void gestioneTimer()
+    public void gestioneTimer(String comando,String fileFrasi,String dialoghiTimerScaduto)
     {
         boolean dentro = false;
         
         Timer timer = new Timer();
         
         //avvio del timer per la prima volta
-        TimerGioco t = new TimerGioco();
+        TimerGioco t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
         TimerTask tempoScaduto = t;
         timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
         
-        System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
-        
         do
-        {
-            
+        {          
             if(t.isTempoScaduto())
             {
-                t = new TimerGioco();
+                t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
                 tempoScaduto = t;
                 timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
             }
 
-            //aspetta che l'utente si nasconda
+            //aspetta che l'utente faccia qualcosa
             Scanner scanner = new Scanner(System.in);
             if(scanner.hasNextLine()) 
             {
-                if(scanner.nextLine().equalsIgnoreCase("nasconditi"))//comando preso in input dall'utente)
+                if(scanner.nextLine().equalsIgnoreCase(comando))//comando preso in input dall'utente)
                 {
                     timer.cancel();//annulla il timer
-                    
-                    EsecuzioneComandi esec = new EsecuzioneComandi(this);
-                    esec.nasconditi(getStanzaCorrente());
+
+                    try
+                    {
+                        //caricamento delle stopwords in un set di stringhe.
+                        Set<String> stopwords = Utils.caricaStopwords(new File("./resources/stopwords"));
+                        Parser parser = new Parser(stopwords);//creazione del parser con le relative stopwords
+                        ParserOutput p = parser.parse(comando, getComandi(), getStanzaCorrente().getOggetti(), getInventario());
+                        prossimaMossa(p);
+                    }
+                    catch (IOException ex)
+                    {
+                        System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+                        System.exit(0);
+                    }
+                   
                     dentro = true;                  
                 }
                 else
                 {
-                    System.out.println("Nasconditi, o i soldati ti prenderanno.");
+                    System.out.println("Fai qualcosa prima che sia troppo tardi");
                 }
             }           
         }

@@ -63,6 +63,5 @@ public abstract class StrutturaGioco implements Serializable  {
      
     public abstract void prossimaMossa(ParserOutput p);//In questo metodo è racchiusa la storia dell'avventura testuale
     
-    public abstract void gestioneTimer();//Questo metodo si occupa di gestire i timer per le situazioni di gioco che lo richiedono
-
+    public abstract void gestioneTimer(String comando,String fileFrasi,String dialoghiTimerScaduto);//Questo metodo si occupa di gestire i timer per le situazioni di gioco che lo richiedono
 }
