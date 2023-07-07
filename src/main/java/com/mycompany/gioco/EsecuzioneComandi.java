@@ -421,6 +421,7 @@ public class EsecuzioneComandi implements Serializable{
                             o.setAlias(new String[]{""});
                             o.setInvisibile(true);
                             inventarioGiocatore.add(o);
+                            oggetto.setUsabile(false);//il tastierino non può essere usato di nuovo
                         } 
                         else 
                         {
@@ -428,17 +429,25 @@ public class EsecuzioneComandi implements Serializable{
                         }
                     }
                 }
-            }else {
+            }
+            else 
+            {
                 System.out.println("Non puoi usare questo oggetto");
             }
-        }else {
+        }
+        else 
+        {
             System.out.println("Non esiste un tale oggetto");
         }
     }
 
-    private boolean usaTastierino() throws InterruptedException {
+    private boolean usaTastierino() throws InterruptedException 
+    {
+        
         new TastierinoJFrame(4,8,0).setVisible(true);
-        while(TastierinoJFrame.isAperto()) {
+        
+        while(TastierinoJFrame.isAperto()) 
+        {
             Thread.sleep(1000);
         }
         return TastierinoJFrame.isCorretto();

@@ -31,34 +31,24 @@ public class DocumentFrame extends JFrame
         setSize(900,500);         
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.BLACK);
+        getContentPane().setBackground(new Color(0, 77, 0));
         
 
-        String processText = text.replaceAll("[.;:]", "$0<br>");
+        String processText = text.replaceAll("[.;:||\n]", "$0<br>");
         
         textLabel = new JLabel("<html>"+processText+"</html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
         textLabel.setForeground(Color.WHITE);
         //textLabel.setFont(new Font("Bodoni MT", Font.BOLD, 16));
-        textLabel.setFont(new Font("Kristen ITC", Font.BOLD, 14));
-        
-        int spacing = 20;
-        Border emptyBorder = new EmptyBorder(spacing, spacing, spacing, spacing);
-        
-        Color borderColor = Color.GRAY;
-        int borderWidth = 2;
-        Border lineBorder = BorderFactory.createLineBorder(borderColor, borderWidth);
-        Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, lineBorder);
-        textLabel.setBorder(compoundBorder); 
+        textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
         
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setBackground(Color.BLACK);
+        scrollPane.getViewport().setBackground(new Color(0, 77, 0));
         
         add(scrollPane, BorderLayout.CENTER);    
         pack();
-        //System.out.println("Sto uscnedo dal costruttore");
     }
 }
