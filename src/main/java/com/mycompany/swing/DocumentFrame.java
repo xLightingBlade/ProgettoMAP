@@ -31,7 +31,7 @@ public class DocumentFrame extends JFrame
         setSize(900,500);         
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.BLACK);
+        getContentPane().setBackground(new Color(0, 77, 0));
         
 
         String processText = text.replaceAll("[.;:]", "$0<br>");
@@ -41,7 +41,7 @@ public class DocumentFrame extends JFrame
         textLabel.setVerticalAlignment(JLabel.TOP);
         textLabel.setForeground(Color.WHITE);
         //textLabel.setFont(new Font("Bodoni MT", Font.BOLD, 16));
-        textLabel.setFont(new Font("Kristen ITC", Font.BOLD, 14));
+        textLabel.setFont(new Font("Press Gothic", Font.BOLD, 20));
         
         int spacing = 20;
         Border emptyBorder = new EmptyBorder(spacing, spacing, spacing, spacing);
@@ -55,7 +55,7 @@ public class DocumentFrame extends JFrame
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setBackground(Color.BLACK);
+        scrollPane.getViewport().setBackground(new Color(0, 77, 0));
         
         add(scrollPane, BorderLayout.CENTER);    
         pack();

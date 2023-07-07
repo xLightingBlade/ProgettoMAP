@@ -4,8 +4,6 @@
  */
 package com.mycompany.tipi;
 
-import com.mycompany.avventura.LoaderPrinterCharacterStream;
-
 /**
  *
  * @author Antonio

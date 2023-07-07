@@ -1,0 +1,11 @@
+John, amico mio, ho bloccato il cancello con questo tastierino elettronico;
+gli infetti ci stavano raggiungendo, abbiamo rischiato grosso.
+Serve na combinazione per poterlo aprire. Leggi attentamente :
+
+Tre cifre (comprese tra 0 e 9) dovrai trovare per aprire questo cancello. 
+Questi tre indizi ti diranno la sequenza corretta che dovrai indovinare.
+1)La somma delle 3 cifre è 12.
+2)Il primo numero è la metà del secondo.
+3)La differenza tra il primo e il quarto è 4.
+
+John so che riuscirai ad indovinare la combinazione. Ti aspettiamo al campo, torna presto.

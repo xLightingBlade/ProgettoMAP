@@ -348,10 +348,11 @@ public class OperazioniDatabase {
         tastierino.setPrendibile(false);
         stanze.get(4).getOggetti().add(tastierino);
 
-        Oggetto foglioQuadro = new Oggetto(idOggetti.get(13), nomiOggetti.get(13), descrizioniOggetti.get(13));
+        Documento foglioQuadro = new OggettoFoglietto(idOggetti.get(13), nomiOggetti.get(13), descrizioniOggetti.get(13));
         foglioQuadro.setLeggibile(true);
         foglioQuadro.setAlias(new String[]{"foglio enigma", "foglietto", "enigma"});
         foglioQuadro.setContenuto("CONTENUTO FOGLIO ENIGMA");
+        foglioQuadro.setPathDocumento(".//the_last_of_us(storia)//documenti_gioco(da raccogliere)//enigma.txt");
         stanze.get(5).getOggetti().add(foglioQuadro);
 
         Oggetto levaCorrente = new Oggetto(idOggetti.get(14), nomiOggetti.get(14), descrizioniOggetti.get(14));
@@ -371,11 +372,12 @@ public class OperazioniDatabase {
         torcia.setAccendibile(true);
         stanze.get(6).getOggetti().add(torcia);
  
-        Oggetto documentoMetro = new Oggetto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));
+        Documento documentoMetro = new OggettoFoglietto(idOggetti.get(16), nomiOggetti.get(16), descrizioniOggetti.get(16));
         documentoMetro.setAlias(new String[]{"documento", "documento metro", "lettera"});
         documentoMetro.setLeggibile(true);
         documentoMetro.setContenuto("CONTENUTO DOCUMENTO METROPOLITANA");
-        stanze.get(7).getOggetti().add(documentoMetro);
+        documentoMetro.setPathDocumento(".//the_last_of_us(storia)//documenti_gioco(da raccogliere)//Documento_metro.txt");
+        stanze.get(8).getOggetti().add(documentoMetro);
         
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
