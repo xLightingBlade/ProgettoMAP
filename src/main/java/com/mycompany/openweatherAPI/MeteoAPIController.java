@@ -33,7 +33,7 @@ public class MeteoAPIController {
     }
     
     public static MeteoForecastDataTransferObject getWeatherByCity(String city) throws IOException, InterruptedException{
-        var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+API_KEY);
+        var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?q="+city.replaceAll("\\s", "%20")+"&units=metric&appid="+API_KEY);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
                 .newBuilder()

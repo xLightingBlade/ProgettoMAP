@@ -96,7 +96,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     
     public static void dialoghiMeteoCitta(String citta) {
         try {
-            idMeteo = MeteoAPI.getMeteoID(citta.replaceAll("\\s", ""));
+            idMeteo = MeteoAPI.getMeteoID(citta);
             switch(citta) {
                 case "Boston" -> {
                     if(idMeteo.toString().startsWith("80")) {
