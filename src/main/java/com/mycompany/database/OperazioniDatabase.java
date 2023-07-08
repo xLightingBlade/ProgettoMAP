@@ -125,14 +125,17 @@ public class OperazioniDatabase {
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
         soggiornoCasa.setCitta(("Boston"));
+        soggiornoCasa.setInfoMeteo(true);
         
         Stanza bagnoCasa = new Stanza(idStanze.get(1), nomiStanze.get(1), descrizioniStanze.get(1));
         bagnoCasa.setOsservazione(osservazioni.get(1));
         bagnoCasa.setCitta("Boston");
+        bagnoCasa.setInfoMeteo(true);
         
         Stanza ripostiglioCasa = new Stanza(idStanze.get(2), nomiStanze.get(2), descrizioniStanze.get(2));
         ripostiglioCasa.setOsservazione(osservazioni.get(2));
         ripostiglioCasa.setCitta("Boston");
+        ripostiglioCasa.setInfoMeteo(true);
         //
         
         
@@ -155,6 +158,7 @@ public class OperazioniDatabase {
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(25));
         uscitaPassaggio.setOsservazione(osservazioni.get(17));
         uscitaPassaggio.setCitta("Boston");
+        uscitaPassaggio.setInfoMeteo(true);
         //      
         
         /*
@@ -181,10 +185,12 @@ public class OperazioniDatabase {
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
         ingressoOspedale.setCitta("Salt Lake City");
+        ingressoOspedale.setInfoMeteo(true);
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
         dentroOspedale.setCitta("Salt Lake City");
+        dentroOspedale.setInfoMeteo(true);
         
         Stanza magazzino = new Stanza(idStanze.get(11), nomiStanze.get(11), descrizioniStanze.get(11));
         magazzino.setOsservazione(osservazioni.get(11));
