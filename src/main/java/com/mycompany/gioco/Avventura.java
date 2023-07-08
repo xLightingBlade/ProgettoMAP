@@ -32,7 +32,9 @@ import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.awt.Font;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
@@ -79,13 +81,13 @@ public class Avventura extends StrutturaGioco implements Serializable
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
             if(idMeteo.toString().startsWith("80")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt"), "UTF-8")));
                 leggiFile.start();
             } else if(idMeteo.toString().startsWith("5")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt"), "UTF-8")));
                 leggiFile.start();
             } else if(idMeteo.toString().startsWith("6")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoNeve.txt"), "UTF-8")));
                 leggiFile.start();  
             }
         } catch (InterruptedException | IOException ex) {
@@ -100,25 +102,25 @@ public class Avventura extends StrutturaGioco implements Serializable
             switch(citta) {
                 case "Boston" -> {
                     if(idMeteo.toString().startsWith("80")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("5")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("6")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }
                 case "Salt Lake City" -> {
                     if(idMeteo.toString().startsWith("80")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("5")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("6")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }

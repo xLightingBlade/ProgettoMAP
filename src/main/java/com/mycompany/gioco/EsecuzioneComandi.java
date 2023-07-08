@@ -11,9 +11,12 @@ import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -70,7 +73,7 @@ public class EsecuzioneComandi implements Serializable{
     
     
     //Questo metodo simula l'attacco nel gioco
-    void attacca(Stanza stanzacorrente)
+    void attacca(Stanza stanzacorrente) throws UnsupportedEncodingException
     {
         //diloghi attacco
         if(stanzacorrente.getNome().equalsIgnoreCase("Stanza Zattera")) 
@@ -81,7 +84,7 @@ public class EsecuzioneComandi implements Serializable{
             try 
             {     
                 //dialoghi post attacco di Joel                   
-                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt"));
+                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt"), "UTF-8"));
                 loader_introduzione = new CaricamentoDati(fileIn);
                 loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
 
@@ -115,7 +118,7 @@ public class EsecuzioneComandi implements Serializable{
     
     
     //per ora si nasconde solo dietro la roccia
-    void nasconditi(Stanza stanzacorrente) 
+    void nasconditi(Stanza stanzacorrente) throws UnsupportedEncodingException 
     {
         if(stanzacorrente.getOggetti().contains(new Oggetto(11))) 
         {
@@ -126,7 +129,7 @@ public class EsecuzioneComandi implements Serializable{
             try 
             {     
                 //dialoghi dietro la roccia                    
-                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt"));
+                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt"), "UTF-8"));
                 loader_introduzione = new CaricamentoDati(fileIn);
                 loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
 
@@ -134,7 +137,7 @@ public class EsecuzioneComandi implements Serializable{
                 //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
                 loader_introduzione.join();
                 //dialoghi appena le guardie sono passate                    
-                fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt"));
+                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt"), "UTF-8"));
                 loader_introduzione = new CaricamentoDati(fileIn);
                 loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
 

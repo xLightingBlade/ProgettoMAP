@@ -8,8 +8,11 @@ import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.Stanza;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -42,14 +45,14 @@ public class BehaviourController {
         return inventarioGiocatore.stream().anyMatch(obj -> obj.getNome().equalsIgnoreCase(nomeOgg));
     }
 
-    public static void checkDialoghi(Stanza stanzaCorrente){
+    public static void checkDialoghi(Stanza stanzaCorrente) throws UnsupportedEncodingException{
         if(!stanzaCorrente.accessoFatto()) {
             selezioneDialogoIngressoStanza(stanzaCorrente);
             stanzaCorrente.setPrimoAccessoFatto(true);
         }
     }
 
-    public static void selezioneDialogoIngressoStanza(Stanza stanzaCorrente){
+    public static void selezioneDialogoIngressoStanza(Stanza stanzaCorrente) throws UnsupportedEncodingException{
         String filePath = null;
         
         switch(stanzaCorrente.getNome()) {
@@ -100,11 +103,11 @@ public class BehaviourController {
         }
     }
 
-    public static void mostraDialogoStanza(String filePath)
+    public static void mostraDialogoStanza(String filePath) throws UnsupportedEncodingException
     {    
         try 
         {
-            BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
+            BufferedReader fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
             CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
             loader_introduzione.start();
             loader_introduzione.join();
