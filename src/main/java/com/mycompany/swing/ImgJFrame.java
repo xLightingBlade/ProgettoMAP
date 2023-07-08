@@ -67,6 +67,7 @@ public class ImgJFrame extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg", "").setVisible(true);

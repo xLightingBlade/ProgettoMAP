@@ -11,8 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,24 +19,26 @@ import java.util.logging.Logger;
 public class TimerGioco extends TimerTask implements Serializable  
 {
     private boolean tempoScaduto;
+    private String fileFrasi;
+    private String dialoghiTimerScaduto;
     
-    public TimerGioco()
+    public TimerGioco(String fileFrasi,String dialoghiTimerScaduto)
     {
         tempoScaduto = false;
+        this.fileFrasi = fileFrasi;
+        this.dialoghiTimerScaduto = dialoghiTimerScaduto;
     }
     
     //Questo metodo dovrà salvare la partita e terminarla poichè il tempo è scaduto e l'utente ha perso.
     @Override
     public void run() 
     {
-        String filePath = ".//the_last_of_us(storia)//Dialoghi//guardie_prendono_Joel_e_Ellie.txt";
-        mostraDialogoStanza(filePath);
-        System.out.println( "Hai perso! Nasconditi prima che arrivino le guardie. Riprova!\nCaricamento, attendi.\n");
+        mostraDialogoStanza(fileFrasi);
         
         try 
         {
             //ripartono i dialoghi
-            BufferedReader in = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt"));
+            BufferedReader in = new BufferedReader(new FileReader(dialoghiTimerScaduto));
             CaricamentoDati dialoghi = new CaricamentoDati(in);
             dialoghi.start();
             dialoghi.join();

@@ -1,3 +1,8 @@
+
+									MANUALE UTENTE
+
+
+
 Ti trovi in una qualunque stanza :
 
 
@@ -20,10 +25,19 @@ Ti trovi in una qualunque stanza :
         - curati              , "Utilizza questo comando per curarti in caso di ferite ."
         - inventario          , "Utilizza questo comando per visualizzare gli oggetti che hai raccolto ."
         
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-    Comandi per la partita corrente :
-        - salva              , "Utilizza questo comando per salvare la partita ."
-        - esci               , "Utilizza questo comando per uscire dal gioco ."
+
+Comandi generici:
+
+
+	Comandi per la partita corrente :
+        	- salva              , "Utilizza questo comando per salvare la partita ."
+        	- esci               , "Utilizza questo comando per uscire dal gioco ."
+            - help               , "Utilizza questo comando per visualizzare i comandi disponibili e la relativa descrizione."
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 
 Ricorda che gli oggetti non hanno un unico nome , ma bens'ì un nome e un alias. 
@@ -31,3 +45,8 @@ Quindi potrai utilizzare il nome o l'alias per interagire con l'oggetto.
 Esplora attentamente la stanza, osservare gli oggetti presenti e utilizza i comandi corretti per progredire nel gioco.
 
 Buona fortuna!
+
+
+
+
+

@@ -26,7 +26,7 @@ public class OggettoFoglietto extends Documento
     public void visualizza()
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
-        DocumentFrame documentFrame = new DocumentFrame("Documento medico", loader.ottieniComeTesto(pathDocumento));
+        DocumentFrame documentFrame = new DocumentFrame("documento", loader.ottieniComeTesto(pathDocumento));
         documentFrame.setVisible(true);
     }
 }
