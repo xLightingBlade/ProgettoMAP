@@ -39,7 +39,7 @@ Una volta oltrepassate le guardie Joel si dirige verso la sala operatoria dove t
 Joel riesce a portare via Ellie dall'ospedale e grazie ad un'auto trovata nel parcheggio al piano terra Joel riesce a fuggire con Ellie salvandole la vita.
 <br>
 <br>
-<br>
+
 ## 2. **Gameplay di gioco**
 In questa avventuare testuale l'utente giocatore dovrà cercare di avanzare con la storia accedendo a delle stanze che si apriranno solo quando saranno risolti determinati enigmi.<br>
 L'utente quindi deve cercare di raccogliere ed utilizzare tutti gli oggetti necessari per aprire le porte e poter avanzare con il gioco.<br>
