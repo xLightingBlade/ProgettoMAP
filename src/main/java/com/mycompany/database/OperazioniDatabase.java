@@ -395,6 +395,7 @@ public class OperazioniDatabase {
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
         zattera.setAlias(new String[]{"legno","assi","assi di legno","tavola","tavola di legno","tavoletta","tavoletta di legno","tavolette di legno"});
+        zattera.setInvisibile(true);
         stanze.get(8).getOggetti().add(zattera);
         
         //
