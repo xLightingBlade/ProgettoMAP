@@ -4,7 +4,6 @@
  */
 package com.mycompany.swing;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author santo
@@ -203,7 +202,6 @@ public class TastierinoJFrame extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

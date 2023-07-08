@@ -15,13 +15,11 @@ import javax.swing.JScrollPane;
  * @author santo
  */
 
-public class DocumentFrame extends JFrame 
-{
+public class DocumentFrame extends JFrame {
     private final JLabel textLabel;
     private JScrollPane scrollPane;
     
-    public DocumentFrame(String title, String text) 
-    {
+    public DocumentFrame(String title, String text) {
         super(title);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(900,500);         
@@ -49,6 +47,5 @@ public class DocumentFrame extends JFrame
 
     public JLabel getTextLabel() {
         return textLabel;
-    }
-    
+    }  
 }
