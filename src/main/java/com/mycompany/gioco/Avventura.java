@@ -44,17 +44,6 @@ import java.util.logging.Logger;
 
 
 /**
- * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
- * debba estendere la classe StrutturaGioco. L'Engine è fatto in modo che possa
- * eseguire qualsiasi gioco che estende StrutturaGioco, in questo modo si
- * possono creare più gioci utilizzando lo stesso Engine.
- *
- * Diverse migliorie possono essere applicate: - la descrizione del gioco
- * potrebbe essere caricate da file o da DBMS in modo da non modificare il
- * codice sorgente - l'utilizzo di file e DBMS non è semplice poiché all'interno
- * del file o del DBMS dovrebbe anche essere codificata la logica del gioco
- * (prossimaMossa) oltre alla descrizione di stanze, oggetti, ecc...
- *
  * @author gabri
  */
 public class Avventura extends StrutturaGioco implements Serializable 
@@ -108,7 +97,6 @@ public class Avventura extends StrutturaGioco implements Serializable
     public static void dialoghiMeteoCitta(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            //esempi, tanto per adesso non verranno mai chiamati. Nemmeno i file di testo esistono, questo è un esempio dell'idea.
             switch(citta) {
                 case "Boston" -> {
                     if(idMeteo.toString().startsWith("80")) {
@@ -142,7 +130,6 @@ public class Avventura extends StrutturaGioco implements Serializable
     
 
     @Override
-    //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
     public void prossimaMossa(ParserOutput p) 
     {

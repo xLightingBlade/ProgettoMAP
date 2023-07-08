@@ -124,12 +124,15 @@ public class OperazioniDatabase {
         //stanze casa di Joel. richiesti cibo, colpi, pistola e coltello        
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
+        soggiornoCasa.setCitta(("Boston"));
         
         Stanza bagnoCasa = new Stanza(idStanze.get(1), nomiStanze.get(1), descrizioniStanze.get(1));
         bagnoCasa.setOsservazione(osservazioni.get(1));
+        bagnoCasa.setCitta("Boston");
         
         Stanza ripostiglioCasa = new Stanza(idStanze.get(2), nomiStanze.get(2), descrizioniStanze.get(2));
-        ripostiglioCasa.setOsservazione(osservazioni.get(2));       
+        ripostiglioCasa.setOsservazione(osservazioni.get(2));
+        ripostiglioCasa.setCitta("Boston");
         //
         
         
@@ -150,7 +153,8 @@ public class OperazioniDatabase {
         Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(25));
-        uscitaPassaggio.setOsservazione(osservazioni.get(17));      
+        uscitaPassaggio.setOsservazione(osservazioni.get(17));
+        uscitaPassaggio.setCitta("Boston");
         //      
         
         /*
@@ -176,9 +180,11 @@ public class OperazioniDatabase {
         //Stanze ospedale San Maries   
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
+        ingressoOspedale.setCitta("Salt Lake City");
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
+        dentroOspedale.setCitta("Salt Lake City");
         
         Stanza magazzino = new Stanza(idStanze.get(11), nomiStanze.get(11), descrizioniStanze.get(11));
         magazzino.setOsservazione(osservazioni.get(11));
