@@ -36,6 +36,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -179,7 +180,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case ATTACCA ->
                 {
+                try {
                     esec.attacca(stanzacorrente);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
                         
                 case SPINGI -> 
@@ -217,7 +222,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case NASCONDITI -> 
                 {       
+                try {
                     esec.nasconditi(stanzacorrente);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
 
                 case CURATI -> esec.curati(inventarioGiocatore);
@@ -261,7 +270,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 System.out.println(getStanzaCorrente().getDescrizione());
                 System.out.println();
                 
-                BehaviourController.checkDialoghi(getStanzaCorrente());
+                try {
+                    BehaviourController.checkDialoghi(getStanzaCorrente());
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
                 {
