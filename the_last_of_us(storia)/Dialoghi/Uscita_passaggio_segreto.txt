@@ -6,9 +6,9 @@ Soldato2:     Le mani sulla testa. Dammi il braccio ragazzina.
 Ambiente:     "Beep! Beep! Beep!".
 Soldato2:     Cazzo, la ragazzina è infetta!!
 Ambiente:     "Verso degli infetti".
-Soldato2:     Oh no ci sono infetti!!
+Soldato2:     Infetti!!
 Ambiente:     "Colpi di pistola di Joel".
-Ellie:        Li hai uccisi Joel.
+Ellie:        Li hai uccisi Joel....
 Joel:         Ellie corri!!
 
 L'allarme di sicurezza della ZQ è scattato e Joel ed Ellie devono correre via da li.

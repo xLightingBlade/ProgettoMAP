@@ -1,6 +1,6 @@
-John, amico mio, ho bloccato il cancello con questo tastierino elettronico;
-gli infetti ci stavano raggiungendo, abbiamo rischiato grosso.
-Serve na combinazione per poterlo aprire. Leggi attentamente :
+John, amico mio, ho bloccato il cancello con questo tastierino elettronico.
+Gli infetti ci stavano raggiungendo, abbiamo rischiato grosso.
+Serve una combinazione per poterlo aprire. Leggi attentamente :
 
 Tre cifre (comprese tra 0 e 9) dovrai trovare per aprire questo cancello. 
 Questi tre indizi ti diranno la sequenza corretta che dovrai indovinare.
