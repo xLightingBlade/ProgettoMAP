@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -35,9 +34,9 @@ public class Engine implements Serializable
 
     
     //Costruttore
-    /*Il costruttore fa principalmente 2 cose:
+    /*Il costruttore fa principalmente 3 cose:
         1)caricamento dei dati del gioco
-        2)crezione del parser
+        2)creazione del parser
         3)caricamento delle stopwords da file
     */
     public Engine(StrutturaGioco game) 

@@ -181,7 +181,7 @@ public class OperazioniDatabase {
         uscitaMetro.getOggettiNecessari().add(new Oggetto(17));       
         //
         
-        //Stanze ospedale San Maries   
+        //Stanze ospedale Saint Mary's  
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
         ingressoOspedale.setCitta("Salt Lake City");
@@ -222,7 +222,7 @@ public class OperazioniDatabase {
         //
         
         
-        //Setta mappa
+        //Imposta mappa di gioco
         
         //casa di Joel
         soggiornoCasa.setEst(bagnoCasa);
@@ -236,7 +236,7 @@ public class OperazioniDatabase {
         corridoioPassaggio.setNord(cancello);      
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
-        cancello.setNord(uscitaPassaggio);//Su questo va fatto un check se il cancello è stato aperto
+        cancello.setNord(uscitaPassaggio);
         stanzaQuadroElettrico.setOvest(cancello);
         uscitaPassaggio.setNord(ingressoMetro);
         //
@@ -260,13 +260,13 @@ public class OperazioniDatabase {
         infermeria.setOvest(dentroOspedale);
         //
         
-        //ospedale (mdificare)
+        //ospedale)
         pianoSalaOperatoria.setEst(condotto);
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
         condotto.setOvest(pianoSalaOperatoria);
         condotto.setNord(salaOperatoria);//dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria   
         stanzaCacciavite.setEst(pianoSalaOperatoria);
-        salaOperatoria.setNord(finale); //per ora, a fini di testing
+        salaOperatoria.setNord(finale);
         //
         
         

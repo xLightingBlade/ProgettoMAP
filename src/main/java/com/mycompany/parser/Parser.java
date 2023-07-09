@@ -65,7 +65,7 @@ public class Parser implements Serializable
     }
     
 
-    /* ATTENZIONE: il parser è implementato in modo abbastanza independete dalla lingua, ma riconosce solo 
+    /* ATTENZIONE: il parser è implementato in modo abbastanza independente dalla lingua, ma riconosce solo 
     * frasi semplici del tipo <azione> <oggetto> <oggetto>. Eventuali articoli o preposizioni vengono semplicemente
     * rimossi.
      */

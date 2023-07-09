@@ -6,7 +6,6 @@
 package com.mycompany.gioco;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.avventura.StrutturaGioco;
@@ -73,7 +72,9 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
-    /** Per info sui possibili valori dell'id meteo:
+    /**
+     * Un paio di metodi per mostrare una frase in base alle condizioni meteo della città.
+     * Per info sui possibili valori dell'id meteo:
      *  https://openweathermap.org/weather-conditions 
      * @param citta
     */
@@ -162,9 +163,9 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case OVEST -> esec.checkWestAccess(stanzacorrente,inventarioGiocatore);
                 
-                case INVENTARIO -> esec.printInventarioContent(inventarioGiocatore);
+                case INVENTARIO -> esec.stampaContenutoInventario(inventarioGiocatore);
                 
-                case GUARDA -> esec.printOsservazione(stanzacorrente);
+                case GUARDA -> esec.stampaOsservazione(stanzacorrente);
                 
                 case PRENDI -> esec.prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
                 
@@ -339,7 +340,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         //avvio del timer per la prima volta
         TimerGioco t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
         TimerTask tempoScaduto = t;
-        timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+        timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
         
         do
         {          
@@ -347,7 +348,7 @@ public class Avventura extends StrutturaGioco implements Serializable
             {
                 t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
                 tempoScaduto = t;
-                timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+                timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
             }
 
             //aspetta che l'utente faccia qualcosa

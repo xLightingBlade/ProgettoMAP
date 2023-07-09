@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author gabri
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MeteoForecastDataTransferObject {
+public class MeteoForecastDTO {
     public Coord coord;
     public ArrayList<Weather> weather;
     public String base;
@@ -78,8 +78,8 @@ public class MeteoForecastDataTransferObject {
         public double gust;
     }
     
-    public static MeteoForecastDataTransferObject parseJson(String json) throws MalformedURLException, IOException {
+    public static MeteoForecastDTO parseJson(String json) throws MalformedURLException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return (MeteoForecastDataTransferObject) mapper.readValue(json, MeteoForecastDataTransferObject.class);
+        return (MeteoForecastDTO) mapper.readValue(json, MeteoForecastDTO.class);
     }
 }

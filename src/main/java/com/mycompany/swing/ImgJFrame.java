@@ -14,10 +14,6 @@ import javax.swing.JLabel;
  * @author santo
  */
 public class ImgJFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ImgJFrame
-     */
     
     public ImgJFrame(String pathImg) throws ImgException {       
         this(pathImg, "");

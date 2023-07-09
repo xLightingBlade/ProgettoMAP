@@ -81,7 +81,7 @@ public class Stanza implements Serializable {
         return oggettiNecessariPerAccedere;
     }
     
-    //utilizzato per capire se una stanza deve essere visibile nella mappa o no
+
     public boolean isVisibile() {
         return visibile;
     }

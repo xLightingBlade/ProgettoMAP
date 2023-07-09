@@ -13,7 +13,6 @@ import com.mycompany.tipi.Stanza;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -96,12 +95,12 @@ public class EsecuzioneComandi implements Serializable{
             {
                 System.out.println("""
                     Errore nel caricamento dati.
-                    Riavvia il giocoA.""");
+                    Riavvia il gioco.""");
                 System.exit(0);
             } 
             catch (IllegalArgumentException ex) 
             {
-                System.out.println("Errore nel caricamento dati. Riavvia il gioco.B");
+                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
                 System.exit(0);
             } 
             catch (InterruptedException ex)
@@ -148,12 +147,12 @@ public class EsecuzioneComandi implements Serializable{
             {
                 System.out.println("""
                     Errore nel caricamento dati.
-                    Riavvia il giocoA.""");
+                    Riavvia il gioco.""");
                 System.exit(0);
             } 
             catch (IllegalArgumentException ex) 
             {
-                System.out.println("Errore nel caricamento dati. Riavvia il gioco.B");
+                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
                 System.exit(0);
             } 
             catch (InterruptedException ex)
@@ -168,11 +167,14 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
-    
+    /**
+     * Serie di metodi 'check___Access' per verificare di avere gli oggetti necessari a proseguire nella direzione chiesta.
+     * @param stanzacorrente
+     * @param inventarioGiocatore 
+     */
     void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
         if (stanzacorrente.getNord() != null) {
             if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
-                //setta la nuova stanzaCorrente a quella a nord della stanza corrente attuale
                 a.setStanzaCorrente(stanzacorrente.getNord());
                     a.haAccessoAllaStanza = true;
                 }else{  
@@ -229,7 +231,7 @@ public class EsecuzioneComandi implements Serializable{
     }
     
     
-    void printInventarioContent(List<Oggetto> inventarioGiocatore){
+    void stampaContenutoInventario(List<Oggetto> inventarioGiocatore){
         System.out.println("Nel tuo inventario ci sono:");
                 for (Oggetto o : inventarioGiocatore) {
                     if(!o.isInvisibile()) {
@@ -239,7 +241,7 @@ public class EsecuzioneComandi implements Serializable{
     }
     
     
-    void printOsservazione(Stanza stanzaCorrente){
+    void stampaOsservazione(Stanza stanzaCorrente){
     
          if (stanzaCorrente.getOsservazione() != null) {
              if(stanzaCorrente.isVisibile() == true) {
@@ -257,9 +259,9 @@ public class EsecuzioneComandi implements Serializable{
     
     
     /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
-    * vengongo inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
-    * Potrebbe non esssere la soluzione ottimale.
-     */
+    * vengono inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
+    * 
+    */
     void apriOggetto(Oggetto oggetto, Oggetto oggettoInventario, Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore )
     {
         if (oggetto == null && oggettoInventario == null) 
@@ -270,6 +272,7 @@ public class EsecuzioneComandi implements Serializable{
         {
             if (oggetto != null) 
             {
+                //imposta l'armadietto come apribile se hai la sua chiave
                 if(oggetto.getNome().equals("armadietto") && inventarioGiocatore.contains( ( new Oggetto(18))))
                 {
                     oggetto.setApribile(true);
@@ -360,7 +363,7 @@ public class EsecuzioneComandi implements Serializable{
         {
             if (oggetto.isPrendibile()) 
             {
-                //se l'oggetto
+                
                 if(oggetto instanceof OggettoImmagine) 
                 {
                     ((OggettoImmagine) oggetto).visualizza();
@@ -395,8 +398,7 @@ public class EsecuzioneComandi implements Serializable{
         if(oggetto != null){
             if (oggetto.isSpingibile()) {
                        System.out.println("Hai premuto: " + oggetto.getNome());
-                       //Creare metodo più generico qui.
-                       //questo mi serve solo per ''vedere'' se ho ''premuto'' la leva(in realtà me la metto nell'inventario, invisibile
+                       //id 14 = leva. Leva premuta crea oggetto fittizio nell'inventario
                        if (oggetto.getId() == 14) {
                            inventarioGiocatore.add(oggetto);
                            stanzaCorrente.getOggetti().remove(oggetto);
@@ -437,7 +439,7 @@ public class EsecuzioneComandi implements Serializable{
             inventarioGiocatore.remove(new Oggetto(6, "garza"));
             inventarioGiocatore.remove(new Oggetto(7, "alcol"));
             
-            //Questo oggetto serve per indicare che joel si è curato
+            //Questo oggetto serve per indicare che joel si è curato.
             Oggetto curato = new Oggetto(24, "curato");
             curato.setAlias(new String[]{"salute"});        
             curato.setPrendibile(false);
@@ -472,7 +474,7 @@ public class EsecuzioneComandi implements Serializable{
                             o.setInvisibile(true);
                             inventarioGiocatore.add(o);
                             
-                            System.out.println("Joel:  bene ora potrò oltrepassare il cancello");
+                            System.out.println("Joel:  Bene, ora potrò oltrepassare il cancello");
                         } 
                     }
                     
@@ -496,7 +498,7 @@ public class EsecuzioneComandi implements Serializable{
                                 //questo non permette al giocatore di usare di nuovo il cacciavite
                                 oggetto.setUsabile(false);
                                 
-                                System.out.println("Joel:  bene, la grata è aperta.");
+                                System.out.println("Joel:  Bene, la grata è aperta.");
                                 System.out.println("Joel:  Ora potrò oltrepassare le guardie in silenzio");
                             }
                             else
@@ -522,6 +524,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
 
+    //Metodo per aggirare la non-modalità di un jframe, di modo da fermare il flusso d'esecuzione mentre si sta usando il tastierino
     private boolean usaTastierino() throws InterruptedException 
     {
         
