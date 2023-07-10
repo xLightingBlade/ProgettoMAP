@@ -7,14 +7,12 @@ package com.mycompany.gioco;
 
 import java.io.BufferedReader;
 import com.mycompany.avventura.CaricamentoDati;
-import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.avventura.StrutturaGioco;
 import com.mycompany.avventura.Utils;
 import com.mycompany.database.OperazioniDatabase;
 import com.mycompany.openweatherAPI.MeteoAPI;
 import com.mycompany.parser.Parser;
 import com.mycompany.parser.ParserOutput;
-import com.mycompany.swing.DocumentFrame;
 import com.mycompany.tipi.Comando;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.TipoComando;
@@ -29,7 +27,6 @@ import static com.mycompany.tipi.TipoComando.OVEST;
 import static com.mycompany.tipi.TipoComando.PRENDI;
 import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
-import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -51,10 +48,10 @@ import java.util.logging.Logger;
 public class Avventura extends StrutturaGioco implements Serializable 
 {
     private static final long serialVersionUID = -4185062833257302102L;
-    boolean haAccessoAllaStanza = false;
-    boolean assenzaStanza = false;
-    boolean usaTimer = true;
-    static Integer idMeteo = 0;
+    private boolean haAccessoAllaStanza = false;
+    private boolean assenzaStanza = false;
+    private boolean usaTimer = true;
+    private static Integer idMeteo = 0;
     
     @Override
     public void init() throws Exception 
@@ -146,7 +143,7 @@ public class Avventura extends StrutturaGioco implements Serializable
             EsecuzioneComandi esec = new EsecuzioneComandi(this);
             this.haAccessoAllaStanza = false;
             this.assenzaStanza = false;
-            Stanza stanzacorrente = getStanzaCorrente();
+            //Stanza stanzacorrente = getStanzaCorrente();
             List<Oggetto> inventarioGiocatore = getInventario();
             List<Stanza> stanze = getStanze();
             Oggetto oggetto = p.getOggetto();
@@ -155,48 +152,144 @@ public class Avventura extends StrutturaGioco implements Serializable
             
             switch(comando)
             {
-                case NORD -> esec.checkNordAccess(stanzacorrente,inventarioGiocatore);
+                case NORD -> 
+                {
+                    if(getStanzaCorrente().getNord() != null)
+                    {
+                        if(esec.checkNordAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
+                        {
+                            //System.out.println("ora : " + stanzacorrente.getNome());
+                            
+                            setStanzaCorrente(getStanzaCorrente().getNord());
+                            
+                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                            haAccessoAllaStanza = true;
+                        }
+                        else
+                        {
+                            haAccessoAllaStanza = false;
+                        }
+                    }
+                    else
+                    {
+                        assenzaStanza = true;     
+                    }
+                    
+                    controlloAccessoStanza();
+                }
                 
-                case SUD -> esec.checkSudAccess( stanzacorrente,inventarioGiocatore);
+                case SUD -> 
+                {
+                    if(getStanzaCorrente().getSud() != null)
+                    {
+                        if(esec.checkSudAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
+                        {
+                            //System.out.println("ora : " + stanzacorrente.getNome());
+                            
+                            setStanzaCorrente(getStanzaCorrente().getSud());
+                            
+                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                            haAccessoAllaStanza = true;
+                        }
+                        else
+                        {
+                            haAccessoAllaStanza = false;
+                        }
+                    }
+                    else
+                    {
+                        assenzaStanza = true;     
+                    }
+                    
+                    controlloAccessoStanza();
+                }
                 
-                case EST -> esec.checkEstAccess(stanzacorrente, inventarioGiocatore);
+                case EST -> 
+                {
+                    if(getStanzaCorrente().getEst() != null)
+                    {
+                        if(esec.checkEstAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
+                        {
+                            //System.out.println("ora : " + stanzacorrente.getNome());
+                            
+                            setStanzaCorrente(getStanzaCorrente().getEst());
+                            
+                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                            haAccessoAllaStanza = true;
+                        }
+                        else
+                        {
+                            haAccessoAllaStanza = false;
+                        }
+                    }
+                    else
+                    {
+                        assenzaStanza = true;     
+                    }  
+                    
+                    controlloAccessoStanza();
+                }
                 
-                case OVEST -> esec.checkWestAccess(stanzacorrente,inventarioGiocatore);
+                case OVEST -> 
+                {
+                    if(getStanzaCorrente().getOvest() != null)
+                    {
+                        if(esec.checkWestAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
+                        {
+                            //System.out.println("ora : " + stanzacorrente.getNome());
+                            
+                            setStanzaCorrente(getStanzaCorrente().getOvest());
+                            
+                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                            haAccessoAllaStanza = true;
+                        }
+                        else
+                        {
+                            haAccessoAllaStanza = false;
+                        }
+                    }
+                    else
+                    {
+                        assenzaStanza = true;     
+                    }
+                    
+                    controlloAccessoStanza();
+                }
                 
                 case INVENTARIO -> esec.stampaContenutoInventario(inventarioGiocatore);
                 
-                case GUARDA -> esec.stampaOsservazione(stanzacorrente);
+                case GUARDA -> esec.stampaOsservazione(getStanzaCorrente());
                 
-                case PRENDI -> esec.prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
+                case PRENDI -> esec.prendiOggetto( oggetto,inventarioGiocatore, getStanzaCorrente());
                 
-                case APRI -> esec.apriOggetto(oggetto, oggettoInventario, stanzacorrente, inventarioGiocatore );
+                case APRI -> esec.apriOggetto(oggetto, oggettoInventario, getStanzaCorrente(), inventarioGiocatore );
                 
                 case HELP -> 
                 {
-                    LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
-                    DocumentFrame manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
-                    manualeUtente.getTextLabel().setFont(new Font("Press Gothic", Font.BOLD, 15));
-                    manualeUtente.setVisible(true);
+                    esec.help();
                 }
                 
                 case ATTACCA ->
                 {
-                try {
-                    esec.attacca(stanzacorrente);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    try 
+                    {
+                        esec.attacca(getStanzaCorrente());
+                    } 
+                    catch (UnsupportedEncodingException ex) 
+                    {
+                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                         
                 case SPINGI -> 
                 {
                     if(oggetto!= null)
                     {
-                        esec.spingiOggetto(oggetto, inventarioGiocatore, stanzacorrente);
+                        esec.spingiOggetto(oggetto, inventarioGiocatore, getStanzaCorrente());
                     }
                     else
                     {
-                        esec.spingiOggetto(oggettoInventario, inventarioGiocatore, stanzacorrente);
+                        esec.spingiOggetto(oggettoInventario, inventarioGiocatore, getStanzaCorrente());
                     }
                 }
                 
@@ -216,18 +309,21 @@ public class Avventura extends StrutturaGioco implements Serializable
                 case ACCENDI -> 
                 {
                     if(oggetto!= null)
-                        esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                        esec.accendiQualcosa(getStanzaCorrente(), inventarioGiocatore, oggetto);
                     else
-                        esec.accendiQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                        esec.accendiQualcosa(getStanzaCorrente(), inventarioGiocatore, oggettoInventario);
                 }
                 
                 case NASCONDITI -> 
                 {       
-                try {
-                    esec.nasconditi(stanzacorrente);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    try 
+                    {
+                        esec.nasconditi(getStanzaCorrente());
+                    } 
+                    catch (UnsupportedEncodingException ex) 
+                    {
+                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
                 case CURATI -> esec.curati(inventarioGiocatore);
@@ -238,7 +334,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     {
                         try 
                         {
-                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggetto);
+                            esec.usaQualcosa(getStanzaCorrente(), inventarioGiocatore, oggetto);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -247,7 +343,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     {
                         try 
                         {
-                            esec.usaQualcosa(stanzacorrente, inventarioGiocatore, oggettoInventario);
+                            esec.usaQualcosa(getStanzaCorrente(), inventarioGiocatore, oggettoInventario);
                         } 
                         catch (InterruptedException ex) 
                         {
@@ -263,59 +359,38 @@ public class Avventura extends StrutturaGioco implements Serializable
             }
             
             
-            if (this.haAccessoAllaStanza) 
-            {
-                System.out.println();
-                System.out.println(getStanzaCorrente().getNome());
-                System.out.println("================================================");
-                System.out.println(getStanzaCorrente().getDescrizione());
-                System.out.println();
-                
-                try {
-                    BehaviourController.checkDialoghi(getStanzaCorrente());
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
-                {
-                    prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
-                }
-                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Sala Operatoria"))
-                {
-                    prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
-                }
-                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto") && usaTimer)
-                {
-                    usaTimer = false;
-                    System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
-                    gestioneTimer("nasconditi","the_last_of_us(storia)//Dialoghi//guardie_prendono_Joel_e_Ellie.txt","the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt");
-                }
-                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Stanza Zattera") && usaTimer)
-                {   
-                    //il timer viene disattivato, altrimenti l'utente potrebbe avanzare, tornare indietro e
-                    //doversi nascondere di nuovo dalle guardie. Il che non avrebbe senso, visto che lo ha già fatto prima.
-                    usaTimer = false;
-                    
-                    System.out.println("Attacca il clicker prima che ti uccida.\n Hai ancora pochi secondi per farlo.\n");
-                    gestioneTimer("attacca","the_last_of_us(storia)//Dialoghi//infetti_uccidono_Joel.txt","the_last_of_us(storia)//Dialoghi//Stanza_della_zattera.txt");
-                }
-                
-                //questo if serve per resettare il timer (disattivato prima) e renderlo utilizzabile nelle prossime fasi di gioco.
-                else if(getStanzaCorrente().getNome().equalsIgnoreCase("Uscita Passaggio"))
-                {
-                    usaTimer = true;
-                }
-            }
-            
-            if (this.assenzaStanza) 
-            {
-                System.out.println("Da quella parte non si può andare c'è un muro!\n");
-            }
-            
+            //termina il gioco perchè è finito
             if(getStanzaCorrente().getNome().equalsIgnoreCase("Salt Lake City, Utah"))
             {
                 System.exit(0);
+            }
+            else if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
+            {
+                prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
+            }
+            else if(getStanzaCorrente().getNome().equalsIgnoreCase("Sala Operatoria"))
+            {
+                prossimaMossa(new ParserOutput(new Comando(NORD,"nord"),null));
+            }
+            else if(getStanzaCorrente().getNome().equalsIgnoreCase("Corridoio passaggio segreto") && usaTimer)
+            {
+                usaTimer = false;
+                System.out.println("Nasconditi dalle guardie prima che ti trovino.\n Hai ancora pochi secondi per farlo.\n");
+                gestioneTimer("nasconditi","the_last_of_us(storia)//Dialoghi//guardie_prendono_Joel_e_Ellie.txt","the_last_of_us(storia)//Dialoghi//Passaggio_segreto.txt");
+            }
+            else if(getStanzaCorrente().getNome().equalsIgnoreCase("Stanza Zattera") && usaTimer)
+            {   
+                //il timer viene disattivato, altrimenti l'utente potrebbe avanzare, tornare indietro e
+                //doversi nascondere di nuovo dalle guardie. Il che non avrebbe senso, visto che lo ha già fatto prima.
+                usaTimer = false;
+
+                System.out.println("Attacca il clicker prima che ti uccida.\n Hai ancora pochi secondi per farlo.\n");
+                gestioneTimer("attacca","the_last_of_us(storia)//Dialoghi//infetti_uccidono_Joel.txt","the_last_of_us(storia)//Dialoghi//Stanza_della_zattera.txt");
+            }
+            //questo if serve per resettare il timer (disattivato prima) e renderlo utilizzabile nelle prossime fasi di gioco.
+            else if(getStanzaCorrente().getNome().equalsIgnoreCase("Uscita Passaggio"))
+            {
+                usaTimer = true;
             }
         }
     }
@@ -382,5 +457,61 @@ public class Avventura extends StrutturaGioco implements Serializable
             }           
         }
         while(dentro == false);
+    }
+    
+    
+    
+    public void controlloAccessoStanza()
+    {
+        if (!this.assenzaStanza) 
+        {
+            if (this.haAccessoAllaStanza) 
+            {
+                System.out.println();
+                System.out.println(getStanzaCorrente().getNome());
+                System.out.println("================================================");
+                System.out.println(getStanzaCorrente().getDescrizione());
+                System.out.println();
+
+                try 
+                {
+                    BehaviourController.checkDialoghi(getStanzaCorrente());
+                } 
+                catch (UnsupportedEncodingException ex) 
+                {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                System.out.println("Non puoi accedere alla stanza, hai ancora da fare qui.");
+            }
+        }
+        else
+        {
+            System.out.println("Da quella parte non si può andare c'è un muro!\n");
+        }
+    }
+    
+    
+
+    public boolean isHaAccessoAllaStanza() {
+        return haAccessoAllaStanza;
+    }
+
+    public boolean isAssenzaStanza() {
+        return assenzaStanza;
+    }
+
+    public boolean isUsaTimer() {
+        return usaTimer;
+    }
+
+    public void setHaAccessoAllaStanza(boolean haAccessoAllaStanza) {
+        this.haAccessoAllaStanza = haAccessoAllaStanza;
+    }
+
+    public void setAssenzaStanza(boolean assenzaStanza) {
+        this.assenzaStanza = assenzaStanza;
     }
 }

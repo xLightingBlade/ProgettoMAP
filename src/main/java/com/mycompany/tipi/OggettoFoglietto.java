@@ -13,7 +13,6 @@ import com.mycompany.swing.DocumentFrame;
  */
 public class OggettoFoglietto extends Documento
 {
-
     public OggettoFoglietto(int id, String nome, String descrizione) 
     {
         super(id, nome, descrizione);

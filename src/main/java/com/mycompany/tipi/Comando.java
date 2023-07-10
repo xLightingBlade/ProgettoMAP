@@ -22,7 +22,7 @@ public class Comando implements Serializable {
 
     private final String nome;
 
-    private Set<String> alias;//un insieme di alis, cioè di nomi simili del comando.
+    private Set<String> alias;//un insieme di alias, cioè di nomi simili del comando.
     //Non è detto che l'utente fornirà in input esattamente il nome del comando che vuole usare,
     //ma magari potrebbe fornire un nome simile(presente tra gli alias) e il gioco continuerà a funzionare correttmente.
     
