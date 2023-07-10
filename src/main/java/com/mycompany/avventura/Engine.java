@@ -11,9 +11,10 @@ import com.mycompany.parser.ParserOutput;
 import com.mycompany.tipi.TipoComando;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.Serializable;
@@ -33,9 +34,9 @@ public class Engine implements Serializable
 
     
     //Costruttore
-    /*Il costruttore fa principalmente 2 cose:
+    /*Il costruttore fa principalmente 3 cose:
         1)caricamento dei dati del gioco
-        2)crezione del parser
+        2)creazione del parser
         3)caricamento delle stopwords da file
     */
     public Engine(StrutturaGioco game) 
@@ -45,7 +46,7 @@ public class Engine implements Serializable
         //caricamento frasi introduttive e dialoghi iniziali da file tramite thread 
         try
         {
-            BufferedReader fileIn = new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"));
+            BufferedReader fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//(introduzione_al_gioco)Soggiorno.txt"), "UTF-8"));
             CaricamentoDati loader_introduzione = new CaricamentoDati(fileIn);
             loader_introduzione.start();//caricamento e visualizzazione intro e dialoghi con thread       
             

@@ -21,7 +21,7 @@ public class ParserOutput implements Serializable {
     
     private Oggetto oggettoInventario;
 
-    //Costruttori
+    
     public ParserOutput(Comando comando, Oggetto oggetto) {
         this.comando = comando;
         this.oggetto = oggetto;
@@ -32,7 +32,8 @@ public class ParserOutput implements Serializable {
         this.oggetto = oggetto;
         this.oggettoInventario = oggettoInv;
     }
-    //
+
+
     
     public Comando getComando() {
         return comando;

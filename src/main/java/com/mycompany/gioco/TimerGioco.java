@@ -7,10 +7,14 @@ package com.mycompany.gioco;
 import com.mycompany.avventura.CaricamentoDati;
 import static com.mycompany.gioco.BehaviourController.mostraDialogoStanza;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,14 +35,18 @@ public class TimerGioco extends TimerTask implements Serializable
     
     //Questo metodo dovrà salvare la partita e terminarla poichè il tempo è scaduto e l'utente ha perso.
     @Override
-    public void run() 
+    public void run () 
     {
-        mostraDialogoStanza(fileFrasi);
+        try {
+            mostraDialogoStanza(fileFrasi);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TimerGioco.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try 
         {
             //ripartono i dialoghi
-            BufferedReader in = new BufferedReader(new FileReader(dialoghiTimerScaduto));
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(dialoghiTimerScaduto), "UTF-8"));
             CaricamentoDati dialoghi = new CaricamentoDati(in);
             dialoghi.start();
             dialoghi.join();
@@ -47,6 +55,8 @@ public class TimerGioco extends TimerTask implements Serializable
         {
             System.out.println("Errore nel caricamento dati. File non trovato.");
             System.exit(0);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TimerGioco.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally
         {

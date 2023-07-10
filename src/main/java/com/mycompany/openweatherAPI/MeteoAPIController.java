@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 public class MeteoAPIController {
     private static final String API_KEY = "a9d4563be1eacdd328807b358fb23966";
     
-    public static MeteoForecastDataTransferObject getWeatherByCoordinates(String latitude, String longitude) throws IOException, InterruptedException{
+    public static MeteoForecastDTO getMeteoConCoordinate(String latitude, String longitude) throws IOException, InterruptedException{
         var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API_KEY);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
@@ -29,11 +29,11 @@ public class MeteoAPIController {
                 .build();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
       
-        return MeteoForecastDataTransferObject.parseJson(response.body());
+        return MeteoForecastDTO.parseJson(response.body());
     }
     
-    public static MeteoForecastDataTransferObject getWeatherByCity(String city) throws IOException, InterruptedException{
-        var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+API_KEY);
+    public static MeteoForecastDTO getMeteoCitta(String city) throws IOException, InterruptedException{
+        var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?q="+city.replaceAll("\\s", "%20")+"&units=metric&appid="+API_KEY);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
                 .newBuilder()
@@ -43,7 +43,7 @@ public class MeteoAPIController {
                 .build();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
       
-        return MeteoForecastDataTransferObject.parseJson(response.body());
+        return MeteoForecastDTO.parseJson(response.body());
     }
     
 }

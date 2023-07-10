@@ -6,7 +6,6 @@
 package com.mycompany.gioco;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.avventura.StrutturaGioco;
@@ -32,8 +31,11 @@ import static com.mycompany.tipi.TipoComando.SPINGI;
 import static com.mycompany.tipi.TipoComando.SUD;
 import java.awt.Font;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -44,17 +46,6 @@ import java.util.logging.Logger;
 
 
 /**
- * ATTENZIONE: La descrizione del gioco è fatta in modo che qualsiasi gioco
- * debba estendere la classe StrutturaGioco. L'Engine è fatto in modo che possa
- * eseguire qualsiasi gioco che estende StrutturaGioco, in questo modo si
- * possono creare più gioci utilizzando lo stesso Engine.
- *
- * Diverse migliorie possono essere applicate: - la descrizione del gioco
- * potrebbe essere caricate da file o da DBMS in modo da non modificare il
- * codice sorgente - l'utilizzo di file e DBMS non è semplice poiché all'interno
- * del file o del DBMS dovrebbe anche essere codificata la logica del gioco
- * (prossimaMossa) oltre alla descrizione di stanze, oggetti, ecc...
- *
  * @author gabri
  */
 public class Avventura extends StrutturaGioco implements Serializable 
@@ -81,7 +72,9 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
-    /** Per info sui possibili valori dell'id meteo:
+    /**
+     * Un paio di metodi per mostrare una frase in base alle condizioni meteo della città.
+     * Per info sui possibili valori dell'id meteo:
      *  https://openweathermap.org/weather-conditions 
      * @param citta
     */
@@ -90,13 +83,13 @@ public class Avventura extends StrutturaGioco implements Serializable
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
             if(idMeteo.toString().startsWith("80")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt"), "UTF-8")));
                 leggiFile.start();
             } else if(idMeteo.toString().startsWith("5")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt"), "UTF-8")));
                 leggiFile.start();
             } else if(idMeteo.toString().startsWith("6")) {
-                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//soggiornoNevica.txt")));
+                CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoNeve.txt"), "UTF-8")));
                 leggiFile.start();  
             }
         } catch (InterruptedException | IOException ex) {
@@ -108,29 +101,28 @@ public class Avventura extends StrutturaGioco implements Serializable
     public static void dialoghiMeteoCitta(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            //esempi, tanto per adesso non verranno mai chiamati. Nemmeno i file di testo esistono, questo è un esempio dell'idea.
             switch(citta) {
                 case "Boston" -> {
                     if(idMeteo.toString().startsWith("80")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("5")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("6")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }
                 case "Salt Lake City" -> {
                     if(idMeteo.toString().startsWith("80")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("5")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt"), "UTF-8")));
                         leggiFile.start();
                     }else if(idMeteo.toString().startsWith("6")) {
-                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new FileReader(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt")));
+                        CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }
@@ -142,7 +134,6 @@ public class Avventura extends StrutturaGioco implements Serializable
     
 
     @Override
-    //Aggiungere comando per leggere
     //In questo metodo è racchiuso il cuore del gioco e il suo avanzare.
     public void prossimaMossa(ParserOutput p) 
     {
@@ -172,9 +163,9 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case OVEST -> esec.checkWestAccess(stanzacorrente,inventarioGiocatore);
                 
-                case INVENTARIO -> esec.printInventarioContent(inventarioGiocatore);
+                case INVENTARIO -> esec.stampaContenutoInventario(inventarioGiocatore);
                 
-                case GUARDA -> esec.printOsservazione(stanzacorrente);
+                case GUARDA -> esec.stampaOsservazione(stanzacorrente);
                 
                 case PRENDI -> esec.prendiOggetto( oggetto,inventarioGiocatore, stanzacorrente);
                 
@@ -190,7 +181,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case ATTACCA ->
                 {
+                try {
                     esec.attacca(stanzacorrente);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
                         
                 case SPINGI -> 
@@ -228,7 +223,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case NASCONDITI -> 
                 {       
+                try {
                     esec.nasconditi(stanzacorrente);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
 
                 case CURATI -> esec.curati(inventarioGiocatore);
@@ -272,7 +271,11 @@ public class Avventura extends StrutturaGioco implements Serializable
                 System.out.println(getStanzaCorrente().getDescrizione());
                 System.out.println();
                 
-                BehaviourController.checkDialoghi(getStanzaCorrente());
+                try {
+                    BehaviourController.checkDialoghi(getStanzaCorrente());
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 if(getStanzaCorrente().getNome().equalsIgnoreCase("Ingresso Ospedale"))
                 {
@@ -337,7 +340,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         //avvio del timer per la prima volta
         TimerGioco t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
         TimerTask tempoScaduto = t;
-        timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+        timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
         
         do
         {          
@@ -345,7 +348,7 @@ public class Avventura extends StrutturaGioco implements Serializable
             {
                 t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
                 tempoScaduto = t;
-                timer.schedule(tempoScaduto, 20000);//attendi 11 secondi, poi hai perso
+                timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
             }
 
             //aspetta che l'utente faccia qualcosa

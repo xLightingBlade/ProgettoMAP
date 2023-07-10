@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- *
- * @author pierpaolo
- */
+
 public class ContenitoreOggetti extends Oggetto implements Serializable {
 
     private List<Oggetto> list = new ArrayList<>();

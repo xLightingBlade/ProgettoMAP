@@ -124,12 +124,18 @@ public class OperazioniDatabase {
         //stanze casa di Joel. richiesti cibo, colpi, pistola e coltello        
         Stanza soggiornoCasa = new Stanza(idStanze.get(0), nomiStanze.get(0), descrizioniStanze.get(0));
         soggiornoCasa.setOsservazione(osservazioni.get(0));
+        soggiornoCasa.setCitta(("Boston"));
+        soggiornoCasa.setInfoMeteo(true);
         
         Stanza bagnoCasa = new Stanza(idStanze.get(1), nomiStanze.get(1), descrizioniStanze.get(1));
         bagnoCasa.setOsservazione(osservazioni.get(1));
+        bagnoCasa.setCitta("Boston");
+        bagnoCasa.setInfoMeteo(true);
         
         Stanza ripostiglioCasa = new Stanza(idStanze.get(2), nomiStanze.get(2), descrizioniStanze.get(2));
-        ripostiglioCasa.setOsservazione(osservazioni.get(2));       
+        ripostiglioCasa.setOsservazione(osservazioni.get(2));
+        ripostiglioCasa.setCitta("Boston");
+        ripostiglioCasa.setInfoMeteo(true);
         //
         
         
@@ -150,7 +156,9 @@ public class OperazioniDatabase {
         Stanza uscitaPassaggio = new Stanza(idStanze.get(17), nomiStanze.get(17), descrizioniStanze.get(17));
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(14));
         uscitaPassaggio.getOggettiNecessari().add(new Oggetto(25));
-        uscitaPassaggio.setOsservazione(osservazioni.get(17));      
+        uscitaPassaggio.setOsservazione(osservazioni.get(17));
+        uscitaPassaggio.setCitta("Boston");
+        uscitaPassaggio.setInfoMeteo(true);
         //      
         
         /*
@@ -173,12 +181,16 @@ public class OperazioniDatabase {
         uscitaMetro.getOggettiNecessari().add(new Oggetto(17));       
         //
         
-        //Stanze ospedale San Maries   
+        //Stanze ospedale Saint Mary's  
         Stanza ingressoOspedale = new Stanza(idStanze.get(9), nomiStanze.get(9), descrizioniStanze.get(9));
         ingressoOspedale.setOsservazione(osservazioni.get(9));
+        ingressoOspedale.setCitta("Salt Lake City");
+        ingressoOspedale.setInfoMeteo(true);
         
         Stanza dentroOspedale = new Stanza(idStanze.get(10), nomiStanze.get(10), descrizioniStanze.get(10));
         dentroOspedale.setOsservazione(osservazioni.get(10));
+        dentroOspedale.setCitta("Salt Lake City");
+        dentroOspedale.setInfoMeteo(true);
         
         Stanza magazzino = new Stanza(idStanze.get(11), nomiStanze.get(11), descrizioniStanze.get(11));
         magazzino.setOsservazione(osservazioni.get(11));
@@ -210,7 +222,7 @@ public class OperazioniDatabase {
         //
         
         
-        //Setta mappa
+        //Imposta mappa di gioco
         
         //casa di Joel
         soggiornoCasa.setEst(bagnoCasa);
@@ -224,7 +236,7 @@ public class OperazioniDatabase {
         corridoioPassaggio.setNord(cancello);      
         cancello.setSud(corridoioPassaggio);
         cancello.setEst(stanzaQuadroElettrico);
-        cancello.setNord(uscitaPassaggio);//Su questo va fatto un check se il cancello è stato aperto
+        cancello.setNord(uscitaPassaggio);
         stanzaQuadroElettrico.setOvest(cancello);
         uscitaPassaggio.setNord(ingressoMetro);
         //
@@ -248,13 +260,13 @@ public class OperazioniDatabase {
         infermeria.setOvest(dentroOspedale);
         //
         
-        //ospedale (mdificare)
+        //ospedale)
         pianoSalaOperatoria.setEst(condotto);
         pianoSalaOperatoria.setOvest(stanzaCacciavite);
         condotto.setOvest(pianoSalaOperatoria);
         condotto.setNord(salaOperatoria);//dal condotto, diciamo, se hai il cacciavite, puoi entrarci dentro ed arrivare alla sala operatoria   
         stanzaCacciavite.setEst(pianoSalaOperatoria);
-        salaOperatoria.setNord(finale); //per ora, a fini di testing
+        salaOperatoria.setNord(finale);
         //
         
         
@@ -383,6 +395,7 @@ public class OperazioniDatabase {
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
         zattera.setAlias(new String[]{"legno","assi","assi di legno","tavola","tavola di legno","tavoletta","tavoletta di legno","tavolette di legno"});
+        zattera.setInvisibile(true);
         stanze.get(8).getOggetti().add(zattera);
         
         //
