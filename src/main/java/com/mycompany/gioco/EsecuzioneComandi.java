@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -455,7 +456,7 @@ public class EsecuzioneComandi implements Serializable
     
     
     
-    void help()
+    void help() throws IOException
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
         DocumentFrame manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
