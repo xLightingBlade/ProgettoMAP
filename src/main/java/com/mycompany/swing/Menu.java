@@ -42,7 +42,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     
-    private void myInit(ImageIcon imgIcon) {
+    private void myInit(ImageIcon imgIcon) 
+    {
         setSize(1000, 600);
 
         jPanel1.setBorder(BorderFactory.createEmptyBorder());       // Rimuovi il bordo del pannello
@@ -189,7 +190,9 @@ public class Menu extends javax.swing.JFrame {
     private void caricaPartitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caricaPartitaButtonActionPerformed
         // qui ci sarà la chiamata al metodo per ricaricare la partita
         
-        switch (CaricamentoSalvataggioPartita.carica()) 
+        CaricamentoSalvataggioPartita caricamento = new CaricamentoSalvataggioPartita();
+        
+        switch (caricamento.carica()) 
         {    
             //file partita salvata non trovato
             case 1 -> JOptionPane.showMessageDialog(null, "Nessuna partita salvata. Avviare una nuova partita.", "Partita non salvata",JOptionPane.ERROR_MESSAGE);
@@ -260,7 +263,12 @@ public class Menu extends javax.swing.JFrame {
         switch(sceltaUtente.getStatoCorrente()) {
             case AVVIA -> new Engine(new Avventura()).esegui();
                 
-            case CARICA -> CaricamentoSalvataggioPartita.avviaPartitaSalvata();
+            case CARICA -> 
+            {
+                CaricamentoSalvataggioPartita avvioPartitaSalvata = new CaricamentoSalvataggioPartita();
+                avvioPartitaSalvata.carica();
+                avvioPartitaSalvata.avviaPartitaSalvata();
+            }
         }
     }
 
