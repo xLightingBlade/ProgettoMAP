@@ -27,14 +27,8 @@ import java.util.List;
  * @author gabri
  */
 
-public class EsecuzioneComandi implements Serializable{
-    private Avventura a;
-    
-    public EsecuzioneComandi(Avventura a) {
-        this.a = a;
-    }
-    
-    
+public class EsecuzioneComandi implements Serializable
+{ 
     void chiudiPartita() {
         System.out.println("Partita terminata");
         System.exit(0);

@@ -140,7 +140,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         } 
         else 
         {
-            EsecuzioneComandi esec = new EsecuzioneComandi(this);
+            EsecuzioneComandi esec = new EsecuzioneComandi();
             this.haAccessoAllaStanza = false;
             this.assenzaStanza = false;
             //Stanza stanzacorrente = getStanzaCorrente();
@@ -157,12 +157,8 @@ public class Avventura extends StrutturaGioco implements Serializable
                     if(getStanzaCorrente().getNord() != null)
                     {
                         if(esec.checkNordAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
-                        {
-                            //System.out.println("ora : " + stanzacorrente.getNome());
-                            
-                            setStanzaCorrente(getStanzaCorrente().getNord());
-                            
-                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                        {  
+                            setStanzaCorrente(getStanzaCorrente().getNord()); 
                             haAccessoAllaStanza = true;
                         }
                         else
@@ -184,11 +180,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     {
                         if(esec.checkSudAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
                         {
-                            //System.out.println("ora : " + stanzacorrente.getNome());
-                            
                             setStanzaCorrente(getStanzaCorrente().getSud());
-                            
-                            //System.out.println("dopo : " +stanzacorrente.getNome());
                             haAccessoAllaStanza = true;
                         }
                         else
@@ -210,11 +202,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     {
                         if(esec.checkEstAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
                         {
-                            //System.out.println("ora : " + stanzacorrente.getNome());
-                            
-                            setStanzaCorrente(getStanzaCorrente().getEst());
-                            
-                            //System.out.println("dopo : " +stanzacorrente.getNome());
+                            setStanzaCorrente(getStanzaCorrente().getEst());  
                             haAccessoAllaStanza = true;
                         }
                         else
@@ -236,11 +224,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                     {
                         if(esec.checkWestAccess(getStanzaCorrente(),inventarioGiocatore, stanze))
                         {
-                            //System.out.println("ora : " + stanzacorrente.getNome());
-                            
                             setStanzaCorrente(getStanzaCorrente().getOvest());
-                            
-                            //System.out.println("dopo : " +stanzacorrente.getNome());
                             haAccessoAllaStanza = true;
                         }
                         else
