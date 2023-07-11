@@ -17,6 +17,12 @@ import java.util.List;
 /**
  *
  * @author Antonio
+ * Questa classe esegue varie funzionalità:
+ *      1)Permette di leggere da un qualunque flusso di caratteri e salvare ogni riga del flusso su una lista di stringhe.
+ *      2)Permette di stampare il contenuto del flusso di caratteri su un qualunque output stream
+ *      3)Permette di stampare il contenuto del flusso di caratteri su un qualunque output stream,
+ *        stampando ogni elemento della lista di stringhe ad un intervallo di tempo regolare
+ *      4)Permette di ottenere il contenuto della lista di stringhe su una singola stringa
  */
 public class LoaderPrinterCharacterStream implements Serializable 
 {
@@ -96,7 +102,8 @@ public class LoaderPrinterCharacterStream implements Serializable
     }
     
     
-    public ArrayList<String> getFrasi() {
+    public ArrayList<String> getFrasi() 
+    {
         return new ArrayList<>(frasi);  // ritorno una copia
     }
     

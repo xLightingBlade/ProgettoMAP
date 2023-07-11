@@ -37,8 +37,7 @@ public class Comando implements Serializable {
         this.nome = nome;
         this.alias = alias;
     }
-    //
-    
+    //  
     
     public String getNome() {
         return nome;

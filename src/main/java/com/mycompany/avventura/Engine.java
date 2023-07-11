@@ -113,7 +113,8 @@ public class Engine implements Serializable
             else if(p != null && p.getComando().getTipo() == TipoComando.SALVA)
             {
                 //salvataggio
-                CaricamentoSalvataggioPartita.salva(this);
+                CaricamentoSalvataggioPartita salvataggio = new CaricamentoSalvataggioPartita();
+                salvataggio.salva(this);
             }
             //il comando è corretto
             else

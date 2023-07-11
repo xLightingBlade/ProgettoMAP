@@ -444,19 +444,14 @@ public class Avventura extends StrutturaGioco implements Serializable
     }
     
     
-    
     public void controlloAccessoStanza()
     {
         if (!this.assenzaStanza) 
         {
             if (this.haAccessoAllaStanza) 
             {
-                System.out.println();
-                System.out.println(getStanzaCorrente().getNome());
-                System.out.println("================================================");
-                System.out.println(getStanzaCorrente().getDescrizione());
-                System.out.println();
-
+                stampaStanza();
+                
                 try 
                 {
                     BehaviourController.checkDialoghi(getStanzaCorrente());
@@ -475,7 +470,18 @@ public class Avventura extends StrutturaGioco implements Serializable
         {
             System.out.println("Da quella parte non si può andare c'è un muro!\n");
         }
-    } 
+    }
+    
+    
+    @Override
+    public void stampaStanza()
+    {
+        System.out.println();
+        System.out.println(getStanzaCorrente().getNome());
+        System.out.println("================================================");
+        System.out.println(getStanzaCorrente().getDescrizione());
+        System.out.println();
+    }
 
     public boolean isHaAccessoAllaStanza() {
         return haAccessoAllaStanza;

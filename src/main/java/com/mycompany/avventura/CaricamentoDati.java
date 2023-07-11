@@ -29,7 +29,7 @@ public class CaricamentoDati extends Thread implements Serializable
         LoaderPrinterCharacterStream frasiIntro = new LoaderPrinterCharacterStream();
         try 
         {
-            frasiIntro.carica(in);//caricamento effettivo della intro e dialoghi iniziali da file
+            frasiIntro.carica(in);//caricamento effettivo dei dialoghi da file
             frasiIntro.stampaAdIntervallo(System.out, secondiAttesa);///stampa a schermo ad intervallo regolare di intro e dialoghi iniziali
         } 
         catch (InterruptedException ex) 

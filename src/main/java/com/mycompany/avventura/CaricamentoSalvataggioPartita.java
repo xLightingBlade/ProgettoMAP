@@ -22,10 +22,10 @@ import java.io.Serializable;
 public class CaricamentoSalvataggioPartita implements Serializable
 {
     //questo attributo statico conterrà una partita salvata, oppure null se non è stata salvata nessuna partita
-    private static Engine partitaSalvata;
+    private Engine partitaSalvata;
             
     //permette di salvare una partita
-    public static void salva(Engine partita)
+    public void salva(Engine partita)
     {
         try
         {
@@ -43,7 +43,6 @@ public class CaricamentoSalvataggioPartita implements Serializable
         catch(IOException ex) 
         {
             System.out.println("Impossibile salvare la partita ora. Riprova più tardi o riavvia il gioco.");
-            //ex.printStackTrace();
         }
     }
     
@@ -56,7 +55,7 @@ public class CaricamentoSalvataggioPartita implements Serializable
         3 se c'è un errore di I/O o un errore durante il casting per inserire l'oggetto letto nell'oggetto partita
         4 se la partita salvata è stata caricata correttamente
     */
-    public static int carica()
+    public int carica()
     {   
         try
         {
@@ -69,22 +68,17 @@ public class CaricamentoSalvataggioPartita implements Serializable
             {
                 throw new FileVuotoException();
             }
-            
-            System.out.println("Partita caricata, riprendi a giocare!\n");
         }
         catch(FileNotFoundException fnf)
         {
-            //fnf.printStackTrace();
             return 1;
         }
         catch(FileVuotoException ex)
         {
-            //ex.printStackTrace();
             return 2;
         }
         catch(IOException | ClassNotFoundException ex) 
         {
-            //ex.printStackTrace();
             return 3;
         }
  
@@ -93,11 +87,10 @@ public class CaricamentoSalvataggioPartita implements Serializable
     
     
     //Avvia la partita salvata
-    public static void avviaPartitaSalvata()
+    public void avviaPartitaSalvata()
     {
+        System.out.println("Partita caricata, riprendi a giocare!\n");
+        partitaSalvata.getGioco().stampaStanza();
         partitaSalvata.esegui();
-    }
-    
-    
-    
+    } 
 }
