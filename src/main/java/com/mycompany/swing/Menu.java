@@ -34,7 +34,8 @@ public class Menu extends javax.swing.JFrame
    
     public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException, IOException 
     {
-        if(CheckImg.isImage(pathImg)){
+        if(CheckImg.isImage(pathImg))
+        {
             ImageIcon imgIcon = new ImageIcon(pathImg);
             initComponents();
             this.sceltaUtente = sceltaUtente;
@@ -263,9 +264,9 @@ public class Menu extends javax.swing.JFrame
                 } 
                 catch (ImgException ex)
                 {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("errore immagine");
                 } catch (IOException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("eeerrr");
                 }
             }
         });

@@ -251,7 +251,14 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case HELP -> 
                 {
-                    esec.help();
+                    try 
+                    {
+                        esec.help();
+                    } 
+                    catch (IOException ex) 
+                    {
+                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 
                 case ATTACCA ->
