@@ -93,3 +93,7 @@ Di seguito, una descrizione di come i vari argomenti del corso sono stati applic
 6. ***Lambda expressions***: Al momento vi è un solo utilizzo delle lambda expressions: In `.//gioco/BehaviourController` il metodo `checkOggettoInventario`, per controllare se nell'inventario del
    giocatore compare un certo oggetto, apre uno stream di Oggetti su cui applica un'operazione terminale anyMatch, per controllare se nell'inventario esiste l'oggetto cercato
 
+
+## 4. **Diagramma delle classi**
+![parte1](diagramma1.jpg)
+![parte2](diagramma2.jpg)
