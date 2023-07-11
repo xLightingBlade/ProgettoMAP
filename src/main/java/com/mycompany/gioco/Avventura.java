@@ -475,9 +475,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         {
             System.out.println("Da quella parte non si può andare c'è un muro!\n");
         }
-    }
-    
-    
+    } 
 
     public boolean isHaAccessoAllaStanza() {
         return haAccessoAllaStanza;
