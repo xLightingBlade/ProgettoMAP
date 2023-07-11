@@ -47,4 +47,49 @@ Il tutto è contornato da una narrativa avvincente mostrata all'utente attravers
 in cui si chiede al giocatore di intervenire tempestivamente per salvare la vita dei personaggi.<br>
 Inoltre per rendere l'esperienza di gioco più comoda e divertente, l'utente ha a disposizione la possibilità di poter consultare un piccolo manuale utente,<br>
 in cui è spiegato il funzionamente di tutti i comandi del gioco, e la possibilità di salvare la partita e riprenderla quando desidera. 
+<br>
+<br>
+
+## 3. **Applicazione degli argomenti del corso**
+Di seguito, una descrizione di come i vari argomenti del corso sono stati applicati a questo progetto:
+1. ***File***: Innanzitutto, vengono usati dei file csv, presenti nella cartella `resources`, per caricare dati con cui creare delle tabelle in un database H2.
+   Nella stessa cartella è anche presente un file denominato `stopwords`, usato nel progetto dal parser per ignorare le stopwords all'interno dei comandi.
+   Inoltre, vi sono due cartelle: `the_last_of_us(storia)/Dialoghi` e `the_last_of_us(storia)/documenti_gioco(da raccogliere)`.
+   La prima cartella presenta tutti i file di testo contenenti i dialoghi mostrati al primo ingresso in una stanza, al verificarsi di certe attività o in base alle condizioni climatiche
+   di alcune stanze in particolare.
+   La seconda cartella contiene file di testo che racchiudono il contenuto di alcuni documenti leggibili all'interno del gioco.
+
+2. ***Database***: Per questo progetto è stato usato H2 in modalità embedded (tant'è che il database 'test' viene creato nella user home directory).
+   Per il progetto, sono state create delle tabelle all'interno del database, denominate "STANZE", "OGGETTI", e "COMANDI", popolate con il contenuto dei sopraccitati
+   file csv, usando la funzione csvread fornita da H2.
+   Queste tabelle sono poi state interrogate ed il contenuto dei ResultSet è stato usato per popolare le liste di stanze, oggetti e comandi usate nel gioco.
+
+3. ***Threads***: La classe `src/main/java/com/mycompany/avventura/CaricamentoDati.java` prende in input un BufferedStream e lo passa alla classe `src/main/java/com/mycompany/avventura/LoaderPrinterCharacterStream.java`
+   deputata a leggere il contenuto del file di testo. In tutto ciò, CaricamentoDati estende Thread e nel suo metodo 'run' effettua la stampa del contenuto dei file di testo, in
+   contemporanea all'inizializzazione dell'avventura.
+   Oltre a questo, un metodo `gestioneTimer` all'interno di `Avventura.java` fa uso della classe TimerTask per creare una sorta di "quick time event", dove il giocatore deve inserire un certo
+   comando entro un certo periodo di tempo per non finire in game over.
+
+4. ***REST API***: Il package `src/main/java/com/mycompany/openweatherAPI` è creato allo scopo di poter effettuare chiamate API all'endpoint [api.openweathermap.org](api.openweathermap.org).
+   Al suo interno si trovano le seguenti classi:
+     1. La classe `MeteoForecastDTO`, classe che rappresenta l'oggetto contenente l'output di una chiamata API. Infatti, questa classe ha un metodo `parseJSON`, che prende in input il json
+        ricevuto dalla chiamata API e lo trasforma in un oggetto MeteoForecastDTO.
+     2. La classe `MeteoAPIController` possiede due metodi, uno per recuperare il meteo di una zona specificandone le coordinate e uno dove invece si specifica il nome di una città.
+        In entrambi i casi si fa uso delle classi `URI` (per creare appunto l'URI da usare nella chiamata), `HTTPRequest` (per impostare i parametri della richiesta http), `HTTPClient`
+        (il client che eseguirà la richiesta) e `HTTPResponse` (per ricevere la risposta http e prenderne poi il body).
+        Questi metodi passano infine il body della risposta al metodo `parseJson`
+     3. La classe `MeteoAPI` contiene un paio di metodi attualmente non usati che servono a mostrare la temperatura di una città o di coordinate. In più, possiede un metodo `getMeteoID` che
+        effettua una chiamata API tramite il metodo `getMeteoCitta` di `MeteoAPIController` e dall'oggetto risultante prende l'attributo id.
+        Questo attributo, che indica essenzialmente che tempo fa in quella località, viene usato poi, in alcune stanze, per stampare il contenuto di un file di testo, diverso a seconda dell'id meteo.
+
+5. ***SWING***:Si è fatto uso delle funzionalità di SWING per alcuni aspetti del progetto:
+     1. All'avvio del gioco, si apre il frame `Menu.java`. La schermata di menù permette al giocatore, tramite una serie di bottoni, di scegliere se iniziare una nuova partita, caricarne una esistente, consultare
+     il manuale utente oppure chiudere il gioco.
+     2. Quando si raccoglie un oggetto di tipo `Documento` oppure si chiede di visualizzare il manuale utente, viene attivato il frame `DocumentFrame.java`, visualizzandone il contenuto testuale in una finestra.
+     3. Allo stesso modo, quando si raccoglie un oggetto di tipo `OggettoImmagine` (una foto), la foto viene visualizzata in una finestra, che è un frame `ImgJFrame.java`.
+     4. Quando bisogna inserire la combinazione giusta in un tastierino per poter aprire un cancello, viene aperta una finestra, frame `TastierinoJFrame.java`, che ha dei campi JTextField dove inserire
+        quella che si crede essere la combinazione di cifre giusta
+
+6. ***Lambda expressions***: Al momento vi è un solo utilizzo delle lambda expressions: In `.//gioco/BehaviourController` il metodo `checkOggettoInventario`, per controllare se nell'inventario del
+   giocatore compare un certo oggetto, apre uno stream di Oggetti su cui applica un'operazione terminale anyMatch, per controllare se nell'inventario esiste l'oggetto cercato
 
