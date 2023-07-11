@@ -399,7 +399,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         //avvio del timer per la prima volta
         TimerGioco t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
         TimerTask tempoScaduto = t;
-        timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
+        timer.schedule(tempoScaduto, 15000);//Il parametro delay indica il tempo massimo prima di finire in game over.
         
         do
         {          

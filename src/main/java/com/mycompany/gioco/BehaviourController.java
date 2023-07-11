@@ -21,12 +21,17 @@ import java.util.List;
 
 public class BehaviourController {
     //Questo è un metodo per controllare in ogni stanza quali oggetti serve avere per entrarci.
-    public static boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) {
+    public static boolean checkAccessoStanza(Stanza stanza, List<Oggetto> inventarioGiocatore) 
+    {
         int counterOggettiStanza = stanza.getOggettiNecessari().size();
         int counterOggettiTrovati = 0;
-        for(Oggetto oggettoStanza : stanza.getOggettiNecessari()) {
-            for(Oggetto oggettoInventario : inventarioGiocatore) {
-                if(oggettoStanza.equals(oggettoInventario)){
+        
+        for(Oggetto oggettoStanza : stanza.getOggettiNecessari()) 
+        {
+            for(Oggetto oggettoInventario : inventarioGiocatore) 
+            {
+                if(oggettoStanza.equals(oggettoInventario))
+                {
                     counterOggettiTrovati+= 1;
                 }
             }

@@ -221,14 +221,16 @@ public class EsecuzioneComandi implements Serializable
     
     void stampaContenutoInventario(List<Oggetto> inventarioGiocatore)
     {
-        System.out.println("Nel tuo inventario ci sono:");
+        System.out.println("\nNel tuo inventario ci sono:");
+        
         for (Oggetto o : inventarioGiocatore) 
         {
             if(!o.isInvisibile()) 
             {
-                System.out.println(o.getNome() + ": " + o.getDescrizione());
+                System.out.println(o.getNome() + " , " + o.getDescrizione() + " , " + o.getId());
             }
         }
+        System.out.println("\n");
     }
     
     
@@ -394,37 +396,59 @@ public class EsecuzioneComandi implements Serializable
     
     
     void spingiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
-        if(oggetto != null){
-            if (oggetto.isSpingibile()) {
+        if(oggetto != null)
+        {
+            if (oggetto.isSpingibile()) 
+            {
                        System.out.println("Hai premuto: " + oggetto.getNome());
-                       //id 14 = leva. Leva premuta crea oggetto fittizio nell'inventario
-                       if (oggetto.getId() == 14) {
-                           inventarioGiocatore.add(oggetto);
-                           stanzaCorrente.getOggetti().remove(oggetto);
-                           for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) {
-                               if (o.getNome().equalsIgnoreCase("tastierino")) {
-                                   o.setUsabile(true);
+                       
+                       //se l'oggetto è una leva
+                       if (oggetto.getId() == 14) 
+                       {
+                           if(!inventarioGiocatore.contains(oggetto))
+                           {
+                               System.out.println("Hai premuto: " + oggetto.getNome());
+                               inventarioGiocatore.add(oggetto);
+                               stanzaCorrente.getOggetti().remove(oggetto);
+                           }
+                           
+                           for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) 
+                           {
+                               if (o.getNome().equalsIgnoreCase("tastierino")) 
+                               {
+                                   o.setUsabile(true);//puoi usare il tasierino perchè hai spinto la leva
                                }
                            }
                        }
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Non ci sono oggetti che puoi premere qui.");
             }
-        }else{
+        }
+        else
+        {
             System.out.println("Nessun Oggetto da spingere.");
         }
     }
     
     
-    void leggiOggetto(Oggetto oggetto){
-        if(oggetto != null){
-            if (oggetto.isLeggibile()) {
+    void leggiOggetto(Oggetto oggetto)
+    {
+        if(oggetto != null)
+        {
+            if (oggetto.isLeggibile())
+            {
                     System.out.print(oggetto.getContenuto());
 
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Non ci sono oggetti che puoi leggere qui.");
             }
-        }else{
+        }
+        else
+        {
             System.out.println("Nessun Oggetto da Leggere.");
         }
     }
@@ -454,7 +478,7 @@ public class EsecuzioneComandi implements Serializable
     }
     
     
-    
+    //questo metodo è usato per aprire il manuale utente quando il giocatore lancia il comando help
     void help()
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
@@ -463,7 +487,7 @@ public class EsecuzioneComandi implements Serializable
         manualeUtente.setVisible(true);
     }
     
-
+    //Questo metodo permette di gestire il comando usa NomeoOggetto
     void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException 
     {
         if(oggetto != null) 
@@ -475,16 +499,39 @@ public class EsecuzioneComandi implements Serializable
                     //tastierino
                     case 12 -> 
                     {
-                        if(usaTastierino()) 
+                        boolean tastierinoUsato = false;
+                        
+                        //ricerco nell'inventario l'oggetto che indica che ho usato il tastierino
+                        for(Oggetto o: inventarioGiocatore)
                         {
-                            Oggetto o = new Oggetto(25);
-                            o.setNome("");
-                            o.setAlias(new String[]{""});
-                            o.setInvisibile(true);
-                            inventarioGiocatore.add(o);
-                            
-                            System.out.println("Joel:  Bene, ora potrò oltrepassare il cancello");
-                        } 
+                            //se presente
+                            if(o.getNome().equalsIgnoreCase("tastierinoUsato"))
+                            {
+                                tastierinoUsato = true;
+                            }
+                        }
+                        
+                        //se non hai mai indovinato la combinazione del tastierino
+                        if(!tastierinoUsato)
+                        {
+                            //prova ad indovinare la combinazione
+                            if(usaTastierino()) 
+                            {
+                                System.out.println("dddd");
+                                Oggetto o = new Oggetto(25);
+                                o.setNome("tastierinoUsato");
+                                o.setAlias(new String[]{""});
+                                o.setInvisibile(true);
+                                o.setInvisibile(false);
+                                inventarioGiocatore.add(o);
+
+                                System.out.println("Joel:  Bene, ora potrò oltrepassare il cancello\n");
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("Il cancello è già aperto, prosegui.\n");
+                        }                      
                     }
                     
                     

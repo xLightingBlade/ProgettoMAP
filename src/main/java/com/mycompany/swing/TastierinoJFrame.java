@@ -124,6 +124,7 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean errore = false;
+        
         try{
             Integer numberTextField1 = (int) Double.parseDouble(jTextField1.getText()); // restituisce il testo che sta attualmente nella textFiled e lo trasforma in un double            
             Integer numberTextField2 = (int) Double.parseDouble(jTextField2.getText());
