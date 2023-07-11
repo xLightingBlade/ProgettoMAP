@@ -84,11 +84,11 @@ Di seguito, una descrizione di come i vari argomenti del corso sono stati applic
 
 5. ***SWING***:Si è fatto uso delle funzionalità di SWING per alcuni aspetti del progetto:
      1. All'avvio del gioco, si apre il frame `Menu.java`. La schermata di menù permette al giocatore, tramite una serie di bottoni, di scegliere se iniziare una nuova partita, caricarne una esistente, consultare
-     il manuale utente oppure chiudere il gioco.
-     2. Quando si raccoglie un oggetto di tipo `Documento` oppure si chiede di visualizzare il manuale utente, viene attivato il frame `DocumentFrame.java`, visualizzandone il contenuto testuale in una finestra.
-     3. Allo stesso modo, quando si raccoglie un oggetto di tipo `OggettoImmagine` (una foto), la foto viene visualizzata in una finestra, che è un frame `ImgJFrame.java`.
+     il manuale utente oppure chiudere il gioco: ![menu](/immaginiReport/menu.png)
+     2. Quando si raccoglie un oggetto di tipo `Documento` oppure si chiede di visualizzare il manuale utente, viene attivato il frame `DocumentFrame.java`, visualizzandone il contenuto testuale in una finestra: ![documentframe](/immaginiReport/manuale.png)
+     3. Allo stesso modo, quando si raccoglie un oggetto di tipo `OggettoImmagine` (una foto), la foto viene visualizzata in una finestra, che è un frame `ImgJFrame.java` ![foto](/immaginiReport/foto.png)
      4. Quando bisogna inserire la combinazione giusta in un tastierino per poter aprire un cancello, viene aperta una finestra, frame `TastierinoJFrame.java`, che ha dei campi JTextField dove inserire
-        quella che si crede essere la combinazione di cifre giusta
+        quella che si crede essere la combinazione di cifre giusta ![tastierino](/immaginiReport/tastierino.png)
 
 6. ***Lambda expressions***: Al momento vi è un solo utilizzo delle lambda expressions: In `.//gioco/BehaviourController` il metodo `checkOggettoInventario`, per controllare se nell'inventario del
    giocatore compare un certo oggetto, apre uno stream di Oggetti su cui applica un'operazione terminale anyMatch, per controllare se nell'inventario esiste l'oggetto cercato
