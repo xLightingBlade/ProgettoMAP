@@ -46,5 +46,4 @@ public class ContenitoreOggetti extends Oggetto implements Serializable {
     public void remove(Oggetto o) {
         list.remove(o);
     }
-
 }

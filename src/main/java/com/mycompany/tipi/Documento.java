@@ -26,9 +26,7 @@ public abstract class Documento extends Oggetto
     public String getPathDocumento() 
     {
         return this.pathDocumento;
-    }
-    
-    
+    }   
     
     public abstract void visualizza();
 }

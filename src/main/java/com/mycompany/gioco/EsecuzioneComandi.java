@@ -4,12 +4,15 @@
  */
 package com.mycompany.gioco;
 import com.mycompany.avventura.CaricamentoDati;
+import com.mycompany.avventura.LoaderPrinterCharacterStream;
+import com.mycompany.swing.DocumentFrame;
 import com.mycompany.swing.TastierinoJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
 import com.mycompany.tipi.OggettoImmagine;
 import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,14 +27,8 @@ import java.util.List;
  * @author gabri
  */
 
-public class EsecuzioneComandi implements Serializable{
-    Avventura a;
-    
-    public EsecuzioneComandi(Avventura a) {
-        this.a = a;
-    }
-    
-    
+public class EsecuzioneComandi implements Serializable
+{ 
     void chiudiPartita() {
         System.out.println("Partita terminata");
         System.exit(0);
@@ -87,8 +84,6 @@ public class EsecuzioneComandi implements Serializable{
                 loader_introduzione = new CaricamentoDati(fileIn);
                 loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
 
-                //usato per simulare il fatto che le guardie stanno passando.
-                //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
                 loader_introduzione.join();
             } 
             catch(FileNotFoundException ex)
@@ -172,89 +167,93 @@ public class EsecuzioneComandi implements Serializable{
      * @param stanzacorrente
      * @param inventarioGiocatore 
      */
-    void checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getNord() != null) {
-            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getNord().getId()), inventarioGiocatore)){
-                a.setStanzaCorrente(stanzacorrente.getNord());
-                    a.haAccessoAllaStanza = true;
-                }else{  
-                    System.out.println("Non puoi accedere alla stanza.");
-                }    
-        }else {
-            a.assenzaStanza = true;
+    boolean checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
+    {
+        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getNord().getId()), inventarioGiocatore))
+        {
+            return true;
         }
+        else
+        {
+            return false;
+        }    
     }
     
     
-    void checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getSud() != null) {
-             if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getSud().getId()), inventarioGiocatore)) {
-                a.setStanzaCorrente(stanzacorrente.getSud());
-                a.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        }else {
-            a.assenzaStanza = true;
+    boolean checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
+    {
+        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getSud().getId()), inventarioGiocatore))
+        {
+            return true;
         }
+        else
+        {
+            return false;
+        }    
     }
     
     
-    void checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getEst() != null) {
-            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getEst().getId()), inventarioGiocatore)) {
-                a.setStanzaCorrente(stanzacorrente.getEst());
-                a.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        }else {
-            a.assenzaStanza = true;
+    boolean checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
+    {
+        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getEst().getId()), inventarioGiocatore))
+        {
+            return true;
         }
+        else
+        {
+            return false;
+        }    
     }
     
     
-    void checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore){
-        if (stanzacorrente.getOvest() != null) {
-            if(BehaviourController.checkAccessoStanza(a.getStanze().get(stanzacorrente.getOvest().getId()), inventarioGiocatore)) {
-                a.setStanzaCorrente(stanzacorrente.getOvest());
-                a.haAccessoAllaStanza = true;
-            }else {
-                System.out.println("Non puoi accedere alla stanza.");
-            }
-
-        } else {
-            a.assenzaStanza = true;
+    boolean checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
+    {
+        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getOvest().getId()), inventarioGiocatore))
+        {
+            return true;
         }
+        else
+        {
+            return false;
+        }    
     }
     
     
-    void stampaContenutoInventario(List<Oggetto> inventarioGiocatore){
+    void stampaContenutoInventario(List<Oggetto> inventarioGiocatore)
+    {
         System.out.println("Nel tuo inventario ci sono:");
-                for (Oggetto o : inventarioGiocatore) {
-                    if(!o.isInvisibile()) {
-                        System.out.println(o.getNome() + ": " + o.getDescrizione());
-                    }
-                }
+        for (Oggetto o : inventarioGiocatore) 
+        {
+            if(!o.isInvisibile()) 
+            {
+                System.out.println(o.getNome() + ": " + o.getDescrizione());
+            }
+        }
     }
     
     
-    void stampaOsservazione(Stanza stanzaCorrente){
-    
-         if (stanzaCorrente.getOsservazione() != null) {
-             if(stanzaCorrente.isVisibile() == true) {
-                 System.out.println(stanzaCorrente.getOsservazione());
-                 if(stanzaCorrente.haInfoMeteo() && stanzaCorrente.getCitta() != null) {
-                     Avventura.dialoghiMeteoCitta(stanzaCorrente.getCitta());
-                 }
-             } else {
-                 System.out.println("Non si vede niente!");
-             }    
-                } else {
-                    System.out.println("Non c'è niente di interessante da osserva qui.");
-                }
+    void stampaOsservazione(Stanza stanzaCorrente)
+    {   
+        if (stanzaCorrente.getOsservazione() != null)
+        {
+            if(stanzaCorrente.isVisibile() == true) 
+            {
+               System.out.println(stanzaCorrente.getOsservazione());
+
+               if(stanzaCorrente.haInfoMeteo() && stanzaCorrente.getCitta() != null) 
+               {
+                   Avventura.dialoghiMeteoCitta(stanzaCorrente.getCitta());
+               }
+            } 
+            else 
+            {
+               System.out.println("Non si vede niente!");
+            }    
+        } 
+        else 
+        {
+            System.out.println("Non c'è niente di interessante da osserva qui.");
+        }
     }
     
     
@@ -454,6 +453,16 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
     
+    
+    
+    void help()
+    {
+        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+        DocumentFrame manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
+        manualeUtente.getTextLabel().setFont(new Font("Press Gothic", Font.BOLD, 15));
+        manualeUtente.setVisible(true);
+    }
+    
 
     void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException 
     {
@@ -524,6 +533,7 @@ public class EsecuzioneComandi implements Serializable{
         }
     }
 
+    
     //Metodo per aggirare la non-modalità di un jframe, di modo da fermare il flusso d'esecuzione mentre si sta usando il tastierino
     private boolean usaTastierino() throws InterruptedException 
     {
