@@ -1,7 +1,7 @@
 # ProgettoMAP
 
 ## Repository per il progetto del corso Metodi Avanzati di Programmazione 22-23
-
+<pre>
 ├───docs
 ├───immaginiReport
 ├───resources
@@ -48,6 +48,6 @@
 └───the_last_of_us(storia)
     ├───Dialoghi
     └───documenti_gioco(da raccogliere)
-
+</pre>
 
 La documentazione si trova in `docs/Documentazione.md`
