@@ -101,5 +101,5 @@ Di seguito, una descrizione di come i vari argomenti del corso sono stati applic
 
 ## 5. **Specifica Algebrica**
 Si è scelto di scrivere la specifica algebrica del dato astratto ContenitoreOggetti:
-![parte1](/immaginiReport/specifica1.png)
-![parte2](/immaginiReport/specifica2.png)
+![parte1](specifica1.png)
+![parte2](specifica2.png)
