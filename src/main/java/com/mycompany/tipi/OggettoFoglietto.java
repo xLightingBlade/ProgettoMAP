@@ -18,6 +18,7 @@ public class OggettoFoglietto extends Documento
         super(id, nome, descrizione);
     }
     
+    
     //Questo metodo si occupa della visualizzazione di un documento di gioco con una interfaccia grafica.
     //Qualora in futuro non si fosse più soddisfatti del metodo di visualizzazione della foto,
     //basterà cambiare unicamente il codice di questo metodo.

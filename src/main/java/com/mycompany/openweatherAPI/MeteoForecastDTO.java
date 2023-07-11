@@ -16,7 +16,8 @@ import java.util.ArrayList;
  * @author gabri
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MeteoForecastDTO {
+public class MeteoForecastDTO 
+{
     public Coord coord;
     public ArrayList<Weather> weather;
     public String base;
@@ -31,19 +32,25 @@ public class MeteoForecastDTO {
     public String name;
     public int cod;
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Clouds{
+    public static class Clouds
+    {
         public int all;
     }
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Coord{
+    public static class Coord
+    {
         public double lon;
         public double lat;
     }
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Main{
+    public static class Main
+    {
         public double temp;
         public double feels_like;
         public double temp_min;
@@ -54,8 +61,10 @@ public class MeteoForecastDTO {
         public int grnd_level;
     }
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Sys{
+    public static class Sys
+    {
         public int type;
         public int id;
         public String country;
@@ -63,22 +72,27 @@ public class MeteoForecastDTO {
         public int sunset;
     }
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Weather{
+    public static class Weather
+    {
         public int id;
         public String main;
         public String description;
         public String icon;
     }
     
+    
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Wind{
+    public static class Wind
+    {
         public double speed;
         public int deg;
         public double gust;
     }
     
-    public static MeteoForecastDTO parseJson(String json) throws MalformedURLException, IOException {
+    public static MeteoForecastDTO parseJson(String json) throws MalformedURLException, IOException 
+    {
         ObjectMapper mapper = new ObjectMapper();
         return (MeteoForecastDTO) mapper.readValue(json, MeteoForecastDTO.class);
     }

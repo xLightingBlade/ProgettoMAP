@@ -13,25 +13,32 @@ import javax.swing.JLabel;
  *
  * @author santo
  */
-public class ImgJFrame extends javax.swing.JFrame {
+public class ImgJFrame extends javax.swing.JFrame 
+{
     
-    public ImgJFrame(String pathImg) throws ImgException {       
+    public ImgJFrame(String pathImg) throws ImgException 
+    {       
         this(pathImg, "");
     }
     
     
-    public ImgJFrame(String pathImg, String toolTipText)  throws ImgException { 
-        if(CheckImg.isImage(pathImg)) {
+    public ImgJFrame(String pathImg, String toolTipText)  throws ImgException 
+    { 
+        if(CheckImg.isImage(pathImg)) 
+        {
             ImageIcon imgIcon = new ImageIcon(pathImg);  
             initComponents();
             myInit(imgIcon, toolTipText);
-        } else {
+        } 
+        else 
+        {
             throw new ImgException();
         }
     }
 
     
-    private void myInit(ImageIcon imgIcon, String toolTipText) {
+    private void myInit(ImageIcon imgIcon, String toolTipText) 
+    {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);     //DISPOSE_ON_CLOSE chiude solo il frame corrente e libera le risorse associate ad esso, ma l'esecuzione del programma continua normalmente.      
         setSize(1200, 800);
         setResizable(false);    
@@ -60,14 +67,20 @@ public class ImgJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
             @Override
-            public void run() {
-                try {
+            public void run() 
+            {
+                try 
+                {
                     new ImgJFrame(".//resources//img//fotoSoggiorno960x660.jpg", "").setVisible(true);
-                } catch (ImgException ex) {
+                } 
+                catch (ImgException ex) 
+                {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

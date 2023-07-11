@@ -12,10 +12,12 @@ public abstract class Documento extends Oggetto
 {
     protected String pathDocumento;
 
+    
     public Documento(int id, String nome, String descrizione) 
     {
         super(id, nome, descrizione);
     }
+    
     
     public void setPathDocumento(String pathRelativoDocumento) 
     {
@@ -23,10 +25,12 @@ public abstract class Documento extends Oggetto
 
     }
     
+    
     public String getPathDocumento() 
     {
         return this.pathDocumento;
     }   
+    
     
     public abstract void visualizza();
 }

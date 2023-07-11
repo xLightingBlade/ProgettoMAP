@@ -8,9 +8,11 @@ package com.mycompany.exception;
  *
  * @author santo
  */
-public class ImgException extends Exception {
+public class ImgException extends Exception 
+{
     @Override
-    public String getMessage() {
+    public String getMessage() 
+    {
         return "Il path selezionato non corrisponde ad un'immagine";
     }
 }

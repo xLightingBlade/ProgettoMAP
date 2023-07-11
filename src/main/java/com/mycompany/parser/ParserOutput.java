@@ -13,7 +13,8 @@ import java.io.Serializable;
  *
  * @author gabri
  */
-public class ParserOutput implements Serializable {
+public class ParserOutput implements Serializable 
+{
 
     private Comando comando;
 
@@ -22,41 +23,52 @@ public class ParserOutput implements Serializable {
     private Oggetto oggettoInventario;
 
     
-    public ParserOutput(Comando comando, Oggetto oggetto) {
+    public ParserOutput(Comando comando, Oggetto oggetto) 
+    {
         this.comando = comando;
         this.oggetto = oggetto;
     }
 
+    
     public ParserOutput(Comando comando, Oggetto oggetto, Oggetto oggettoInv) {
         this.comando = comando;
         this.oggetto = oggetto;
         this.oggettoInventario = oggettoInv;
     }
-
-
     
-    public Comando getComando() {
+    
+    public Comando getComando()
+    {
         return comando;
     }
 
-    public void setComando(Comando comando) {
+    
+    public void setComando(Comando comando) 
+    {
         this.comando = comando;
     }
 
-    public Oggetto getOggetto() {
+    
+    public Oggetto getOggetto() 
+    {
         return oggetto;
     }
 
-    public void setOggetto(Oggetto oggetto) {
+    
+    public void setOggetto(Oggetto oggetto)
+    {
         this.oggetto = oggetto;
     }
 
-    public Oggetto getOggettoInventario() {
+    
+    public Oggetto getOggettoInventario()
+    {
         return oggettoInventario;
     }
 
-    public void setOggettoInventario(Oggetto oggettoInventario) {
+    
+    public void setOggettoInventario(Oggetto oggettoInventario) 
+    {
         this.oggettoInventario = oggettoInventario;
     }
-
 }

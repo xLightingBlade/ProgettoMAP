@@ -19,7 +19,8 @@ import java.util.List;
  * Questa classe astratta modella la struttura fondamentale 
  * che una qualunque avventura testuale deve avere.
  */
-public abstract class StrutturaGioco implements Serializable  {
+public abstract class StrutturaGioco implements Serializable  
+{
 
     private List<Stanza> stanze = new ArrayList<>();//la lista delle stanze del gioco
 
@@ -29,38 +30,45 @@ public abstract class StrutturaGioco implements Serializable  {
 
     private Stanza stanzaCorrente;//so sempre in che stanza mi trovo in qualunque momento
 
-    public List<Stanza> getStanze() {
+    
+    public List<Stanza> getStanze() 
+    {
         return stanze;
     }
     
-    public void setStanze(List<Stanza> stanze) {
+    public void setStanze(List<Stanza> stanze) 
+    {
         this.stanze = stanze;
     }
 
-    public List<Comando> getComandi() {
+    public List<Comando> getComandi() 
+    {
         return comandi;
     }
     
-    public void setComandi(List<Comando> comandi) {
+    public void setComandi(List<Comando> comandi) 
+    {
         this.comandi = comandi;
     }
 
-    public Stanza getStanzaCorrente() {
+    public Stanza getStanzaCorrente() 
+    {
         return stanzaCorrente;
     }
 
-    public void setStanzaCorrente(Stanza stanzaCorrente) {
+    public void setStanzaCorrente(Stanza stanzaCorrente) 
+    {
         this.stanzaCorrente = stanzaCorrente;
     }
 
-    public List<Oggetto> getInventario() {
+    public List<Oggetto> getInventario() 
+    {
         return inventario;
     }
 
     public abstract void init() throws Exception;//Questo metodo (implementato da una classe che erediterà da questa)
     //inizializzerà tutti i dati del gioco, come stanze, oggetti ecc...
-
-     
+  
     public abstract void prossimaMossa(ParserOutput p);//In questo metodo è racchiusa la storia dell'avventura testuale
     
     public abstract void gestioneTimer(String comando,String fileFrasi,String dialoghiTimerScaduto);//Questo metodo si occupa di gestire i timer per le situazioni di gioco che lo richiedono
