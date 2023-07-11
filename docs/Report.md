@@ -47,7 +47,3 @@ Il tutto è contornato da una narrativa avvincente mostrata all'utente attravers
 in cui si chiede al giocatore di intervenire tempestivamente per salvare la vita dei personaggi.<br>
 Inoltre per rendere l'esperienza di gioco più comoda e divertente, l'utente ha a disposizione la possibilità di poter consultare un piccolo manuale utente,<br>
 in cui è spiegato il funzionamente di tutti i comandi del gioco, e la possibilità di salvare la partita e riprenderla quando desidera. 
-
-
-
-![modelloDiDominio](./diagramma%20classi%201.jpg)

@@ -6,6 +6,9 @@ package com.mycompany.tipi;
 
 import com.mycompany.avventura.LoaderPrinterCharacterStream;
 import com.mycompany.swing.DocumentFrame;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,8 +28,12 @@ public class OggettoFoglietto extends Documento
     @Override
     public void visualizza()
     {
-        LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
-        DocumentFrame documentFrame = new DocumentFrame("documento", loader.ottieniComeTesto(pathDocumento));
-        documentFrame.setVisible(true);
+        try {
+            LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
+            DocumentFrame documentFrame = new DocumentFrame("documento", loader.ottieniComeTesto(pathDocumento));
+            documentFrame.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(OggettoFoglietto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

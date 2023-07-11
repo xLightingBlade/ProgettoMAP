@@ -13,6 +13,7 @@ import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
 import java.awt.Font;
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
@@ -245,7 +246,6 @@ public class EsecuzioneComandi implements Serializable
                         }
 
                         oggettoInventario.setAperto(true);
-
                     } 
                     else 
                     {
@@ -383,8 +383,9 @@ public class EsecuzioneComandi implements Serializable
     }
     
     
+
     //questo metodo è usato per aprire il manuale utente quando il giocatore lancia il comando help
-    void help()
+    void help() throws IOException
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
         DocumentFrame manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));

@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,13 +109,13 @@ public class LoaderPrinterCharacterStream implements Serializable
     }
     
     
-    public String ottieniComeTesto(String pathName) 
+    public String ottieniComeTesto(String pathName) throws IOException 
     {
         BufferedReader buff = null;
         
         try 
         {
-            buff = new BufferedReader(new FileReader(new File(pathName)));
+            buff = new BufferedReader(new FileReader(new File(pathName), Charset.forName("UTF-8")));
         }  
         catch (FileNotFoundException ex) 
         {

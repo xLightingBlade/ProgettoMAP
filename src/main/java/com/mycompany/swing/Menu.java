@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -31,10 +32,9 @@ public class Menu extends javax.swing.JFrame
     private DocumentFrame manualeUtente;
     
    
-    public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException 
+    public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException, IOException 
     {
-        if(CheckImg.isImage(pathImg)) 
-        {
+        if(CheckImg.isImage(pathImg)){
             ImageIcon imgIcon = new ImageIcon(pathImg);
             initComponents();
             this.sceltaUtente = sceltaUtente;
@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JFrame
     }
 
     
-    private void myInit(ImageIcon imgIcon) 
+    private void myInit(ImageIcon imgIcon) throws IOException 
     {
         setSize(1000, 600);
 
@@ -73,7 +73,7 @@ public class Menu extends javax.swing.JFrame
     }
     
     
-    private void initManualeUtente()
+    private void initManualeUtente() throws IOException
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
         manualeUtente = new DocumentFrame("Manuale utente",loader.ottieniComeTesto(".//resources//istruzioniGioco.txt"));
@@ -263,6 +263,8 @@ public class Menu extends javax.swing.JFrame
                 } 
                 catch (ImgException ex)
                 {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
