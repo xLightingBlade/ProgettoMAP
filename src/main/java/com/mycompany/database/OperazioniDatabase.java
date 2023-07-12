@@ -554,7 +554,7 @@ public class OperazioniDatabase
         help.setAlias(new String[]{"aiuto","aiutami","cosa faccio","cosa fare","che faccio","cosa devo fare","help me"});
         
         Comando attacca = new Comando(TipoComando.valueOf(tipoComandi.get(17)), nomeComandi.get(17));
-        attacca.setAlias(new String[]{"attaccalo","colpisci","ferisci","colpiscilo","feriscilo"});
+        attacca.setAlias(new String[]{"attaccalo","colpisci","ferisci","colpiscilo","feriscilo", "spara", "spara pistola", "accoltella"});
         
         comandi.add(nord);
         comandi.add(inventario);
