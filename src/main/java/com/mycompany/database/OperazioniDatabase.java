@@ -577,6 +577,7 @@ public class OperazioniDatabase
         
         return comandi;
     }
+  
     
     public static void resetDatabase() throws SQLException 
     {

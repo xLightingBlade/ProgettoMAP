@@ -27,7 +27,8 @@ public class OggettoImmagine extends Documento
         }
         catch(ImgException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         }
     }   
 }
