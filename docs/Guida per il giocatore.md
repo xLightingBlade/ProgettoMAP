@@ -27,7 +27,7 @@ entrandoci dovrai prima attaccare uno zombie, prima che ti uccida lui. Successiv
 Anche a nord dei binari della metro c'è una stanza usata per mostrare dei dialoghi.  
 Proseguendo a nord si attivano dei dialoghi che ti portano direttamente nella stanza successiva.  
 **SE POSSIEDI GIA ALCOL, GARZE E FORBICI, PUOI SALTARE LA SEZIONE SUCCESSIVA**  
-Sei ferito, nella stanza dove ti trovi devi raccogliere una chiave. Prosegui poi ad ovest per andare nel magazzino, apri l'armadietto e raccogli il tesserino.  
+Sei ferito, nella stanza dove ti trovi devi raccogliere una chiave. Prosegui poi ad ovest per andare nel magazzino, apri l'armadietto e raccogli il tesserino e le forbici.    
 Torna ad est e poi vai di nuovo ad est per entrare nell'infermeria(chiusa senza avere il tesserino), dove puoi trovare alcol, garze e forbici.  
 **FINE SEZIONE RECUPERO OGGETTI**
 Con questi oggetti, digita il comando 'curati' per curarti e ottenere l'accesso alle zone successive.  
