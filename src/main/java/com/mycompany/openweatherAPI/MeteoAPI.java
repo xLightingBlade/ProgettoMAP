@@ -12,8 +12,7 @@ import java.io.IOException;
 //Andrebbe migliorato un po', però non credo che l'utente mentre giochi voglia sapere che tempo fa.
 //Chiamate API utili allo scopo del progetto.
 public class MeteoAPI 
-{
-    
+{  
     public static int getMeteoID(String citta) throws InterruptedException, IOException 
     {
         int meteoId = 0;

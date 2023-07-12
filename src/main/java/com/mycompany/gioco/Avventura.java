@@ -80,55 +80,83 @@ public class Avventura extends StrutturaGioco implements Serializable
      *  https://openweathermap.org/weather-conditions 
      * @param citta
     */
-    public static void dialoghiMeteoSoggiorno(String citta) {
-        try {
+    public static void dialoghiMeteoSoggiorno(String citta) 
+    {
+        try 
+        {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            if(idMeteo.toString().startsWith("80")) {
+            
+            if(idMeteo.toString().startsWith("80"))
+            {
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoSoleggiato.txt"), "UTF-8")));
                 leggiFile.start();
-            } else if(idMeteo.toString().startsWith("5")) {
+            } 
+            else if(idMeteo.toString().startsWith("5")) 
+            {
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoPiove.txt"), "UTF-8")));
                 leggiFile.start();
-            } else if(idMeteo.toString().startsWith("6")) {
+            }
+            else if(idMeteo.toString().startsWith("6"))
+            {
                 CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//soggiornoNeve.txt"), "UTF-8")));
                 leggiFile.start();  
             }
-        } catch (InterruptedException | IOException ex) {
+        } 
+        catch (InterruptedException | IOException ex) 
+        {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     
-    public static void dialoghiMeteoCitta(String citta) {
-        try {
+    public static void dialoghiMeteoCitta(String citta) 
+    {
+        try 
+        {
             idMeteo = MeteoAPI.getMeteoID(citta);
-            switch(citta) {
-                case "Boston" -> {
-                    if(idMeteo.toString().startsWith("80")) {
+            
+            switch(citta) 
+            {
+                case "Boston" -> 
+                {
+                    if(idMeteo.toString().startsWith("80"))
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonSole.txt"), "UTF-8")));
                         leggiFile.start();
-                    }else if(idMeteo.toString().startsWith("5")) {
+                    }
+                    else if(idMeteo.toString().startsWith("5"))
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonPioggia.txt"), "UTF-8")));
                         leggiFile.start();
-                    }else if(idMeteo.toString().startsWith("6")) {
+                    }
+                    else if(idMeteo.toString().startsWith("6")) 
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//BostonNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }
-                case "Salt Lake City" -> {
-                    if(idMeteo.toString().startsWith("80")) {
+                
+                case "Salt Lake City" -> 
+                {
+                    if(idMeteo.toString().startsWith("80")) 
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCitySole.txt"), "UTF-8")));
                         leggiFile.start();
-                    }else if(idMeteo.toString().startsWith("5")) {
+                    }
+                    else if(idMeteo.toString().startsWith("5")) 
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityPioggia.txt"), "UTF-8")));
                         leggiFile.start();
-                    }else if(idMeteo.toString().startsWith("6")) {
+                    }else if(idMeteo.toString().startsWith("6")) 
+                    {
                         CaricamentoDati leggiFile = new CaricamentoDati(new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//SaltLakeCityNeve.txt"), "UTF-8")));
                         leggiFile.start();
                     }
                 }
             }
-        } catch (InterruptedException | IOException ex) {
+        } 
+        catch (InterruptedException | IOException ex) 
+        {
             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

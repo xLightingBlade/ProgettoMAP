@@ -37,9 +37,12 @@ public class TimerGioco extends TimerTask implements Serializable
     @Override
     public void run () 
     {
-        try {
+        try 
+        {
             mostraDialogoStanza(fileFrasi);
-        } catch (UnsupportedEncodingException ex) {
+        } 
+        catch (UnsupportedEncodingException ex) 
+        {
             Logger.getLogger(TimerGioco.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -72,7 +75,5 @@ public class TimerGioco extends TimerTask implements Serializable
     public void setTempoScaduto(boolean tempoScaduto) 
     {
         this.tempoScaduto = tempoScaduto;
-    }
-    
-    
+    } 
 }
