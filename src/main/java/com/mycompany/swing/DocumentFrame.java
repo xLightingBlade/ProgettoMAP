@@ -33,7 +33,7 @@ public class DocumentFrame extends JFrame
 
         String processText = text.replaceAll("\n", "<br>");
         
-        textLabel = new JLabel("<html><pre style='Press Gothic'>"+processText+"</pre></html>");
+        textLabel = new JLabel("<html><pre>"+processText+"</pre></html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
         textLabel.setForeground(Color.WHITE);

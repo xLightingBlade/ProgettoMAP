@@ -52,8 +52,12 @@ public class Avventura extends StrutturaGioco implements Serializable
     private boolean assenzaStanza = false;
     private boolean usaTimer = true;
     private static Integer idMeteo = 0;
+    EsecuzioneComandi esec = new EsecuzioneComandi();
     
-    
+    /**
+     *
+     * @throws Exception
+     */
     @Override
     public void init() throws Exception 
     {
@@ -66,8 +70,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         setComandi(OperazioniDatabase.creaComandi());
         setStanze(OperazioniDatabase.creaOggetti());
         //Stanza attuale
-        setStanzaCorrente(getStanze().get(0));
-          
+        setStanzaCorrente(getStanze().get(0));         
     }
     
     
@@ -141,7 +144,6 @@ public class Avventura extends StrutturaGioco implements Serializable
         } 
         else 
         {
-            EsecuzioneComandi esec = new EsecuzioneComandi();
             this.haAccessoAllaStanza = false;
             this.assenzaStanza = false;
             //Stanza stanzacorrente = getStanzaCorrente();
@@ -269,7 +271,8 @@ public class Avventura extends StrutturaGioco implements Serializable
                     } 
                     catch (UnsupportedEncodingException ex) 
                     {
-                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Errore nel caricamento dati. Riavvia il gioco\n");
+                        System.exit(0);
                     }
                 }
                         
@@ -307,14 +310,15 @@ public class Avventura extends StrutturaGioco implements Serializable
                 }
                 
                 case NASCONDITI -> 
-                {       
+                {   
                     try 
                     {
                         esec.nasconditi(getStanzaCorrente());
                     } 
                     catch (UnsupportedEncodingException ex) 
                     {
-                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Errore nel caricamento dati. Riavvia il gioco\n");
+                        System.exit(0);
                     }
                 }
 
@@ -447,7 +451,7 @@ public class Avventura extends StrutturaGioco implements Serializable
                 }
                 else
                 {
-                    System.out.println("Fai qualcosa prima che sia troppo tardi");
+                    System.out.println("Fai qualcosa prima che sia troppo tardi.\n");
                 }
             }           
         }
@@ -474,7 +478,7 @@ public class Avventura extends StrutturaGioco implements Serializable
             }
             else
             {
-                System.out.println("Non puoi accedere alla stanza, hai ancora da fare qui.");
+                System.out.println("Non puoi accedere alla stanza, hai ancora da fare qui.\n");
             }
         }
         else
