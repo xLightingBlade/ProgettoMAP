@@ -15,8 +15,8 @@ import java.util.Set;
  * @author gabri
  * Questa classe modella la struttura che un oggetto del gioco (utilizzato dall'utente) deve avere
  */
-public class Oggetto implements Serializable {
-
+public class Oggetto implements Serializable 
+{
     private final int id;
 
     private String nome;
@@ -49,29 +49,38 @@ public class Oggetto implements Serializable {
 
     
     //Costruttori
-    public Oggetto(int id) {
+    public Oggetto(int id)
+    {
         this.id = id;
     }
+    
 
-    public Oggetto(int id, String nome) {
+    public Oggetto(int id, String nome) 
+    {
         this.id = id;
         this.nome = nome;
     }
 
-    public Oggetto(int id, String nome, String descrizione) {
+    
+    public Oggetto(int id, String nome, String descrizione)
+    {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
     }
 
-    public Oggetto(int id, String nome, String descrizione, Set<String> alias) {
+    
+    public Oggetto(int id, String nome, String descrizione, Set<String> alias)
+    {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
         this.alias = alias;
     }
     
-    public Oggetto(int id, String nome, String descrizione, Set<String> alias, String contenuto) {
+    
+    public Oggetto(int id, String nome, String descrizione, Set<String> alias, String contenuto) 
+    {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
@@ -81,147 +90,212 @@ public class Oggetto implements Serializable {
     //
     
 
-    public String getNome() {
+    public String getNome() 
+    {
         return nome;
     }
+    
 
-    public void setNome(String nome) {
+    public void setNome(String nome)
+    {
         this.nome = nome;
     }
     
-    public String getContenuto() {
+    
+    public String getContenuto() 
+    {
         return contenuto;
     }
     
-    public void setContenuto(String contenuto) {
+    
+    public void setContenuto(String contenuto) 
+    {
         this.contenuto = contenuto;
     }
     
-    public String getDescrizione() {
+    
+    public String getDescrizione() 
+    {
         return descrizione;
     }
 
-    public void setDescrizione(String descrizione) {
+    
+    public void setDescrizione(String descrizione) 
+    {
         this.descrizione = descrizione;
     }
 
+    
     //Usato per capire se un oggetto si può aprire
-    public boolean isApribile() {
+    public boolean isApribile() 
+    {
         return apribile;
     }
 
-    public void setApribile(boolean apribile) {
+    
+    public void setApribile(boolean apribile) 
+    {
         this.apribile = apribile;
     }
     
+    
     //Usato per capire se un oggetto si può prendere
-    public boolean isPrendibile() {
+    public boolean isPrendibile() 
+    {
         return prendibile;
     }
 
-    public void setPrendibile(boolean prendibile) {
+    
+    public void setPrendibile(boolean prendibile)
+    {
         this.prendibile = prendibile;
     }
     
+    
     //Usato per capire se un oggetto si può spingere
-    public boolean isSpingibile() {
+    public boolean isSpingibile() 
+    {
         return spingibile;
     }
     
-    public void setSpingibile(boolean spingibile) {
+    
+    public void setSpingibile(boolean spingibile) 
+    {
         this.spingibile = spingibile;
     }
     
+    
     //Usato per capire se un oggetto si può leggere
-    public boolean isLeggibile() {
+    public boolean isLeggibile()
+    {
         return leggibile;
     }
     
-    public void setLeggibile(boolean leggibile) {
+    
+    public void setLeggibile(boolean leggibile)
+    {
         this.leggibile = leggibile;
     }
     
-    public boolean isInvisibile() {
+    
+    public boolean isInvisibile()
+    {
         return invisibile;
     }
     
-    public void setInvisibile(boolean invisibile) {
+    
+    public void setInvisibile(boolean invisibile) 
+    {
         this.invisibile = invisibile;
     }
     
+    
     //Usato per capire se un oggetto è aperto
-    public boolean isAperto() {
+    public boolean isAperto()
+    {
         return aperto;
     }
 
-    public void setAperto(boolean aperto) {
+    
+    public void setAperto(boolean aperto) 
+    {
         this.aperto = aperto;
     }
     
+    
     //Usato per capire se un oggetto è stato spinto
-    public boolean isSpinto() {
+    public boolean isSpinto() 
+    {
         return spinto;
     }
 
-    public void setSpinto(boolean spinto) {
+    
+    public void setSpinto(boolean spinto)
+    {
         this.spinto = spinto;
     }
 
-    public Set<String> getAlias() {
+    
+    public Set<String> getAlias() 
+    {
         return alias;
     }
 
-    public void setAlias(Set<String> alias) {
+    
+    public void setAlias(Set<String> alias)
+    {
         this.alias = alias;
     }
     
-    public void setAlias(String[] alias) {
+    
+    public void setAlias(String[] alias)
+    {
         this.alias = new HashSet<>(Arrays.asList(alias));
     }
 
-    public int getId() {
+    public int getId() 
+    {
         return id;
     }
     
-    public boolean isAccendibile() {
+    
+    public boolean isAccendibile() 
+    {
         return accendibile;
     }
 
-    public void setAccendibile(boolean accendibile) {
+    
+    public void setAccendibile(boolean accendibile) 
+    {
         this.accendibile = accendibile;
     }
 
+    
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 7;
         hash = 37 * hash + this.id;
         return hash;
     }
 
+    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj) 
+    {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        
+        if (getClass() != obj.getClass()) 
+        {
             return false;
         }
+        
         final Oggetto other = (Oggetto) obj;
-        if (this.id != other.id) {
+        
+        if (this.id != other.id) 
+        {
             return false;
         }
         return true;
     }
 
-    public boolean isUsabile() {
+    
+    public boolean isUsabile() 
+    {
         return this.usabile;
     }
 
-    public void setUsabile(boolean b) {
+    
+    public void setUsabile(boolean b) 
+    {
         this.usabile = b;
     }
-
 }

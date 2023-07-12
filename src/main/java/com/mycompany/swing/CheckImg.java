@@ -12,11 +12,16 @@ import javax.imageio.ImageIO;
  *
  * @author santo
  */
-public class CheckImg {
-    public static boolean isImage(String path) { 
-        try { 
+public class CheckImg 
+{
+    public static boolean isImage(String path) 
+    { 
+        try 
+        { 
             return ImageIO.read(new File(path))!=null;   
-        } catch(IOException ex) {                        
+        } 
+        catch(IOException ex) 
+        {                        
             return false;
         }
     }

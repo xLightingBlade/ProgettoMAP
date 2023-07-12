@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author gabri
  * Questa classe enumerativa descrive quali tipi di comando sono definiti nel gioco.
  */
-public enum TipoComando implements Serializable {
+public enum TipoComando implements Serializable 
+{
     FINE, INVENTARIO, NORD, SUD, EST, OVEST, APRI, CHIUDI, SPINGI, TIRA, CAMMINA, PRENDI, PARLA, DAI, USA, GUARDA, ACCENDI, SPEGNI, LEGGI, SALVA, CARICA, NASCONDITI, CURATI, HELP, ATTACCA
 }

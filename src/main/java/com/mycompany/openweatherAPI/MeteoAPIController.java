@@ -15,10 +15,12 @@ import java.net.http.HttpResponse;
  * La chiave api rimane qui in chiaro, per lo scopo di questo progetto non ci si preoccupa dell'aspetto sicurezza
  * @author gabri
  */
-public class MeteoAPIController {
+public class MeteoAPIController 
+{
     private static final String API_KEY = "a9d4563be1eacdd328807b358fb23966";
     
-    public static MeteoForecastDTO getMeteoConCoordinate(String latitude, String longitude) throws IOException, InterruptedException{
+    public static MeteoForecastDTO getMeteoConCoordinate(String latitude, String longitude) throws IOException, InterruptedException
+    {
         var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid="+API_KEY);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
@@ -32,7 +34,8 @@ public class MeteoAPIController {
         return MeteoForecastDTO.parseJson(response.body());
     }
     
-    public static MeteoForecastDTO getMeteoCitta(String city) throws IOException, InterruptedException{
+    public static MeteoForecastDTO getMeteoCitta(String city) throws IOException, InterruptedException
+    {
         var uri = URI.create("https://api.openweathermap.org/data/2.5/weather?q="+city.replaceAll("\\s", "%20")+"&units=metric&appid="+API_KEY);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
@@ -44,6 +47,5 @@ public class MeteoAPIController {
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
       
         return MeteoForecastDTO.parseJson(response.body());
-    }
-    
+    }  
 }

@@ -12,14 +12,17 @@ import java.sql.SQLException;
  *
  * @author gabri
  */
-public class DatabaseInit {
+public class DatabaseInit 
+{
     private static final String DATABASE_URL = "jdbc:h2:~/test";
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException 
+    {
         return DriverManager.getConnection(DATABASE_URL);
     }
     
-    public String getUrl() {
+    public String getUrl()
+    {
         return DATABASE_URL;
     }
 }

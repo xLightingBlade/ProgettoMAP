@@ -53,6 +53,7 @@ public class Avventura extends StrutturaGioco implements Serializable
     private boolean usaTimer = true;
     private static Integer idMeteo = 0;
     
+    
     @Override
     public void init() throws Exception 
     {
@@ -69,13 +70,13 @@ public class Avventura extends StrutturaGioco implements Serializable
           
     }
     
+    
     /**
      * Un paio di metodi per mostrare una frase in base alle condizioni meteo della città.
      * Per info sui possibili valori dell'id meteo:
      *  https://openweathermap.org/weather-conditions 
      * @param citta
     */
-    
     public static void dialoghiMeteoSoggiorno(String citta) {
         try {
             idMeteo = MeteoAPI.getMeteoID(citta);
@@ -250,7 +251,14 @@ public class Avventura extends StrutturaGioco implements Serializable
                 
                 case HELP -> 
                 {
-                    esec.help();
+                    try 
+                    {
+                        esec.help();
+                    } 
+                    catch (IOException ex) 
+                    {
+                        Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 
                 case ATTACCA ->
@@ -319,7 +327,9 @@ public class Avventura extends StrutturaGioco implements Serializable
                         try 
                         {
                             esec.usaQualcosa(getStanzaCorrente(), inventarioGiocatore, oggetto);
-                        } catch (InterruptedException ex) {
+                        } 
+                        catch (InterruptedException ex) 
+                        {
                             Logger.getLogger(Avventura.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } 
@@ -379,6 +389,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         }
     }
     
+    
     //gestione dei timer di gioco    
     /**
      *
@@ -399,7 +410,7 @@ public class Avventura extends StrutturaGioco implements Serializable
         //avvio del timer per la prima volta
         TimerGioco t = new TimerGioco(fileFrasi,dialoghiTimerScaduto);
         TimerTask tempoScaduto = t;
-        timer.schedule(tempoScaduto, 20000);//Il parametro delay indica il tempo massimo prima di finire in game over.
+        timer.schedule(tempoScaduto, 12000);//Il parametro delay indica il tempo massimo prima di finire in game over.
         
         do
         {          
@@ -483,23 +494,28 @@ public class Avventura extends StrutturaGioco implements Serializable
         System.out.println();
     }
 
-    public boolean isHaAccessoAllaStanza() {
+    public boolean isHaAccessoAllaStanza() 
+    {
         return haAccessoAllaStanza;
     }
 
-    public boolean isAssenzaStanza() {
+    public boolean isAssenzaStanza() 
+    {
         return assenzaStanza;
     }
 
-    public boolean isUsaTimer() {
+    public boolean isUsaTimer() 
+    {
         return usaTimer;
     }
 
-    public void setHaAccessoAllaStanza(boolean haAccessoAllaStanza) {
+    public void setHaAccessoAllaStanza(boolean haAccessoAllaStanza) 
+    {
         this.haAccessoAllaStanza = haAccessoAllaStanza;
     }
 
-    public void setAssenzaStanza(boolean assenzaStanza) {
+    public void setAssenzaStanza(boolean assenzaStanza) 
+    {
         this.assenzaStanza = assenzaStanza;
     }
 }

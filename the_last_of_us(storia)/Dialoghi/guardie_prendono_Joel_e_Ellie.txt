@@ -5,5 +5,5 @@ Caricamento
 Joel:    Ellie nooo!!
 Ellie:   Joel aiutooo..
 
-Hai perso! Nasconditi prima che arrivino le guardie. Riprova!\nCaricamento, attendi.
+Hai perso! Nasconditi prima che arrivino le guardie. Riprova! Caricamento, attendi.
 

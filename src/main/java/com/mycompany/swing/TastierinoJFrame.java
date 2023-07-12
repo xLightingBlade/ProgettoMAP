@@ -8,27 +8,34 @@ import javax.swing.JOptionPane;
  *
  * @author santo
  */
-public class TastierinoJFrame extends javax.swing.JFrame {
+public class TastierinoJFrame extends javax.swing.JFrame 
+{
     private int num1;
     private int num2;
     private int num3;
     private static boolean corretto = false;
     private static boolean aperto = false;
     
-    public static boolean isCorretto() {
+    public static boolean isCorretto()
+    {
         return TastierinoJFrame.corretto;
     }
     
-    public static boolean isAperto() {
+    
+    public static boolean isAperto() 
+    {
         return TastierinoJFrame.aperto;
     }
+    
+    
     /**
      * Questi 3 parametri indicano le 3 cifre che l'utente dovrà indovinare.
      * @param num1,
      * @param num2,
      * @param num3,
      */
-    public TastierinoJFrame(int num1, int num2, int num3) {
+    public TastierinoJFrame(int num1, int num2, int num3) 
+    {
         TastierinoJFrame.aperto = true;
         this.num1 = num1;
         this.num2 = num2;
@@ -37,13 +44,16 @@ public class TastierinoJFrame extends javax.swing.JFrame {
         myInit();
     }
     
-    private void myInit() {
+    
+    private void myInit()
+    {
         setTitle("Tastierino numerico elettronico");
         setResizable(false);    // non è possibile ridimensionare il frame
         setLocationRelativeTo(null);  // il frame appare al centro del desktop, quindi non bisogna trascinarlo al centro con il cursore
 
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,35 +134,52 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean errore = false;
-        try{
+        
+        try
+        {
             Integer numberTextField1 = (int) Double.parseDouble(jTextField1.getText()); // restituisce il testo che sta attualmente nella textFiled e lo trasforma in un double            
             Integer numberTextField2 = (int) Double.parseDouble(jTextField2.getText());
             Integer numberTextField3 = (int) Double.parseDouble(jTextField3.getText());
             
-            if (numberTextField1.equals(this.num1)) {
-                if(numberTextField2.equals(this.num2)) {   
-                    if ( numberTextField3.equals(this.num3)) {
+            if (numberTextField1.equals(this.num1))
+            {
+                if(numberTextField2.equals(this.num2)) 
+                {   
+                    if ( numberTextField3.equals(this.num3))
+                    {
                         TastierinoJFrame.corretto = true;
                         JOptionPane.showMessageDialog(null, "Bravissimo, la combinazione è giusta", "COMBINAZIONE CORRETTA", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                         TastierinoJFrame.aperto = false;
-                    } else {
+                    } 
+                    else 
+                    {
                         errore = true;
                     }
-                } else { 
+                } 
+                else 
+                { 
                     errore = true;
                 }
-            } else {
+            } 
+            else
+            {
                 errore = true;
-            }           
+            } 
+            
             if(errore)
                 JOptionPane.showMessageDialog(null, "La combinazione non è corretta", "COMBINAZIONE ERRATA", JOptionPane.ERROR_MESSAGE);
-        } catch(NumberFormatException ex) { 
-            if(!ex.getMessage().equalsIgnoreCase("empty String")) {
+        } 
+        catch(NumberFormatException ex) 
+        { 
+            if(!ex.getMessage().equalsIgnoreCase("empty String")) 
+            {
                 int startIndex = ex.getMessage().indexOf("\"")+1;
                 int lastIndex = ex.getMessage().lastIndexOf("\"");
                 JOptionPane.showMessageDialog(this, "Puoi solo inserire cifre, \""+ex.getMessage().substring(startIndex, lastIndex)+"\" non sembra essere una cifra !!", "Error", JOptionPane.ERROR_MESSAGE);              
-            } else {
+            } 
+            else 
+            {
                 JOptionPane.showMessageDialog(this, "Cosa dovrei farmene di celle vuote !?!?", "Error", JOptionPane.ERROR_MESSAGE);              
             }        
         }
@@ -169,7 +196,8 @@ public class TastierinoJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -195,9 +223,11 @@ public class TastierinoJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run() 
+            {
                 new TastierinoJFrame(4, 8, 0).setVisible(true);
             }
         });

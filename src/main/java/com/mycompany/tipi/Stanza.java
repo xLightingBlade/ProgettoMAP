@@ -14,7 +14,8 @@ import java.util.List;
  * @author gabri
  * Questa classe modella la struttura che ogni stanza deve avere.
  */
-public class Stanza implements Serializable {
+public class Stanza implements Serializable 
+{
 
     private final int id;
 
@@ -45,142 +46,205 @@ public class Stanza implements Serializable {
     
     private final List<Oggetto> oggetti=new ArrayList<>();//la lista degli oggetti che si trovano nella stanza
 
+    
     //costruttori
-    public Stanza(int id) {
+    public Stanza(int id) 
+    {
         this.id = id;
     }
 
-    public Stanza(int id, String nome, String descrizione) {
+    
+    public Stanza(int id, String nome, String descrizione) 
+    {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
     }
     //
     
-    public int getId() {
+    
+    public int getId() 
+    {
         return id;
     }
     
-    public String getNome() {
+    
+    public String getNome()
+    {
         return nome;
     }
+    
 
-    public void setNome(String nome) {
+    public void setNome(String nome) 
+    {
         this.nome = nome;
     }
 
-    public String getDescrizione() {
+    
+    public String getDescrizione() 
+    {
         return descrizione;
     }
+    
 
-    public void setDescrizione(String descrizione) {
+    public void setDescrizione(String descrizione)
+    {
         this.descrizione = descrizione;
     }
     
-    public List<Oggetto> getOggettiNecessari() {
+    
+    public List<Oggetto> getOggettiNecessari()
+    {
         return oggettiNecessariPerAccedere;
     }
     
 
-    public boolean isVisibile() {
+    public boolean isVisibile()
+    {
         return visibile;
     }
 
-    public void setVisibile(boolean visibile) {
+    
+    public void setVisibile(boolean visibile) 
+    {
         this.visibile = visibile;
     }
 
-    public Stanza getSud() {
+    
+    public Stanza getSud() 
+    {
         return sud;
     }
 
-    public void setSud(Stanza sud) {
+    
+    public void setSud(Stanza sud) 
+    {
         this.sud = sud;
     }
 
-    public Stanza getNord() {
+    
+    public Stanza getNord() 
+    {
         return nord;
     }
 
-    public void setNord(Stanza nord) {
+    
+    public void setNord(Stanza nord) 
+    {
         this.nord = nord;
     }
+    
 
-    public Stanza getEst() {
+    public Stanza getEst() 
+    {
         return est;
     }
 
-    public void setEst(Stanza est) {
+    
+    public void setEst(Stanza est)
+    {
         this.est = est;
     }
 
-    public Stanza getOvest() {
+    
+    public Stanza getOvest()
+    {
         return ovest;
     }
+    
 
-    public void setOvest(Stanza ovest) {
+    public void setOvest(Stanza ovest)
+    {
         this.ovest = ovest;
     }
 
-    public List<Oggetto> getOggetti() {
+    
+    public List<Oggetto> getOggetti() 
+    {
         return oggetti;
     }
     
-    public boolean accessoFatto () {
+    
+    public boolean accessoFatto ()
+    {
         return primoAccessoFatto;
     }
     
-    public void setPrimoAccessoFatto(boolean b) {
+    
+    public void setPrimoAccessoFatto(boolean b)
+    {
         this.primoAccessoFatto = b;
     }
 
+    
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         int hash = 3;
         hash = 83 * hash + this.id;
         return hash;
     }
 
+    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj)
+    {
+        if (this == obj) 
+        {
             return true;
         }
-        if (obj == null) {
+        
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
+        
         final Stanza other = (Stanza) obj;
-        if (this.id != other.id) {
+        
+        if (this.id != other.id)
+        {
             return false;
         }
+        
         return true;
     }
 
-    public String getOsservazione() {
+    
+    public String getOsservazione() 
+    {
         return osservazione;
     }
 
-    public void setOsservazione(String osservazione) {
+    
+    public void setOsservazione(String osservazione) 
+    {
         this.osservazione = osservazione;
     }
 
-    public boolean haInfoMeteo() {
+    
+    public boolean haInfoMeteo() 
+    {
         return infoMeteo;
     }
     
-    public void setInfoMeteo(boolean b) {
+    
+    public void setInfoMeteo(boolean b) 
+    {
         this.infoMeteo = b;
     }
 
+    
     public String getCitta() {
         return citta;
     }
     
+    
     public void setCitta(String citta) {
         this.citta = citta;
     }
-
 }

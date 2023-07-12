@@ -13,23 +13,32 @@ import java.util.List;
  *
  * @author gabri
  */
-public class Inventario implements Serializable {
+public class Inventario implements Serializable 
+{
 
     private List<Oggetto> list = new ArrayList<>();
 
-    public List<Oggetto> getList() {
+    
+    public List<Oggetto> getList() 
+    {
         return list;
     }
 
-    public void setList(List<Oggetto> list) {
+    
+    public void setList(List<Oggetto> list) 
+    {
         this.list = list;
     }
 
-    public void add(Oggetto o) {
+    
+    public void add(Oggetto o) 
+    {
         list.add(o);
     }
 
-    public void remove(Oggetto o) {
+    
+    public void remove(Oggetto o)
+    {
         list.remove(o);
     }
 }

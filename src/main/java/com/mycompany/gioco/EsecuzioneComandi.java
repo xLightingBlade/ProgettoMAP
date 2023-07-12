@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.gioco;
-import com.mycompany.avventura.CaricamentoDati;
 import com.mycompany.avventura.LoaderPrinterCharacterStream;
+import static com.mycompany.gioco.BehaviourController.mostraDialogoStanza;
 import com.mycompany.swing.DocumentFrame;
 import com.mycompany.swing.TastierinoJFrame;
 import com.mycompany.tipi.ContenitoreOggetti;
@@ -13,11 +13,7 @@ import com.mycompany.tipi.Oggetto;
 import com.mycompany.tipi.OggettoFoglietto;
 import com.mycompany.tipi.Stanza;
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
@@ -30,7 +26,8 @@ import java.util.List;
 
 public class EsecuzioneComandi implements Serializable
 { 
-    void chiudiPartita() {
+    void chiudiPartita() 
+    {
         System.out.println("Partita terminata");
         System.exit(0);
     }
@@ -72,39 +69,13 @@ public class EsecuzioneComandi implements Serializable
     //Questo metodo simula l'attacco nel gioco
     void attacca(Stanza stanzacorrente) throws UnsupportedEncodingException
     {
-        //diloghi attacco
+        //attacco nella stanza della zattera
         if(stanzacorrente.getNome().equalsIgnoreCase("Stanza Zattera")) 
         {
-            BufferedReader fileIn = null;
-            CaricamentoDati loader_introduzione = null;
-
-            try 
-            {     
-                //dialoghi post attacco di Joel                   
-                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt"), "UTF-8"));
-                loader_introduzione = new CaricamentoDati(fileIn);
-                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
-
-                loader_introduzione.join();
-            } 
-            catch(FileNotFoundException ex)
-            {
-                System.out.println("""
-                    Errore nel caricamento dati.
-                    Riavvia il gioco.""");
-                System.exit(0);
-            } 
-            catch (IllegalArgumentException ex) 
-            {
-                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
-                System.exit(0);
-            } 
-            catch (InterruptedException ex)
-            {
-                System.err.println(ex);
-                System.exit(0);
-            }       
-        } 
+            //diloghi attacco
+            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt");
+        }
+        //..altri casi
         else 
         {
             System.out.println("Non c'è bisogno di attaccare qui.\n");
@@ -112,124 +83,64 @@ public class EsecuzioneComandi implements Serializable
     }
     
     
-    //per ora si nasconde solo dietro la roccia
+    //Questo metodo simula il nascondersi nel gioco
     void nasconditi(Stanza stanzacorrente) throws UnsupportedEncodingException 
     {
-        if(stanzacorrente.getOggetti().contains(new Oggetto(11))) 
+        //nascondiglio nel passaggio segreto
+        if(stanzacorrente.getNome().equalsIgnoreCase("Corridoio passaggio segreto")) 
         {
             System.out.println("Ti sei nascosto, attendi il momento migliore per fuggire.");
-            BufferedReader fileIn = null;
-            CaricamentoDati loader_introduzione = null;
+            
+            //dialoghi dietro la roccia 
+            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt");                   
 
-            try 
-            {     
-                //dialoghi dietro la roccia                    
-                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt"), "UTF-8"));
-                loader_introduzione = new CaricamentoDati(fileIn);
-                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
-
-                //usato per simulare il fatto che le guardie stanno passando.
-                //Una volta finiti i dialoghi vuol dire che le guardie sono passate e partono gli altri dialoghi.
-                loader_introduzione.join();
-                //dialoghi appena le guardie sono passate                    
-                fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt"), "UTF-8"));
-                loader_introduzione = new CaricamentoDati(fileIn);
-                loader_introduzione.start();//caricamento e visualizzazione e dialoghi con thread
-
-                //usato per simulare il fatto che le guardie sono passate.
-                loader_introduzione.join();
-            } 
-            catch(FileNotFoundException ex)
-            {
-                System.out.println("""
-                    Errore nel caricamento dati.
-                    Riavvia il gioco.""");
-                System.exit(0);
-            } 
-            catch (IllegalArgumentException ex) 
-            {
-                System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
-                System.exit(0);
-            } 
-            catch (InterruptedException ex)
-            {
-                System.err.println(ex);
-                System.exit(0);
-            }       
-        } 
+            //dialoghi appena le guardie sono passate
+            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt");     
+        }
+        //..altri casi
         else 
         {
             System.out.println("Non c'è bisogno di nascondersi qui.\n");
         }
     }
+
     
-    /**
-     * Serie di metodi 'check___Access' per verificare di avere gli oggetti necessari a proseguire nella direzione chiesta.
-     * @param stanzacorrente
-     * @param inventarioGiocatore 
-     */
     boolean checkNordAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
     {
-        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getNord().getId()), inventarioGiocatore))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }    
+        return BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getNord().getId()), inventarioGiocatore);    
     }
     
     
     boolean checkSudAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
     {
-        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getSud().getId()), inventarioGiocatore))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }    
+        return BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getSud().getId()), inventarioGiocatore);    
     }
     
     
     boolean checkEstAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
     {
-        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getEst().getId()), inventarioGiocatore))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }    
+        return BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getEst().getId()), inventarioGiocatore);    
     }
     
     
     boolean checkWestAccess(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, List<Stanza> listaStanze)
     {
-        if(BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getOvest().getId()), inventarioGiocatore))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }    
+        return BehaviourController.checkAccessoStanza(listaStanze.get(stanzacorrente.getOvest().getId()), inventarioGiocatore);    
     }
     
     
     void stampaContenutoInventario(List<Oggetto> inventarioGiocatore)
     {
-        System.out.println("Nel tuo inventario ci sono:");
+        System.out.println("\nNel tuo inventario ci sono:");
+        
         for (Oggetto o : inventarioGiocatore) 
         {
             if(!o.isInvisibile()) 
             {
-                System.out.println(o.getNome() + ": " + o.getDescrizione());
+                System.out.println(o.getNome() + " : " + o.getDescrizione());
             }
         }
+        System.out.println("\n");
     }
     
     
@@ -258,10 +169,6 @@ public class EsecuzioneComandi implements Serializable
     }
     
     
-    /*ATTENZIONE: quando un oggetto contenitore viene aperto, tutti gli oggetti contenuti
-    * vengono inseriti nella stanza o nell'inventario a seconda di dove si trova l'oggetto contenitore.
-    * 
-    */
     void apriOggetto(Oggetto oggetto, Oggetto oggettoInventario, Stanza stanzaCorrente, List<Oggetto> inventarioGiocatore )
     {
         if (oggetto == null && oggettoInventario == null) 
@@ -339,7 +246,6 @@ public class EsecuzioneComandi implements Serializable
                         }
 
                         oggettoInventario.setAperto(true);
-
                     } 
                     else 
                     {
@@ -395,37 +301,59 @@ public class EsecuzioneComandi implements Serializable
     
     
     void spingiOggetto(Oggetto oggetto, List<Oggetto> inventarioGiocatore, Stanza stanzaCorrente){
-        if(oggetto != null){
-            if (oggetto.isSpingibile()) {
+        if(oggetto != null)
+        {
+            if (oggetto.isSpingibile()) 
+            {
+               //se l'oggetto è una leva
+               if (oggetto.getId() == 14) 
+               {
+                   //e la leve non è stata già spinta
+                   if(!inventarioGiocatore.contains(oggetto))
+                   {
                        System.out.println("Hai premuto: " + oggetto.getNome());
-                       //id 14 = leva. Leva premuta crea oggetto fittizio nell'inventario
-                       if (oggetto.getId() == 14) {
-                           inventarioGiocatore.add(oggetto);
-                           stanzaCorrente.getOggetti().remove(oggetto);
-                           for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) {
-                               if (o.getNome().equalsIgnoreCase("tastierino")) {
-                                   o.setUsabile(true);
-                               }
-                           }
+                       inventarioGiocatore.add(oggetto);
+                       stanzaCorrente.getOggetti().remove(oggetto);
+                   }
+
+                   for(Oggetto o : stanzaCorrente.getOvest().getOggetti()) 
+                   {
+                       if (o.getNome().equalsIgnoreCase("tastierino")) 
+                       {
+                           o.setUsabile(true);//puoi usare il tastierino perchè hai spinto la leva
                        }
-            } else {
+                   }
+               }
+               //..altri oggetti spingibili
+            } 
+            else 
+            {
                 System.out.println("Non ci sono oggetti che puoi premere qui.");
             }
-        }else{
+        }
+        else
+        {
             System.out.println("Nessun Oggetto da spingere.");
         }
     }
     
     
-    void leggiOggetto(Oggetto oggetto){
-        if(oggetto != null){
-            if (oggetto.isLeggibile()) {
+    void leggiOggetto(Oggetto oggetto)
+    {
+        if(oggetto != null)
+        {
+            if (oggetto.isLeggibile())
+            {
                     System.out.print(oggetto.getContenuto());
 
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Non ci sono oggetti che puoi leggere qui.");
             }
-        }else{
+        }
+        else
+        {
             System.out.println("Nessun Oggetto da Leggere.");
         }
     }
@@ -455,7 +383,8 @@ public class EsecuzioneComandi implements Serializable
     }
     
     
-    
+
+    //questo metodo è usato per aprire il manuale utente quando il giocatore lancia il comando help
     void help() throws IOException
     {
         LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
@@ -464,7 +393,7 @@ public class EsecuzioneComandi implements Serializable
         manualeUtente.setVisible(true);
     }
     
-
+    //Questo metodo permette di gestire il comando usa NomeoOggetto
     void usaQualcosa(Stanza stanzacorrente, List<Oggetto> inventarioGiocatore, Oggetto oggetto) throws InterruptedException 
     {
         if(oggetto != null) 
@@ -476,49 +405,87 @@ public class EsecuzioneComandi implements Serializable
                     //tastierino
                     case 12 -> 
                     {
-                        if(usaTastierino()) 
+                        boolean tastierinoUsato = false;
+                        
+                        //ricerco nell'inventario l'oggetto che indica che ho usato il tastierino
+                        for(Oggetto o: inventarioGiocatore)
                         {
-                            Oggetto o = new Oggetto(25);
-                            o.setNome("");
-                            o.setAlias(new String[]{""});
-                            o.setInvisibile(true);
-                            inventarioGiocatore.add(o);
-                            
-                            System.out.println("Joel:  Bene, ora potrò oltrepassare il cancello");
-                        } 
+                            //se presente
+                            if(o.getNome().equalsIgnoreCase("tastierinoUsato"))
+                            {
+                                tastierinoUsato = true;
+                            }
+                        }
+                        
+                        //se non hai mai indovinato la combinazione del tastierino
+                        if(!tastierinoUsato)
+                        {
+                            //prova ad indovinare la combinazione
+                            if(usaTastierino()) 
+                            {
+                                System.out.println("dddd");
+                                Oggetto o = new Oggetto(25);
+                                o.setNome("tastierinoUsato");
+                                o.setAlias(new String[]{""});
+                                o.setInvisibile(true);
+                                inventarioGiocatore.add(o);
+
+                                System.out.println("Joel:  Bene, ora potrò oltrepassare il cancello\n");
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("Il cancello è già aperto, prosegui.\n");
+                        }                      
                     }
                     
                     
                     //cacciavite
                     case 21 ->
                     {
-                        //se l'inventario contiene il cacciavite
-                        if(inventarioGiocatore.contains(oggetto))
+                        boolean cacciaviteUsato = false;
+                        
+                        //ricerco nell'inventario l'oggetto che indica che ho usato il tastierino
+                        for(Oggetto o: inventarioGiocatore)
                         {
-                            //se l'utente vuole usare il cacciavite nel sistema di ventilazione
-                            if(stanzacorrente.getNome().equalsIgnoreCase("Sistema di ventilazione"))
+                            //se presente
+                            if(o.getNome().equalsIgnoreCase("cacciaviteUsato"))
                             {
-                                //apri la grata nel sistema di ventilazione
-                                Oggetto o = new Oggetto(26);
-                                o.setNome("");
-                                o.setAlias(new String[]{""});
-                                o.setInvisibile(true);
-                                inventarioGiocatore.add(o);
-                                
-                                //questo non permette al giocatore di usare di nuovo il cacciavite
-                                oggetto.setUsabile(false);
-                                
-                                System.out.println("Joel:  Bene, la grata è aperta.");
-                                System.out.println("Joel:  Ora potrò oltrepassare le guardie in silenzio");
+                                cacciaviteUsato = true;
+                            }
+                        }
+                        
+                        //se il cacciavite non è stato mai usato
+                        if(!cacciaviteUsato)
+                        {
+                            //verifca se l'inventario contiene il cacciavite
+                            if(inventarioGiocatore.contains(oggetto))
+                            {
+                                //se l'utente vuole usare il cacciavite nel sistema di ventilazione
+                                if(stanzacorrente.getNome().equalsIgnoreCase("Sistema di ventilazione"))
+                                {
+                                    //apri la grata nel sistema di ventilazione
+                                    Oggetto o = new Oggetto(26);
+                                    o.setNome("cacciaviteUsato");
+                                    o.setAlias(new String[]{""});
+                                    inventarioGiocatore.add(o);
+
+                                    System.out.println("Joel:  Bene, la grata è aperta.");
+                                    System.out.println("Joel:  Ora potrò oltrepassare le guardie in silenzio");
+                                }
+                                else
+                                {
+                                    System.out.println("Non puoi usare questo oggetto in questa stanza");
+                                }
                             }
                             else
                             {
-                                System.out.println("Non puoi usare questo oggetto in questa stanza");
+                                System.out.println("Devi prima raccogliere quest oggetto");
                             }
                         }
                         else
                         {
-                            System.out.println("Devi prima raccogliere quest oggetto");
+                            System.out.println("La grata è già aperta, prosegui.");
                         }
                     }
                 }
@@ -537,8 +504,7 @@ public class EsecuzioneComandi implements Serializable
     
     //Metodo per aggirare la non-modalità di un jframe, di modo da fermare il flusso d'esecuzione mentre si sta usando il tastierino
     private boolean usaTastierino() throws InterruptedException 
-    {
-        
+    {        
         new TastierinoJFrame(4,8,0).setVisible(true);
         
         while(TastierinoJFrame.isAperto()) 

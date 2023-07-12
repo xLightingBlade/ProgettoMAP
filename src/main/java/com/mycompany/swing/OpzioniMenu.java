@@ -8,23 +8,28 @@ package com.mycompany.swing;
  *
  * @author santo
  */
-public class OpzioniMenu {
+public class OpzioniMenu
+{
     private Stato statoCorrente;
     
-    public enum Stato {
+    public enum Stato 
+    {
         AVVIA,
         CARICA,
     }
     
-    public OpzioniMenu() {
+    public OpzioniMenu()
+    {
         statoCorrente = null;
     }
     
-    public Stato getStatoCorrente() {
+    public Stato getStatoCorrente() 
+    {
         return statoCorrente;
     }
     
-    public void setStatoCorrente(Stato nuovoStato) {
+    public void setStatoCorrente(Stato nuovoStato) 
+    {
         statoCorrente = nuovoStato;
     }
 }

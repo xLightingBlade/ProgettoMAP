@@ -23,7 +23,8 @@ import java.util.List;
  *
  * @author gabri
  */
-public class OperazioniDatabase {
+public class OperazioniDatabase 
+{
     private static Connection con;
     private static List<Integer> idStanze = new ArrayList<>();
     private static List<String> nomiStanze = new ArrayList<>();
@@ -41,12 +42,14 @@ public class OperazioniDatabase {
     private static List<Comando> comandi = new ArrayList<>();
     
     
-    public static void connettiDatabase() throws SQLException {
+    public static void connettiDatabase() throws SQLException 
+    {
         OperazioniDatabase.con = DatabaseInit.getConnection();
     }
     
     
-    public static void creaTabelle() throws SQLException {
+    public static void creaTabelle() throws SQLException 
+    {
         String query = "create table if not exists STANZE " + "(ID_STANZA int NOT NULL, " +
                 "NOME varchar(50), " + "DESCRIZIONE varchar(1000), " + "OSSERVA varchar(3000), " +
                 "PRIMARY KEY(ID_STANZA)) as select ID,NOME,DESCRIZIONE,OSSERVA from csvread('./resources/stanze.csv')";
@@ -59,11 +62,14 @@ public class OperazioniDatabase {
         String query3 = "create table if not exists COMANDI " + "(TIPO_COMANDO varchar(50) NOT NULL, " +
                 "NOME varchar(50), PRIMARY KEY(TIPO_COMANDO)) as select TIPO,NOME  from csvread('./resources/comandi.csv')";
         
-        try(Statement stmt = con.createStatement()) {
+        try(Statement stmt = con.createStatement())
+        {
             stmt.executeUpdate(query);
             stmt.executeUpdate(query2);
             stmt.executeUpdate(query3);
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) 
+        {
             System.err.println("Errore creazione tabelle:\n");
             System.err.print(ex.getErrorCode() + "\n");
             System.err.print(ex.getSQLState() +"\n");
@@ -72,45 +78,59 @@ public class OperazioniDatabase {
     }
     
     
-    public static void caricaDati() throws SQLException {
+    public static void caricaDati() throws SQLException
+    {
         String query = "select ID_STANZA, NOME, DESCRIZIONE, OSSERVA from STANZE";
         String query2 = "select ID_OGGETTO, NOME, DESCRIZIONE, CONTENUTO, STANZA from OGGETTI";
         String query3 = "select TIPO_COMANDO, NOME from COMANDI";
-        try(Statement stmt = con.createStatement()) {
+        
+        try(Statement stmt = con.createStatement()) 
+        {
             ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()) {
+            while(rs.next()) 
+            {
                 idStanze.add(rs.getInt("ID_STANZA"));
                 nomiStanze.add(rs.getString("NOME"));
                 descrizioniStanze.add(rs.getString("DESCRIZIONE"));
                 osservazioni.add(rs.getString("OSSERVA"));
             }
-        } catch(SQLException ex) {
+        } 
+        catch(SQLException ex) 
+        {
             System.out.println("Errore caricamento dati stanze");
         }
         
-        try(Statement stmt = con.createStatement()) {
+        try(Statement stmt = con.createStatement()) 
+        {
             ResultSet rs = stmt.executeQuery(query2);
-            while(rs.next()) {
+            while(rs.next()) 
+            {
                 idOggetti.add(rs.getInt("ID_OGGETTO"));
                 nomiOggetti.add(rs.getString("NOME"));
                 descrizioniOggetti.add(rs.getString("DESCRIZIONE"));
                 contenutoOggetti.add(rs.getString("CONTENUTO"));
                 stanzaOggetto.add(rs.getInt("STANZA"));
             }
-        } catch(SQLException ex) {
+        } 
+        catch(SQLException ex) 
+        {
             System.err.println("Errore caricamento dati oggetti");
             System.err.print(ex.getErrorCode());
             System.err.print(ex.getSQLState());
             System.err.print(ex.getMessage());
         }
         
-        try(Statement stmt = con.createStatement()) {
+        try(Statement stmt = con.createStatement()) 
+        {
             ResultSet rs = stmt.executeQuery(query3);
-            while(rs.next()) {
+            while(rs.next()) 
+            {
                 tipoComandi.add(rs.getString("TIPO_COMANDO"));
                 nomeComandi.add(rs.getString("NOME"));
             }
-        } catch(SQLException ex) {
+        } 
+        catch(SQLException ex) 
+        {
             System.err.println("Errore caricamento dati comandi");
             System.err.print(ex.getErrorCode());
             System.err.print(ex.getSQLState());
@@ -395,7 +415,7 @@ public class OperazioniDatabase {
 
         Oggetto zattera = new Oggetto(idOggetti.get(17), nomiOggetti.get(17), descrizioniOggetti.get(17));
         zattera.setAlias(new String[]{"legno","assi","assi di legno","tavola","tavola di legno","tavoletta","tavoletta di legno","tavolette di legno"});
-        zattera.setInvisibile(true);
+        zattera.setInvisibile(false);
         stanze.get(8).getOggetti().add(zattera);
         
         //
@@ -558,10 +578,14 @@ public class OperazioniDatabase {
         return comandi;
     }
     
-    public static void resetDatabase() throws SQLException {
-        try(Statement stmt = con.createStatement()) {
+    public static void resetDatabase() throws SQLException 
+    {
+        try(Statement stmt = con.createStatement()) 
+        {
             stmt.executeUpdate("DROP ALL OBJECTS");
-        } catch(SQLException ex) {
+        } 
+        catch(SQLException ex) 
+        {
             System.err.println("Errore reset database\n");
             System.err.print(ex.getErrorCode());
             System.err.print(ex.getSQLState());

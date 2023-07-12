@@ -25,19 +25,24 @@ import javax.swing.SwingConstants;
  *
  * @author santo
  */
-public class Menu extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame 
+{
     private OpzioniMenu sceltaUtente;
     //private JDialog manualeDialog;
     private DocumentFrame manualeUtente;
     
    
-    public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException, IOException {
-        if(CheckImg.isImage(pathImg)) {
+    public Menu(String pathImg, OpzioniMenu sceltaUtente) throws ImgException, IOException 
+    {
+        if(CheckImg.isImage(pathImg))
+        {
             ImageIcon imgIcon = new ImageIcon(pathImg);
             initComponents();
             this.sceltaUtente = sceltaUtente;
             myInit(imgIcon);
-        } else {
+        } 
+        else 
+        {
             throw new ImgException();           
         }
     }
@@ -221,7 +226,8 @@ public class Menu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -247,23 +253,30 @@ public class Menu extends javax.swing.JFrame {
         
         OpzioniMenu sceltaUtente = new OpzioniMenu();
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
             @Override
-            public void run() {
-                try {
+            public void run()
+            {
+                try 
+                {
                     new Menu(".//resources//img//sfondoMenuTheLastofUS.jpg", sceltaUtente).setVisible(true);
-                } catch (ImgException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+                catch (ImgException ex)
+                {
+                    System.out.println("errore immagine");
                 } catch (IOException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("eeerrr");
                 }
             }
         });
         
-        while(sceltaUtente.getStatoCorrente()==null) {
+        while(sceltaUtente.getStatoCorrente()==null) 
+        {
         }
         
-        switch(sceltaUtente.getStatoCorrente()) {
+        switch(sceltaUtente.getStatoCorrente()) 
+        {
             case AVVIA -> new Engine(new Avventura()).esegui();
                 
             case CARICA -> 
