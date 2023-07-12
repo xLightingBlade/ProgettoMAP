@@ -1,4 +1,4 @@
-# PROGETTO MAP 22_23
+# PROGETTO MAP 22_23 (Antonio Mennuni, Gabriele Nigro, Danilo Santo)
 ## 1. **Descrizione generale del caso di studio**
 
 Benvenuti nell'avvincente mondo di "The last of us" (rivisitato), ambientato nel 2050, esattamente vent'anni dopo che un fungo noto come Cordyceps ha scatenato una pandemia globale che ha trasformato il 90% della popolazione mondiale in feroci creature assetate di sangue, simili a degli zombie. 
@@ -40,12 +40,12 @@ Joel riesce a portare via Ellie dall'ospedale e grazie ad un'auto trovata nel pa
 <br>
 <br>
 
-## 2. **Gameplay di gioco**
+## 2. **Gameplay**
 In questa avventuare testuale l'utente giocatore dovrà cercare di avanzare con la storia accedendo a delle stanze che si apriranno solo quando saranno risolti determinati enigmi.<br>
 L'utente quindi deve cercare di raccogliere ed utilizzare tutti gli oggetti necessari per aprire le porte e poter avanzare con il gioco.<br>
 Il tutto è contornato da una narrativa avvincente mostrata all'utente attraverso i dialoghi dei personaggi e da dei momenti di pericolo<br>
 in cui si chiede al giocatore di intervenire tempestivamente per salvare la vita dei personaggi.<br>
-Inoltre per rendere l'esperienza di gioco più comoda e divertente, l'utente ha a disposizione la possibilità di poter consultare un piccolo manuale utente,<br>
+Inoltre per rendere l'esperienza di gioco più comoda e divertente, l'utente ha a disposizione la possibilità di poter consultare un piccolo manuale utente,
 in cui è spiegato il funzionamente di tutti i comandi del gioco, e la possibilità di salvare la partita e riprenderla quando desidera. 
 <br>
 <br>
@@ -96,6 +96,10 @@ Di seguito, una descrizione di come i vari argomenti del corso sono stati applic
 
 ## 4. **Diagramma delle classi**
 ![parte1](diagramma1.jpg)
+<br>
+<br>
+<br>
+<br>
 ![parte2](diagramma2.jpg)
 
 
