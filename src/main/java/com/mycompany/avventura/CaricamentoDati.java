@@ -25,7 +25,7 @@ public class CaricamentoDati extends Thread implements Serializable
     @Override
     public void run() 
     {
-        Integer secondiAttesa = 2;
+        Integer secondiAttesa = 1;
         LoaderPrinterCharacterStream frasiIntro = new LoaderPrinterCharacterStream();
         try 
         {

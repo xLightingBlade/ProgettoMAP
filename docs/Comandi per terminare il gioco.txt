@@ -1,0 +1,61 @@
+
+oss
+prendi pistola
+prendi coltello
+prendi cibo
+prendi foto
+sud
+oss
+prendi munizioni
+nord
+nord
+"dopo i dialghi attendere 15 sec, vedere che succede e poi eseguire il comando" -> nasconditi
+nord
+est
+spingi leva
+prendi documento
+ovest
+usa tastierino (la combinazione corretta è "4 8 0")
+nord
+nord
+oss
+prendi torcia
+nord
+oss
+ovest
+"dopo i dialghi attendere 15 sec, vedere che succede e poi eseguire il comando" -> attacca
+oss
+accendi torcia
+oss
+prendi zattera
+prendi documento
+est
+nord
+nord
+oss
+prendi chiave
+ovest
+oss
+apri armadietto
+prendi forbici
+prendi tesserino
+est
+est
+oss
+prendi garza
+prendi alcol
+ovest
+curati
+nord
+oss
+prendi documento
+ovest
+oss
+accendi torcia
+oss
+prendi cacciavite
+est
+est
+oss
+usa cacciavite
+nord
