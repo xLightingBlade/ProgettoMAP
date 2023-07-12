@@ -50,4 +50,5 @@
     └───documenti_gioco(da raccogliere)
 </pre>
 
-La documentazione si trova in `docs/Documentazione.md`
+La documentazione si trova in `docs/Documentazione.md`  
+La guida al gioco si trova in `docs/Guida per il giocatore.md`
