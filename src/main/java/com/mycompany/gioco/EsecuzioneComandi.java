@@ -25,7 +25,10 @@ import java.util.List;
  */
 
 public class EsecuzioneComandi implements Serializable
-{ 
+{  
+    private Boolean nascosto = false;
+    private Boolean attaccato = false;
+    
     void chiudiPartita() 
     {
         System.out.println("Partita terminata");
@@ -68,15 +71,25 @@ public class EsecuzioneComandi implements Serializable
     
     //Questo metodo simula l'attacco nel gioco
     void attacca(Stanza stanzacorrente) throws UnsupportedEncodingException
-    {
-        //attacco nella stanza della zattera
+    {       
+        //se la stanza corrente è la zattera
         if(stanzacorrente.getNome().equalsIgnoreCase("Stanza Zattera")) 
         {
-            //diloghi attacco
-            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt");
+            // e non hai ancora mai attaccato in questa stanza
+            if(!attaccato)
+            {
+                attaccato = true;
+                
+                //diloghi attacco
+                mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//joel_attacca.txt");
+            }
+            else 
+            {
+                System.out.println("Hai già attaccato, pericolo scampato.\n");
+            }
         }
         //..altri casi
-        else 
+        else
         {
             System.out.println("Non c'è bisogno di attaccare qui.\n");
         }
@@ -86,16 +99,25 @@ public class EsecuzioneComandi implements Serializable
     //Questo metodo simula il nascondersi nel gioco
     void nasconditi(Stanza stanzacorrente) throws UnsupportedEncodingException 
     {
-        //nascondiglio nel passaggio segreto
+        //se la stanza corrente è il corridoio passaggio segreto
         if(stanzacorrente.getNome().equalsIgnoreCase("Corridoio passaggio segreto")) 
         {
-            System.out.println("Ti sei nascosto, attendi il momento migliore per fuggire.");
+            //e non ti sei ancora mai nascosto in questa stanza
+            if(!nascosto)
+            {
+                nascosto = true;
+                System.out.println("Ti sei nascosto, attendi il momento migliore per fuggire.");
             
-            //dialoghi dietro la roccia 
-            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt");                   
+                //dialoghi dietro la roccia 
+                mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Nascondiglio_roccia.txt");                   
 
-            //dialoghi appena le guardie sono passate
-            mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt");     
+                //dialoghi appena le guardie sono passate
+                mostraDialogoStanza(".//the_last_of_us(storia)//Dialoghi//Dopo_nascondiglio_roccia.txt");     
+            }
+            else
+            {
+                System.out.println("Ti sei già nascosto, pericolo scampato.\n");
+            }
         }
         //..altri casi
         else 
@@ -150,7 +172,7 @@ public class EsecuzioneComandi implements Serializable
         {
             if(stanzaCorrente.isVisibile() == true) 
             {
-               System.out.println(stanzaCorrente.getOsservazione());
+               System.out.println(stanzaCorrente.getOsservazione() + "\n");
 
                if(stanzaCorrente.haInfoMeteo() && stanzaCorrente.getCitta() != null) 
                {
@@ -423,7 +445,6 @@ public class EsecuzioneComandi implements Serializable
                             //prova ad indovinare la combinazione
                             if(usaTastierino()) 
                             {
-                                System.out.println("dddd");
                                 Oggetto o = new Oggetto(25);
                                 o.setNome("tastierinoUsato");
                                 o.setAlias(new String[]{""});
