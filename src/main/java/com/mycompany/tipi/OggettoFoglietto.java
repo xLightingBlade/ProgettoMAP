@@ -28,12 +28,16 @@ public class OggettoFoglietto extends Documento
     @Override
     public void visualizza()
     {
-        try {
+        try 
+        {
             LoaderPrinterCharacterStream loader = new LoaderPrinterCharacterStream();
             DocumentFrame documentFrame = new DocumentFrame("documento", loader.ottieniComeTesto(pathDocumento));
             documentFrame.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(OggettoFoglietto.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (IOException ex) 
+        {
+            System.out.println("Errore nel caricamento dati. Riavvia il gioco.");
+            System.exit(0);
         }
     }
 }
