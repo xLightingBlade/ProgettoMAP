@@ -28,21 +28,21 @@ public class DocumentFrame extends JFrame
         setSize(900,500);         
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(0, 77, 0));
+        getContentPane().setBackground(new Color(225, 198, 153));
         
 
         String processText = text.replaceAll("\n", "<br>");
         
-        textLabel = new JLabel("<html><pre>"+processText+"</pre></html>");
+        textLabel = new JLabel("<html>"+processText+"</html>");
         textLabel.setHorizontalAlignment(JLabel.LEFT);
         textLabel.setVerticalAlignment(JLabel.TOP);
-        textLabel.setForeground(Color.WHITE);
-        textLabel.setFont(new Font("Press Gothic", Font.BOLD, 17));
+        textLabel.setForeground(Color.DARK_GRAY);
+        textLabel.setFont(new Font("Segoe Script", Font.PLAIN, 17));
         
         scrollPane = new JScrollPane(textLabel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setBackground(new Color(0, 77, 0));
+        scrollPane.getViewport().setBackground(new Color(225, 198, 153));
         
         add(scrollPane, BorderLayout.CENTER);    
         pack();
